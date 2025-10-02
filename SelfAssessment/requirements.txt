@@ -1,0 +1,13 @@
+numpy
+streamlit
+json5
+crewai
+torch
+langchain_openai
+transformers
+langchain_huggingface
+accelerate
+graphviz
+thefuzz
+vllm
+peft
