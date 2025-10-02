@@ -1,0 +1,15 @@
+# Core ML Libraries
+torch
+transformers
+# PEFT library for LoRA
+peft
+# TRL for SFTTrainer
+trl
+# For loading and processing data
+datasets
+# For 4-bit/8-bit quantization (optional but good practice)
+bitsandbytes
+# For multi-GPU training and optimization
+accelerate
+# For reading the YAML config file
+PyYAML
