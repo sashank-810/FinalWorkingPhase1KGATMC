@@ -3110,49 +3110,33 @@ import time
 from thefuzz import fuzz
 import torch
 from transformers import pipeline
-from config.settings import llm_hf_pipeline, llm_finetuned_pipeline
+from config.settings import student_pipeline
 
-def parse_dot_graph(dot_code):
-    """Parses Graphviz DOT code to extract nodes and edges."""
-    nodes, edges, node_labels = set(), [], {}
-    node_definition_pattern = re.compile(r'^\s*(\w+|"[^"]+")\s*\[label="([^"]+)"\];')
-    edge_definition_pattern = re.compile(r'^\s*(\w+|"[^"]+")\s*->\s*(\w+|"[^"]+")\s*(?:\[[^\]]*\])?;')
-    id_to_label_map = {}
-    for line in dot_code.split('\n'):
-        line = line.strip()
-        node_match = node_definition_pattern.match(line)
-        if node_match:
-            raw_id, label = node_match.groups()
-            nodes.add(label)
-            node_labels[label] = label
-            id_to_label_map[raw_id] = label
-    adj = {label: set() for label in nodes}
-    for line in dot_code.split('\n'):
-        line = line.strip()
-        edge_match = edge_definition_pattern.match(line)
-        if edge_match:
-            source_raw_id, target_raw_id = edge_match.groups()
-            source_label, target_label = id_to_label_map.get(source_raw_id), id_to_label_map.get(target_raw_id)
-            if source_label in nodes and target_label in nodes:
-                edges.append((source_label, target_label))
-                adj[source_label].add(target_label)
-    label_to_id = {label: label for label in nodes}
-    return nodes, edges, adj, node_labels, label_to_id
 
 def init_session_state():
     """Initializes the Streamlit session state with default values."""
     defaults = {
-        "module_ran": None, "text_output": None, "strategic_plan_output": None,
-        "selected_difficulty": "medium", "strategic_plan_parsed": [],
-        "knowledge_graph_dot": None, "source_material": "",
-        "bloom_q_counts": {"Remember": 1, "Understand": 1, "Apply": 1, "Analyze": 1, "Evaluate": 1, "Create": 1},
-        "final_quiz_data": [], "final_quiz_json_output": None,
-        "user_answers": {}, "quiz_submitted": False, "ai_answers": [],
-        "bulk_dataset": []
+        "pipeline_running": False, "pipeline_complete": False,
+        "strategic_plan_parsed": [], "knowledge_graph_dot": None,
+        "final_quiz_data": [], "ai_answers": [], "bulk_dataset": []
     }
     for key, value in defaults.items():
         if key not in st.session_state:
             st.session_state[key] = value
+
+def run_crew_and_parse_json(crew, expected_format='list'):
+    """Runs a crew and robustly parses its JSON markdown output."""
+    result = crew.kickoff()
+    if result and hasattr(result, 'raw'):
+        regex = r"```json\s*(\[[\s\S]*\])\s*```" if expected_format == 'list' else r"```json\s*(\{[\s\S]*\})\s*```"
+        match = re.search(regex, result.raw, re.DOTALL)
+        if match:
+            json_string = match.group(1).strip()
+            try:
+                return json.loads(json_string)
+            except ValueError: return None
+        return None
+    return None
 
 # --- UI Rendering ---
 st.set_page_config(page_title="Spirit", layout="wide")
@@ -3162,386 +3146,167 @@ init_session_state()
 # --- Sidebar Controls ---
 with st.sidebar:
     st.header("Controls")
-    module_options = ["Summarization", "Notes", "Explanation", "Knowledge Graph", "Strategic Plan", "MCQ Generation", "Distractor Generation", "AI Quiz Taker", "Bulk Dataset Generator", "Finetuned Quiz Taker"]
-    module = st.sidebar.selectbox("Select a module", module_options)
+    uploaded_md = st.file_uploader("Upload Source Document", type=["md", "txt"])
 
-    uploaded_md = None
-    if module not in ["Distractor Generation", "AI Quiz Taker", "Bulk Dataset Generator", "Finetuned Quiz Taker"]:
-        uploaded_md = st.file_uploader("Upload Source Document", type=["md", "txt"])
-
-    if module == "MCQ Generation":
-        st.markdown("---")
-        st.session_state.selected_difficulty = st.selectbox("Select Difficulty", ["easy", "medium", "hard"])
-        st.subheader("Questions per Bloom's Level:")
-        bloom_levels = ["Remember", "Understand", "Apply", "Analyze", "Evaluate", "Create"]
-        for level in bloom_levels:
-            st.session_state.bloom_q_counts[level] = st.number_input(f"'{level}' Questions", min_value=0, max_value=2, value=st.session_state.bloom_q_counts.get(level, 1), key=f"num_{level}_q")
-            
-    num_bulk_questions = 25
-    if module == "Bulk Dataset Generator":
-        st.markdown("---")
-        st.info("This module generates a large dataset based on your Strategic Plan.")
-        num_bulk_questions = st.number_input("Questions to Generate (Per Topic)", min_value=5, max_value=50, value=25, step=5)
     st.markdown("---")
+    st.subheader("Pipeline Settings")
     
+    # Settings for modules within the pipeline
+    selected_difficulty = st.selectbox("MCQ Difficulty", ["easy", "medium", "hard"], index=1)
+    num_bulk_questions = st.number_input("Questions to Generate per Topic (for Bulk Dataset)", min_value=5, max_value=50, value=10, step=5)
 
-    # --- Action Buttons & Logic ---
-    if module in ["Summarization", "Notes", "Explanation", "Knowledge Graph", "Strategic Plan"]:
-        if st.button(f"Run {module}"):
-            if uploaded_md:
-                with st.spinner(f"Running {module}..."):
-                    st.session_state.module_ran = module
-                    st.session_state.source_material = uploaded_md.read().decode("utf-8")
-                    try:
-                        crew, _ = get_crew(module, st.session_state.source_material)
-                        result = crew.kickoff()
-                        st.session_state.text_output = str(result.raw) if hasattr(result, 'raw') else str(result)
-                        if module == "Strategic Plan":
-                            match = re.search(r"```json\s*(\[[\s\S]*\])\s*```", result.raw, re.DOTALL)
-                            if match:
-                                json_string = match.group(1).strip()
-                                st.session_state.strategic_plan_parsed = json.loads(json_string)
-                            else: st.error("Strategic Plan did not return valid JSON.")
-                        elif module == "Knowledge Graph":
-                            match = re.search(r"digraph\s+.*\{[\s\S]*\}", st.session_state.text_output, re.DOTALL)
-                            st.session_state.knowledge_graph_dot = match.group(0) if match else None
-                        st.success("Generation Complete!")
-                    except Exception as e:
-                        st.error(f"An unexpected error occurred: {e}")
+    st.markdown("---")
+
+    if st.button("Run Full Pipeline", type="primary"):
+        if uploaded_md:
+            st.session_state.pipeline_running = True
+            st.session_state.pipeline_complete = False
+            st.session_state.source_material = uploaded_md.read().decode("utf-8")
+        else:
+            st.warning("Please upload a source document first.")
+
+# --- Main Page Content & Pipeline Execution ---
+if st.session_state.pipeline_running:
+    # This block executes the entire pipeline sequentially
+    try:
+        # --- STEP 1: STRATEGIC PLAN ---
+        with st.status("Step 1: Generating Strategic Plan...", expanded=True) as status:
+            crew, _ = get_crew("Strategic Plan", st.session_state.source_material)
+            parsed_data = run_crew_and_parse_json(crew, expected_format='list')
+            if parsed_data:
+                st.session_state.strategic_plan_parsed = parsed_data
+                st.write(f"✅ Plan generated with {len(parsed_data)} topics.")
+                status.update(label="Strategic Plan Complete!", state="complete")
             else:
-                st.warning("Please upload a source document first.")
+                status.update(label="Strategic Plan Failed!", state="error")
+                st.stop()
 
-    elif module == "MCQ Generation":
-        if st.session_state.strategic_plan_parsed:
-            if st.button("Generate & Save MCQs"):
-                st.session_state.module_ran = "MCQ Generation"
-                try:
-                    all_mcqs = []
-                    topics = st.session_state.strategic_plan_parsed
-                    progress_bar = st.progress(0, text="Initializing...")
-                    for i, topic_obj in enumerate(topics):
-                        with st.spinner(f"Processing topic {i+1}/{len(topics)}..."):
-                            crew, _ = get_crew("MCQ Generation", json.dumps(topic_obj), 
-                                               difficulty=st.session_state.selected_difficulty, 
-                                               bloom_q_counts=st.session_state.bloom_q_counts)
-                            result = crew.kickoff()
-                            if result and hasattr(result, 'raw'):
-                                match = re.search(r"```json\s*(\{[\s\S]*\})\s*```", result.raw, re.DOTALL)
-                                if match:
-                                    try:
-                                        parsed_data = json.loads(match.group(1).strip())
-                                        if isinstance(parsed_data, dict) and parsed_data.get('status') == 'refined':
-                                            all_mcqs.extend(parsed_data.get('mcqs', []))
-                                    except Exception: pass
-                        progress_bar.progress((i + 1) / len(topics))
-                        time.sleep(7)
-                    if all_mcqs:
-                        data_to_save = [{"domain": m.get("domain"), "bloom_level": m.get("bloom_level"), "topic": m.get("topic"), "question": m.get("question"), "answer": m.get("correct_answer"), "rationale": m.get("rationale")} for m in all_mcqs]
-                        with open("mcqs.json", 'w', encoding='utf-8') as f:
-                            json.dump(data_to_save, f, indent=4, ensure_ascii=False)
-                        st.success("✅ MCQs saved to `mcqs.json`!")
-                        st.session_state.text_output = "You can now run 'Distractor Generation'."
-                    else:
-                        st.warning("No MCQs were generated.")
-                    progress_bar.empty()
-                except Exception as e:
-                    st.error(f"An unexpected error occurred: {e}")
-        else:
-            st.info("Please run 'Strategic Plan' first.")
+        # --- STEP 2: KNOWLEDGE GRAPH ---
+        with st.status("Step 2: Generating Knowledge Graph...", expanded=True) as status:
+            crew, _ = get_crew("Knowledge Graph", st.session_state.source_material)
+            result = crew.kickoff()
+            text_output = str(result.raw) if hasattr(result, 'raw') else str(result)
+            match = re.search(r"digraph\s+.*\{[\s\S]*\}", text_output, re.DOTALL)
+            if match:
+                st.session_state.knowledge_graph_dot = match.group(0)
+                st.write("✅ Knowledge graph generated.")
+                status.update(label="Knowledge Graph Complete!", state="complete")
+            else:
+                status.update(label="Knowledge Graph Failed!", state="error")
+                st.stop()
 
-    elif module == "Distractor Generation":
-        if os.path.exists("mcqs.json"):
-             if st.button("Generate Final Quiz"):
-                st.session_state.module_ran = "Distractor Generation"
-                st.session_state.user_answers, st.session_state.quiz_submitted = {}, False
-                try:
-                    with open("mcqs.json", 'r', encoding='utf-8') as f:
-                        questions_data = json.load(f)
-                    final_quiz_data = []
-                    progress_bar = st.progress(0, text="Initializing...")
-                    for i, q_obj in enumerate(questions_data):
-                        with st.spinner(f"Generating options for question {i+1}/{len(questions_data)}..."):
-                            crew, _ = get_crew("Distractor Generation", json.dumps(q_obj))
-                            result = crew.kickoff()
-                            distractors_with_rationales = []
-                            if result and hasattr(result, 'raw'):
-                                match = re.search(r"```json\s*(\[[\s\S]*\])\s*```", result.raw, re.DOTALL)
-                                if match:
-                                    try:
-                                        parsed_options = json.loads(match.group(1).strip())
-                                        if isinstance(parsed_options, list): distractors_with_rationales = parsed_options
-                                    except Exception: pass
-                            options = [d.get('option', '') for d in distractors_with_rationales] + [q_obj['answer']]
-                            random.shuffle(options)
-                            distractor_rationales_map = {d.get('option'): d.get('misleading_rationale') for d in distractors_with_rationales}
-                            final_quiz_data.append({
-                                "question": q_obj['question'], "options": options, "correct_answer": q_obj['answer'],
-                                "correct_rationale": q_obj['rationale'], "distractor_rationales": distractor_rationales_map,
-                                "domain": q_obj.get("domain"), "bloom_level": q_obj.get("bloom_level"), "topic": q_obj.get("topic")
-                            })
-                        progress_bar.progress((i + 1) / len(questions_data))
-                        time.sleep(1)
-                    st.session_state.final_quiz_data = final_quiz_data
-                    data_for_json_file = [ {k: v for k, v in mcq.items() if k != 'options'} for mcq in final_quiz_data ]
-                    output_filename = "final_quiz.json"
-                    with open(output_filename, 'w', encoding='utf-8') as f:
-                        json.dump(data_for_json_file, f, indent=4, ensure_ascii=False)
-                    st.session_state.final_quiz_json_output = json.dumps(data_for_json_file, indent=4)
-                    st.success(f"✅ Final quiz generated and saved to `{output_filename}`!")
-                    progress_bar.empty()
-                    st.rerun()
-                except Exception as e:
-                    st.error(f"An unexpected error occurred: {e}")
-        else:
-            st.info("Please run 'MCQ Generation' first.")
+        # --- STEP 3: MCQ GENERATION ---
+        with st.status("Step 3: Generating Multiple-Choice Questions...", expanded=True) as status:
+            all_mcqs = []
+            topics = st.session_state.strategic_plan_parsed
+            for i, topic_obj in enumerate(topics):
+                st.write(f"Generating MCQs for topic {i+1}/{len(topics)}: '{topic_obj.get('topic')}'...")
+                crew, _ = get_crew("MCQ Generation", json.dumps(topic_obj), difficulty=selected_difficulty, bloom_q_counts={"Remember":1, "Understand":1, "Apply":1, "Analyze":1, "Evaluate":1, "Create":1})
+                parsed_data = run_crew_and_parse_json(crew, expected_format='dict')
+                if parsed_data and isinstance(parsed_data, dict) and parsed_data.get('status') == 'refined':
+                    for mcq in parsed_data.get('mcqs', []):
+                        mcq['topic'] = topic_obj.get('topic', 'Unknown')
+                        all_mcqs.append(mcq)
+            with open("mcqs.json", 'w', encoding='utf-8') as f:
+                json.dump(all_mcqs, f, indent=4, ensure_ascii=False)
+            st.write(f"✅ {len(all_mcqs)} MCQs generated and saved.")
+            status.update(label="MCQ Generation Complete!", state="complete")
 
-    elif module == "AI Quiz Taker":
-        if os.path.exists("final_quiz.json"):
-            if st.button("Start AI Quiz Attempt"):
-                st.session_state.module_ran = "AI Quiz Taker"
-                try:
-                    qwen_pipeline = llm_hf_pipeline
-                    if not st.session_state.final_quiz_data:
-                        st.error("Quiz data not in session. Run 'Distractor Generation' first.")
-                        st.stop()
-                    
-                    quiz_data = st.session_state.final_quiz_data
-                    ai_answers = []
-                    progress_bar = st.progress(0, text="AI is starting the quiz...")
-                    for i, q_obj in enumerate(quiz_data):
-                        with st.spinner(f"AI is answering question {i+1}/{len(quiz_data)}..."):
-                            options_str = "\n".join([f"- {opt}" for opt in q_obj.get('options', [])])
-                            prompt = f"Question: {q_obj['question']}\nOptions:\n{options_str}\nRespond with only the text of the correct option."
-                            response = qwen_pipeline(prompt, max_new_tokens=100, do_sample=False)
-                            ai_raw_output = response[0]['generated_text'].replace(prompt, '').strip()
-                            ai_chosen_option = "AI failed to select an option."
-                            current_options = q_obj.get("options", [])
-                            if current_options:
-                                best_match = max(current_options, key=lambda option: fuzz.partial_ratio(option, ai_raw_output))
-                                ai_chosen_option = best_match
-                            ai_answers.append(ai_chosen_option)
-                        progress_bar.progress((i + 1) / len(quiz_data))
-                    
-                    st.session_state.ai_answers = ai_answers
-                    
-                    incorrect_answers_data = []
-                    for i, mcq in enumerate(quiz_data):
-                        if ai_answers[i] != mcq.get('correct_answer'):
-                            incorrect_answers_data.append(mcq)
-                    if incorrect_answers_data:
-                        output_filename = "ai_quiz_failures.json"
-                        with open(output_filename, 'w', encoding='utf-8') as f:
-                            json.dump(incorrect_answers_data, f, indent=4, ensure_ascii=False)
-                        st.info(f"📝 AI's {len(incorrect_answers_data)} incorrect answers saved to `{output_filename}`.")
-                    
-                    st.success("✅ AI has completed the quiz!")
-                    progress_bar.empty()
-                    st.rerun()
-                except Exception as e:
-                    st.error(f"An unexpected error occurred: {e}")
-        else:
-            st.info("Please run 'Distractor Generation' first.")
+        # --- STEP 4: DISTRACTOR GENERATION ---
+        with st.status("Step 4: Generating Final Quiz with Distractors...", expanded=True) as status:
+            with open("mcqs.json", 'r', encoding='utf-8') as f:
+                questions_data = json.load(f)
+            final_quiz_data = []
+            for i, q_obj in enumerate(questions_data):
+                st.write(f"Generating options for question {i+1}/{len(questions_data)}...")
+                crew, _ = get_crew("Distractor Generation", json.dumps(q_obj))
+                parsed_options = run_crew_and_parse_json(crew, expected_format='list')
+                distractors = parsed_options if parsed_options else []
+                options = [d.get('option', '') for d in distractors] + [q_obj['correct_answer']]
+                random.shuffle(options)
+                distractor_rationales = {d.get('option'): d.get('misleading_rationale') for d in distractors}
+                final_quiz_data.append({
+                    "question": q_obj['question'], "options": options, "correct_answer": q_obj['correct_answer'],
+                    "correct_rationale": q_obj['rationale'], "distractor_rationales": distractor_rationales,
+                    "domain": q_obj.get("domain"), "bloom_level": q_obj.get("bloom_level"), "topic": q_obj.get("topic")
+                })
+            st.session_state.final_quiz_data = final_quiz_data
+            st.write(f"✅ Final quiz with {len(final_quiz_data)} questions created.")
+            status.update(label="Distractor Generation Complete!", state="complete")
 
-    elif module == "Bulk Dataset Generator":
-        if st.session_state.strategic_plan_parsed:
-            if st.button("Generate Bulk Dataset"):
-                st.session_state.module_ran = "Bulk Dataset Generator"
-                try:
-                    all_triplets = []
-                    topics = st.session_state.strategic_plan_parsed
-                    CHUNK_SIZE = 5 
-                    num_chunks_per_topic = num_bulk_questions // CHUNK_SIZE
-                    total_requests = len(topics) * num_chunks_per_topic
-                    completed_requests = 0
-                    progress_bar = st.progress(0, text="Initializing bulk dataset generation...")
+        # --- STEP 5: AI QUIZ TAKER ---
+        with st.status("Step 5: Running AI Quiz Taker...", expanded=True) as status:
+            stud_pipeline = student_pipeline()
+            quiz_data = st.session_state.final_quiz_data
+            ai_answers = []
+            for i, q_obj in enumerate(quiz_data):
+                st.write(f"AI is answering question {i+1}/{len(quiz_data)}...")
+                options_str = "\n".join([f"- {opt}" for opt in q_obj.get('options', [])])
+                prompt = f"Question: {q_obj['question']}\nOptions:\n{options_str}\nRespond with only the text of the correct option."
+                response = stud_pipeline(prompt, max_new_tokens=100, do_sample=False)
+                ai_raw_output = response[0]['generated_text'].replace(prompt, '').strip()
+                ai_chosen_option = max(q_obj.get("options", []), key=lambda opt: fuzz.partial_ratio(opt, ai_raw_output)) if q_obj.get("options") else "AI failed"
+                ai_answers.append(ai_chosen_option)
+            st.session_state.ai_answers = ai_answers
+            st.write("✅ AI has completed the quiz.")
+            status.update(label="AI Quiz Taker Complete!", state="complete")
 
-                    for i, topic_obj in enumerate(topics):
-                        for j in range(num_chunks_per_topic):
-                            with st.spinner(f"Generating batch {j+1}/{num_chunks_per_topic} for topic '{topic_obj.get('topic')}'..."):
-                                crew, _ = get_crew("Bulk Dataset Generator", 
-                                                   input_data=json.dumps(topic_obj),
-                                                   source_material=st.session_state.source_material,
-                                                   num_questions=CHUNK_SIZE)
-                                result = crew.kickoff()
-                                if result and hasattr(result, 'raw'):
-                                    match = re.search(r"```json\s*(\[[\s\S]*\])\s*```", result.raw, re.DOTALL)
-                                    if match:
-                                        try:
-                                            parsed_data = json.loads(match.group(1).strip())
-                                            all_triplets.extend(parsed_data)
-                                        except Exception: pass
-                            completed_requests += 1
-                            progress_bar.progress(completed_requests / total_requests)
-                            time.sleep(7)
+        # --- STEP 6: BULK DATASET GENERATOR ---
+        with st.status("Step 6: Generating Bulk Dataset...", expanded=True) as status:
+            all_triplets = []
+            topics = st.session_state.strategic_plan_parsed
+            CHUNK_SIZE = 5 
+            num_chunks_per_topic = num_bulk_questions // CHUNK_SIZE
+            for i, topic_obj in enumerate(topics):
+                for j in range(num_chunks_per_topic):
+                    st.write(f"Generating batch {j+1}/{num_chunks_per_topic} for topic '{topic_obj.get('topic')}'...")
+                    crew, _ = get_crew("Bulk Dataset Generator", input_data=json.dumps(topic_obj), source_material=st.session_state.source_material, num_questions=CHUNK_SIZE)
+                    parsed_data = run_crew_and_parse_json(crew, expected_format='list')
+                    if parsed_data:
+                        all_triplets.extend(parsed_data)
+            st.session_state.bulk_dataset = all_triplets
+            with open("bulk_dataset.json", 'w', encoding='utf-8') as f:
+                json.dump(all_triplets, f, indent=4, ensure_ascii=False)
+            st.write(f"✅ Bulk dataset created with {len(all_triplets)} triplets.")
+            status.update(label="Bulk Dataset Generation Complete!", state="complete")
 
-                    st.session_state.bulk_dataset = all_triplets
-                    output_filename = "bulk_dataset.json"
-                    with open(output_filename, 'w', encoding='utf-8') as f:
-                        json.dump(all_triplets, f, indent=4, ensure_ascii=False)
-                    st.success(f"✅ Bulk dataset created with {len(all_triplets)} Q&A triplets!")
-                    st.rerun()
-                except Exception as e:
-                    st.error(f"An unexpected error occurred: {e}")
-        else:
-            st.info("Please run 'Strategic Plan' first to identify topics for dataset generation.")
-    
-    
-    elif module == "Finetuned Quiz Taker":
-        if os.path.exists("final_quiz.json"):
-            if st.button("Start Finetuned AI Quiz Attempt"):
-                st.session_state.module_ran = "Finetuned Quiz Taker"
-                try:
-                    # Use the imported fine-tuned pipeline
-                    finetuned_pipeline = llm_finetuned_pipeline
-                    
-                    if not st.session_state.final_quiz_data:
-                        st.error("Quiz data not in session. Run 'Distractor Generation' first.")
-                        st.stop()
-                    
-                    quiz_data = st.session_state.final_quiz_data
-                    ai_answers = []
-                    progress_bar = st.progress(0, text="Finetuned AI is starting the quiz...")
+        st.session_state.pipeline_running = False
+        st.session_state.pipeline_complete = True
+        st.rerun()
 
-                    for i, q_obj in enumerate(quiz_data):
-                        with st.spinner(f"Finetuned AI is answering question {i+1}/{len(quiz_data)}..."):
-                            options_str = "\n".join([f"- {opt}" for opt in q_obj.get('options', [])])
-                            prompt = f"Question: {q_obj['question']}\nOptions:\n{options_str}\nRespond with only the text of the correct option."
-                            response = finetuned_pipeline(prompt, max_new_tokens=100, do_sample=False)
-                            ai_raw_output = response[0]['generated_text'].replace(prompt, '').strip()
-                            
-                            ai_chosen_option = "AI failed to select an option."
-                            current_options = q_obj.get("options", [])
-                            if current_options:
-                                best_match = max(current_options, key=lambda option: fuzz.partial_ratio(option, ai_raw_output))
-                                ai_chosen_option = best_match
-                            ai_answers.append(ai_chosen_option)
-                        progress_bar.progress((i + 1) / len(quiz_data))
-                    
-                    st.session_state.ai_answers = ai_answers
-                    st.success("✅ Finetuned AI has completed the quiz!")
-                    st.rerun()
-                except Exception as e:
-                    st.error(f"An unexpected error occurred: {e}")
-        else:
-            st.info("Please run 'Distractor Generation' first.")
-
+    except Exception as e:
+        st.error(f"The pipeline failed with an error: {e}")
+        st.session_state.pipeline_running = False
 
 # --- Main Page Content Display ---
-if not st.session_state.module_ran:
-    st.info("Upload a document and select a module from the sidebar to begin.")
+if st.session_state.pipeline_complete:
+    st.header("✅ Pipeline Finished")
+    st.success("All processes completed successfully. You can now review the outputs.")
+    
+    st.subheader("Strategic Plan")
+    st.dataframe(st.session_state.strategic_plan_parsed)
 
-elif st.session_state.module_ran in ["AI Quiz Taker", "Finetuned Quiz Taker"]:
-    st.header(f"🤖 {st.session_state.module_ran} Results")
-    quiz_data = st.session_state.get('final_quiz_data', [])
-    ai_answers = st.session_state.get('ai_answers', [])
-    if not quiz_data or not ai_answers:
-        st.warning("No AI quiz results found.")
-    else:
-        score = 0
-        for i, mcq in enumerate(quiz_data):
-            ai_answer = ai_answers[i]
-            correct_answer = mcq.get('correct_answer')
-            st.markdown(f"**Q{i+1}: {mcq.get('question')}**")
-            st.write(f"Correct Answer: **{correct_answer}**")
-            if ai_answer == correct_answer:
-                st.success(f"AI's Answer: **{ai_answer}** (Correct!)")
-                score += 1
-            else:
-                st.error(f"AI's Answer: **{ai_answer}** (Incorrect!)")
-            st.markdown("---")
-        st.markdown(f"### Final Score: {score}/{len(quiz_data)}")
-
-
-elif st.session_state.module_ran == "Bulk Dataset Generator":
-    st.header("📦 Bulk Training Dataset")
-    dataset = st.session_state.get('bulk_dataset', [])
-    if not dataset:
-        st.warning("No dataset was generated.")
-    else:
-        st.info(f"Generated a total of {len(dataset)} question-answer-reasoning triplets.")
-        st.dataframe(dataset)
-        st.download_button("📥 Download Dataset as JSON", json.dumps(dataset, indent=4), "bulk_dataset.json", "application/json")
-
-elif st.session_state.module_ran in ["AI Quiz Taker", "Finetuned Quiz Taker"]:
-    st.header(f"🤖 {st.session_state.module_ran} Results")
-    quiz_data = st.session_state.get('final_quiz_data', [])
-    ai_answers = st.session_state.get('ai_answers', [])
-    if not quiz_data or not ai_answers:
-        st.warning("No AI quiz results found.")
-    else:
-        score = 0
-        for i, mcq in enumerate(quiz_data):
-            ai_answer = ai_answers[i]
-            correct_answer = mcq.get('correct_answer')
-            st.markdown(f"**Q{i+1}: {mcq.get('question')}**")
-            st.write(f"Correct Answer: **{correct_answer}**")
-            if ai_answer == correct_answer:
-                st.success(f"AI's Answer: **{ai_answer}** (Correct!)")
-                score += 1
-            else:
-                st.error(f"AI's Answer: **{ai_answer}** (Incorrect!)")
-            st.markdown("---")
-        st.markdown(f"### Final Score: {score}/{len(quiz_data)}")
-
-elif st.session_state.module_ran == "Distractor Generation":
-    st.header("Final Quiz")
-    quiz_data = st.session_state.get('final_quiz_data', [])
-    if not quiz_data:
-        st.warning("No quiz data found.")
-    else:
-        with st.form("final_quiz_form"):
-            for i, mcq in enumerate(quiz_data):
-                st.markdown(f"##### Q{i+1} ({mcq.get('bloom_level', '')}): {mcq.get('question', 'N/A')}")
-                options = mcq.get('options', [])
-                user_choice = st.radio("Select your answer:", options, key=f"q_{i}", index=None, disabled=st.session_state.quiz_submitted)
-                if user_choice:
-                    st.session_state.user_answers[i] = user_choice
-                st.markdown("---")
-            submit_button = st.form_submit_button("Submit Answers")
-        if submit_button:
-            st.session_state.quiz_submitted = True
-            st.rerun()
-        if st.session_state.quiz_submitted:
-            st.subheader("Quiz Results")
-            score = 0
-            for i, mcq in enumerate(quiz_data):
-                user_answer = st.session_state.user_answers.get(i)
-                correct_answer = mcq.get('correct_answer')
-                st.markdown(f"**Q{i+1} ({mcq.get('bloom_level', '')}): {mcq.get('question')}**")
-                st.write(f"Your Answer: **{user_answer if user_answer else 'No answer chosen'}**")
-                st.write(f"Correct Answer: **{correct_answer}**")
-                if user_answer == correct_answer:
-                    st.success("Correct!")
-                    score += 1
-                    with st.expander("View Rationale"):
-                        st.markdown(mcq.get('correct_rationale', 'No rationale provided.'))
-                else:
-                    st.error("Incorrect!")
-                    with st.expander("View Explanation"):
-                        explanation = mcq.get('distractor_rationales', {}).get(user_answer, "No specific explanation available.")
-                        st.markdown(explanation)
-                st.markdown("---")
-            st.markdown(f"### Your Final Score: {score}/{len(quiz_data)}")
-            if st.button("Retake Quiz"):
-                st.session_state.user_answers, st.session_state.quiz_submitted = {}, False
-                st.rerun()
-        st.download_button("📥 Download Quiz as JSON", st.session_state.final_quiz_json_output, "final_quiz.json", "application/json")
-
-elif st.session_state.module_ran == "Strategic Plan":
-    st.header("Refined Strategic Plan")
-    if st.session_state.strategic_plan_parsed:
-        st.dataframe(st.session_state.strategic_plan_parsed)
-        with st.expander("View Raw JSON"):
-            st.json(st.session_state.strategic_plan_parsed)
-elif st.session_state.module_ran == "Knowledge Graph":
-    st.header("Learning Path Flowchart")
+    st.subheader("Knowledge Graph")
     if st.session_state.knowledge_graph_dot:
         st.graphviz_chart(st.session_state.knowledge_graph_dot)
-        st.subheader("Final DOT Code")
-        st.code(st.session_state.knowledge_graph_dot, language='dot')
+
+    st.subheader("AI Quiz Taker Results")
+    score = sum(1 for i, mcq in enumerate(st.session_state.final_quiz_data) if st.session_state.ai_answers[i] == mcq.get('correct_answer'))
+    st.metric("AI Score", f"{score} / {len(st.session_state.final_quiz_data)}")
+    with st.expander("View Detailed AI Quiz Results"):
+        for i, mcq in enumerate(st.session_state.final_quiz_data):
+            st.markdown(f"**Q{i+1}: {mcq.get('question')}**")
+            st.write(f"Correct Answer: **{mcq.get('correct_answer')}**")
+            if st.session_state.ai_answers[i] == mcq.get('correct_answer'):
+                st.success(f"AI's Answer: **{st.session_state.ai_answers[i]}** (Correct!)")
+            else:
+                st.error(f"AI's Answer: **{st.session_state.ai_answers[i]}** (Incorrect!)")
+            st.markdown("---")
+
+    st.subheader("Bulk Dataset")
+    st.info(f"Generated a total of {len(st.session_state.bulk_dataset)} question-answer-reasoning triplets.")
+    st.dataframe(st.session_state.bulk_dataset)
+    st.download_button("📥 Download Bulk Dataset", json.dumps(st.session_state.bulk_dataset, indent=4), "bulk_dataset.json", "application/json")
+    
 else:
-    if st.session_state.text_output:
-        st.header(f"Output for {st.session_state.module_ran}")
-        st.markdown(st.session_state.text_output, unsafe_allow_html=True)
-        if st.session_state.module_ran not in ["MCQ Generation", "Distractor Generation", "AI Quiz Taker", "Finetuned Quiz Taker"]:
-            st.download_button(f"📥 Download {st.session_state.module_ran}", st.session_state.text_output, f"{st.session_state.module_ran.lower().replace(' ', '_')}_output.md")
+    st.info("Upload a document and configure your settings in the sidebar, then click 'Run Full Pipeline'.")

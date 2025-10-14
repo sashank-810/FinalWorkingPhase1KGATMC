@@ -1,0 +1,777 @@
+[
+    {
+        question: "Explain the concept of an ordinary differential equation (ODE) and describe how its order is determined, providing a specific example.",
+        answer: "An ordinary differential equation (ODE) is an equation that relates a function of a single independent variable to its derivatives. The order of an ODE is the highest derivative present in the equation. For example, the equation d²y/dx² + 3(dy/dx) + 2y = 0 is a second-order ODE because the highest derivative is the second derivative (d²y/dx²).",
+        answer_reasoning: "This question assesses comprehension of ODE fundamentals, requiring the student to define key terms and demonstrate understanding of order determination through a concrete example, aligning with the 'Understand' level.",
+    },
+    {
+        question: "Solve the differential equation dy/dx = 4x³ using integration, and explain the significance of the constant of integration in the solution.",
+        answer: "Integrating both sides with respect to x yields y = ∫4x³ dx = x⁴ + C, where C is the constant of integration. The constant C represents the family of all possible solutions to the differential equation. Each value of C corresponds to a unique solution curve; for instance, if an initial condition y(0) = 2 is provided, C = 2, resulting in the specific solution y = x⁴ + 2.",
+        answer_reasoning: "This requires applying integration techniques to solve a first-order ODE and articulating the role of the constant, which is a core 'Apply' skill for solving basic differential equations.",
+    },
+    {
+        question: "Analyze the differential equation dy/dx = y(1 - y) in terms of its order, linearity, and separability. Justify each characteristic.",
+        answer: "The equation dy/dx = y(1 - y) is a first-order ODE because the highest derivative is the first derivative (dy/dx). It is nonlinear due to the y² term (y(1 - y) = y - y²), which violates the linearity condition (where the dependent variable and its derivatives must appear linearly). However, it is separable because it can be rewritten as dy/[y(1 - y)] = dx, allowing separation of variables for solution via integration.",
+        answer_reasoning: "This demands deconstructing the equation's properties to identify order, linearity, and separability, requiring analytical thinking at the 'Analyze' level.",
+    },
+    {
+        question: "Evaluate the suitability of using Euler's method versus analytical methods for solving the differential equation dy/dx = e^x with initial condition y(0) = 1. Justify your evaluation.",
+        answer: "Euler's method is a numerical approximation technique, while analytical methods provide exact solutions. For dy/dx = e^x, an analytical solution exists (y = e^x + C), so Euler's method is unnecessary and inefficient here. Analytical methods are preferred for exact solutions when feasible, as they avoid cumulative numerical errors. Euler's method would be more appropriate for complex ODEs without closed-form solutions, such as dy/dx = sin(y) + x.",
+        answer_reasoning: "This requires comparing method appropriateness based on problem complexity, demonstrating critical evaluation skills at the 'Evaluate' level.",
+    },
+    {
+        question: "Create a real-world scenario involving population dynamics that can be modeled by the differential equation dP/dt = kP(1 - P/M), where P is population size, k is a growth rate constant, and M is carrying capacity. Explain the role of each parameter.",
+        answer: "A forest ecosystem with limited resources can be modeled by dP/dt = kP(1 - P/M). Here, P(t) represents the population of deer at time t, k is the intrinsic growth rate (e.g., k = 0.1 per year for rapid reproduction), and M is the carrying capacity (e.g., M = 1000 deer, the maximum sustainable population). As P approaches M, the growth rate slows (1 - P/M approaches 0), preventing overpopulation. This model describes logistic growth, where initial exponential growth transitions to stabilization at M.",
+        answer_reasoning: "Creating a contextual scenario and explaining parameter roles demonstrates the ability to generate novel applications of differential equations, a 'Create' level task.",
+    },
+    {
+        question: "Apply the method of separation of variables to solve the differential equation dy/dx = 5xy with initial condition y(0) = 2, and explain each step of the solution process.",
+        answer: "Step 1: Separate variables: dy/y = 5x dx. Step 2: Integrate both sides: ∫(1/y) dy = ∫5x dx → ln|y| = (5/2)x² + C. Step 3: Solve for y: y = Ce^{(5/2)x²} (C = e^C). Step 4: Apply initial condition y(0) = 2: 2 = C*e^0 → C = 2. Final solution: y = 2e^{(5/2)x²}.",
+        answer_reasoning: "This question requires the student to demonstrate procedural application of separation of variables—a core technique for first-order ODEs—by executing each step correctly and justifying the mathematical operations.",
+    },
+    {
+        question: "Analyze the differential equation d²y/dt² + 4(dy/dt) + 4y = 0. Identify its order, linearity, and type (homogeneous/non-homogeneous). Then determine the behavior of solutions as t → ∞ and explain why this occurs.",
+        answer: "Order: 2 (highest derivative is second-order). Linearity: Linear (all terms are linear in y and derivatives). Type: Homogeneous (right-hand side is 0). Behavior: All solutions decay to 0 as t → ∞. Reason: Characteristic equation r² + 4r + 4 = 0 has a repeated root r = -2, leading to solutions of the form y(t) = (A + Bt)e^{-2t}, which decay exponentially due to the negative real exponent.",
+        answer_reasoning: "This question demands deconstruction of the ODE's structural properties and synthesis of how these properties dictate solution behavior, requiring deeper analytical reasoning than basic application.",
+    },
+    {
+        question: "Evaluate the appropriateness of using Euler's method versus the integrating factor method for solving dy/dt = -ty + e^{-t²} with y(0) = 1 over the interval [0, 2]. Justify your evaluation based on computational efficiency and solution accuracy.",
+        answer: "Euler's method is computationally simpler but less accurate due to its linear approximation and error accumulation. The integrating factor method (for linear ODEs) is more precise but requires solving ∫μ(t)·e^{-t²} dt, which involves error functions and is computationally intensive. For this equation, Euler's method may suffice for rough estimates but fails to capture the exponential decay accurately, whereas the integrating factor method (though complex) yields exact behavior. Thus, Euler's method is inappropriate for accuracy-sensitive applications, while the integrating factor method is theoretically superior despite higher computational cost.",
+        answer_reasoning: "This question assesses the student's ability to weigh methodological trade-offs, requiring critical judgment about mathematical tool selection based on problem constraints.",
+    },
+    {
+        question: "Create a differential equation model for the population growth of a species where the birth rate is proportional to the square of the current population, and the death rate is proportional to the population. Solve your model for the general solution and interpret the long-term behavior.",
+        answer: "Model: dP/dt = kP² - mP (k > 0, m > 0). General solution: Solve via separation: ∫(1/(P(kP - m))) dP = ∫dt. Partial fractions yield (1/m)∫(1/P - k/(kP - m)) dP = t + C → (1/m)(ln|P| - ln|kP - m|) = t + C. Simplify: ln|P/(kP - m)| = mt + C → P/(kP - m) = Ae^{mt} → P(t) = (mAe^{mt})/(1 - kAe^{mt}). Long-term behavior: As t → ∞, if A > 0, P(t) → m/k (carrying capacity). If A < 0, population collapses to 0. Interpretation: Population stabilizes at m/k if growth outpaces death; otherwise, extinction occurs.",
+        answer_reasoning: "This question requires students to synthesize a real-world scenario into a mathematical model (creative application), solve it using advanced techniques, and interpret results—exhibiting full mastery of the concept.",
+    },
+    {
+        question: "Analyze the structural differences between first-order and second-order differential equations, and explain how these differences impact the solution methods used for each.",
+        answer: "First-order differential equations involve only the first derivative (e.g., dy/dx = f(x, y)) and typically require one initial condition. They can often be solved using methods like separation of variables or integrating factors. Second-order equations involve the second derivative (e.g., d²y/dx² + p(x)dy/dx + q(x)y = r(x)) and require two initial conditions. Solution methods for second-order equations are more complex, such as characteristic equations for homogeneous cases or variation of parameters for nonhomogeneous equations. The key structural difference—order—directly influences the number of initial conditions needed and the complexity of solution techniques.",
+        answer_reasoning: "This question requires students to deconstruct the structural properties of differential equations by order, identifying how order dictates solution methodology and initial condition requirements. This demonstrates analytical understanding beyond basic recognition of DE types.",
+    },
+    {
+        question: "Evaluate the effectiveness of using numerical methods (e.g., Euler's method) versus analytical methods (e.g., integrating factors) for solving the differential equation dy/dx = 2xy with y(0) = 1. Justify your assessment based on accuracy, computational effort, and applicability to real-world scenarios.",
+        answer: "Euler's method is computationally simpler but less accurate, especially for larger step sizes, as it approximates solutions using linear segments. For dy/dx = 2xy, which has an analytical solution y = e^(x²), Euler's method would accumulate significant error over time. Analytical methods like integrating factors provide exact solutions, ensuring precision critical for applications like population modeling or chemical kinetics where small errors compound. However, analytical methods fail for complex equations (e.g., nonlinear or higher-order DEs), where numerical methods become indispensable. Thus, for this specific equation, analytical methods are superior for accuracy, while numerical methods are more versatile for broader, real-world problems where exact solutions are unattainable.",
+        answer_reasoning: "This question demands students weigh trade-offs between solution approaches, requiring critical evaluation of accuracy, effort, and practicality. It tests the ability to justify method selection based on problem constraints, a key skill in engineering and scientific applications.",
+    },
+    {
+        question: "Create a new differential equation that models the spread of a contagious disease in a population with limited healthcare resources. Include terms for infection rate, recovery rate, and resource constraints. Explain how each term reflects real-world dynamics.",
+        answer: "The equation: dI/dt = βSI - γI - kR, where I is infected individuals, S is susceptible, R is healthcare resources, β is infection rate, γ is recovery rate, and k is resource depletion factor. Here, βSI represents infection spread proportional to susceptible-infected interactions; γI models natural recovery; kR accounts for resource-limited treatment (e.g., fewer hospital beds reducing recovery rates as R decreases). As R depletes (e.g., R = R₀ - αt), k increases, slowing recovery and increasing I. This captures how limited resources amplify outbreaks—a dynamic absent in basic SIR models.",
+        answer_reasoning: "This question requires students to synthesize concepts into a novel, contextually grounded model. The created equation must reflect real-world complexity (e.g., resource constraints), demonstrating creative application of DE principles beyond textbook examples.",
+    },
+    {
+        question: "Evaluate the validity of the proposed solution y = e^{3x} + 5 for the differential equation dy/dx = 3y. Justify your evaluation by substituting the solution into the equation and comparing both sides.",
+        answer: "The proposed solution is invalid. Substituting y = e^{3x} + 5 into the right-hand side of the differential equation yields 3y = 3(e^{3x} + 5) = 3e^{3x} + 15. The derivative of y with respect to x is dy/dx = 3e^{3x}. Since 3e^{3x} ≠ 3e^{3x} + 15, the solution does not satisfy the differential equation. The constant term (+5) introduces an inconsistency that invalidates the solution.",
+        answer_reasoning: "This question requires students to apply substitution to verify a solution's validity against the differential equation's criteria. It tests their ability to make a judgment about correctness (Evaluate level) by analyzing the mathematical relationship between the solution and the equation.",
+    },
+    {
+        question: "Create a real-world scenario involving fluid flow through a cylindrical pipe that can be modeled by the differential equation dV/dt = k(A - V), where V(t) is the volume of fluid at time t, A is the pipe's capacity, and k is a positive constant. Explain how the equation reflects the physical behavior of the system.",
+        answer: "Scenario: A cylindrical pipe with capacity A = 500 liters is being filled with water at a rate proportional to the remaining empty space. The differential equation dV/dt = k(500 - V) models this, where k represents the inflow rate constant. As V increases, the remaining capacity (500 - V) decreases, causing the inflow rate (dV/dt) to decline proportionally. This reflects a natural phenomenon where filling slows as the pipe nears capacity, consistent with real-world fluid dynamics.",
+        answer_reasoning: "This question requires students to synthesize knowledge of differential equations and physical systems to generate a new context (Create level). The scenario must align with the equation's structure, demonstrating understanding of how mathematical models represent real-world behavior.",
+    },
+    {
+        question: "Design a differential equation that models the growth of a bacterial population in a nutrient-limited environment, where the growth rate is proportional to both the current population size and the remaining nutrient concentration. Define all variables and explain the mathematical relationship.",
+        answer: "The differential equation is dP/dt = kP(N - P), where P represents the bacterial population at time t, N is the maximum sustainable population (carrying capacity) determined by nutrient availability, k is the growth rate constant, and the term (N - P) models the decreasing nutrient availability as population increases. This equation extends exponential growth by incorporating a limiting factor: when P is small, growth is approximately exponential (dP/dt ≈ kNP), but as P approaches N, the growth rate diminishes to zero.",
+        answer_reasoning: "This question requires students to synthesize concepts of proportional relationships, limiting factors, and real-world modeling to generate a novel differential equation. It assesses 'Create' level mastery by demanding the construction of a biologically plausible model, moving beyond textbook examples to demonstrate conceptual originality and application.",
+    },
+    {
+        question: "State the definition of a differential equation in your own words.",
+        answer: "A differential equation is an equation that contains one or more derivatives of an unknown function with respect to one or more independent variables.",
+        answer_reasoning: "This question tests the student's ability to recall and articulate the fundamental definition of differential equations at the Remember level, addressing their specific failure point.",
+    },
+    {
+        question: "Explain how the order of a differential equation is determined, and provide an example of a third-order differential equation.",
+        answer: "The order of a differential equation is determined by the highest derivative present in the equation. For example, the equation d³y/dx³ + 2(d²y/dx²) - 5(dy/dx) + 3y = e^x is a third-order differential equation because the highest derivative is the third derivative (d³y/dx³).",
+        answer_reasoning: "This question requires the student to demonstrate comprehension of the concept of order (Understand level) by explaining its determination and providing a concrete example.",
+    },
+    {
+        question: "Given the equation dy/dx = 3x² + 2y, classify it as ordinary or partial, state its order, and identify whether it is linear or nonlinear.",
+        answer: "This is an ordinary differential equation (ODE) because it involves only one independent variable (x). It is first-order because the highest derivative is dy/dx. It is linear because the dependent variable (y) and its derivative appear linearly (no products or powers of y or dy/dx).",
+        answer_reasoning: "This question requires the student to apply classification criteria (Apply level) to a specific equation, demonstrating practical understanding of ODEs, order, and linearity.",
+    },
+    {
+        question: "Analyze the differential equation y'' + (sin x)y' + e^x y = 0 in terms of its order, linearity, homogeneity, and type (ODE/PDE).",
+        answer: "This equation is second-order (highest derivative is y''), linear (y and its derivatives appear linearly), homogeneous (right-hand side is zero), and an ordinary differential equation (only one independent variable, x).",
+        answer_reasoning: "This question requires the student to decompose the equation's characteristics (Analyze level), demonstrating deeper structural understanding beyond surface identification.",
+    },
+    {
+        question: "Evaluate why the distinction between linear and nonlinear differential equations is critical for solving real-world problems, using a specific application example.",
+        answer: "The distinction is critical because linear differential equations have systematic solution methods (e.g., characteristic equations for constant coefficients), while nonlinear equations often require numerical approximations or lack closed-form solutions. For example, modeling population growth with the logistic equation (dy/dt = ky(1 - y/M)) is nonlinear; its solution requires special techniques unlike linear models of radioactive decay (dy/dt = -λy).",
+        answer_reasoning: "This question requires the student to make a reasoned judgment about practical significance (Evaluate level), connecting theoretical concepts to real-world problem-solving challenges.",
+    },
+    {
+        question: "Create a new second-order linear nonhomogeneous ordinary differential equation with constant coefficients, then explain why your example meets all specified criteria.",
+        answer: "Example: y'' - 4y' + 4y = 3e^{2x}. This is second-order (highest derivative y''), linear (y and derivatives appear linearly), nonhomogeneous (right-hand side 3e^{2x} ≠ 0), and an ODE (one independent variable).",
+        answer_reasoning: "This question requires the student to synthesize knowledge into a novel example (Create level), demonstrating mastery by generating a valid equation that satisfies all specified properties.",
+    },
+    {
+        question: "Explain the definition of a differential equation and describe two key characteristics that distinguish it from algebraic equations. Justify why these characteristics are fundamental to understanding differential equations.",
+        answer: "A differential equation is an equation that relates a function to its derivatives. Two key characteristics are its order (the highest derivative present) and whether it is linear (the equation is linear in the function and its derivatives). Order determines the number of initial conditions required for a unique solution, while linearity dictates whether standard solution techniques like integrating factors apply. These characteristics are fundamental because they classify equations into solvable categories and dictate the solution approach.",
+        answer_reasoning: "This question tests the student's ability to recall and articulate core definitions and characteristics, aligning with the 'Understand' level. The student must demonstrate comprehension of why order and linearity matter in classification.",
+    },
+    {
+        question: "Given the differential equation $\\frac{d^2y}{dx^2} + 3\\frac{dy}{dx} + 2y = \\sin(x)$, determine its order, linearity, and whether it is ordinary or partial. Apply the definitions to justify your classification.",
+        answer: "This is a second-order ordinary linear differential equation. Order is 2 (highest derivative is $\\frac{d^2y}{dx^2}$), linearity holds because the equation is linear in $y$ and its derivatives (coefficients are constants or functions of $x$), and it is ordinary since all derivatives are with respect to a single independent variable $x$.",
+        answer_reasoning: "This requires applying the definitions of order, linearity, and ordinary vs. partial equations to classify a specific example, meeting the 'Apply' level by using concepts in a concrete context.",
+    },
+    {
+        question: "Analyze how the linearity of a differential equation impacts its solution structure. Contrast the solution spaces of linear versus nonlinear equations using a specific example for each.",
+        answer: "Linear differential equations have solution spaces that form vector spaces (e.g., $y' + 2y = 0$ has solutions $y = Ce^{-2x}$, where $C$ is arbitrary). Nonlinear equations lack this property; for example, $y' = y^2$ has solutions $y = \\frac{1}{C - x}$, which cannot be expressed as a linear combination of independent solutions. This difference arises because linearity allows superposition, while nonlinearity introduces dependencies on specific initial conditions.",
+        answer_reasoning: "This question demands breaking down the structural implications of linearity, requiring analytical reasoning about solution spaces. It assesses 'Analyze' by comparing solution behaviors rather than merely recalling facts.",
+    },
+    {
+        question: "Evaluate the validity of the statement: 'All first-order differential equations can be solved using the method of integrating factors.' Provide evidence to support your judgment.",
+        answer: "The statement is false. Integrating factors apply only to linear first-order equations (e.g., $y' + P(x)y = Q(x)$). Nonlinear equations like $y' = y^2$ cannot be solved this way; their solutions require separation of variables or other methods. For example, $y' = y^2$ yields $y = \\frac{1}{C - x}$, which cannot be derived via integrating factors.",
+        answer_reasoning: "This requires critiquing a general claim by identifying exceptions and providing counterexamples, fulfilling the 'Evaluate' level. The student must judge the accuracy of a statement using evidence from the material.",
+    },
+    {
+        question: "Create a second-order linear partial differential equation with constant coefficients, then describe how its solution method differs from that of an ordinary differential equation of the same order.",
+        answer: "Example: $\\frac{\\partial^2 u}{\\partial x^2} + 2\\frac{\\partial^2 u}{\\partial y^2} = 0$. For partial differential equations (PDEs), solutions depend on multiple independent variables and often require boundary conditions over regions (e.g., solving Laplace's equation in a domain). In contrast, an ordinary differential equation (ODE) like $y'' + 2y' + y = 0$ has solutions depending only on a single variable and uses initial conditions at a point (e.g., $y(0)$ and $y'(0)$).",
+        answer_reasoning: "This task requires synthesizing new content (the PDE example) and contrasting solution methodologies, embodying the 'Create' level. The student must generate a novel example and explain its conceptual difference from ODEs.",
+    },
+    {
+        question: "Apply the definition of a differential equation to identify and classify the equation $\\frac{d^2y}{dx^2} + 3\\frac{dy}{dx} + 2y = \\sin(x)$ as ordinary or partial, determine its order, and explain how this classification affects the solution methodology compared to a first-order equation.",
+        answer: "This is a second-order ordinary differential equation (ODE) because it contains only the second derivative with respect to a single independent variable (x), and no partial derivatives. The order is 2 (highest derivative present). For solution methodology: Second-order ODEs require two initial conditions (e.g., y and y' at a point) and typically involve characteristic equations or methods like variation of parameters. In contrast, first-order equations require only one initial condition and can often be solved via separation of variables or integrating factors. The presence of the nonhomogeneous term $\\sin(x)$ further necessitates finding a particular solution in addition to the homogeneous solution.",
+        answer_reasoning: "This question targets 'Apply' by requiring the student to directly use the definition of ODEs and order to classify a specific equation, then apply that classification to predict solution techniques. It moves beyond rote identification to practical implications for solution strategies.",
+    },
+    {
+        question: "Analyze the differential equation $y' = 1 + y^2$ by decomposing its characteristics: identify its order, linearity, type (ODE/PDE), and explain why the nonlinearity fundamentally alters the solution approach compared to a linear equation like $y' = y$.",
+        answer: "This is a first-order ordinary differential equation (ODE) because it involves only the first derivative with respect to a single independent variable. It is nonlinear due to the $y^2$ term. Nonlinearity prevents the use of standard linear methods (e.g., integrating factors or homogeneous solutions). For $y' = 1 + y^2$, separation of variables yields $\\int \\frac{dy}{1+y^2} = \\int dx$, leading to $\\arctan(y) = x + C$, which is solvable but requires inverse trigonometric functions. In contrast, $y' = y$ is linear with solution $y = Ce^x$, solvable via exponential functions. The nonlinearity creates a solution that is bounded (arctan function) versus exponential growth, demonstrating how characteristic properties dictate mathematical behavior.",
+        answer_reasoning: "This 'Analyze' question requires deconstructing the equation's properties (order, linearity, type) and explaining causal relationships between characteristics and solution methods. It forces students to compare and contrast, moving beyond basic identification to understanding structural implications.",
+    },
+    {
+        question: "Evaluate whether the differential equation $\\frac{\\partial u}{\\partial t} = k \\frac{\\partial^2 u}{\\partial x^2}$ is appropriately used to model heat conduction in a metal rod. Justify your judgment by referencing key characteristics of differential equations, including order, type, and physical applicability.",
+        answer: "Yes, this equation (the heat equation) is appropriately used for modeling heat conduction. It is a second-order partial differential equation (PDE) with two independent variables (time $t$ and position $x$), matching the physical reality where temperature depends on both location and time. The order (second) correctly represents the spatial diffusion process, and the linearity allows for superposition of solutions. Physically, it satisfies the heat transfer principle that rate of change of temperature is proportional to spatial curvature (second derivative). It is more suitable than an ODE (e.g., $\\frac{d\\theta}{dt} = -k\\theta$), which would oversimplify by ignoring spatial variation along the rod. The PDE accurately captures the distributed nature of heat flow, making it the standard model for such scenarios.",
+        answer_reasoning: "This 'Evaluate' question requires judging the appropriateness of a model by analyzing its characteristics against physical requirements. Students must weigh the equation's type (PDE), order, and linearity against the problem's context (heat conduction in a rod), demonstrating critical assessment of conceptual fit rather than just identification.",
+    },
+    {
+        question: "Create a new differential equation that models the population growth of a species with limited resources, incorporating the concept of carrying capacity. State all assumptions, derive the equation from first principles, and explain why it must be nonlinear.",
+        answer: "Assumptions: (1) Population growth rate is proportional to current population size; (2) Growth rate decreases as population approaches a maximum sustainable size (carrying capacity $K$); (3) Resources are limited. From these, the per capita growth rate is $\\frac{1}{P} \\frac{dP}{dt} = r \\left(1 - \\frac{P}{K}\\right)$, where $r$ is the intrinsic growth rate. Multiplying through by $P$ yields the logistic differential equation: $\\frac{dP}{dt} = rP \\left(1 - \\frac{P}{K}\\right)$. This equation must be nonlinear because the $P^2$ term (from $rP - \\frac{r}{K}P^2$) represents density-dependent growth—when population density increases, growth slows due to competition for resources. A linear equation (e.g., $\\frac{dP}{dt} = rP$) would predict unbounded exponential growth, which is biologically unrealistic for limited resources.",
+        answer_reasoning: "This 'Create' question demands original synthesis: students must generate a new equation from physical principles (carrying capacity), explicitly state assumptions, and justify the nonlinearity. It requires understanding how characteristics (nonlinearity) arise from real-world constraints, demonstrating true conceptual creation beyond pattern recognition.",
+    },
+    {
+        question: "Analyze the distinguishing characteristics between ordinary differential equations (ODEs) and partial differential equations (PDEs), and explain how these characteristics influence the choice of solution methods.",
+        answer: "ODEs involve derivatives with respect to a single independent variable (e.g., dy/dt = f(t,y)), while PDEs involve derivatives with respect to multiple independent variables (e.g., ∂u/∂t = k∂²u/∂x²). The key distinction lies in the number of independent variables and the resulting complexity. ODEs typically require initial conditions (e.g., y(t₀) = y₀) and can often be solved using methods like separation of variables or integrating factors. PDEs require boundary conditions (e.g., u(0,t) = 0) and often demand specialized techniques like separation of variables for spatial domains or numerical methods due to their higher dimensionality. This structural difference directly impacts solution feasibility—ODEs generally allow for analytical solutions more readily than PDEs.",
+        answer_reasoning: "This question requires deconstructing the core definitions and implications of ODEs versus PDEs, testing the student's ability to break down the concept and connect structural features to practical solution strategies, which aligns with the Analyze level.",
+    },
+    {
+        question: "Evaluate the validity of the statement: 'All linear differential equations can be solved using the same analytical method.' Support your evaluation with specific examples and counterexamples.",
+        answer: "The statement is invalid. While linear ODEs share the property of superposition (solutions to homogeneous equations can be combined), their solution methods vary significantly based on order and coefficients. For example, first-order linear ODEs (dy/dt + P(t)y = Q(t)) are solvable via integrating factors, while second-order linear ODEs with constant coefficients (d²y/dt² + a dy/dt + by = 0) require characteristic equations. Counterexamples include the Airy equation (d²y/dx² - xy = 0), a linear second-order ODE with variable coefficients that necessitates power series solutions rather than standard methods. This variation demonstrates that linearity alone does not dictate a universal solution approach.",
+        answer_reasoning: "This question demands critical judgment about a generalization, requiring the student to assess truthfulness through concrete examples and exceptions, which is characteristic of the Evaluate level.",
+    },
+    {
+        question: "Create a real-world scenario involving population dynamics that requires a third-order linear differential equation for accurate modeling. Define the equation, explain the necessity of its third-order characteristic, and justify the inclusion of each term.",
+        answer: "Scenario: Modeling the spread of a disease in a population with three interacting factors—susceptible individuals (S), infected (I), and recovered (R)—where the rate of change of infection includes feedback from both current infection levels and historical trends. The equation: d³I/dt³ + 3(d²I/dt²) + 2(dI/dt) + I = 0. The third-order term (d³I/dt³) captures the acceleration of infection rate changes due to external factors like policy interventions or seasonal variations. The d²I/dt² term models the rate of change in acceleration (e.g., how quickly new policies affect infection trends), while dI/dt and I terms represent immediate infection spread and cumulative effects. This structure is essential because third-order dynamics account for complex, multi-stage feedback loops that lower-order models cannot represent.",
+        answer_reasoning: "This question requires the student to synthesize a novel application, demonstrating deep conceptual understanding by designing a context-specific equation where the mathematical structure directly addresses real-world complexity—a hallmark of the Create level.",
+    },
+    {
+        question: "Design a novel real-world scenario requiring a third-order nonlinear ordinary differential equation to model its dynamics. Explicitly define the equation, identify its order, linearity, and homogeneity, and justify how each mathematical term corresponds to a physical phenomenon in your scenario.",
+        answer: "Consider a fluid dynamics system where a rotating turbine blade experiences complex interactions with viscous fluid flow and aerodynamic forces. The governing equation is: d³θ/dt³ + 0.5(d²θ/dt²)² + 2(dθ/dt) + 3θ = 5sin(2t). This is a third-order nonlinear nonhomogeneous DE. Order is 3 (highest derivative is third-order), nonlinearity arises from the (d²θ/dt²)² term, and nonhomogeneity is confirmed by the 5sin(2t) forcing function. The d³θ/dt³ term represents angular acceleration changes due to turbulence, (d²θ/dt²)² models nonlinear viscous resistance, dθ/dt accounts for rotational damping, θ represents angular displacement, and 5sin(2t) simulates external periodic fluid pressure variations.",
+        answer_reasoning: "This question demands synthesis of differential equation characteristics (order, linearity, homogeneity) with physical system design. Students must create a novel mathematical model rather than recall existing examples, demonstrating true application at Bloom's Create level by connecting abstract DE properties to tangible physical phenomena.",
+    },
+    {
+        question: "Define the order of a differential equation in your own words, including how it relates to derivatives.",
+        answer: "The order of a differential equation is determined by the highest derivative present in the equation. For example, if an equation contains a second derivative (y'') but no higher derivatives, it is a second-order differential equation. The order does not depend on the powers of the derivatives or coefficients.",
+        answer_reasoning: "This question targets the 'Remember' level by requiring the student to recall and restate the core definition of differential equation order, which was the area of failure. It ensures foundational knowledge before advancing.",
+    },
+    {
+        question: "Explain why the order of a differential equation directly influences the number of initial conditions needed for a unique solution.",
+        answer: "The order specifies the highest derivative in the equation, which determines how many initial conditions are required to uniquely solve it. For an nth-order differential equation, n initial conditions are necessary. For instance, a second-order equation like y'' = f(x, y, y') needs two conditions (e.g., y(x₀) = y₀ and y'(x₀) = y₁) because its solution depends on both the function's value and its rate of change at a point.",
+        answer_reasoning: "This 'Understand' level question requires students to connect the definition of order to its practical implication (initial conditions), demonstrating conceptual comprehension beyond rote memorization.",
+    },
+    {
+        question: "Given the differential equation (d³y/dx³)² + 5(d²y/dx²) - sin(x)y = 0, determine its order and justify your reasoning.",
+        answer: "The order is 3. The highest derivative present is d³y/dx³ (third derivative), even though it is squared. The order is solely determined by the highest derivative's order, not by its power or the coefficients (e.g., sin(x)).",
+        answer_reasoning: "This 'Apply' level question forces students to apply the definition to a non-trivial equation, testing their ability to identify the highest derivative amid distractions like squared terms.",
+    },
+    {
+        question: "Analyze why the presence of trigonometric coefficients (e.g., sin(x) or cos(x)) in a differential equation does not affect its order. Provide a mathematical example to support your analysis.",
+        answer: "Trigonometric coefficients influence the equation's behavior but do not change the order. For example, in y'' + (sin x)y' + 3y = 0, the highest derivative is y'' (second derivative), so the order is 2. Coefficients like sin(x) multiply derivatives but do not alter the derivative's order, which is defined by the derivative's degree, not its coefficients.",
+        answer_reasoning: "This 'Analyze' question requires deconstructing the equation to isolate the factor affecting order (derivative degree vs. coefficients), demonstrating critical analysis of the concept.",
+    },
+    {
+        question: "Evaluate the accuracy of the following statement: 'A differential equation's order is determined by the highest power of the dependent variable, such as y² or y³.' Provide a counterexample and explain why the statement is incorrect.",
+        answer: "The statement is inaccurate. The order depends on the highest derivative, not the dependent variable's power. For example, in the equation (y'')² + 3y' + y² = 0, the highest derivative is y'' (second derivative), so the order is 2, even though y² appears. The power of y (e.g., y²) is unrelated to order; it only affects the equation's nonlinearity.",
+        answer_reasoning: "This 'Evaluate' question challenges students to critique a common misconception, requiring them to distinguish between derivative order and variable power, a higher-order skill for error detection.",
+    },
+    {
+        question: "Create a third-order linear differential equation that includes both a polynomial coefficient (e.g., x²) and a trigonometric function (e.g., cos(x)). Explain how you verified its order and why your equation meets the criteria.",
+        answer: "Example: x²(d³y/dx³) + cos(x)(d²y/dx²) + 5(dy/dx) + 3y = 0. The order is 3 because the highest derivative is d³y/dx³ (third derivative). The polynomial coefficient (x²) and trigonometric function (cos(x)) are part of the equation's structure but do not affect the order, which is defined solely by the derivative's degree.",
+        answer_reasoning: "This 'Create' level question demands synthesis of knowledge to generate a valid equation, ensuring students can apply concepts creatively while justifying their design to confirm order correctness.",
+    },
+    {
+        question: "Explain how the order of a differential equation is determined, and provide a concise definition.",
+        answer: "The order of a differential equation is determined by the highest derivative present in the equation. For example, if an equation contains a second derivative (y'') but no higher derivatives, it is classified as a second-order differential equation.",
+        answer_reasoning: "This question targets the 'Understand' level by requiring the student to define the core concept without application, ensuring foundational comprehension before progressing to higher levels.",
+    },
+    {
+        question: "Given the differential equation ( \\frac{d^2y}{dx^2} + 3\\frac{dy}{dx} + 4y = \\sin(x) ), identify its order and justify your answer.",
+        answer: "The order of this differential equation is second-order. The justification is that the highest derivative present is the second derivative (\\( \\frac{d^2y}{dx^2} \\)), and the order is solely determined by the highest derivative regardless of other terms in the equation.",
+        answer_reasoning: "This 'Apply' level question requires the student to correctly apply the definition of order to a specific equation, reinforcing their ability to recognize the highest derivative in practical scenarios.",
+    },
+    {
+        question: "Analyze why the differential equation ( y'' + 2y' - 3y = 0 ) is classified as second-order, and discuss how the presence of the first derivative term (y') does not affect this classification.",
+        answer: "The equation is classified as second-order because the highest derivative is the second derivative (y''). The presence of the first derivative term (y') does not influence the order, as the order is strictly defined by the highest derivative present, not by the number of derivative terms or their coefficients.",
+        answer_reasoning: "This 'Analyze' question requires the student to decompose the equation and explain the role of each derivative term, demonstrating deeper understanding beyond surface-level recognition.",
+    },
+    {
+        question: "Evaluate the following statement: 'The differential equation ( \\left(\\frac{dy}{dx}\\right)^2 + y = 5 \\) is second-order because the derivative is squared.' Is this statement accurate? Justify your evaluation.",
+        answer: "The statement is inaccurate. The order of a differential equation is determined by the highest derivative present, not by the power to which the derivative is raised. In this equation, the highest derivative is the first derivative (\\( \\frac{dy}{dx} \\)), so it is first-order, not second-order. The squaring of the derivative affects the equation's nonlinearity but not its order.",
+        answer_reasoning: "This 'Evaluate' question challenges common misconceptions by requiring the student to critically assess a flawed reasoning, fostering the ability to distinguish between order and nonlinearity in differential equations.",
+    },
+    {
+        question: "Create a new differential equation of third order that includes at least two different derivative terms (e.g., first and second derivatives). Explain why your equation is classified as third-order.",
+        answer: "Example: ( y''' - 2y'' + 5y' + 3y = e^x ). This equation is third-order because the highest derivative present is the third derivative (y'''), and the order is defined by this highest derivative regardless of the presence of lower-order derivative terms.",
+        answer_reasoning: "This 'Create' level question demands the student to synthesize knowledge by generating a valid example, demonstrating mastery through original application and explanation of the concept.",
+    },
+    {
+        question: "Determine the order of the differential equation: 5y^{(4)} - 3y''' + 2y'' = e^x.",
+        answer: "The order of the differential equation is 4, as the highest derivative present is the fourth derivative (y^{(4)}).",
+        answer_reasoning: "This question requires the student to apply the definition of differential equation order (based on the highest-order derivative), testing their ability to identify the order in a non-trivial equation with multiple derivative terms.",
+    },
+    {
+        question: "Analyze how the order of a differential equation influences the number of arbitrary constants in its general solution, and provide an example to illustrate your explanation.",
+        answer: "The order of a differential equation directly determines the number of arbitrary constants in its general solution. For an nth-order equation, the general solution contains exactly n arbitrary constants. For example, the second-order equation y'' + 4y = 0 has a general solution y = A cos(2x) + B sin(2x), which includes two arbitrary constants (A and B), matching its order of 2.",
+        answer_reasoning: "This question requires the student to analyze the structural relationship between equation order and solution properties, moving beyond simple identification to explain the mathematical necessity of arbitrary constants based on order.",
+    },
+    {
+        question: "Evaluate the accuracy of the statement: 'A differential equation of order 2 must have exactly two derivatives in its formulation.' Justify your evaluation with examples.",
+        answer: "The statement is false. The order is determined by the highest derivative present, not the total number of derivatives. For example, the equation y'' + y' = 0 has two derivatives (y'' and y') but is second-order. Conversely, the equation y'' + y = 0 also has two derivatives (y'' and y) and is second-order. The correct definition states that order depends solely on the highest derivative, not the count. Thus, the statement conflates derivative count with order, making it inaccurate.",
+        answer_reasoning: "This question assesses the student's ability to critically evaluate a common misconception. By providing counterexamples and contrasting derivative count with highest-order derivative, the student demonstrates analytical judgment about the definition of order.",
+    },
+    {
+        question: "Create a third-order differential equation that models a physical scenario (e.g., a mechanical system with three degrees of freedom), and explain why the order is appropriate for the model.",
+        answer: "Consider the equation: mdddot{y} + cddot{y} + ky' + gy = 0, where m represents mass, c is damping coefficient, k is spring constant, and g is a gravitational term. This third-order equation (highest derivative dddot{y}) models a system where the rate of change of acceleration (jerk) is influenced by position, velocity, and acceleration. The order is appropriate because three initial conditions (e.g., y(0), y'(0), y''(0)) are required to uniquely determine the system's behavior, reflecting the three state variables needed to fully describe the dynamics of a three-degree-of-freedom mechanical system.",
+        answer_reasoning: "This question requires the student to synthesize knowledge of order and physical context to create a valid model. The example demonstrates how order corresponds to the number of state variables in a complex system, ensuring the model's mathematical structure aligns with real-world dynamics.",
+    },
+    {
+        question: "Analyze the differential equation 4y''' - 5y'' + 3y' - 2y = 0. Identify its order, explain the criteria used to determine the order, and discuss why this classification is critical for solving the equation.",
+        answer: "The equation 4y''' - 5y'' + 3y' - 2y = 0 is a third-order differential equation. The order is determined by the highest derivative present, which is the third derivative (y'''). This classification is critical because it dictates the number of initial conditions required for a unique solution (three for a third-order equation) and influences the choice of solution methods, such as using characteristic equations for linear constant-coefficient ODEs. For instance, solving this equation would require three initial conditions (y(0), y'(0), y''(0)) and typically involve finding roots of the characteristic polynomial.",
+        answer_reasoning: "This question requires students to decompose the equation to identify the highest derivative, explain the definition of order, and connect it to practical solution requirements. It tests analytical understanding beyond simple identification, addressing the student's failure to analyze order beyond basic recognition.",
+    },
+    {
+        question: "Evaluate the accuracy of the statement: 'The equation (d²y/dx²)² + dy/dx + y = 0 is a second-order differential equation.' Justify your evaluation by distinguishing between the order and degree of differential equations.",
+        answer: "The statement is accurate. The order of a differential equation is defined by the highest derivative present, not the power to which the derivative is raised. In this equation, the highest derivative is d²y/dx² (a second-order derivative), so the equation is classified as second-order. The squared term on the derivative affects the equation's nonlinearity and degree (the degree is 2 due to the squared derivative), but it does not alter the order. Confusing degree with order is a common misconception, but this statement correctly identifies the order.",
+        answer_reasoning: "This question challenges students to distinguish between order (highest derivative) and degree (highest power of the highest derivative), a critical skill for evaluating statements. Correctly assessing the statement demonstrates critical evaluation beyond surface-level recognition, addressing the student's failure to apply the concept in judgment-based scenarios.",
+    },
+    {
+        question: "Create a third-order nonlinear differential equation with constant coefficients. Explain your construction process, verify the order and nonlinearity, and describe how the equation's structure influences its solution method.",
+        answer: "An example is y''' + 3y'' + (y')² + 2y = 0. This equation is third-order because the highest derivative is y''' (third derivative). It is nonlinear due to the (y')² term. The coefficients (1, 3, 2) are constants, satisfying the requirement. Verification: The highest derivative order is 3 (confirmed by y'''), and nonlinearity is confirmed by the squared derivative term. The structure necessitates solution methods like numerical approximation or series solutions, as linear methods (e.g., characteristic equations) are inapplicable due to nonlinearity. For instance, solving this would require iterative techniques like Euler's method, not closed-form algebraic solutions.",
+        answer_reasoning: "This question demands synthesis of concepts to generate a novel example, requiring students to apply knowledge of order, nonlinearity, and solution methods. It assesses creative application and comprehensive understanding, addressing the student's failure to produce original examples at the Create level.",
+    },
+    {
+        question: "Construct a third-order linear differential equation with constant coefficients. Explain how you determined the order of your equation.",
+        answer: "An example of a third-order linear differential equation with constant coefficients is y''' + 2y'' + 3y' + 4y = 0. The order of a differential equation is defined by the highest derivative present; in this equation, the highest derivative is y''' (the third derivative of y with respect to x), confirming it as a third-order differential equation.",
+        answer_reasoning: "This question requires the student to generate an original differential equation meeting specific criteria (third-order, linear, constant coefficients), demonstrating mastery of the definition of order. The explanation must explicitly reference the highest derivative, ensuring conceptual understanding beyond rote identification, which addresses the student's failure at the 'Create' level.",
+    },
+    {
+        question: "Define the degree of a differential equation in your own words.",
+        answer: "The degree of a differential equation is the highest power of the highest-order derivative present in the equation, provided the equation is a polynomial in its derivatives.",
+        answer_reasoning: "This question tests the student's ability to recall and articulate the formal definition of degree, addressing the foundational 'Remember' level failure by requiring precise verbalization of the concept.",
+    },
+    {
+        question: "Explain why the degree of a differential equation is undefined for equations containing derivatives raised to non-integer powers, such as (d²y/dx²)^0.5 + dy/dx = 0.",
+        answer: "The degree is defined only for polynomial equations in derivatives. Non-integer powers (e.g., 0.5) make the equation non-polynomial, so the highest power of the highest-order derivative cannot be identified, rendering the degree undefined.",
+        answer_reasoning: "This 'Understand' level question requires students to connect the mathematical prerequisite (polynomial form) to the definition, demonstrating conceptual comprehension beyond rote recall.",
+    },
+    {
+        question: "Determine the degree of the differential equation (d³y/dx³)^2 + 3(d²y/dx²) - 5(dy/dx) = 0 and justify your answer.",
+        answer: "The highest-order derivative is d³y/dx³ (third order), raised to the power of 2. Since the equation is polynomial in derivatives, the degree is 2.",
+        answer_reasoning: "This 'Apply' level question requires students to identify the highest-order derivative and its exponent in a concrete example, applying the definition to a new problem.",
+    },
+    {
+        question: "Analyze how the order and degree of the equation (dy/dx)^4 + y^2 = 0 differ in their implications for solution methods.",
+        answer: "Order (1) indicates the number of initial conditions needed (e.g., y(0) = c), while degree (4) reflects the algebraic complexity of the derivative term. A higher degree may require solving a quartic equation for dy/dx, complicating analytical solution approaches.",
+        answer_reasoning: "This 'Analyze' level question forces students to dissect the relationship between order and degree, comparing their practical impacts on problem-solving strategies.",
+    },
+    {
+        question: "Evaluate the correctness of the statement: 'The degree of a differential equation is determined by the highest power of the dependent variable, such as y^3 in (d²y/dx²)^2 + y^3 = 0.' Provide a counterexample if false.",
+        answer: "The statement is false. Degree depends on the highest power of the highest-order derivative, not the dependent variable. In (d²y/dx²)^2 + y^3 = 0, the degree is 2 (from (d²y/dx²)^2), not 3 (from y^3).",
+        answer_reasoning: "This 'Evaluate' level question challenges students to critique a common misconception, requiring evidence-based reasoning to correct an error in conceptual understanding.",
+    },
+    {
+        question: "Create a differential equation of order 3 and degree 4. Verify both properties and explain why your equation satisfies the definitions.",
+        answer: "Example: (d³y/dx³)^4 + (d²y/dx²)^2 + y = 0. Order = 3 (highest derivative is third-order), Degree = 4 (highest power of the third derivative). The equation is polynomial in derivatives, so degree is defined as 4.",
+        answer_reasoning: "This 'Create' level question demands original synthesis of the concept, requiring students to generate a valid example while explicitly justifying adherence to both order and degree definitions.",
+    },
+    {
+        question: "Explain the definition of the degree of a differential equation, clearly distinguishing it from the order of the equation, and provide an example where these two concepts differ.",
+        answer: "The degree of a differential equation is defined as the highest power of the highest-order derivative in the equation, provided the equation is polynomial in its derivatives. For example, the equation (d²y/dx²)³ + (dy/dx)² = 0 has an order of 2 (highest derivative order) and a degree of 3 (highest power of the highest-order derivative). This differs from the order, which only refers to the highest derivative's order, not its exponent.",
+        answer_reasoning: "This question tests the student's foundational understanding by requiring them to articulate the precise definition and contrast it with the related concept of order, addressing a common point of confusion.",
+    },
+    {
+        question: "Given the differential equation (d³y/dx³)² + (d²y/dx²)³ - 5(dy/dx) = 0, determine its order and degree. Justify your answer using the formal definitions.",
+        answer: "The order is 3 (highest derivative is d³y/dx³), and the degree is 2 (highest power of the highest-order derivative, d³y/dx³, is squared). The equation is polynomial in derivatives, so the degree is valid and defined by the exponent of the highest-order derivative.",
+        answer_reasoning: "This question requires the student to apply the definitions of order and degree to a concrete example, demonstrating their ability to systematically identify key components of a differential equation.",
+    },
+    {
+        question: "Analyze why the differential equation (dy/dx)^{1/2} + y = 0 does not have a defined degree. Discuss the mathematical conditions that must be satisfied for a degree to exist in a differential equation.",
+        answer: "The equation (dy/dx)^{1/2} + y = 0 lacks a defined degree because the degree requires the differential equation to be polynomial in its derivatives. Here, the derivative (dy/dx) is raised to a non-integer power (1/2), violating the polynomial condition. A differential equation has a defined degree only if all derivatives are raised to non-negative integer powers and the equation is algebraic in its derivatives.",
+        answer_reasoning: "This question demands analytical decomposition of the equation's structure to identify why the standard degree definition fails, requiring deeper scrutiny of the mathematical prerequisites for degree calculation.",
+    },
+    {
+        question: "Evaluate the validity of the statement: 'The degree of a differential equation is determined solely by the highest order of the derivative present.' Provide a counterexample and explain why the statement is incorrect.",
+        answer: "The statement is false. For example, the equation (d²y/dx²)^4 + (dy/dx) = 0 has an order of 2 but a degree of 4. The degree depends on the exponent of the highest-order derivative, not the derivative's order itself. The statement incorrectly conflates order (which refers to the derivative's rank) with degree (which refers to the highest power of that derivative).",
+        answer_reasoning: "This question assesses the student's ability to critically evaluate a misconception by identifying a counterexample and explaining the conceptual error, demonstrating higher-order evaluative thinking.",
+    },
+    {
+        question: "Construct a first-order differential equation with a degree of 3. Justify how your equation satisfies the definition of degree, and explain why a different exponent would alter its degree.",
+        answer: "Example: (dy/dx)^3 + 2y = 0. This is first-order (highest derivative is dy/dx) with degree 3 (the highest power of the highest-order derivative is 3). If the exponent were changed to 2, the degree would become 2; if fractional (e.g., (dy/dx)^{1/2}), the degree would be undefined. The degree is defined only for integer powers in polynomial form.",
+        answer_reasoning: "This question requires the student to synthesize a new example that meets specific criteria, demonstrating mastery through creative construction and explicit justification of the degree definition.",
+    },
+    {
+        question: "Analyze the differential equation (d²y/dx²)^3 + (dy/dx)^2 = sin(y) to determine its degree. Explain each step in your reasoning.",
+        answer: "The degree of a differential equation is defined as the highest power of the highest-order derivative after the equation is expressed as a polynomial in its derivatives. In the given equation, the highest-order derivative is d²y/dx² (second order), and it is raised to the power of 3. The equation is already a polynomial in derivatives (no radicals or fractional exponents involving derivatives), so the degree is 3. This is distinct from the order (which is 2), as degree specifically refers to the power of the highest-order derivative.",
+        answer_reasoning: "This question requires students to deconstruct the definition of degree by isolating the highest-order derivative and its exponent, testing analytical understanding of the distinction between order and degree.",
+    },
+    {
+        question: "Evaluate the statement: 'The degree of a differential equation is always determined by the highest power of any derivative present, regardless of its order.' Provide a counterexample and explain why the statement is incorrect.",
+        answer: "The statement is incorrect. The degree is defined as the highest power of the *highest-order* derivative, not the highest power of any derivative. For example, in the equation (dy/dx)^4 + d²y/dx² = 0, the highest-order derivative is d²y/dx² (order 2), which is raised to the first power. Thus, the degree is 1, not 4. The highest power of any derivative (4) is irrelevant because the degree depends solely on the highest-order derivative's exponent. This counterexample demonstrates that the statement misrepresents the definition.",
+        answer_reasoning: "This question requires critical evaluation of a misconception, testing the ability to identify logical errors and justify conclusions with precise counterexamples.",
+    },
+    {
+        question: "Create a fourth-order differential equation of degree 3. Explain how you constructed it to ensure both the order and degree meet the specified criteria.",
+        answer: "An example is (d⁴y/dx⁴)^3 + (d³y/dx³)^2 + (dy/dx) = e^y. The order is 4, as the highest-order derivative is d⁴y/dx⁴. The degree is 3, as this derivative is raised to the third power (the highest power of the highest-order derivative). The equation is a polynomial in derivatives, satisfying the requirement for degree definition. Lower-order derivatives (e.g., d³y/dx³ and dy/dx) do not affect the degree, as degree depends only on the highest-order derivative's exponent.",
+        answer_reasoning: "This question demands creative synthesis of the concept, requiring students to generate a valid example while explicitly justifying how both order and degree constraints are met through intentional construction.",
+    },
+    {
+        question: "Evaluate the claim that the differential equation (d²y/dx²)² + sin(dy/dx) = 0 has a degree of 2. Justify your answer.",
+        answer: "The claim is incorrect. The degree of a differential equation is defined only when the equation is a polynomial in its derivatives. Here, the term sin(dy/dx) is not a polynomial expression in the derivative dy/dx. Therefore, the equation is not a polynomial in derivatives, and the degree is undefined. The highest power of the highest-order derivative (d²y/dx²) is 2, but this does not determine the degree because the equation violates the polynomial requirement.",
+        answer_reasoning: "This question tests the student's ability to evaluate the validity of a statement by applying the precise definition of degree (only defined for polynomial equations in derivatives), requiring critical analysis beyond surface-level pattern recognition.",
+    },
+    {
+        question: "Create a differential equation of order 2 and degree 3 that is a polynomial in its derivatives. Provide a justification for both criteria.",
+        answer: "An example is (d²y/dx²)³ + 2(dy/dx) + y = 0. This equation has order 2 because the highest-order derivative present is d²y/dx² (second derivative). It has degree 3 because the highest power of the highest-order derivative (d²y/dx²) is 3, and the equation is a polynomial in all derivatives (all terms are polynomials in y, dy/dx, and d²y/dx²).",
+        answer_reasoning: "This question requires students to synthesize knowledge of order and degree definitions to construct a new valid example, demonstrating creative application of the concepts beyond memorization.",
+    },
+    {
+        question: "Determine the degree of the differential equation (d²y/dx²)^3 + 5(dy/dx) = 7y. Justify your answer using the definition of degree.",
+        answer: "The degree is 3. The equation is a polynomial in derivatives, where the highest-order derivative (d²y/dx²) is raised to the power of 3. Terms involving the dependent variable (e.g., 7y) do not affect the degree, as degree is defined solely by the highest power of the highest-order derivative in a polynomial expression.",
+        answer_reasoning: "This question requires applying the definition of degree (polynomial in derivatives, highest power of highest-order derivative) to a concrete example, testing the student's ability to distinguish between derivative terms and variable terms.",
+    },
+    {
+        question: "Analyze why the differential equation dy/dx = sin(y) has no defined degree, while (dy/dx)^2 = y does. Contrast both cases using the mathematical criteria for degree.",
+        answer: "dy/dx = sin(y) lacks a defined degree because it is not a polynomial in derivatives—sin(y) is a transcendental function of the dependent variable, violating the requirement for polynomial structure. In contrast, (dy/dx)^2 = y is a polynomial in the first derivative (dy/dx), so its degree is 2. The key distinction is whether the equation can be expressed as a polynomial in the derivatives, not the dependent variable.",
+        answer_reasoning: "This question demands deconstruction of the degree definition, requiring students to identify why certain equations fail to meet the criteria (non-polynomial) versus those that succeed (polynomial in derivatives).",
+    },
+    {
+        question: "Evaluate the statement: 'The degree of a differential equation is determined by the highest power of the independent variable (e.g., x^2 in the equation).' Provide a counterexample to disprove this claim.",
+        answer: "The statement is false. Degree depends on the highest power of the highest-order derivative, not the independent variable. For example, in (d²y/dx²)^2 + x(dy/dx) = 0, the degree is 2 (from (d²y/dx²)^2), not 1 (from x^1). The independent variable's exponent is irrelevant to degree determination.",
+        answer_reasoning: "This question assesses critical evaluation of a common misconception by requiring a counterexample that demonstrates the correct criteria for degree versus irrelevant factors like independent variable exponents.",
+    },
+    {
+        question: "Create a third-order differential equation with degree 4. Justify your construction by explicitly referencing the relationship between derivative order and degree.",
+        answer: "Example: (d³y/dx³)^4 + (d²y/dx²)^2 + dy/dx = 0. This equation has order 3 (highest derivative is d³y/dx³) and degree 4 (highest power of the highest-order derivative is 4). Terms involving lower-order derivatives or the dependent variable do not affect the degree, which is defined solely by the highest-order derivative's power in the polynomial expression.",
+        answer_reasoning: "This question requires synthesis of knowledge to construct a valid example that meets specific criteria, demonstrating mastery of the relationship between order (highest derivative) and degree (highest power of that derivative).",
+    },
+    {
+        question: "State the general solution for the first-order differential equation dy/dx = 3x.",
+        answer: "The general solution is y = (3/2)x² + C, where C is an arbitrary constant.",
+        answer_reasoning: "This question tests the student's ability to recall the fundamental integration process for a simple linear ordinary differential equation, which is the essential prerequisite for understanding general solutions.",
+    },
+    {
+        question: "Explain why the constant of integration must appear in the general solution of a first-order differential equation.",
+        answer: "The constant of integration appears because the derivative of any constant is zero. When solving a differential equation through integration, the constant represents the infinite family of solutions that satisfy the equation. Without it, only one specific solution would be represented, not the complete set of possible solutions.",
+        answer_reasoning: "This requires the student to articulate the mathematical rationale behind the constant, demonstrating conceptual understanding beyond rote memorization of solution forms.",
+    },
+    {
+        question: "Solve the differential equation dy/dx = 5x² - 4 for its general solution, showing all integration steps.",
+        answer: "Integrating both sides with respect to x: ∫dy = ∫(5x² - 4)dx. This yields y = (5/3)x³ - 4x + C, where C is an arbitrary constant.",
+        answer_reasoning: "This question requires the student to apply integration techniques to derive the general solution, reinforcing the procedural knowledge needed to transition from differential equations to solution forms.",
+    },
+    {
+        question: "Analyze how the solution process for separable differential equations differs from linear first-order differential equations in terms of the steps required to obtain the general solution.",
+        answer: "For separable equations (e.g., dy/dx = f(x)g(y)), the solution involves separating variables (dy/g(y) = f(x)dx) and integrating both sides. For linear equations (e.g., dy/dx + P(x)y = Q(x)), the integrating factor method is required: multiplying by μ(x) = e^{∫P(x)dx} to transform the left side into a product rule derivative before integration. The key difference is that separable equations require variable separation, while linear equations require an integrating factor to achieve exactness.",
+        answer_reasoning: "Analyzing the solution processes requires the student to compare methodologies, identify procedural distinctions, and explain their conceptual basis, moving beyond basic application.",
+    },
+    {
+        question: "Evaluate the correctness of the statement: 'The general solution of a differential equation contains all possible solutions.' Provide a mathematical justification for your evaluation.",
+        answer: "The statement is correct. The general solution includes an arbitrary constant (e.g., y = x² + C), which represents the entire family of solutions. For any initial condition (e.g., y(0) = 5), a specific value of C can be determined to yield a unique particular solution. Since C can take any real value, the general solution encompasses all possible solutions to the differential equation.",
+        answer_reasoning: "Evaluating the statement requires the student to assess its validity, provide a mathematical example, and justify the conclusion, demonstrating critical analysis of solution properties.",
+    },
+    {
+        question: "Create a first-order differential equation whose general solution is y = sin(x) + C. Verify your solution by solving the equation.",
+        answer: "Differentiating y = sin(x) + C gives dy/dx = cos(x). Thus, the differential equation is dy/dx = cos(x). Verification: Integrating dy/dx = cos(x) yields y = sin(x) + C, which matches the given general solution.",
+        answer_reasoning: "Creating a differential equation from a known general solution requires the student to reverse-engineer the problem, demonstrating mastery of the relationship between differential equations and their solution families at the highest cognitive level.",
+    },
+    {
+        question: "Evaluate the validity of the general solution $y = C_1 e^{x} + C_2 e^{-x}$ for the differential equation $y'' - y = 0$. Justify your evaluation by substituting the solution into the equation and explaining why both exponential terms and the arbitrary constants are mathematically necessary.",
+        answer: "The solution is valid. Substituting $y = C_1 e^{x} + C_2 e^{-x}$ gives $y'' = C_1 e^{x} + C_2 e^{-x}$, so $y'' - y = (C_1 e^{x} + C_2 e^{-x}) - (C_1 e^{x} + C_2 e^{-x}) = 0$. The exponential terms $e^{x}$ and $e^{-x}$ correspond to the characteristic equation roots $r^2 - 1 = 0$ (i.e., $r = \\pm 1$), which are required for a second-order linear homogeneous ODE. The constants $C_1$ and $C_2$ are necessary to represent all possible solutions, as the general solution of an $n$-th order ODE must contain $n$ arbitrary constants.",
+        answer_reasoning: "This question requires the student to critically assess the solution's correctness through substitution and connect the solution structure to the ODE's order and characteristic equation. It tests their ability to evaluate mathematical necessity (e.g., why two constants are required) rather than merely verifying algebraically.",
+    },
+    {
+        question: "Create a first-order differential equation whose general solution is $y = 5e^{2x} + C$. Explain the step-by-step reasoning used to derive the equation from the given solution.",
+        answer: "The differential equation is $\\frac{dy}{dx} = 10e^{2x}$. Derivation: Differentiate the general solution $y = 5e^{2x} + C$ with respect to $x$ to obtain $\\frac{dy}{dx} = 10e^{2x} + 0 = 10e^{2x}$. This eliminates the arbitrary constant $C$, directly yielding the differential equation.",
+        answer_reasoning: "This question demands the student generate a new ODE by applying differentiation to the solution. It requires understanding the relationship between solutions and their corresponding ODEs, demonstrating mastery of the 'Create' level by producing a novel equation based on structural analysis of the solution form.",
+    },
+    {
+        question: "State the standard form of the particular solution for a linear differential equation with constant coefficients when the nonhomogeneous term is a constant.",
+        answer: "When the nonhomogeneous term is a constant (e.g., $ f(x) = C $), the particular solution is assumed to be a constant of the form $ y_p = A $, where $ A $ is a constant to be determined by substitution into the differential equation. This form works because the derivatives of a constant are zero, simplifying the equation to solve for $ A $.",
+        answer_reasoning: "This question targets the Remember level by requiring the student to recall the foundational form of the particular solution for a constant nonhomogeneous term, reinforcing the basic step necessary for applying the method of undetermined coefficients.",
+    },
+    {
+        question: "Explain why the method of undetermined coefficients requires modifying the assumed form of the particular solution when the nonhomogeneous term matches a solution to the homogeneous equation.",
+        answer: "The method requires modification because if the nonhomogeneous term (e.g., $ e^{rx} $) matches a homogeneous solution, the standard assumed form (e.g., $ y_p = Ae^{rx} $) would produce zero when substituted into the differential equation, leading to a contradiction (e.g., $ 0 = e^{rx} $). Multiplying by $ x^k $ (where $ k $ is the smallest integer ensuring linear independence) creates a new form that is not a homogeneous solution, allowing the coefficients to be solved without contradiction.",
+        answer_reasoning: "This question targets the Understand level by requiring the student to articulate the mathematical rationale behind the modification, moving beyond rote memorization to grasp the underlying principle of linear independence.",
+    },
+    {
+        question: "Solve the differential equation $ y'' - 5y' + 6y = 3e^{2x} $ using the method of undetermined coefficients.",
+        answer: "The homogeneous solution is found by solving $ r^2 - 5r + 6 = 0 $, giving roots $ r = 2 $ and $ r = 3 $, so $ y_h = C_1e^{2x} + C_2e^{3x} $. The nonhomogeneous term $ 3e^{2x} $ matches the homogeneous solution $ e^{2x} $, so the assumed particular solution is $ y_p = Axe^{2x} $. Substituting $ y_p $ into the DE: $ y_p' = Ae^{2x} + 2Axe^{2x} $, $ y_p'' = 4Ae^{2x} + 4Axe^{2x} $. Then $ y_p'' - 5y_p' + 6y_p = (4Ae^{2x} + 4Axe^{2x}) - 5(Ae^{2x} + 2Axe^{2x}) + 6(Axe^{2x}) = -Ae^{2x} = 3e^{2x} $. Solving $ -A = 3 $ gives $ A = -3 $, so $ y_p = -3xe^{2x} $.",
+        answer_reasoning: "This question targets the Apply level by requiring the student to execute the method of undetermined coefficients, including recognizing resonance (matching homogeneous solutions) and performing algebraic substitution to solve for the coefficient.",
+    },
+    {
+        question: "Analyze the key differences between the method of undetermined coefficients and variation of parameters for finding particular solutions in linear differential equations.",
+        answer: "The method of undetermined coefficients is limited to nonhomogeneous terms that are polynomials, exponentials, sines, cosines, or products thereof. It assumes a form based on the term and solves for coefficients. Variation of parameters is a general method that works for any nonhomogeneous term but requires computing integrals involving the Wronskian of homogeneous solutions. Undetermined coefficients is computationally simpler when applicable, while variation of parameters is more versatile but algebraically intensive.",
+        answer_reasoning: "This question targets the Analyze level by requiring students to dissect the scope, process, and trade-offs of both methods, identifying their structural differences and practical implications.",
+    },
+    {
+        question: "Evaluate the suitability of using the method of undetermined coefficients for the differential equation $ y'' + y = sin(2x) + e^x $, justifying your assessment.",
+        answer: "The method is suitable because $ sin(2x) $ and $ e^x $ are terms the method can handle. The homogeneous solution is $ y_h = C_1cos(x) + C_2sin(x) $, which does not overlap with $ sin(2x) $ or $ e^x $. Thus, the assumed particular solution can be $ y_p = Acos(2x) + Bsin(2x) + Ce^x $. Substitution will yield solvable equations for $ A $, $ B $, and $ C $, confirming the method's applicability without modification.",
+        answer_reasoning: "This question targets the Evaluate level by requiring students to assess the method's suitability based on term compatibility, justifying their conclusion using the homogeneous solution's form and the nonhomogeneous terms' characteristics.",
+    },
+    {
+        question: "Design a differential equation problem requiring the method of undetermined coefficients with a modification due to resonance. Provide the problem statement, solution steps, and explain why the modification was necessary.",
+        answer: "Problem: Find the particular solution for $ y'' - 4y = 8e^{2x} $. Homogeneous solution: $ y_h = C_1e^{2x} + C_2e^{-2x} $. The nonhomogeneous term $ 8e^{2x} $ matches $ e^{2x} $ in $ y_h $, so assume $ y_p = Axe^{2x} $. Derivatives: $ y_p' = Ae^{2x} + 2Axe^{2x} $, $ y_p'' = 4Ae^{2x} + 4Axe^{2x} $. Substitute into DE: $ (4Ae^{2x} + 4Axe^{2x}) - 4(Axe^{2x}) = 4Ae^{2x} = 8e^{2x} $, so $ A = 2 $. Thus, $ y_p = 2xe^{2x} $. The modification was necessary because $ e^{2x} $ is a homogeneous solution; using $ y_p = Ae^{2x} $ would yield $ 0 = 8e^{2x} $, which is invalid.",
+        answer_reasoning: "This question targets the Create level by requiring students to construct a problem that demonstrates resonance, justify the modification, and detail the solution process, demonstrating mastery of the concept's application and theory.",
+    },
+    {
+        question: "Apply the method of undetermined coefficients to find a particular solution for the differential equation $y'' - 4y' + 4y = e^{2x}$, justifying the choice of trial solution.",
+        answer: "The characteristic equation for the homogeneous equation $y'' - 4y' + 4y = 0$ is $r^2 - 4r + 4 = 0$, which has a repeated root $r = 2$. Since $e^{2x}$ is a solution to the homogeneous equation, the standard trial solution $y_p = A e^{2x}$ would yield $0$ when substituted into the left-hand side. To ensure linear independence, we multiply by $x^2$, giving $y_p = A x^2 e^{2x}$. Substituting into the differential equation: $y_p'' - 4y_p' + 4y_p = A e^{2x} (4x^2 + 8x + 4 - 8x - 8 + 4) = 4A e^{2x} = e^{2x}$. Solving for $A$ gives $A = \\frac{1}{4}$. Thus, the particular solution is $y_p = \\frac{1}{4} x^2 e^{2x}$.",
+        answer_reasoning: "This question requires the student to apply the undetermined coefficients method correctly, recognizing when to modify the trial solution due to overlap with homogeneous solutions. It tests procedural knowledge at the 'Apply' level by demanding step-by-step execution of the method.",
+    },
+    {
+        question: "Analyze why multiplying the trial solution by $x^k$ is necessary when the nonhomogeneous term matches a homogeneous solution. Use the differential equation $y'' - 3y' + 2y = e^x$ as a concrete example to justify the choice of $k=1$.",
+        answer: "When the nonhomogeneous term $e^x$ matches a homogeneous solution (since the characteristic roots $r=1$ and $r=2$ include $r=1$), the standard trial solution $y_p = A e^x$ results in $0$ when substituted into the left-hand side. This occurs because $e^x$ satisfies the homogeneous equation. To obtain a linearly independent solution, we multiply by $x^k$, where $k$ is the multiplicity of the root. Here, $r=1$ has multiplicity 1, so $k=1$. The modified trial solution $y_p = A x e^x$ yields a non-zero result when substituted: $y_p'' - 3y_p' + 2y_p = A e^x (x + 2 - 3x - 3 + 2x) = -A e^x = e^x$, solving to $A = -1$. Thus, $k=1$ is necessary to avoid the null result and ensure the solution spans the correct space.",
+        answer_reasoning: "This question demands analytical decomposition of the method's mechanics, requiring the student to connect the algebraic outcome (null substitution) to the structural requirement of $x^k$ multiplication. It moves beyond application to dissect the underlying reason for the method's adjustment.",
+    },
+    {
+        question: "Evaluate the following student's solution for $y'' + y = \\sin(x)$: 'The particular solution is $y_p = A \\sin(x) + B \\cos(x)$.' Identify the error, explain its cause, and provide the correct solution.",
+        answer: "The error is that $\\sin(x)$ and $\\cos(x)$ are solutions to the homogeneous equation $y'' + y = 0$ (characteristic roots $\\pm i$). Using $y_p = A \\sin(x) + B \\cos(x)$ leads to $0 = \\sin(x)$ upon substitution, which is invalid. The cause is failure to account for overlap between the nonhomogeneous term and homogeneous solutions. The correct trial solution must be multiplied by $x$ to ensure linear independence: $y_p = A x \\sin(x) + B x \\cos(x)$. Substituting yields $-2A \\cos(x) + 2B \\sin(x) = \\sin(x)$, so $A = 0$, $B = \\frac{1}{2}$. The correct particular solution is $y_p = \\frac{1}{2} x \\cos(x)$.",
+        answer_reasoning: "This question requires critical evaluation of a flawed solution, identifying the root cause (overlap with homogeneous solutions) and correcting it. It tests the student's ability to assess reasoning and outcomes, a core 'Evaluate' skill that demands metacognitive analysis.",
+    },
+    {
+        question: "Create a nonhomogeneous differential equation where the method of undetermined coefficients fails, necessitating variation of parameters. Justify why undetermined coefficients is insufficient for your equation and outline the steps for variation of parameters.",
+        answer: "Example equation: $y'' + y = \\tan(x)$. Undetermined coefficients fails because $\\tan(x)$ is not a linear combination of $e^{ax}$, $\\sin(bx)$, $\\cos(bx)$, or polynomials—its form violates the method's requirements. Variation of parameters is necessary because it handles arbitrary nonhomogeneous terms. Steps for variation of parameters: (1) Solve the homogeneous equation $y'' + y = 0$, yielding $y_h = C_1 \\cos(x) + C_2 \\sin(x)$; (2) Compute the Wronskian $W = \\cos(x) \\cdot \\cos(x) - (-\\sin(x)) \\cdot \\sin(x) = 1$; (3) Find $u_1' = -\\frac{\\sin(x) \\tan(x)}{1} = -\\sin(x) \\sec(x) = -\\tan(x)$, so $u_1 = \\ln|\\cos(x)|$; (4) Find $u_2' = \\frac{\\cos(x) \\tan(x)}{1} = \\sin(x)$, so $u_2 = -\\cos(x)$; (5) The particular solution is $y_p = u_1 \\cos(x) + u_2 \\sin(x) = \\cos(x) \\ln|\\cos(x)| - \\sin(x) \\cos(x)$.",
+        answer_reasoning: "This 'Create' question requires generating a novel problem that meets specific constraints (undetermined coefficients failure) and justifying the choice. It assesses the student's ability to synthesize knowledge to design a valid scenario, demonstrating deep conceptual mastery beyond rote application.",
+    },
+    {
+        question: "Analyze the process of finding a particular solution for a nonhomogeneous linear differential equation. Specifically, explain why the general solution is the sum of the homogeneous solution and a particular solution, and how the particular solution is chosen to satisfy the nonhomogeneous term.",
+        answer: "The general solution of a nonhomogeneous linear differential equation is the sum of the general solution of the corresponding homogeneous equation and any particular solution of the nonhomogeneous equation. This is because the homogeneous solution accounts for the arbitrary constants (due to the order of the equation) and the particular solution satisfies the nonhomogeneous term. The particular solution is chosen based on the form of the nonhomogeneous term (e.g., using the method of undetermined coefficients for terms that are polynomials, exponentials, sines, cosines, or products thereof). The reason this works is that the differential operator is linear, so the sum of a solution to the homogeneous equation and a solution to the nonhomogeneous equation is a solution to the nonhomogeneous equation.",
+        answer_reasoning: "This question requires the student to break down the concept of the general solution into its components (homogeneous and particular solutions) and explain the rationale behind the method, which is at the Analyze level.",
+    },
+    {
+        question: "Evaluate the effectiveness of the method of undetermined coefficients versus the method of variation of parameters for solving the nonhomogeneous differential equation y'' - 3y' + 2y = e^{2x}. Justify your evaluation based on the complexity of the calculations and the applicability of each method for the given equation.",
+        answer: "For the equation y'' - 3y' + 2y = e^{2x}, the method of undetermined coefficients is more effective. The nonhomogeneous term is e^{2x}, which is a solution to the homogeneous equation (since the characteristic equation r^2 - 3r + 2 = 0 has roots r=1 and r=2, so e^{2x} is a homogeneous solution). Therefore, when using undetermined coefficients, we would have to multiply the trial solution by x (i.e., use A*x*e^{2x} instead of A*e^{2x}), which is straightforward. The method of variation of parameters would require computing integrals involving e^{2x} and the homogeneous solutions, which is also doable but more computationally intensive. Thus, undetermined coefficients is preferred here because the nonhomogeneous term is of a form that fits the undetermined coefficients method (with the necessary adjustment for duplication).",
+        answer_reasoning: "This question requires the student to compare two methods and make a judgment about which is better for a specific equation, which is at the Evaluate level.",
+    },
+    {
+        question: "Create a second-order linear nonhomogeneous differential equation that has a particular solution y_p = x^2 * e^x. Then, find the general solution of the equation you created, assuming the homogeneous equation has characteristic roots that are distinct and not related to the particular solution form (i.e., the exponent in the particular solution is not a root of the characteristic equation).",
+        answer: "The differential equation is y'' - 2y' + 2y = (x^2 + 2)e^x. The general solution is y = e^x (c1 cos x + c2 sin x) + x^2 e^x.",
+        answer_reasoning: "This question requires the student to generate a new differential equation and then solve it, which is at the Create level.",
+    },
+    {
+        question: "Evaluate the validity of the proposed particular solution $ y_p = -\\frac{x^2}{2} $ for the differential equation $ y'' + 2y' = x^2 $. Justify your assessment using the method of undetermined coefficients.",
+        answer: "The proposed particular solution $ y_p = -\\frac{x^2}{2} $ is invalid. Substituting into the differential equation yields $ y_p'' + 2y_p' = -1 + 2(-x) = -2x - 1 $, which does not equal the right-hand side ($ x^2 $). The correct trial solution must account for the homogeneous solution's root $ r = 0 $ (from characteristic equation $ r(r+2) = 0 $). Since $ r = 0 $ is a simple root, the trial solution for the polynomial nonhomogeneous term $ x^2 $ should be $ y_p = Ax^3 + Bx^2 + Cx $. The proposed quadratic solution fails to satisfy the equation because it omits the cubic term required to match the $ x^2 $ coefficient on the right-hand side.",
+        answer_reasoning: "This question tests the student's ability to evaluate a solution's validity by substitution and method application. It requires critical analysis of the method of undetermined coefficients (Bloom's 'Evaluate' level), ensuring the student recognizes when polynomial trial solutions require multiplication by $ x^m $ for overlapping homogeneous solutions.",
+    },
+    {
+        question: "Construct a particular solution for the differential equation $ y'' - 5y' + 6y = e^{3x} $ using the method of undetermined coefficients. Explain each step of your reasoning.",
+        answer: "The homogeneous equation $ y'' - 5y' + 6y = 0 $ has characteristic roots $ r = 2 $ and $ r = 3 $. Since $ e^{3x} $ matches the homogeneous solution (root $ r = 3 $), the trial solution must be multiplied by $ x $: $ y_p = Axe^{3x} $. Substituting into the DE: $ y_p' = Ae^{3x} + 3Axe^{3x} $, $ y_p'' = 6Ae^{3x} + 9Axe^{3x} $. Plugging in: $ (6Ae^{3x} + 9Axe^{3x}) - 5(Ae^{3x} + 3Axe^{3x}) + 6(Axe^{3x}) = e^{3x} $. Simplifying: $ (6A - 5A)e^{3x} + (9A - 15A + 6A)xe^{3x} = Ae^{3x} = e^{3x} $. Thus, $ A = 1 $, and the particular solution is $ y_p = xe^{3x} $.",
+        answer_reasoning: "This question requires the student to synthesize knowledge of homogeneous solutions and undetermined coefficients to create a new solution (Bloom's 'Create' level). It assesses their ability to apply theoretical concepts to generate a correct solution, emphasizing the necessity of multiplying by $ x $ for overlapping terms.",
+    },
+    {
+        question: "Design a second-order linear nonhomogeneous differential equation for which y_p(x) = 3x^2 - 4x + 1 is a particular solution. Justify your choice of coefficients in the differential equation and explain how you determined the form of the nonhomogeneous term based on standard methods for finding particular solutions.",
+        answer: "To construct the differential equation, we assume it has the form y'' + a y' + b y = f(x), where f(x) is the nonhomogeneous term. Since y_p is a quadratic polynomial, f(x) must also be a quadratic polynomial (as per the method of undetermined coefficients for polynomial nonhomogeneous terms when the characteristic equation has no root at 0). Substituting y_p into the left-hand side of the equation:\n\ny_p = 3x² - 4x + 1\ny_p' = 6x - 4\ny_p'' = 6\n\nPlugging into y'' + a y' + b y:\n6 + a(6x - 4) + b(3x² - 4x + 1) = 3b x² + (6a - 4b)x + (6 - 4a + b).\n\nThis must equal f(x) = c x² + d x + e. We choose coefficients to match a simple quadratic:\n- Set b = 3 (so 3b = 9 for the x² term, but we'll adjust f(x) accordingly).\n- Choose a = 2 to simplify coefficients: 6a - 4b = 12 - 12 = 0 (for the x term).\n- Then 6 - 4a + b = 6 - 8 + 3 = 1 (for the constant term).\n\nThus, the equation becomes y'' + 2y' + 3y = 9x² + 1. Verification: Substitute y_p into left-hand side: 6 + 2(6x - 4) + 3(3x² - 4x + 1) = 6 + 12x - 8 + 9x² - 12x + 3 = 9x² + 1, which matches the right-hand side.",
+        answer_reasoning: "This question requires the student to synthesize knowledge of undetermined coefficients by constructing a differential equation from a given particular solution. The student must recognize that the nonhomogeneous term's degree matches the particular solution's degree (quadratic), compute derivatives of y_p, and solve for coefficients to ensure the equation holds. This demonstrates Create-level understanding by generating a new problem rather than applying a known method.",
+    },
+    {
+        question: "State the condition for a first-order differential equation to be separable.",
+        answer: "A first-order differential equation is separable if it can be expressed in the form dy/dx = g(x) * h(y), where g(x) is a function of x only and h(y) is a function of y only.",
+        answer_reasoning: "This question tests the student's ability to recall the fundamental definition of a separable differential equation, which is the basis for solving such equations. Correct recall at the Remember level is essential before progressing to higher cognitive levels.",
+    },
+    {
+        question: "Explain in your own words what it means for a differential equation to be separable.",
+        answer: "A differential equation is separable when the variables can be isolated so that all terms involving the dependent variable y and dy appear on one side of the equation, and all terms involving the independent variable x and dx appear on the other side. This allows the equation to be solved by integrating both sides independently without mixing variables.",
+        answer_reasoning: "This requires the student to demonstrate comprehension by rephrasing the concept without relying on the exact definition. It moves beyond rote memorization to show understanding of the conceptual foundation.",
+    },
+    {
+        question: "Solve the differential equation dy/dx = 3x^2 y.",
+        answer: "Step 1: Separate variables: (1/y) dy = 3x^2 dx. Step 2: Integrate both sides: ∫(1/y) dy = ∫3x^2 dx → ln|y| = x^3 + C. Step 3: Solve for y: y = e^(x^3 + C) = e^C * e^(x^3) = K e^(x^3), where K = e^C is a non-zero constant. The trivial solution y = 0 is included when K = 0, so the general solution is y = K e^(x^3) for any constant K.",
+        answer_reasoning: "This requires the student to apply the separation method to a concrete problem. It demonstrates procedural fluency by executing the three-step process: separation, integration, and solution for y, including consideration of the trivial solution.",
+    },
+    {
+        question: "Analyze the differential equation (y^2 + 1) dy/dx = x y. Determine if it is separable and justify your conclusion.",
+        answer: "The equation (y^2 + 1) dy/dx = x y is not separable. Rearranged: dy/dx = (x y) / (y^2 + 1). The right-hand side cannot be expressed as a product of a function of x alone and a function of y alone because the denominator (y^2 + 1) is a sum that cannot be factored to isolate y terms. For separability, the equation must satisfy dy/h(y) = g(x) dx; here, the y-dependent terms are mixed with x in the denominator, preventing separation.",
+        answer_reasoning: "This requires the student to deconstruct the equation and verify separability conditions. It tests analytical skills by identifying why the equation fails the separable form (sum in denominator prevents factorization), moving beyond simple recognition to critical evaluation of structure.",
+    },
+    {
+        question: "Evaluate the following solution for dy/dx = (2x)/(y^2): 'y^3/3 = x^2 + C, so y = (3x^2 + 3C)^(1/3)'. Identify and correct any errors.",
+        answer: "The solution contains two errors. First, integration of y^2 dy = 2x dx gives ∫y^2 dy = ∫2x dx → y^3/3 = x^2 + C (correct). However, the solution step should be y^3 = 3x^2 + 3C (not y^3/3 = 3x^2 + 3C). Then y = (3x^2 + D)^(1/3) where D = 3C. The error is in algebraic manipulation: multiplying both sides by 3 yields y^3 = 3x^2 + 3C, not y^3/3 = 3x^2 + 3C. The final form should be y = (3x^2 + D)^(1/3) with D = 3C. The solution is otherwise correct.",
+        answer_reasoning: "This requires the student to critically assess a solution for accuracy. It tests evaluation skills by identifying a specific algebraic error and correcting it, ensuring the student understands both the solution process and the importance of precise algebraic manipulation.",
+    },
+    {
+        question: "Create a new separable differential equation with the general solution y = ln(x) + C. Justify why your equation is separable.",
+        answer: "The differential equation is dy/dx = 1/x. Justification: The solution y = ln(x) + C implies dy/dx = 1/x (by differentiation). This equation is separable because it can be rewritten as dy = (1/x) dx, which separates all y terms (dy) on one side and all x terms (1/x dx) on the other. It satisfies the form dy = f(x) dx, equivalent to dy/dx = f(x) * 1 (where h(y) = 1, a constant function of y).",
+        answer_reasoning: "This requires the student to generate a novel equation from a solution form and justify its separability. It tests creativity (Create level) by deriving the DE through differentiation, then verifying separability by showing the equation fits the definition. The justification confirms understanding of the core concept beyond rote application.",
+    },
+    {
+        question: "Explain what it means for a differential equation to be separable and provide an example of a separable differential equation.",
+        answer: "A differential equation is separable if it can be written in the form dy/dx = g(x) * h(y), where g(x) is a function of x only and h(y) is a function of y only. This allows the equation to be rearranged so that all terms involving y are on one side and all terms involving x are on the other. For example, the equation dy/dx = 2x * y is separable because it can be rewritten as (1/y) dy = 2x dx.",
+        answer_reasoning: "This question tests the student's ability to define the concept of separable differential equations and to provide a clear example. It is at the 'Understand' level as it requires the student to recall and explain the concept.",
+    },
+    {
+        question: "Solve the differential equation: dy/dx = (2x)/(y+1), with the initial condition y(0)=1.",
+        answer: "First, separate the variables: (y+1) dy = 2x dx. Then integrate both sides: ∫(y+1) dy = ∫2x dx → (1/2)y^2 + y = x^2 + C. Apply the initial condition y(0)=1: (1/2)(1)^2 + 1 = 0^2 + C → 1/2 + 1 = C → C = 3/2. Therefore, the solution is (1/2)y^2 + y = x^2 + 3/2, which can be rewritten as y^2 + 2y = 2x^2 + 3.",
+        answer_reasoning: "This question requires the student to apply the method of separation of variables to solve a specific differential equation. It is at the 'Apply' level as it involves performing the steps of the method.",
+    },
+    {
+        question: "Compare the method of solving separable differential equations with the method of solving linear differential equations. In what scenarios would you choose one method over the other?",
+        answer: "Separable differential equations can be solved by separating the variables and integrating both sides. Linear differential equations (of the form dy/dx + P(x)y = Q(x)) are solved using an integrating factor. A separable equation is a special case of a linear equation only if the equation is linear in y and the right-hand side is a product of a function of x and a function of y. However, not all linear equations are separable. For example, dy/dx + y = e^x is linear but not separable. One would choose the separable method when the equation can be written as dy/dx = g(x)h(y), and the linear method when the equation is in the standard linear form. If an equation is both, the separable method might be simpler. But if it's linear but not separable, then the integrating factor method must be used.",
+        answer_reasoning: "This question requires the student to break down the two methods and compare them, identifying when each is applicable. It is at the 'Analyze' level as it involves comparing and contrasting two approaches.",
+    },
+    {
+        question: "A student claims that the differential equation dy/dx = x^2 * y^2 is separable and solves it by writing it as dy/y^2 = x^2 dx and then integrating. However, they made a mistake in the integration step. Identify the mistake and correct it.",
+        answer: "The student correctly separated the variables: dy/y^2 = x^2 dx. However, when integrating, they should have: ∫ y^{-2} dy = ∫ x^2 dx → -1/y = (1/3)x^3 + C. The mistake is that the student might have forgotten the negative sign from the integral of y^{-2}. The correct solution is -1/y = (1/3)x^3 + C, which can be rewritten as y = -1 / [(1/3)x^3 + C].",
+        answer_reasoning: "This question requires the student to evaluate the student's work, identify an error, and correct it. It is at the 'Evaluate' level because it involves judging the correctness of a solution and providing a correction.",
+    },
+    {
+        question: "Create a new separable differential equation that models a real-world scenario (e.g., population growth with a specific constraint). Then, write the solution process for it.",
+        answer: "Consider a population P(t) that grows at a rate proportional to its current size but with a maximum carrying capacity that limits growth. However, for a separable equation, we might model a simpler scenario: the rate of change of a chemical concentration in a reaction. Example: Let C(t) be the concentration of a chemical at time t. The reaction rate is proportional to the square of the concentration: dC/dt = -k C^2, where k>0 is a constant. This is separable: dC / C^2 = -k dt. Integrating both sides: ∫ C^{-2} dC = -k ∫ dt → -1/C = -kt + D, where D is a constant. Then, 1/C = kt - D, so C = 1/(kt - D). Using an initial condition, say C(0)=C0, we get 1/C0 = -D → D = -1/C0. Thus, C(t) = 1/(kt + 1/C0).",
+        answer_reasoning: "This question requires the student to construct a new example of a separable differential equation in a real-world context and then solve it. It is at the 'Create' level as it involves generating a new problem and solving it.",
+    },
+    {
+        question: "Solve the differential equation dy/dx = (2x)/(y(1 + x²)) with the initial condition y(0) = 2, demonstrating all steps of variable separation and integration.",
+        answer: "Separate variables: y dy = (2x)/(1 + x²) dx. Integrate both sides: ∫y dy = ∫(2x)/(1 + x²) dx. Left side: y²/2 + C₁. Right side: ln(1 + x²) + C₂ (since d/dx[ln(1 + x²)] = 2x/(1 + x²)). Combine constants: y²/2 = ln(1 + x²) + C. Apply initial condition y(0) = 2: (2)²/2 = ln(1) + C → 2 = 0 + C → C = 2. Solve for y: y²/2 = ln(1 + x²) + 2 → y² = 2ln(1 + x²) + 4 → y = √[2ln(1 + x²) + 4] (positive root chosen since y(0) = 2 > 0).",
+        answer_reasoning: "This question requires precise application of separation of variables and integration techniques, testing the student's ability to execute the method correctly at the Apply level by solving a specific initial value problem.",
+    },
+    {
+        question: "Analyze why the differential equation dy/dx = (x + y)/x is non-separable, and contrast it with a separable equation like dy/dx = xy. Explain the structural differences that determine separability.",
+        answer: "The equation dy/dx = (x + y)/x = 1 + y/x cannot be expressed as f(x)g(y) because the right-hand side contains y/x (a product of y and 1/x), but also a constant term 1. Separability requires the right-hand side to be a product of a function of x alone and a function of y alone. In contrast, dy/dx = xy = (x)(y) is separable (f(x) = x, g(y) = y). The key difference is that non-separable equations like (x + y)/x have terms that cannot be factored into pure x and pure y components, violating the separability condition.",
+        answer_reasoning: "This question requires deconstructing the definition of separable equations, identifying structural constraints, and contrasting examples to demonstrate analytical understanding beyond basic application.",
+    },
+    {
+        question: "Evaluate the solution process for dy/dx = (x²y)/(1 + x³) with y(0) = 1. A student separated variables as (1/y) dy = (x²)/(1 + x³) dx, integrated to ln|y| = (1/3)ln|1 + x³| + C, and simplified to y = k(1 + x³)^(1/3). Identify and correct any errors in the solution.",
+        answer: "The solution process is correct in separation and integration. The constant of integration is handled properly. Applying y(0) = 1: 1 = k(1)^(1/3) → k = 1, so y = (1 + x³)^(1/3). However, the solution omits domain restrictions: 1 + x³ > 0 (i.e., x > -1) is required for the logarithm and cube root to be defined in real numbers. The student's solution is incomplete without this domain specification. Additionally, the absolute value was correctly handled since 1 + x³ > 0 for x > -1, so |1 + x³| = 1 + x³. The solution is mathematically valid but lacks critical domain context.",
+        answer_reasoning: "This question requires critical assessment of a solution's completeness and correctness, testing the student's ability to evaluate the rigor of their work beyond basic computation.",
+    },
+    {
+        question: "Create a new separable differential equation modeling radioactive decay with a time-varying decay rate. Derive its general solution, and explain how the solution would change if the decay rate were constant instead.",
+        answer: "Let λ(t) = k/t (time-varying decay rate), so the equation is dN/dt = -λ(t)N = -(k/t)N. Separate variables: dN/N = -(k/t) dt. Integrate: ln|N| = -k ln|t| + C → N = Ce^{-k ln t} = Ct^{-k} (for t > 0). If λ is constant (λ = k), the equation becomes dN/dt = -kN, with solution N = Ne^{-kt}. The time-varying case yields a power-law solution (N ∝ t^{-k}), while the constant decay rate gives exponential decay (N ∝ e^{-kt}). The key difference is that time-varying rates alter the functional form of the solution, requiring different integration techniques.",
+        answer_reasoning: "This question demands original problem creation based on a real-world concept, application of separation techniques, and synthesis of how parameter changes affect solutions, demonstrating creative and integrative understanding at the Create level.",
+    },
+    {
+        question: "Analyze the conditions required for a first-order differential equation to be classified as separable. Demonstrate your analysis by verifying separability for the equation dy/dx = (x^2 + 1)(y^2 - 1) and explaining why the separation of variables method applies.",
+        answer: "A differential equation is separable if it can be expressed as dy/dx = f(x)g(y), where f(x) is a function solely of x and g(y) is a function solely of y. For dy/dx = (x^2 + 1)(y^2 - 1), f(x) = x^2 + 1 and g(y) = y^2 - 1. Since the right-hand side factors into a product of a pure x-function and a pure y-function, the equation satisfies the separability condition. This allows separation into dy/(y^2 - 1) = (x^2 + 1) dx, enabling integration of both sides independently to solve for y.",
+        answer_reasoning: "This question requires deconstructing the equation's structure to identify separability criteria (Bloom's Analyze level), testing the student's ability to apply theoretical conditions to a concrete example rather than merely performing steps.",
+    },
+    {
+        question: "Evaluate the validity of the following solution approach for the equation dy/dx = e^(x+y): 'Rewrite as dy/dx = e^x e^y, separate to dy/e^y = e^x dx, integrate to get -e^(-y) = e^x + C.' Justify whether the method is correct and identify any conceptual errors in the reasoning.",
+        answer: "The approach is correct. The equation dy/dx = e^(x+y) factors into e^x · e^y, satisfying the separable form dy/dx = f(x)g(y) with f(x) = e^x and g(y) = e^y. Separation yields dy/e^y = e^x dx, and integration of both sides gives -e^(-y) = e^x + C. No errors exist—the solution method correctly applies separation of variables, and the integration steps are valid for all y where e^y ≠ 0 (which holds for all real y).",
+        answer_reasoning: "This question demands critical assessment of a solution's logical flow (Bloom's Evaluate level), requiring the student to verify each step against the definition of separable equations and integration rules, moving beyond procedural correctness to conceptual justification.",
+    },
+    {
+        question: "Create a new first-order differential equation that is both separable and nonlinear. Solve it using the separation of variables method, and explicitly justify why your constructed equation meets the criteria for separability. Include all solution steps and verify the solution.",
+        answer: "Constructed equation: dy/dx = (x^3)(y^2 + 1). This equation is separable because it factors as f(x) = x^3 (pure x-function) and g(y) = y^2 + 1 (pure y-function). It is nonlinear due to the y^2 term. Separation: dy/(y^2 + 1) = x^3 dx. Integration: ∫ dy/(y^2 + 1) = ∫ x^3 dx → arctan(y) = (x^4)/4 + C. Solution: y = tan((x^4)/4 + C). Verification: The original equation separates cleanly into x and y terms, and substitution confirms the solution satisfies dy/dx = (x^3)(y^2 + 1).",
+        answer_reasoning: "This question requires generating a novel problem (Bloom's Create level) that meets specific criteria, demonstrating synthesis of knowledge. The student must ensure the equation is nonlinear (to avoid trivial linear examples) and explicitly justify separability, then execute the solution process with verification—showing deep conceptual mastery.",
+    },
+    {
+        question: "A student solves the differential equation $\\frac{dy}{dx} = \\frac{x^3}{y^2}$ and claims the solution is $y = \\frac{3}{2}x^{4/3} + C$. Evaluate the correctness of this solution. Identify the error and provide the correct solution.",
+        answer: "The solution is incorrect. The error occurs in improper variable separation and integration. Correct separation yields $y^2  dy = x^3  dx$. Integrating both sides: $\\int y^2  dy = \\int x^3  dx \\implies \\frac{1}{3}y^3 = \\frac{1}{4}x^4 + C \\implies y^3 = \\frac{3}{4}x^4 + K$ (where $K = 3C$). The correct solution is $y = \\sqrt[3]{\\frac{3}{4}x^4 + K}$. The student omitted the cubic term on $y$, incorrectly integrated $x^3$ as $\\frac{3}{2}x^{4/3}$ (missing the $\\frac{1}{4}$ factor), and neglected the cube root in the solution.",
+        answer_reasoning: "This question requires critical evaluation of a solution's validity, identification of specific procedural errors in variable separation and integration, and reconstruction of the correct solution. It assesses the student's ability to analyze and correct mathematical reasoning at the 'Evaluate' level.",
+    },
+    {
+        question: "Create a new variable separable differential equation modeling bacterial population growth where the growth rate is proportional to the square of the current population. Solve the equation, and verify the solution by substitution.",
+        answer: "The differential equation is $\\frac{dP}{dt} = kP^2$ ($k > 0$). Separating variables: $\\frac{dP}{P^2} = k  dt$. Integrating: $-\\frac{1}{P} = kt + C \\implies P = -\\frac{1}{kt + C}$. Verification: $\\frac{dP}{dt} = \\frac{k}{(kt + C)^2} = k \\left(-\\frac{1}{kt + C}\\right)^2 = kP^2$, confirming the solution satisfies the original equation.",
+        answer_reasoning: "This question requires synthesizing knowledge of real-world applications (bacterial growth) to generate a novel differential equation, applying separation of variables to solve it, and validating the solution. It demonstrates the 'Create' level by producing a new, contextually appropriate mathematical model and solution.",
+    },
+    {
+        question: "Define a first-order homogeneous differential equation and provide its standard mathematical form.",
+        answer: "A first-order homogeneous differential equation is defined as one that can be expressed in the form dy/dx = f(y/x), where f is a function of the ratio y/x. Equivalently, it can be written as M(x,y)dx + N(x,y)dy = 0, where both M(x,y) and N(x,y) are homogeneous functions of the same degree. A function g(x,y) is homogeneous of degree n if g(tx, ty) = t^n g(x,y) for all t ≠ 0.",
+        answer_reasoning: "This question targets the 'Remember' level by requiring precise recall of the definition and standard form, which is foundational for recognizing homogeneous equations.",
+    },
+    {
+        question: "Explain why the differential equation (x^2 + y^2)dx - 2xy dy = 0 qualifies as homogeneous, using the definition of homogeneous functions.",
+        answer: "The equation (x² + y²)dx - 2xy dy = 0 is homogeneous because both coefficients of dx and dy are homogeneous functions of the same degree. For M(x,y) = x² + y², M(tx, ty) = (tx)² + (ty)² = t²(x² + y²) = t²M(x,y), so it is homogeneous of degree 2. For N(x,y) = -2xy, N(tx, ty) = -2(tx)(ty) = -2t²xy = t²N(x,y), also homogeneous of degree 2. Since M and N share the same degree, the equation is homogeneous.",
+        answer_reasoning: "This 'Understand' level question requires students to apply the definition of homogeneous functions to verify the equation's classification, demonstrating conceptual comprehension beyond rote memorization.",
+    },
+    {
+        question: "Solve the homogeneous differential equation dy/dx = (x^2 + y^2)/(2xy) using the substitution v = y/x. Show all steps.",
+        answer: "1. Rewrite the equation: dy/dx = (1 + (y/x)^2)/(2(y/x)) = (1 + v²)/(2v) where v = y/x.\\n2. Substitute y = vx, so dy/dx = v + x dv/dx.\\n3. Set equal: v + x dv/dx = (1 + v²)/(2v).\\n4. Rearrange: x dv/dx = (1 + v²)/(2v) - v = (1 - v²)/(2v).\\n5. Separate variables: (2v)/(1 - v²) dv = dx/x.\\n6. Integrate both sides: ∫(2v)/(1 - v²) dv = ∫dx/x.\\n7. Let u = 1 - v², du = -2v dv, so left integral becomes -∫du/u = -ln|u| + C = -ln|1 - v²| + C.\\n8. Right integral: ln|x| + C.\\n9. Combine: -ln|1 - v²| = ln|x| + C ⇒ ln|1/(1 - v²)| = ln|kx| ⇒ 1/(1 - v²) = kx.\\n10. Substitute v = y/x: 1/(1 - y²/x²) = kx ⇒ x²/(x² - y²) = kx ⇒ x = k(x² - y²).",
+        answer_reasoning: "This 'Apply' level question demands procedural execution of the substitution method, testing the student's ability to transform and solve homogeneous equations systematically.",
+    },
+    {
+        question: "Analyze the role of the degree of homogeneity in the solution process of homogeneous differential equations. How would the solution approach differ if M and N had different degrees?",
+        answer: "The degree of homogeneity determines the scaling behavior under (tx, ty) but does not affect the substitution method (v = y/x), as long as M and N share the same degree. If M and N had different degrees, the equation would not be homogeneous, and the substitution method would fail. For example, if M were degree 2 and N degree 3, the ratio M/N would not simplify to a function of y/x, making the equation non-homogeneous and requiring alternative methods (e.g., exact equations or integrating factors).",
+        answer_reasoning: "This 'Analyze' question requires dissecting the relationship between homogeneity degree and solution strategy, identifying critical conditions for method applicability.",
+    },
+    {
+        question: "Evaluate the efficiency of the substitution method (v = y/x) for solving homogeneous differential equations compared to the integrating factor method. Justify your assessment.",
+        answer: "The substitution method is significantly more efficient for homogeneous equations than the integrating factor method. Homogeneous equations are specifically structured to simplify via v = y/x, reducing them to separable equations—a direct and systematic process. In contrast, integrating factors are designed for linear equations (e.g., dy/dx + P(x)y = Q(x)), which are a subset of ODEs. Applying integrating factors to homogeneous equations would involve unnecessary algebraic manipulation without leveraging their inherent structure, increasing solution complexity. Thus, the substitution method is tailored, efficient, and preferred for homogeneous equations.",
+        answer_reasoning: "This 'Evaluate' question challenges students to compare methodological appropriateness, emphasizing strategic selection based on equation properties.",
+    },
+    {
+        question: "Create a new first-order homogeneous differential equation with degree 3 homogeneity. Solve it using the substitution method and explain how the degree influenced your solution steps.",
+        answer: "Created equation: (x³ + 2x²y + y³)dx + (x²y + 3xy²)dy = 0.\\nVerification: M(x,y) = x³ + 2x²y + y³ → M(tx, ty) = t³M, degree 3. N(x,y) = x²y + 3xy² → N(tx, ty) = t³N, degree 3. Homogeneous.\\nSolution: dy/dx = -(x³ + 2x²y + y³)/(x²y + 3xy²) = -(1 + 2v + v³)/(v + 3v²) (v = y/x).\\nSubstitute y = vx, dy/dx = v + x dv/dx: v + x dv/dx = -(1 + 2v + v³)/(v(1 + 3v)).\\nRearrange: x dv/dx = [-(1 + 2v + v³)/(v(1 + 3v))] - v = (-1 - 5v - 4v²)/(v(1 + 3v)).\\nSeparate: [v(1 + 3v)/(-1 - 5v - 4v²)] dv = dx/x.\\nIntegrate both sides (partial fractions needed).\\nThe degree 3 homogeneity ensured M and N scaled identically under (tx, ty), allowing v = y/x to simplify the ratio to a function of v, which is the core requirement for the substitution method. Higher degrees do not alter the solution approach but may increase algebraic complexity in integration.",
+        answer_reasoning: "This 'Create' question requires original problem generation and method application, demonstrating synthesis of knowledge and awareness of how homogeneity degree affects problem structure.",
+    },
+    {
+        question: "Explain the defining characteristic of a first-order homogeneous differential equation and justify why the equation dy/dx = (x^2 + 3xy + y^2)/x^2 qualifies as homogeneous.",
+        answer: "A first-order homogeneous differential equation is defined as one that can be expressed in the form dy/dx = f(y/x), where f is a function of the ratio y/x. The equation dy/dx = (x^2 + 3xy + y^2)/x^2 qualifies because dividing all terms in the numerator by x^2 yields 1 + 3(y/x) + (y/x)^2, which is explicitly a function of the ratio v = y/x. This satisfies the condition for homogeneity.",
+        answer_reasoning: "This question tests the student's ability to define the core concept and apply the definition to verify a specific example, directly addressing the 'Understand' level by requiring conceptual explanation rather than rote memorization.",
+    },
+    {
+        question: "Solve the homogeneous differential equation dy/dx = (2x^2 + 3xy)/(xy) using the substitution v = y/x. Show all steps of the solution process.",
+        answer: "Let v = y/x ⇒ y = vx, dy/dx = v + x dv/dx. Substitute into equation: v + x dv/dx = (2x^2 + 3x(vx))/(x(vx)) = (2x^2 + 3v x^2)/(v x^2) = (2 + 3v)/v = 2/v + 3. Rearrange: x dv/dx = 2/v + 3 - v = (2 + 3v - v^2)/v. Separate variables: v/(2 + 3v - v^2) dv = dx/x. Integrate both sides: ∫ v/(−v² + 3v + 2) dv = ∫ dx/x. Use partial fractions or substitution to solve the left integral, resulting in −(1/2)ln|−v² + 3v + 2| = ln|x| + C. Substitute back v = y/x to obtain the implicit solution: −(1/2)ln|(−y²/x²) + 3(y/x) + 2| = ln|x| + C.",
+        answer_reasoning: "This question requires the student to apply the substitution method for homogeneous equations, demonstrating procedural competence at the 'Apply' level by executing the solution steps systematically.",
+    },
+    {
+        question: "Analyze the differences between homogeneous and non-homogeneous differential equations by comparing dy/dx = (x^2 + y^2)/xy and dy/dx = x^2 + y^2. Explain why the first is homogeneous while the second is not.",
+        answer: "The equation dy/dx = (x^2 + y^2)/xy is homogeneous because it simplifies to dy/dx = x/y + y/x = (1/v) + v (where v = y/x), which is a function of y/x. In contrast, dy/dx = x^2 + y^2 cannot be expressed as a function of y/x alone; it contains terms that do not reduce to a ratio of y/x (e.g., x^2 and y^2 are not homogeneous functions of the same degree when divided by a single power of x). Homogeneity requires all terms to be expressible as f(y/x), which fails for the second equation.",
+        answer_reasoning: "This question demands analytical decomposition of two equations to identify structural differences, targeting the 'Analyze' level by requiring students to dissect the mathematical form and justify categorization.",
+    },
+    {
+        question: "Evaluate the correctness of the following solution to the homogeneous DE dy/dx = (x^2 + 2xy)/y^2. The student claims: 'After substituting v = y/x, the equation becomes v + x dv/dx = (1 + 2v)/v^2. Solving gives ∫ v^2/(1 + 2v) dv = ∫ dx/x. The solution is correct.' Identify errors and correct them.",
+        answer: "The solution is incorrect in the algebraic simplification. The right-hand side should simplify to (x^2 + 2xy)/y^2 = (1 + 2(y/x))/(y^2/x^2) = (1 + 2v)/v^2, which is correct. However, the equation v + x dv/dx = (1 + 2v)/v^2 leads to x dv/dx = (1 + 2v)/v^2 − v = (1 + 2v − v^3)/v^2, not (1 + 2v)/v^2. The student omitted subtracting v, resulting in an incorrect separated equation. The correct separation is v^2 dv/(1 + 2v − v^3) = dx/x, not v^2 dv/(1 + 2v). The integration step is also incomplete as the denominator requires partial fractions for solution.",
+        answer_reasoning: "This question requires critical evaluation of an incorrect solution, testing the 'Evaluate' level by identifying algebraic errors and understanding solution validity.",
+    },
+    {
+        question: "Create a new first-order homogeneous differential equation with a non-constant coefficient function. Solve it using v = y/x, and verify the solution by substitution into the original equation.",
+        answer: "Create the equation: dy/dx = (x^2 + 4xy + 4y^2)/(x^2 − xy). Simplify to dy/dx = (1 + 4(y/x) + 4(y/x)^2)/(1 − (y/x)) = f(v) where v = y/x. Substitute v = y/x, y = vx, dy/dx = v + x dv/dx: v + x dv/dx = (1 + 4v + 4v^2)/(1 − v). Rearrange: x dv/dx = (1 + 4v + 4v^2)/(1 − v) − v = (1 + 4v + 4v^2 − v + v^2)/(1 − v) = (1 + 3v + 5v^2)/(1 − v). Separate: (1 − v)/(1 + 3v + 5v^2) dv = dx/x. Integrate both sides. For verification, substitute the solution back into the original DE to confirm consistency.",
+        answer_reasoning: "This question requires original creation of a homogeneous DE and full solution execution, targeting the 'Create' level by demanding synthesis of concepts and verification of results.",
+    },
+    {
+        question: "Solve the differential equation (x^2 + y^2) dx - 2xy dy = 0 with the initial condition y(1) = 1.",
+        answer: "The particular solution satisfying the initial condition is ( y = x ).",
+        answer_reasoning: "The equation is homogeneous. Using the substitution y = vx, we reduce it to a separable equation. After solving and applying the initial condition, we find that the solution satisfying y(1)=1 is y=x.",
+    },
+    {
+        question: "Explain why the substitution y = vx is appropriate for solving homogeneous differential equations of the form dy/dx = f(y/x).",
+        answer: "The substitution y = vx is appropriate because it transforms the homogeneous equation into a separable equation. Since the function f(y/x) is homogeneous of degree 0, the substitution v = y/x (or y = vx) allows the equation to be expressed in terms of v and x only, which can then be separated and integrated.",
+        answer_reasoning: "This question requires the student to break down the rationale behind the substitution method, demonstrating an understanding of the properties of homogeneous functions and why the substitution works.",
+    },
+    {
+        question: "A student claims that the differential equation (x^2 - y^2) dx + 2xy dy = 0 is homogeneous and solves it by the substitution y = vx, obtaining the solution x^2 + y^2 = C. Evaluate the correctness of this solution and the method.",
+        answer: "The differential equation is homogeneous, but the solution x^2 + y^2 = C is incorrect; the correct solution is x^2 + y^2 = Kx for some constant K.",
+        answer_reasoning: "This question requires the student to critically assess a solution, identifying errors in the method and providing the correct solution, which tests their ability to evaluate the validity of a given approach.",
+    },
+    {
+        question: "Design a homogeneous differential equation of the form M(x,y) dx + N(x,y) dy = 0 (where M and N are homogeneous functions of the same degree) that has the particular solution y = x^2. Then solve it to verify.",
+        answer: "The equation ( -2y  dx + x  dy = 0 ) has the particular solution ( y = x^2 ).",
+        answer_reasoning: "This question requires the student to generate a new problem (a differential equation) that meets the criteria, demonstrating creativity and deep understanding of the concept.",
+    },
+    {
+        question: "Analyze the structural properties of a first-order differential equation that qualify it as homogeneous, and explain why the substitution v = y/x is mathematically valid for transforming such equations into separable form.",
+        answer: "A first-order differential equation is homogeneous if it can be expressed as dy/dx = f(y/x), where f is a function of the ratio y/x. This requires that the function f(x,y) satisfies f(tx, ty) = f(x,y) for all t ≠ 0 (i.e., homogeneous of degree 0). The substitution v = y/x is valid because it replaces the ratio y/x with a single variable v, reducing the equation to a form where variables can be separated. For example, given dy/dx = (y² + xy)/x², dividing numerator and denominator by x² yields dy/dx = (y/x)² + (y/x) = v² + v. Substituting y = vx (so dy/dx = v + x dv/dx) transforms the equation into v + x dv/dx = v² + v, simplifying to x dv/dx = v². This separable equation can then be solved by integrating both sides.",
+        answer_reasoning: "This question requires students to deconstruct the mathematical definition of homogeneity and justify the substitution method's validity, which is a core analytical skill for homogeneous equations at the 'Analyze' level.",
+    },
+    {
+        question: "Evaluate the limitations of the homogeneous equation solution method when applied to non-homogeneous equations, and provide a specific example where an alternative method (e.g., integrating factors) is necessary and superior.",
+        answer: "The homogeneous method fails for equations that do not satisfy f(tx, ty) = f(x,y), as the substitution v = y/x cannot reduce them to separable form. For example, consider dy/dx + (1/x)y = x². This is a linear non-homogeneous equation. Applying the homogeneous method would incorrectly assume dy/dx = f(y/x), but f(x,y) = -y/x + x² does not satisfy f(tx, ty) = f(x,y) (since f(tx, ty) = -ty/(tx) + (tx)² = -y/x + t²x² ≠ f(x,y) for t ≠ 1). The integrating factor method is superior here: the integrating factor is e^(∫1/x dx) = x, multiplying through gives x dy/dx + y = x³, or d/dx(xy) = x³. Integrating yields xy = x⁴/4 + C, so y = x³/4 + C/x. This solution is exact and efficient, whereas the homogeneous approach would lead to incorrect steps.",
+        answer_reasoning: "This question demands critical judgment about method applicability, requiring students to assess when homogeneous methods are inapplicable and justify alternative approaches, aligning with 'Evaluate' level expectations.",
+    },
+    {
+        question: "Create a novel real-world scenario involving a physical process governed by a homogeneous differential equation, formulate the equation based on the scenario, solve it using the homogeneous method, and interpret the solution's practical implications.",
+        answer: "Scenario: A chemical reaction's rate of product formation is proportional to the square of the ratio of reactant concentration to time elapsed. Let C(t) represent concentration at time t, with rate dC/dt = k(C/t)² (k > 0, constant). This is homogeneous because dC/dt = kC²/t² = f(C/t), and f(tC, t²) = k(tC)²/(t²)² = kC²/t² = f(C, t) (degree 0 homogeneity). Substituting v = C/t (so C = vt, dC/dt = v + t dv/dt) yields v + t dv/dt = kv². Rearranging gives t dv/dt = kv² - v, or ∫ dv/(v(kv - 1)) = ∫ dt/t. Partial fractions: 1/(v(kv - 1)) = k/(kv - 1) - k/v. Integration yields ln|kv - 1| - ln|v| = ln|t| + C, simplifying to (kv - 1)/v = Ct. Solving for C: C = (1 + Ct)/v = (1 + Ct)/(C/t) = t(1 + Ct)/C. Interpretation: The concentration C(t) grows hyperbolically with time, indicating accelerating product formation as time increases. However, the solution becomes undefined when 1 + Ct = 0 (t = -1/C), implying a physical limit where the model breaks down, suggesting the scenario requires constraints on t to remain valid.",
+        answer_reasoning: "This question requires synthesizing a real-world context, formulating a mathematically valid homogeneous equation, applying the solution method, and interpreting results—exemplifying 'Create' level thinking through original problem design and application.",
+    },
+    {
+        question: "A student claims that the differential equation dy/dx = (x^2 + 2xy + y^2)/x^2 is homogeneous. Evaluate the student's claim by verifying whether the right-hand side is a function of y/x alone. If the equation is homogeneous, solve it using the substitution v = y/x. If it is not homogeneous, explain why and then solve it as a non-homogeneous equation.",
+        answer: "The right-hand side simplifies to (x^2 + 2xy + y^2)/x^2 = 1 + 2(y/x) + (y/x)^2, which is explicitly a function of y/x (substituting t = y/x yields 1 + 2t + t^2). Thus, the equation is homogeneous. Solving via substitution v = y/x (so y = vx and dy/dx = v + x dv/dx): \n\nv + x dv/dx = 1 + 2v + v^2\nx dv/dx = 1 + v + v^2\n∫ dv/(v^2 + v + 1) = ∫ dx/x\n\nCompleting the square in the denominator: v^2 + v + 1 = (v + 1/2)^2 + (√3/2)^2. The integral becomes:\n(2/√3) arctan((2v + 1)/√3) = ln|x| + C\n\nSubstituting v = y/x:\n(2/√3) arctan((2y/x + 1)/√3) = ln|x| + C",
+        answer_reasoning: "This question requires students to evaluate homogeneity by algebraic manipulation to confirm the RHS is purely a function of y/x. It then demands application of the substitution method, testing both conceptual understanding (homogeneity verification) and procedural skill (integration and solution derivation). The evaluation component (judging the claim) aligns with Bloom's 'Evaluate' level.",
+    },
+    {
+        question: "Create a homogeneous differential equation of the form dy/dx = f(y/x) that has the particular solution y = x^2. Then, verify that your equation is homogeneous and that y = x^2 satisfies it.",
+        answer: "To create the equation, differentiate the solution: dy/dx = 2x. Express this in terms of y/x: since y = x^2, y/x = x, so dy/dx = 2x = 2(y/x). The differential equation is dy/dx = 2y/x. \n\nVerification: (1) Homogeneity: RHS 2y/x = 2(y/x) is a function of y/x alone (f(t) = 2t), confirming homogeneity. (2) Solution check: substitute y = x^2 and dy/dx = 2x. LHS = 2x, RHS = 2(x^2)/x = 2x. LHS = RHS, so y = x^2 satisfies the equation.",
+        answer_reasoning: "This question demands creation of a novel homogeneous equation meeting specific criteria (given solution). Students must derive the equation from the solution (synthesis), then verify both homogeneity and solution satisfaction—exceeding application to require original problem design and validation. This aligns with Bloom's 'Create' level by constructing a new mathematical entity and confirming its properties.",
+    },
+    {
+        question: "Construct a homogeneous differential equation of the form dy/dx = f(y/x) where f is a quadratic polynomial. Solve the equation using the substitution method, and explain why the homogeneity condition enables the substitution to reduce the equation to a separable form.",
+        answer: "I created the homogeneous differential equation dy/dx = (y/x)² + 1. Using substitution v = y/x, so y = vx and dy/dx = v + x dv/dx, the equation becomes v + x dv/dx = v² + 1. Rearranging gives x dv/dx = v² - v + 1, which separates into dv/(v² - v + 1) = dx/x. Integrating the left side requires completing the square: v² - v + 1 = (v - 1/2)² + 3/4, leading to (2/√3) arctan((2v - 1)/√3) = ln|x| + C. Substituting back v = y/x yields the solution (2/√3) arctan((2y/x - 1)/√3) = ln|x| + C. The homogeneity condition (f being a function of y/x) enables the substitution because it transforms the equation into one where variables are separable in terms of v and x, which is solvable by integration.",
+        answer_reasoning: "This question requires students to generate a novel homogeneous differential equation (a 'Create' level task), demonstrate the substitution method correctly, and explicitly connect homogeneity to the solution strategy. It assesses both content knowledge and the ability to synthesize concepts for problem generation, addressing the student's failure to create at the highest Bloom's level.",
+    },
+    {
+        question: "Apply the integrating factor method to solve the linear differential equation dy/dx + 3y = 6e^{-2x}. Show all steps and verify the solution by substitution.",
+        answer: "The integrating factor μ(x) = e^{∫3 dx} = e^{3x}. Multiply both sides by μ(x): e^{3x} dy/dx + 3e^{3x}y = 6e^{x}. The left side is d/dx [y e^{3x}]. Integrate both sides: y e^{3x} = ∫6e^{x} dx = 6e^{x} + C. Solve for y: y = 6e^{-2x} + C e^{-3x}. Verification: dy/dx = -12e^{-2x} - 3C e^{-3x}. Substitute into original equation: (-12e^{-2x} - 3C e^{-3x}) + 3(6e^{-2x} + C e^{-3x}) = -12e^{-2x} - 3C e^{-3x} + 18e^{-2x} + 3C e^{-3x} = 6e^{-2x}, which matches the right-hand side.",
+        answer_reasoning: "This question requires the student to systematically apply the integrating factor method, demonstrating procedural mastery at the Apply level. Verification step ensures understanding of solution validity, addressing common errors like miscalculating the integrating factor or integration constants.",
+    },
+    {
+        question: "Analyze the structural differences between homogeneous and non-homogeneous linear differential equations. Explain why the integrating factor method works for both, but the solution process diverges after finding the integrating factor.",
+        answer: "Homogeneous linear differential equations have the form dy/dx + P(x)y = 0 (Q(x) = 0), while non-homogeneous have Q(x) ≠ 0. The integrating factor μ(x) = e^{∫P(x)dx} works for both because it transforms the left-hand side into a perfect derivative regardless of Q(x). For homogeneous equations, integration yields y μ(x) = C, so y = C μ(x)^{-1}. For non-homogeneous equations, integration yields y μ(x) = ∫Q(x)μ(x) dx + C, requiring evaluation of the integral involving Q(x). The divergence arises because homogeneous equations lack the forcing term Q(x), simplifying the solution to a single exponential term.",
+        answer_reasoning: "This question demands deconstruction of equation types and method mechanics, moving beyond application to analytical comparison. It addresses the student's likely confusion about why the same method requires additional steps for non-homogeneous cases.",
+    },
+    {
+        question: "Evaluate the correctness of the solution y = (x^2 + 5)e^{-x} for the equation dy/dx + y = 2x e^{-x}. Identify any errors in the solution process and explain why the solution is invalid or valid.",
+        answer: "The solution is invalid. Verification: dy/dx = 2x e^{-x} - (x^2 + 5)e^{-x}. Substitute into left-hand side: dy/dx + y = [2x e^{-x} - (x^2 + 5)e^{-x}] + (x^2 + 5)e^{-x} = 2x e^{-x}, which matches the right-hand side. However, the solution process is flawed: the integrating factor μ(x) = e^{∫1 dx} = e^x. Multiplying the equation by μ(x) gives d/dx [y e^x] = 2x. Integrating yields y e^x = x^2 + C, so y = (x^2 + C)e^{-x}. The constant C is arbitrary, but the solution explicitly states C = 5 without derivation. The error lies in treating C as fixed rather than a constant of integration. Valid solutions require C to remain symbolic until initial conditions are applied.",
+        answer_reasoning: "This question assesses critical evaluation of solution quality, requiring the student to detect hidden flaws in a seemingly correct answer. It targets the student's tendency to overlook the role of arbitrary constants in differential equations.",
+    },
+    {
+        question: "Create a new first-order linear differential equation with a non-constant coefficient P(x) that requires logarithmic terms in the integrating factor. Solve it step-by-step, explaining how the integrating factor is derived and why it necessitates logarithmic integration.",
+        answer: "Example equation: dy/dx + (2/x)y = x^2. Integrating factor μ(x) = e^{∫2/x dx} = e^{2 ln|x|} = x^2 (valid for x > 0). Multiply through: x^2 dy/dx + 2x y = x^4. Left side is d/dx [y x^2]. Integrate: y x^2 = ∫x^4 dx = x^5/5 + C. Solution: y = x^3/5 + C x^{-2}. Explanation: The coefficient P(x) = 2/x has an integral ∫P(x)dx = 2 ln|x|, which requires logarithmic integration to compute μ(x). This is necessary because P(x) is not constant, so μ(x) depends on x through the logarithm. The logarithmic term in the exponent ensures μ(x) correctly scales the equation to a perfect derivative.",
+        answer_reasoning: "This question demands synthesis of knowledge to generate a novel problem (Create level). It reinforces why non-constant P(x) complicates the integrating factor, addressing the student's potential gap in recognizing when logarithmic terms arise in μ(x).",
+    },
+    {
+        question: "Explain the fundamental difference between linear and nonlinear differential equations in your own words, and provide one specific example of each type to illustrate your explanation.",
+        answer: "A linear differential equation is defined as one where the dependent variable and all its derivatives appear only to the first power and are not multiplied together. The equation must be expressible in the form a_n(x)y^(n) + ... + a_1(x)y' + a_0(x)y = g(x), where coefficients and nonhomogeneous terms depend only on the independent variable. In contrast, a nonlinear differential equation contains terms where the dependent variable or its derivatives are raised to powers other than one, multiplied together, or appear inside nonlinear functions (e.g., sin(y), e^y). Example of linear: dy/dx + 3y = e^x (all terms are first-degree in y and dy/dx). Example of nonlinear: dy/dx + y^2 = x (contains the term y^2, which is nonlinear).",
+        answer_reasoning: "This question targets the 'Understand' level by requiring students to define and distinguish core characteristics of linear vs. nonlinear equations. It moves beyond rote memorization to conceptual comprehension through self-explanation and concrete examples, directly addressing the failure at the 'Understand' level.",
+    },
+    {
+        question: "A radioactive substance decays at a rate proportional to its current mass. If the initial mass is 100 grams and 20 grams decay in the first hour, derive the differential equation modeling this process and solve it to find the mass remaining after 5 hours. Show all steps.",
+        answer: "The decay rate is proportional to current mass, so dm/dt = -km (k>0, negative sign for decay). Using initial condition m(0)=100, and after 1 hour m(1)=80: 80 = 100e^(-k*1) → k = -ln(0.8) ≈ 0.2231. Differential equation: dm/dt = -0.2231m. Solution: m(t) = 100e^(-0.2231t). After 5 hours: m(5) = 100e^(-0.2231*5) ≈ 100e^(-1.1155) ≈ 32.7 grams.",
+        answer_reasoning: "This 'Apply' level question requires students to translate a real-world scenario into a linear ODE (dm/dt = -km), solve it using separation of variables, and compute a specific value. It tests procedural application of the concept beyond textbook examples, building on the foundational understanding they previously lacked.",
+    },
+    {
+        question: "Analyze how the solution behavior of the linear ODE dy/dt = -y + sin(t) changes when the nonhomogeneous term sin(t) is replaced with sin(2t). Compare the long-term behavior of both solutions and explain the mathematical reason for the difference.",
+        answer: "For dy/dt = -y + sin(t), the homogeneous solution decays as e^(-t) → 0. The particular solution is y_p = (1/2)(sin(t) - cos(t)), so the full solution approaches (1/2)(sin(t) - cos(t)) as t→∞ (steady oscillation). For dy/dt = -y + sin(2t), the particular solution is y_p = (2/5)sin(2t) - (1/5)cos(2t), so the solution approaches (2/5)sin(2t) - (1/5)cos(2t). The difference arises because the frequency of sin(2t) (frequency=2) does not match the natural frequency of the homogeneous solution (which is 1, from characteristic equation r+1=0). When frequencies match (as in the first case with sin(t) and natural frequency 1), resonance occurs but is damped by the -y term. Here, no resonance occurs since 2≠1, leading to a different amplitude and phase in the steady state.",
+        answer_reasoning: "This 'Analyze' question requires breaking down solution components (homogeneous vs. particular), comparing behaviors, and identifying the mathematical cause (frequency mismatch). It moves beyond solving to examining relationships and causes, which is essential for deep conceptual understanding.",
+    },
+    {
+        question: "Evaluate the validity of the following claim: 'The method of undetermined coefficients can solve any linear nonhomogeneous differential equation.' Support your evaluation with a specific counterexample and explain why the method fails in that case.",
+        answer: "The claim is false. The method of undetermined coefficients only works when the nonhomogeneous term is a solution to a constant-coefficient linear homogeneous ODE (e.g., polynomials, exponentials, sines/cosines). Counterexample: dy/dt + y = 1/t. The nonhomogeneous term 1/t is not of the form e^(at), t^n e^(at), or trigonometric functions, so the method fails. The particular solution cannot be guessed in the standard form (e.g., assuming A/t would not work because derivatives of 1/t involve higher powers). This equation requires methods like variation of parameters or integrating factors. The failure occurs because the method relies on the nonhomogeneous term having a derivative that is a linear combination of itself, which 1/t does not satisfy.",
+        answer_reasoning: "This 'Evaluate' question requires critical assessment of a general statement, using a specific counterexample to justify the evaluation. Students must identify the method's limitations and explain the mathematical reason for failure, demonstrating higher-order judgment beyond basic application.",
+    },
+    {
+        question: "Create a new real-world problem involving population dynamics that can be modeled by a linear differential equation. Write the equation, solve it, and explain how the solution reflects the biological process described. Include a specific numerical prediction for your model.",
+        answer: "Scenario: A bacterial culture grows at a rate proportional to its current population, with a constant death rate due to environmental toxins. Initial population: 500 bacteria. Growth rate constant: 0.3 per hour. Death rate constant: 0.1 per hour. Differential equation: dP/dt = (0.3 - 0.1)P = 0.2P. Solution: P(t) = 500e^(0.2t). After 10 hours: P(10) = 500e^(2) ≈ 3695 bacteria. Explanation: The equation is linear (dP/dt - 0.2P = 0) because P and dP/dt are first-degree. The exponential growth solution reflects rapid population increase without carrying capacity, which is valid for short-term growth in a controlled environment before resource limitations (not included in this model). The prediction of ~3695 bacteria at t=10 hours shows the accelerating growth typical of exponential models.",
+        answer_reasoning: "This 'Create' question requires generating a novel, contextually rich scenario (bacterial growth with death rate) that demonstrates linearity. Students must formulate the equation, solve it, and connect the solution to the biological process, showing originality and synthesis of concepts. The numerical prediction validates the model's practical application.",
+    },
+    {
+        question: "Solve the linear differential equation dy/dx + 4y = 12e^{-x} using the integrating factor method. Show all steps, including the derivation of the integrating factor and the solution process.",
+        answer: "The integrating factor μ(x) = e^(∫4 dx) = e^(4x). Multiplying both sides by μ(x) gives e^(4x) dy/dx + 4e^(4x)y = 12e^(3x). The left side simplifies to d/dx(y e^(4x)) = 12e^(3x). Integrating both sides yields y e^(4x) = 4e^(3x) + C. Solving for y gives y = 4e^(-x) + C e^(-4x).",
+        answer_reasoning: "This question requires the student to systematically apply the integrating factor method, demonstrating procedural mastery at the Apply level by executing all steps without error.",
+    },
+    {
+        question: "Analyze why the integrating factor method specifically works for first-order linear differential equations but cannot be directly applied to nonlinear equations like dy/dx + y^2 = Q(x). Provide mathematical justification.",
+        answer: "The integrating factor method relies on the left-hand side being expressible as d/dx(μ(x)y), which requires linearity in y. For linear equations (dy/dx + P(x)y = Q(x)), the product rule guarantees μ(x)P(x) = d/dx(ln μ(x)), enabling exact differentiation. Nonlinear equations (e.g., dy/dx + y^2 = Q(x)) fail this condition because y^2 breaks the linearity, making it impossible to find a μ(x) that transforms the left side into a single derivative.",
+        answer_reasoning: "This question demands analytical decomposition of the method's mathematical foundation, distinguishing linear from nonlinear cases by examining differential structure.",
+    },
+    {
+        question: "Evaluate the effectiveness of the integrating factor method versus separation of variables for solving dy/dx + 2y = e^x. Discuss when each method would be preferable in real-world applications.",
+        answer: "The integrating factor method is optimal for linear equations like dy/dx + 2y = e^x because it directly handles the nonhomogeneous term. Separation of variables fails here since y cannot be isolated from the 2y term. In contrast, for equations like dy/dx = y^2, separation of variables is preferable due to its simplicity. Real-world applications (e.g., population growth modeled by dy/dx = ky) often use separation of variables, while engineering systems with external forcing terms (e.g., electrical circuits with voltage inputs) require integrating factors.",
+        answer_reasoning: "This question assesses the student's ability to critique methodological trade-offs based on equation structure and application context, demonstrating evaluative reasoning.",
+    },
+    {
+        question: "Create a new real-world problem involving a linear differential equation modeling radioactive decay with a constant external source. Formulate the equation, solve it using the integrating factor method, and interpret the long-term behavior of the solution.",
+        answer: "Scenario: A radioactive substance decays at a rate proportional to its mass (k = 0.1/day), while a constant source adds 5 grams/day. Let m(t) be mass at time t. The DE is dm/dt + 0.1m = 5. Integrating factor μ = e^(0.1t). Solution: m(t) = 50 + Ce^(-0.1t). Long-term behavior: As t → ∞, m(t) → 50 grams, indicating equilibrium mass where decay rate equals external input rate.",
+        answer_reasoning: "This question requires creative problem design grounded in physical principles, followed by methodical solution and interpretation—evidencing mastery at the Create level through contextual innovation.",
+    },
+    {
+        question: "Analyze the structural components of a first-order linear differential equation in standard form and explain how the integrating factor method addresses the non-homogeneous term.",
+        answer: "A first-order linear differential equation in standard form is dy/dx + P(x)y = Q(x), where P(x) and Q(x) are continuous functions. The integrating factor μ(x) = e^(∫P(x)dx) is derived from the coefficient of y. Multiplying both sides by μ(x) transforms the left-hand side into d/dx[μ(x)y], converting the equation into an exact differential. This allows direct integration to solve for y. The non-homogeneous term Q(x) is addressed because the integrating factor systematically absorbs the coefficient P(x) into a form where the product rule for differentiation applies, enabling integration of the entire equation. Without this step, separation of variables would fail for non-homogeneous equations due to the coupling of y and Q(x).",
+        answer_reasoning: "This question requires deconstructing the equation's structure, identifying the role of each component (P(x), Q(x), μ(x)), and explaining the mathematical mechanism of the integrating factor. It tests analytical understanding by demanding a breakdown of why the method is necessary for non-homogeneous cases.",
+    },
+    {
+        question: "Evaluate the appropriateness of using the integrating factor method versus the method of undetermined coefficients for solving dy/dx + 2y = 5e^(-x). Justify your evaluation with mathematical reasoning.",
+        answer: "The integrating factor method is the correct and necessary approach for this equation. The integrating factor is μ(x) = e^(∫2 dx) = e^(2x). Multiplying through yields d/dx[ye^(2x)] = 5e^(x), which integrates to ye^(2x) = 5e^(x) + C, so y = 5e^(-x) + Ce^(-2x). The method of undetermined coefficients is designed for higher-order linear differential equations with constant coefficients and specific non-homogeneous terms (e.g., polynomials, exponentials, sines/cosines). It is not applicable here because it is a first-order equation, and undetermined coefficients assumes a solution form based on the non-homogeneous term without addressing the homogeneous structure. Using undetermined coefficients would be incorrect as it fails to handle the coupled term involving y. Thus, the integrating factor method is superior for this first-order case due to its universal applicability to linear equations in standard form.",
+        answer_reasoning: "This question requires comparing two methods, assessing their mathematical validity for the given equation, and justifying the choice. It tests evaluation skills by demanding analysis of method limitations and contextual appropriateness, rather than mere recall.",
+    },
+    {
+        question: "Create a first-order linear differential equation with an integrating factor of e^(4x), solve it, and provide a real-world scenario where this equation models a physical process.",
+        answer: "The differential equation dy/dx + 4y = 8e^(3x) has an integrating factor μ(x) = e^(∫4 dx) = e^(4x). Multiplying through: d/dx[ye^(4x)] = 8e^(7x). Integrating both sides: ye^(4x) = (8/7)e^(7x) + C, so y = (8/7)e^(3x) + Ce^(-4x). Real-world scenario: This models the charging process of a capacitor in an RC circuit with a time-varying voltage source. The term 8e^(3x) represents the applied voltage increasing exponentially over time, while 4y represents the current through the resistor (proportional to the capacitor's voltage y). The solution shows the capacitor's voltage approaching the applied voltage's exponential trend (dominant term (8/7)e^(3x)) after an initial transient (Ce^(-4x)) that decays rapidly.",
+        answer_reasoning: "This question requires synthesizing a new equation with a specified integrating factor, solving it correctly, and contextualizing it in a physical scenario. It demonstrates 'Create' level thinking by demanding originality in problem generation and application, moving beyond rote application to novel scenario construction.",
+    },
+    {
+        question: "Design a real-world scenario involving a physical system where the rate of change of a quantity depends linearly on both the quantity itself and a sinusoidal external influence. Formulate the corresponding linear differential equation, define all variables, and explain how each term in the equation relates to the physical components of your scenario.",
+        answer: "Consider a thermal system where the temperature of a metal rod is influenced by a sinusoidal ambient temperature. Let T(t) represent the rod's temperature at time t (in degrees Celsius), and let the ambient temperature vary as T_ambient(t) = (5/3) sin(t) (in degrees Celsius). According to Newton's law of cooling, the rate of change of the rod's temperature is proportional to the difference between its temperature and the ambient temperature: dT/dt = -k(T - T_ambient(t)). Substituting k = 3 (representing a cooling constant) and T_ambient(t) = (5/3) sin(t) yields dT/dt = -3T + 5 sin(t), which rearranges to dT/dt + 3T = 5 sin(t). Here, the term 3T represents the cooling effect proportional to the temperature difference (e.g., heat dissipation through conduction), and 5 sin(t) models the sinusoidal variation of the ambient temperature (e.g., daily temperature cycles affecting the environment).",
+        answer_reasoning: "This question requires the student to synthesize knowledge of linear differential equations and physical phenomena to create a novel scenario. By generating a context where the DE arises naturally (Newton's law of cooling with sinusoidal ambient temperature), the student demonstrates mastery of the Create level by producing an original application rather than merely solving a given equation. The scenario must incorporate all components of a linear DE (homogeneous and nonhomogeneous terms) and explicitly connect mathematical terms to physical mechanisms.",
+    },
+]

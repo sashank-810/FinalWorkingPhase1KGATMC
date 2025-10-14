@@ -1676,9 +1676,11 @@ from agents.mcq_refiner import mcq_refiner_agent
 from agents.distractor_generator import distractor_agent
 from agents.distractor_critic import distractor_critic_agent
 from agents.distractor_refiner import distractor_refiner_agent
+from agents.dataset_generator_agent import dataset_generator_agent
 
 
-def get_crew(module: str, input_data: str, difficulty: str = None, bloom_q_counts: dict = None):
+
+def get_crew(module: str, input_data: str, difficulty: str = None, bloom_q_counts: dict = None, num_questions: int = 5, source_material: str = None):
     """
     Factory function to create and configure a crewai Crew for a specific task.
     """
@@ -1818,7 +1820,7 @@ For each distractor, provide a 'misleading_rationale' that targets a specific, c
 
 --- QUESTION & ANSWER ---
 Question: {q_obj['question']}
-Correct Answer: {q_obj['answer']}
+Correct Answer: {q_obj['correct_answer']}
 """,
             expected_output='''A JSON list of exactly 3 objects. Each object must have "option" and "misleading_rationale" keys.
 
@@ -1851,7 +1853,43 @@ Correct Answer: {q_obj['answer']}
         )
         return Crew(agents=[distractor_agent, distractor_critic_agent, distractor_refiner_agent], tasks=[task_generate, task_critique, task_refine], process=Process.sequential, share_crew=False), "distractor_generation"
 
+    elif module == "Bulk Dataset Generator":
+        topic_obj = json.loads(input_data)
+        task = Task(
+            description=f"""
+            Your task is to generate a high-quality dataset of conceptual question-answer-reasoning triplets.
+            Based on the provided source material for the topic **"{topic_obj.get('topic')}"**, generate exactly **{num_questions}** unique, **open-ended questions**.
 
+            **CRITICAL INSTRUCTIONS:**
+            1.  **Generate Conceptual Questions:** The questions must test for deep understanding. Focus on types like:
+                - "Explain the concept of..."
+                - "Compare and contrast..."
+                - "Describe the step-by-step process for..."
+                - "What is the significance of..."
+            2.  **ABSOLUTELY NO MULTIPLE-CHOICE:** The questions must be open-ended. **DO NOT** use phrases like "Which of the following..." or provide options.
+            3.  **Provide Full Answers:** The `correct_answer` MUST be a comprehensive, descriptive paragraph, NOT a single letter like 'A', 'B', or 'C'.
+            4.  **Provide Rationale:** The `reasoning` must explain **why the `correct_answer` is factually correct**, citing principles from the source material.
+
+            --- SOURCE MATERIAL ---
+            {source_material}
+            """,
+            expected_output=f"""A single JSON list wrapped in a markdown block (```json ... ```) containing exactly {num_questions} objects.
+
+            **GOOD EXAMPLE (Follow this format):**
+            ```json
+            [
+              {{
+                "topic": "Homogeneous Differential Equations",
+                "question": "Describe the step-by-step process for solving a first-order homogeneous differential equation.",
+                "correct_answer": "The process involves three main steps: 1. Verify the equation is homogeneous by checking if it can be expressed in the form dy/dx = F(y/x). 2. Perform the substitution y = vx, which also means dy/dx = v + x(dv/dx). 3. This substitution transforms the equation into a new differential equation with separable variables (v and x), which can then be solved by integration.",
+                "reasoning": "This answer is correct as it accurately outlines the standard three-step procedure for solving homogeneous DEs, covering verification, substitution, and the resulting transformation into a separable equation."
+              }}
+            ]
+            ```
+            """,
+            agent=dataset_generator_agent
+        )
+        return Crew(agents=[dataset_generator_agent], tasks=[task], process=Process.sequential, share_crew=False), "bulk_dataset_generation"
     # --- SIMPLE MODULES ---
     else:
         markdown_text = input_data
