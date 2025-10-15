@@ -4,14 +4,14 @@ from langchain_nvidia_ai_endpoints import ChatNVIDIA
 
 # --- NVIDIA API Configuration ---
 # IMPORTANT: Paste your NVIDIA API key here. It will be used for all models.
-NVIDIA_API_KEY = "******************************[Enter your nvidia api]"
+NVIDIA_API_KEY = "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"
+os.environ["NVIDIA_API_KEY"] = NVIDIA_API_KEY
 os.environ["NVIDIA_NIM_API_KEY"] = NVIDIA_API_KEY
-
 # --- Main "Teacher" LLM Client (Kimi K2 Instruct) ---
 main_llm = ChatNVIDIA(
     model="moonshotai/kimi-k2-instruct-0905",
     temperature=0.2,
-    max_tokens=4096,
+    max_tokens=16392,
     top_p=0.7,
 )
 

@@ -3111,15 +3111,60 @@ from thefuzz import fuzz
 import asyncio
 from datetime import datetime, timedelta
 from config.settings import student_llm
+import litellm
 
-# ✅ ASYNC SAFE WRAPPER (REPLACES async_kickoff)
-async def kickoff_async(crew):
-    """Run a Crew.kickoff() asynchronously using thread pool."""
+# ===============================================
+# GLOBAL RESILIENCE HELPERS
+# ===============================================
+
+# ✅ ASYNC WRAPPER FOR CREW.KICKOFF WITH JITTER
+async def kickoff_async_jittered(crew, min_delay=0.5, max_delay=1.5):
+    """Runs Crew.kickoff() asynchronously with slight random delay."""
+    await asyncio.sleep(random.uniform(min_delay, max_delay))
     loop = asyncio.get_event_loop()
     return await loop.run_in_executor(None, crew.kickoff)
 
+# ✅ RETRY LOGIC WITH EXPONENTIAL BACKOFF
+def invoke_with_retry(llm, prompt, retries=6):
+    """Invoke LLM with exponential backoff retry on RateLimitError."""
+    for attempt in range(retries):
+        try:
+            return llm.invoke(prompt)
+        except litellm.RateLimitError:
+            wait = min(30, (2 ** attempt) + random.uniform(0, 1))
+            st.warning(f"⚠️ Rate limit hit (attempt {attempt+1}/{retries}). Retrying in {wait:.1f}s...")
+            time.sleep(wait)
+    raise RuntimeError("❌ Rate limit exceeded even after multiple retries.")
+
+# ✅ GENERIC THROTTLED ASYNC RUNNER
+async def run_async_tasks_with_progress(status_box, tasks, task_labels, max_concurrency=2):
+    """Runs asyncio tasks with concurrency control and ETA tracking."""
+    start_time = time.time()
+    results = []
+    semaphore = asyncio.Semaphore(max_concurrency)
+
+    async def run_with_semaphore(task, label):
+        async with semaphore:
+            res = await task
+            return label, res
+
+    for i, coro in enumerate(
+        asyncio.as_completed([run_with_semaphore(t, task_labels[i]) for i, t in enumerate(tasks)])
+    ):
+        label, result = await coro
+        results.append(result)
+        elapsed = time.time() - start_time
+        avg = elapsed / (i + 1)
+        remaining = len(tasks) - (i + 1)
+        eta = timedelta(seconds=int(avg * remaining))
+        status_box.write(f"✅ Completed '{label}' (ETA: {eta})")
+    return results
+
+# ===============================================
+# SESSION STATE & UTILITIES
+# ===============================================
+
 def init_session_state():
-    """Initializes the Streamlit session state with default values."""
     defaults = {
         "pipeline_running": False,
         "pipeline_complete": False,
@@ -3135,7 +3180,6 @@ def init_session_state():
             st.session_state[key] = value
 
 def run_crew_and_parse_json(crew, expected_format='list'):
-    """Runs a crew and robustly parses its JSON markdown output."""
     result = crew.kickoff()
     if not (result and hasattr(result, 'raw')):
         return None
@@ -3148,25 +3192,14 @@ def run_crew_and_parse_json(crew, expected_format='list'):
     except ValueError:
         return None
 
-async def run_async_tasks_with_progress(status_box, tasks, task_labels):
-    """Runs asyncio tasks and updates a status box with progress and ETA."""
-    start_time = time.time()
-    results = []
-    for i, task in enumerate(asyncio.as_completed(tasks)):
-        results.append(await task)
-        elapsed_time = time.time() - start_time
-        avg_time_per_task = elapsed_time / (i + 1)
-        remaining_tasks = len(tasks) - (i + 1)
-        eta = timedelta(seconds=int(avg_time_per_task * remaining_tasks))
-        status_box.write(f"Completed '{task_labels[i]}'... (ETA: {eta})")
-    return results
+# ===============================================
+# STREAMLIT UI
+# ===============================================
 
-# --- UI Rendering ---
 st.set_page_config(page_title="Spirit", layout="wide")
 st.title("Spirit")
 init_session_state()
 
-# --- Sidebar Controls ---
 with st.sidebar:
     st.header("Controls")
     uploaded_md = st.file_uploader("Upload Source Document", type=["md", "txt"])
@@ -3183,12 +3216,15 @@ with st.sidebar:
         else:
             st.warning("Please upload a source document first.")
 
-# --- Main Page Content & Pipeline Execution ---
+# ===============================================
+# PIPELINE EXECUTION
+# ===============================================
+
 if st.session_state.pipeline_running:
     try:
         start_time = time.time()
 
-        # --- STEP 1: STRATEGIC PLAN ---
+        # ---------- STEP 1: STRATEGIC PLAN ----------
         with st.status("Step 1: Generating Strategic Plan...", expanded=True) as status:
             crew, _ = get_crew("Strategic Plan", st.session_state.source_material)
             parsed_data = run_crew_and_parse_json(crew, expected_format='list')
@@ -3198,7 +3234,7 @@ if st.session_state.pipeline_running:
             st.session_state.strategic_plan_parsed = parsed_data
             status.update(label=f"Strategic Plan Complete! ({len(parsed_data)} topics found)", state="complete")
 
-        # --- STEP 2: KNOWLEDGE GRAPH ---
+        # ---------- STEP 2: KNOWLEDGE GRAPH ----------
         with st.status("Step 2: Generating Knowledge Graph...", expanded=True) as status:
             crew, _ = get_crew("Knowledge Graph", st.session_state.source_material)
             result = crew.kickoff()
@@ -3211,35 +3247,46 @@ if st.session_state.pipeline_running:
                 f.write(st.session_state.knowledge_graph_dot)
             status.update(label="Knowledge Graph Complete!", state="complete")
 
-        # --- STEP 3: MCQ GENERATION (ASYNC) ---
-        async def run_async_steps():
-            with st.status("Step 3: Generating MCQs (in parallel)...", expanded=True) as status:
+        # ---------- STEP 3: MCQ GENERATION ----------
+        async def run_mcq_step():
+            with st.status("Step 3: Generating MCQs (adaptive throttling)...", expanded=True) as status:
                 mcq_crews = [
-                    get_crew("MCQ Generation", json.dumps(topic), difficulty=selected_difficulty, bloom_q_counts={"Remember": 1})[0]
+                    get_crew("MCQ Generation", json.dumps(topic),
+                             difficulty=selected_difficulty,
+                             bloom_q_counts={"Remember": 1, "Understand": 1, "Apply": 1, "Analyze": 1,"Evaluate": 1, "Create": 1})[0]
                     for topic in st.session_state.strategic_plan_parsed
                 ]
                 mcq_labels = [f"MCQs for '{t.get('topic', 'N/A')}'" for t in st.session_state.strategic_plan_parsed]
-                mcq_results = await run_async_tasks_with_progress(status, [kickoff_async(c) for c in mcq_crews], mcq_labels)
+                # ⚙️ Throttled & jittered
+                mcq_results = await run_async_tasks_with_progress(status, [kickoff_async_jittered(c) for c in mcq_crews], mcq_labels, max_concurrency=2)
                 all_mcqs = []
                 for res in mcq_results:
                     if res and hasattr(res, 'raw'):
-                        parsed = re.search(r"```json\s*(\{[\s\S]*\})\s*```", res.raw, re.DOTALL)
-                        if parsed:
-                            data = json.loads(parsed.group(1).strip())
+                        match = re.search(r"```json\s*(\{[\s\S]*\})\s*```", res.raw, re.DOTALL)
+                        if match:
+                            data = json.loads(match.group(1).strip())
                             all_mcqs.extend(data.get('mcqs', []))
-                with open("mcqs.json", 'w') as f:
+                with open("mcqs.json", "w") as f:
                     json.dump(all_mcqs, f, indent=4)
                 status.update(label=f"MCQ Generation Complete! ({len(all_mcqs)} questions)", state="complete")
                 return all_mcqs
 
-        all_mcqs = asyncio.run(run_async_steps())
+        all_mcqs = asyncio.run(run_mcq_step())
 
-        # --- STEP 4: DISTRACTOR GENERATION (ASYNC) ---
+        # ---------- STEP 4: DISTRACTOR GENERATION ----------
         async def run_distractor_step():
-            with st.status("Step 4: Generating Distractors (in parallel)...", expanded=True) as status:
+            with st.status("Step 4: Generating Distractors (ultra-safe mode)...", expanded=True) as status:
                 distractor_crews = [get_crew("Distractor Generation", json.dumps(q_obj))[0] for q_obj in all_mcqs]
                 distractor_labels = [f"Distractors for Q{i+1}" for i in range(len(all_mcqs))]
-                distractor_results = await run_async_tasks_with_progress(status, [kickoff_async(c) for c in distractor_crews], distractor_labels)
+
+                # Lowest concurrency for NIM safety
+                distractor_results = await run_async_tasks_with_progress(
+                    status,
+                    [kickoff_async_jittered(c) for c in distractor_crews],
+                    distractor_labels,
+                    max_concurrency=1
+                )
+
                 final_quiz_data = []
                 for i, result in enumerate(distractor_results):
                     q_obj = all_mcqs[i]
@@ -3248,28 +3295,28 @@ if st.session_state.pipeline_running:
                         match = re.search(r"```json\s*(\[[\s\S]*\])\s*```", result.raw, re.DOTALL)
                         if match:
                             distractors = json.loads(match.group(1).strip())
-                    options = [d.get('option', '') for d in distractors] + [q_obj['correct_answer']]
+                    options = [d.get("option", "") for d in distractors] + [q_obj["correct_answer"]]
                     random.shuffle(options)
                     final_quiz_data.append({
-                        "question": q_obj['question'],
+                        "question": q_obj["question"],
                         "options": options,
-                        "correct_answer": q_obj['correct_answer'],
-                        "rationale": q_obj['rationale'],
+                        "correct_answer": q_obj["correct_answer"],
+                        "rationale": q_obj["rationale"],
                         "topic": q_obj.get("topic"),
                     })
                 st.session_state.final_quiz_data = final_quiz_data
-                status.update(label=f"Distractor Generation Complete!", state="complete")
+                status.update(label="Distractor Generation Complete!", state="complete")
 
         asyncio.run(run_distractor_step())
 
-        # --- STEP 5: AI QUIZ TAKER ---
-        with st.status("Step 5: Running AI Quiz Taker...", expanded=True) as status:
+        # ---------- STEP 5: AI QUIZ TAKER ----------
+        with st.status("Step 5: Running AI Quiz Taker (retry protected)...", expanded=True) as status:
             ai_answers = []
             for i, q_obj in enumerate(st.session_state.final_quiz_data):
-                st.write(f"AI is answering question {i+1}/{len(st.session_state.final_quiz_data)}...")
-                options_str = "\n".join([f"- {opt}" for opt in q_obj.get('options', [])])
+                st.write(f"🤖 AI answering question {i+1}/{len(st.session_state.final_quiz_data)}...")
+                options_str = "\n".join([f"- {opt}" for opt in q_obj.get("options", [])])
                 prompt = f"Question: {q_obj['question']}\nOptions:\n{options_str}\nRespond with only the text of the correct option."
-                response = student_llm.invoke(prompt)
+                response = invoke_with_retry(student_llm, prompt)
                 ai_raw_output = response.content.strip()
                 ai_chosen_option = max(
                     q_obj.get("options", []),
@@ -3279,39 +3326,44 @@ if st.session_state.pipeline_running:
             st.session_state.ai_answers = ai_answers
             status.update(label="AI Quiz Taker Complete!", state="complete")
 
-        # --- STEP 6: BULK DATASET GENERATOR (ASYNC) ---
+        # ---------- STEP 6: BULK DATASET GENERATION ----------
         async def run_bulk_dataset_step():
-            with st.status(f"Step 6: Generating {num_total_questions} triplets (in parallel)...", expanded=True) as status:
-                num_questions_per_topic = num_total_questions // len(st.session_state.strategic_plan_parsed)
+            with st.status(f"Step 6: Generating {num_total_questions} triplets (adaptive throttling)...", expanded=True) as status:
+                num_per_topic = num_total_questions // len(st.session_state.strategic_plan_parsed)
                 bulk_crews = [
-                    get_crew("Bulk Dataset Generator", json.dumps(topic), num_questions=num_questions_per_topic,
+                    get_crew("Bulk Dataset Generator", json.dumps(topic),
+                             num_questions=num_per_topic,
                              source_material=st.session_state.source_material)[0]
                     for topic in st.session_state.strategic_plan_parsed
                 ]
                 bulk_labels = [f"Bulk questions for '{t.get('topic', 'N/A')}'" for t in st.session_state.strategic_plan_parsed]
-                bulk_results = await run_async_tasks_with_progress(status, [kickoff_async(c) for c in bulk_crews], bulk_labels)
+                bulk_results = await run_async_tasks_with_progress(status, [kickoff_async_jittered(c) for c in bulk_crews], bulk_labels, max_concurrency=2)
                 all_triplets = []
                 for result in bulk_results:
-                    if result and hasattr(result, 'raw'):
+                    if result and hasattr(result, "raw"):
                         match = re.search(r"```json\s*(\[[\s\S]*\])\s*```", result.raw, re.DOTALL)
                         if match:
                             all_triplets.extend(json.loads(match.group(1).strip()))
                 st.session_state.bulk_dataset = all_triplets
-                with open("bulk_dataset.json", 'w') as f:
+                with open("bulk_dataset.json", "w") as f:
                     json.dump(all_triplets, f, indent=4)
                 status.update(label=f"Bulk Dataset Generation Complete! ({len(all_triplets)} triplets)", state="complete")
 
         asyncio.run(run_bulk_dataset_step())
 
+        # ---------- FINALIZE ----------
         st.session_state.pipeline_running = False
         st.session_state.pipeline_complete = True
         st.rerun()
 
     except Exception as e:
-        st.error(f"The pipeline failed with an error: {e}")
+        st.error(f"❌ The pipeline failed with an error: {e}")
         st.session_state.pipeline_running = False
 
-# --- MAIN PAGE DISPLAY ---
+# ===============================================
+# OUTPUT DISPLAY
+# ===============================================
+
 if st.session_state.pipeline_complete:
     st.header("✅ Pipeline Finished")
     st.success("All processes completed successfully. You can now review the outputs.")
@@ -3323,7 +3375,7 @@ if st.session_state.pipeline_complete:
         st.subheader("AI Quiz Taker Results")
         score = sum(
             1 for i, mcq in enumerate(st.session_state.final_quiz_data)
-            if st.session_state.ai_answers[i] == mcq.get('correct_answer')
+            if st.session_state.ai_answers[i] == mcq.get("correct_answer")
         )
         st.metric("AI Score", f"{score} / {len(st.session_state.final_quiz_data)}")
 
