@@ -1663,9 +1663,6 @@ from crewai import Task, Crew, Agent, Process
 import json5 as json
 
 # Import the static agent INSTANCES.
-from agents.summarizer import summarizer_agent
-from agents.notes import notes_agent
-from agents.explainer import explainer_agent
 from agents.planner import planner_agent
 from agents.critic import critic_agent
 from agents.refiner import refiner_agent
@@ -1678,30 +1675,24 @@ from agents.distractor_critic import distractor_critic_agent
 from agents.distractor_refiner import distractor_refiner_agent
 from agents.dataset_generator_agent import dataset_generator_agent
 
-
-
 def get_crew(module: str, input_data: str, difficulty: str = None, bloom_q_counts: dict = None, num_questions: int = 5, source_material: str = None):
     """
     Factory function to create and configure a crewai Crew for a specific task.
     """
     # --- STRATEGIC PLAN MODULE ---
     if module == "Strategic Plan":
-        markdown_text = input_data
         task_plan = Task(
-            description=f"""
-As an expert Pedagogical Content Analyst, your task is to create a comprehensive pedagogical plan from the document below.
-Your plan must be a JSON list of topics. For each topic, you must:
+            description=f"""As an expert Pedagogical Content Analyst, analyze the document below to create a comprehensive pedagogical plan.
+For each distinct topic, you must:
 1.  Identify the topic name precisely.
-2.  Critically evaluate the topic against the five RACAR metrics, providing a score from 1-5 based on the strict rubric. Be realistic; not every topic will be a 5.
+2.  Critically evaluate the topic against the five RACAR metrics, providing a realistic score from 1-5.
 3.  Devise a creative and effective 'teaching_strategy'.
-4.  Write a clear 'rationale' explaining why your proposed strategy is pedagogically sound for that topic.
+4.  Write a clear 'rationale' explaining why your strategy is sound.
 
 --- DOCUMENT ---
-{markdown_text}
---- END DOCUMENT ---
-""",
-            expected_output="""
-A single JSON list of objects. Each object MUST contain all 8 specified keys.
+{input_data}
+--- END DOCUMENT ---""",
+            expected_output="""A single JSON list of objects. Each object MUST contain all 8 specified keys with double quotes.
 
 **STRICT RACAR SCORING RUBRIC (1-5 Scale):**
 - **Relevance**: 5: Foundational, 4: Core, 3: Supporting, 2: Peripheral, 1: Trivial.
@@ -1710,113 +1701,84 @@ A single JSON list of objects. Each object MUST contain all 8 specified keys.
 - **Adaptability**: 5: Versatile, 4: Flexible, 3: Adaptable, 2: Inflexible, 1: Rigid.
 - **Rigour**: 5: Expert, 4: Advanced, 3: Intermediate, 2: Basic, 1: Simplistic.
 
-**FEW-SHOT EXAMPLES:**
+**FEW-SHOT EXAMPLE:**
+```json
 [
   {
     "topic": "Introduction to Differential Equations",
-    "relevance": 5,
-    "accuracy": 5,
-    "completeness": 3,
-    "adaptability": 5,
-    "rigour": 2,
+    "relevance": 5, "accuracy": 5, "completeness": 3, "adaptability": 5, "rigour": 2,
     "teaching_strategy": "Start with a relatable real-world analogy, like modeling the cooling of a cup of coffee, to introduce the concept of rates of change.",
     "rationale": "An introductory topic is foundational (Relevance 5) but often not exhaustive (Completeness 3). The goal is to build intuition, not mastery, so the rigour is basic."
-  },
-  {
-    "topic": "Solving Homogeneous Differential Equations",
-    "relevance": 4,
-    "accuracy": 5,
-    "completeness": 4,
-    "adaptability": 3,
-    "rigour": 4,
-    "teaching_strategy": "Use a guided-discovery worksheet where students first verify a function's homogeneity, then apply the y=vx substitution to a pre-solved problem, and finally solve a new problem themselves.",
-    "rationale": "This is a core, advanced topic (Rigour 4) that requires a specific procedural skill, making it less adaptable to other contexts (Adaptability 3)."
   }
 ]
-""",
+```""",
             agent=planner_agent
         )
         task_critique = Task(
-            description="""As a skeptical Instructional Plan Reviewer, your job is to find flaws in the proposed plan.
-Be extremely critical of the RACAR scores. Is a score of 5 truly justified? An "Introduction" topic should NOT have a completeness of 5. Challenge every high score and demand justification.
-Assess if the teaching strategies are creative and genuinely effective or just generic. Provide direct, constructive feedback.""", 
-            expected_output="A bulleted list of sharp, actionable critiques. For each point, state the topic and the specific issue (e.g., 'Topic X: Completeness score is inflated from 5 to 3 because...').", 
-            agent=critic_agent, 
-            context=[task_plan]
+            description="""As a skeptical Instructional Plan Reviewer, your job is to find flaws in the proposed plan. Be extremely critical of the RACAR scores. An "Introduction" topic should NOT have a completeness of 5. Challenge every high score and demand justification.""", 
+            expected_output="A bulleted list of sharp, actionable critiques (e.g., 'Topic X: Completeness score is inflated from 5 to 3 because...').", 
+            agent=critic_agent, context=[task_plan]
         )
-        task_refine_plan = Task(
-            description="As the Lead Curriculum Strategist, synthesize the draft plan and the skeptical critiques. You MUST adjust scores and strategies based on valid points from the critique. Produce a final, perfected JSON plan, including a 'refined_rationale' that explains the improvements.",
-            expected_output="A single, complete, and valid JSON list of objects wrapped in a markdown block (```json ... ```). Your entire response MUST be ONLY this markdown block.",
-            agent=refiner_agent,
-            context=[task_plan, task_critique]
+        task_refine = Task(
+            description="As the Lead Curriculum Strategist, synthesize the draft plan and the critiques. You MUST adjust scores and strategies based on valid points. Produce a final, perfected JSON plan, including a 'refined_rationale' for improvements.",
+            expected_output="A single, complete, and valid JSON list of objects wrapped in a markdown block (```json ... ```).",
+            agent=refiner_agent, context=[task_plan, task_critique]
         )
-        return Crew(agents=[planner_agent, critic_agent, refiner_agent], tasks=[task_plan, task_critique, task_refine_plan], process=Process.sequential, share_crew=False), None
+        return Crew(agents=[planner_agent, critic_agent, refiner_agent], tasks=[task_plan, task_critique, task_refine], process=Process.sequential, share_crew=False), None
+
+    # --- KNOWLEDGE GRAPH MODULE ---
+    elif module == "Knowledge Graph":
+        task = Task(
+            description=f"As a Curriculum Architect, create a learning path flowchart from the document below. The output MUST be only valid Graphviz DOT language code.\n\n---\n{input_data}\n---", 
+            expected_output="A string containing ONLY valid Graphviz DOT language code, starting with `digraph` and ending with `}`. DO NOT include explanations or markdown fences.",
+            agent=knowledge_graph_agent
+        )
+        return Crew(tasks=[task], agents=[knowledge_graph_agent], share_crew=False), None
 
     # --- MCQ GENERATION MODULE ---
     elif module == "MCQ Generation":
         topic_obj = json.loads(input_data)
-        difficulty_instruction = f"The overall difficulty of the questions should be **{difficulty.upper()}**."
-        bloom_counts_instruction = "\nGenerate exactly the following number of questions for each Bloom's Taxonomy level:\n" + "".join([f"- **{level}**: {count} question(s)\n" for level, count in bloom_q_counts.items() if count > 0]) + "If a count for a level is 0, do not generate a question for that level."
-        
+        difficulty_instruction = f"The overall difficulty should be **{difficulty.upper()}**."
+        bloom_counts = bloom_q_counts or {}
+        bloom_instruction = "\nGenerate exactly these questions per Bloom's level:\n" + "".join([f"- **{level}**: {count}\n" for level, count in bloom_counts.items() if count > 0])
         task_generate = Task(
-            description=f"""
-As an expert in educational assessment, generate a set of multiple-choice questions for the topic provided below.
+            description=f"""As an expert in educational assessment, generate MCQs for the topic below.
 {difficulty_instruction}
-{bloom_counts_instruction}
+{bloom_instruction}
 
 **CRITICAL INSTRUCTIONS:**
-1.  You MUST include the `domain` and `bloom_level` for each question.
-2.  The `options` list must contain exactly four strings. **DO NOT** include labels like 'a)', 'b)', etc.
-3.  The `correct_answer` MUST be the full text of the option.
-4.  All mathematical notation MUST use LaTeX formatting (e.g., `$z = a + ib$`).
+1.  Include `domain` and `bloom_level`.
+2.  `options` must be a list of 4 strings, with no labels (e.g., no "A)").
+3.  `correct_answer` MUST be the full text of one of the options.
+4.  All math MUST use LaTeX.
+--- TOPIC DATA ---\n{input_data}""",
+            expected_output='''A JSON object with a key "mcqs" containing a list of question objects.
 
---- TOPIC DATA ---
-{input_data}
---- END TOPIC DATA ---
-""",
-            expected_output='''A single JSON object with a key "mcqs" containing a list of question objects.
-
-**FEW-SHOT EXAMPLE OF A QUESTION OBJECT:**
+**FEW-SHOT EXAMPLE:**
+```json
 {
-  "domain": "Complex Numbers",
-  "bloom_level": "Remember",
-  "topic": "Introduction to Complex Numbers",
-  "question": "What is the value of $i^2$?",
-  "options": [
-    "1",
-    "-1",
-    "i",
-    "-i"
-  ],
-  "correct_answer": "-1",
-  "rationale": "The imaginary unit 'i' is defined by the property that its square is -1."
+  "mcqs": [
+    {
+      "domain": "Complex Numbers", "bloom_level": "Remember", "topic": "Complex Numbers",
+      "question": "What is the value of $i^2$?",
+      "options": ["1", "-1", "i", "-i"],
+      "correct_answer": "-1",
+      "rationale": "The imaginary unit 'i' is defined by the property that its square is -1."
+    }
+  ]
 }
-''',
+```''',
             agent=mcq_generator_agent,
         )
-        task_critique = Task(
-            description="As an MCQ Quality Reviewer, rigorously review the generated questions. Check for clarity, accuracy, pedagogical soundness, and correct alignment with the specified Bloom's level. Provide specific, actionable feedback.",
-            expected_output="A bulleted list of actionable critiques. For each point, specify which question it refers to.",
-            agent=mcq_critic_agent,
-            context=[task_generate]
-        )
-        task_refine = Task(
-            description="As an MCQ Content Polisher, refine the questions based on the critique. Your final output MUST be a single JSON object wrapped in a markdown block.",
-            expected_output='''A final JSON object with two keys: "status": "refined", and "mcqs": [...].
-The entire response MUST be a single JSON markdown block: ```json ... ```
-''',
-            agent=mcq_refiner_agent,
-            context=[task_generate, task_critique]
-        )
+        task_critique = Task(description="As an MCQ Quality Reviewer, rigorously review the generated questions for clarity, accuracy, and alignment with Bloom's level.", expected_output="A bulleted list of actionable critiques.", agent=mcq_critic_agent, context=[task_generate])
+        task_refine = Task(description="As an MCQ Content Polisher, refine the questions based on the critique. Your final output MUST be a single JSON object wrapped in a markdown block.", expected_output='A final JSON object with "status": "refined" and "mcqs": [...], wrapped in a markdown block.', agent=mcq_refiner_agent, context=[task_generate, task_critique])
         return Crew(agents=[mcq_generator_agent, mcq_critic_agent, mcq_refiner_agent], tasks=[task_generate, task_critique, task_refine], process=Process.sequential, share_crew=False), "mcq_generation"
     
     # --- DISTRACTOR GENERATION MODULE ---
     elif module == "Distractor Generation":
         q_obj = json.loads(input_data)
         task_generate = Task(
-            description=f"""
-As a Cunning Educational Saboteur, create 3 compellingly incorrect answer options (distractors) for the question below.
-For each distractor, provide a 'misleading_rationale' that targets a specific, common student misconception. All math must use LaTeX.
+            description=f"""As a Cunning Educational Saboteur, create 3 compellingly incorrect answer options (distractors) for the question below. For each distractor, provide a 'misleading_rationale'. All math must use LaTeX.
 
 --- QUESTION & ANSWER ---
 Question: {q_obj['question']}
@@ -1824,97 +1786,61 @@ Correct Answer: {q_obj['correct_answer']}
 """,
             expected_output='''A JSON list of exactly 3 objects. Each object must have "option" and "misleading_rationale" keys.
 
-**FEW-SHOT EXAMPLES:**
+**FEW-SHOT EXAMPLE:**
+```json
 [
   {
     "option": "The value is $x^2$",
     "misleading_rationale": "This is tempting because it forgets the final step of taking the square root, a common procedural error."
-  },
-  {
-    "option": "An equation with only one variable",
-    "misleading_rationale": "This confuses the concept of an 'unknown function' with a simple 'variable', targeting a foundational misunderstanding."
   }
 ]
-''',
+```''',
             agent=distractor_agent
         )
-        task_critique = Task(
-            description="As a Quality Assurance Expert, rigorously evaluate the 3 generated distractors. Are they genuinely plausible? Is the misleading rationale targeting a valid misconception? Provide a concise, bulleted list of feedback.",
-            expected_output="A concise, bulleted list of actionable feedback.",
-            agent=distractor_critic_agent,
-            context=[task_generate]
-        )
-        task_refine = Task(
-            description="As an Assessment Editor, refine the distractors based on the critique. Preserve the 'misleading_rationale'. Your final output must be a single JSON list of objects wrapped in a markdown block.",
-            expected_output='''A single JSON list of exactly 3 objects wrapped in a markdown block (```json ... ```). Each object must have "option" and "misleading_rationale" keys.
-''',
-            agent=distractor_refiner_agent,
-            context=[task_generate, task_critique]
-        )
+        task_critique = Task(description="As a Quality Assurance Expert, rigorously evaluate the 3 generated distractors. Are they genuinely plausible?", expected_output="A concise, bulleted list of actionable feedback.", agent=distractor_critic_agent, context=[task_generate])
+        task_refine = Task(description="As an Assessment Editor, refine the distractors based on the critique. Your final output MUST be a single JSON list of objects wrapped in a markdown block.", expected_output='A single JSON list of exactly 3 objects wrapped in a markdown block.', agent=distractor_refiner_agent, context=[task_generate, task_critique])
         return Crew(agents=[distractor_agent, distractor_critic_agent, distractor_refiner_agent], tasks=[task_generate, task_critique, task_refine], process=Process.sequential, share_crew=False), "distractor_generation"
 
+    # --- BULK DATASET GENERATOR MODULE ---
     elif module == "Bulk Dataset Generator":
         topic_obj = json.loads(input_data)
         task = Task(
             description=f"""
-            Your task is to generate a high-quality dataset of conceptual question-answer-reasoning triplets.
-            Based on the provided source material for the topic **"{topic_obj.get('topic')}"**, generate exactly **{num_questions}** unique, **open-ended questions**.
+As an Educational Content Synthesizer, generate a dataset of **{num_questions}** questions for the topic: **"{topic_obj.get('topic')}"**.
 
-            **CRITICAL INSTRUCTIONS:**
-            1.  **Generate Conceptual Questions:** The questions must test for deep understanding. Focus on types like:
-                - "Explain the concept of..."
-                - "Compare and contrast..."
-                - "Describe the step-by-step process for..."
-                - "What is the significance of..."
-            2.  **ABSOLUTELY NO MULTIPLE-CHOICE:** The questions must be open-ended. **DO NOT** use phrases like "Which of the following..." or provide options.
-            3.  **Provide Full Answers:** The `correct_answer` MUST be a comprehensive, descriptive paragraph, NOT a single letter like 'A', 'B', or 'C'.
-            4.  **Provide Rationale:** The `reasoning` must explain **why the `correct_answer` is factually correct**, citing principles from the source material.
+**CRITICAL INSTRUCTIONS:**
+1.  Generate a mix of questions with a **4:1 ratio**: 4 numerical/computational questions for every 1 subjective/conceptual question.
+2.  For each question, provide a `chain_of_thought_reasoning` showing the step-by-step derivation to reach the answer.
+3.  Provide a `final_answer` that is only the clean, parsed answer, formatted in LaTeX.
+4.  **DO NOT** generate multiple-choice questions (e.g., "Which of the following...").
 
-            --- SOURCE MATERIAL ---
-            {source_material}
-            """,
+--- SOURCE MATERIAL ---
+{source_material}
+""",
             expected_output=f"""A single JSON list wrapped in a markdown block (```json ... ```) containing exactly {num_questions} objects.
 
-            **GOOD EXAMPLE (Follow this format):**
-            ```json
-            [
-              {{
-                "topic": "Homogeneous Differential Equations",
-                "question": "Describe the step-by-step process for solving a first-order homogeneous differential equation.",
-                "correct_answer": "The process involves three main steps: 1. Verify the equation is homogeneous by checking if it can be expressed in the form dy/dx = F(y/x). 2. Perform the substitution y = vx, which also means dy/dx = v + x(dv/dx). 3. This substitution transforms the equation into a new differential equation with separable variables (v and x), which can then be solved by integration.",
-                "reasoning": "This answer is correct as it accurately outlines the standard three-step procedure for solving homogeneous DEs, covering verification, substitution, and the resulting transformation into a separable equation."
-              }}
-            ]
-            ```
-            """,
+**GOOD EXAMPLE (Numerical):**
+```json
+[
+  {{
+    "topic": "Linear Differential Equations",
+    "question": "Find the general solution of the differential equation $x \\\\frac{{dy}}{{dx}} + 2y = x^2$.",
+    "chain_of_thought_reasoning": "1. Standard Form: Divide by x to get $\\\\frac{{dy}}{{dx}} + \\\\frac{{2}}{{x}}y = x$. This is a linear DE where P(x) = 2/x and Q(x) = x. 2. Integrating Factor (I.F.): Calculate I.F. = $e^{{\\\\int P(x) dx}} = e^{{\\\\int \\\\frac{{2}}{{x}} dx}} = e^{{2\\\\ln|x|}} = e^{{\\\\ln|x^2|}} = x^2$. 3. General Solution: The solution is $y \cdot (I.F.) = \\\\int Q(x) \cdot (I.F.) dx + C$. Substituting gives $y \cdot x^2 = \\\\int x \cdot x^2 dx + C = \\\\int x^3 dx + C$. 4. Integration: $y \cdot x^2 = \\\\frac{{x^4}}{{4}} + C$. 5. Final Answer: Isolate y.",
+    "final_answer": "$y = \\\\frac{{x^2}}{{4}} + Cx^{{-2}}$"
+  }}
+]
+**BAD EXAMPLE (Multiple-Choice):**
+[
+  {{
+    "question": "Which of the following is the integrating factor?",
+    "chain_of_thought_reasoning": "...",
+    "final_answer": "A"
+  }}
+]
+```""",
             agent=dataset_generator_agent
         )
         return Crew(agents=[dataset_generator_agent], tasks=[task], process=Process.sequential, share_crew=False), "bulk_dataset_generation"
-    # --- SIMPLE MODULES ---
+    
     else:
-        markdown_text = input_data
-        agents = {"Summarization": summarizer_agent, "Notes": notes_agent, "Explanation": explainer_agent, "Knowledge Graph": knowledge_graph_agent}
-        task_definitions = {
-            "Summarization": {
-                "description": f"As an Expert Technical Writer, create a professional summary of the document below. Start with a single-sentence overview, followed by a bulleted list of the 3-5 most important key points.\n\n---\n{markdown_text}\n---", 
-                "expected_output": "A well-structured summary with an overview sentence and a bulleted list of key points. DO NOT include minor details."
-            },
-            "Notes": {
-                "description": f"As a Master Student, create detailed, structured revision notes from the document below. Use markdown for headings, subheadings, and nested bullet points to create a clear information hierarchy.\n\n---\n{markdown_text}\n---", 
-                "expected_output": "Well-organized, hierarchical notes in markdown format. DO NOT write long paragraphs."
-            },
-            "Explanation": {
-                "description": f"As a skilled Science Communicator, take the complex topics in the document below and explain them in simple terms suitable for a complete beginner. Use analogies and define any essential jargon.\n\n---\n{markdown_text}\n---", 
-                "expected_output": "A simplified explanation of the core concepts. DO NOT assume any prior knowledge."
-            },
-            "Knowledge Graph": {
-                "description": f"As a Curriculum Architect, create a learning path flowchart from the document below. The output MUST be only valid Graphviz DOT language code. Use short, clear labels for nodes.\n\n---\n{markdown_text}\n---", 
-                "expected_output": "A string containing ONLY valid Graphviz DOT language code, starting with `digraph` and ending with `}`. DO NOT include any explanation, preamble, or markdown fences."
-            }
-        }
-        agent = agents.get(module)
-        task_details = task_definitions.get(module)
-        if not agent or not task_details:
-             raise ValueError(f"Invalid module: {module}")
-        task = Task(description=task_details['description'], expected_output=task_details['expected_output'], agent=agent)
-        return Crew(tasks=[task], agents=[agent], share_crew=False), None
+        raise ValueError(f"Invalid module for pipeline: {module}")
