@@ -3112,9 +3112,24 @@ import asyncio
 from datetime import datetime, timedelta
 from config.settings import student_llm
 
+# ✅ ASYNC SAFE WRAPPER (REPLACES async_kickoff)
+async def kickoff_async(crew):
+    """Run a Crew.kickoff() asynchronously using thread pool."""
+    loop = asyncio.get_event_loop()
+    return await loop.run_in_executor(None, crew.kickoff)
+
 def init_session_state():
     """Initializes the Streamlit session state with default values."""
-    defaults = { "pipeline_running": False, "pipeline_complete": False, "strategic_plan_parsed": [], "knowledge_graph_dot": None, "final_quiz_data": [], "ai_answers": [], "bulk_dataset": [], "source_material": "" }
+    defaults = {
+        "pipeline_running": False,
+        "pipeline_complete": False,
+        "strategic_plan_parsed": [],
+        "knowledge_graph_dot": None,
+        "final_quiz_data": [],
+        "ai_answers": [],
+        "bulk_dataset": [],
+        "source_material": "",
+    }
     for key, value in defaults.items():
         if key not in st.session_state:
             st.session_state[key] = value
@@ -3122,13 +3137,16 @@ def init_session_state():
 def run_crew_and_parse_json(crew, expected_format='list'):
     """Runs a crew and robustly parses its JSON markdown output."""
     result = crew.kickoff()
-    if not (result and hasattr(result, 'raw')): return None
+    if not (result and hasattr(result, 'raw')):
+        return None
     regex = r"```json\s*(\[[\s\S]*\])\s*```" if expected_format == 'list' else r"```json\s*(\{[\s\S]*\})\s*```"
     match = re.search(regex, result.raw, re.DOTALL)
-    if not match: return None
+    if not match:
+        return None
     try:
         return json.loads(match.group(1).strip())
-    except ValueError: return None
+    except ValueError:
+        return None
 
 async def run_async_tasks_with_progress(status_box, tasks, task_labels):
     """Runs asyncio tasks and updates a status box with progress and ETA."""
@@ -3169,55 +3187,79 @@ with st.sidebar:
 if st.session_state.pipeline_running:
     try:
         start_time = time.time()
-        
+
+        # --- STEP 1: STRATEGIC PLAN ---
         with st.status("Step 1: Generating Strategic Plan...", expanded=True) as status:
             crew, _ = get_crew("Strategic Plan", st.session_state.source_material)
             parsed_data = run_crew_and_parse_json(crew, expected_format='list')
-            if not parsed_data: status.update(label="Strategic Plan Failed!", state="error"); st.stop()
+            if not parsed_data:
+                status.update(label="Strategic Plan Failed!", state="error")
+                st.stop()
             st.session_state.strategic_plan_parsed = parsed_data
             status.update(label=f"Strategic Plan Complete! ({len(parsed_data)} topics found)", state="complete")
 
+        # --- STEP 2: KNOWLEDGE GRAPH ---
         with st.status("Step 2: Generating Knowledge Graph...", expanded=True) as status:
             crew, _ = get_crew("Knowledge Graph", st.session_state.source_material)
             result = crew.kickoff()
             match = re.search(r"digraph\s+.*\{[\s\S]*\}", str(result.raw), re.DOTALL)
-            if not match: status.update(label="Knowledge Graph Failed!", state="error"); st.stop()
+            if not match:
+                status.update(label="Knowledge Graph Failed!", state="error")
+                st.stop()
             st.session_state.knowledge_graph_dot = match.group(0)
-            with open("knowledge_graph.dot", "w") as f: f.write(st.session_state.knowledge_graph_dot)
+            with open("knowledge_graph.dot", "w") as f:
+                f.write(st.session_state.knowledge_graph_dot)
             status.update(label="Knowledge Graph Complete!", state="complete")
 
+        # --- STEP 3: MCQ GENERATION (ASYNC) ---
         async def run_async_steps():
-            # --- STEP 3: MCQ GENERATION (ASYNCHRONOUS) ---
             with st.status("Step 3: Generating MCQs (in parallel)...", expanded=True) as status:
-                mcq_crews = [get_crew("MCQ Generation", json.dumps(topic), difficulty=selected_difficulty, bloom_q_counts={"Remember":1})[0] for topic in st.session_state.strategic_plan_parsed]
+                mcq_crews = [
+                    get_crew("MCQ Generation", json.dumps(topic), difficulty=selected_difficulty, bloom_q_counts={"Remember": 1})[0]
+                    for topic in st.session_state.strategic_plan_parsed
+                ]
                 mcq_labels = [f"MCQs for '{t.get('topic', 'N/A')}'" for t in st.session_state.strategic_plan_parsed]
-                mcq_results = await run_async_tasks_with_progress(status, [c.async_kickoff() for c in mcq_crews], mcq_labels)
-                all_mcqs = [mcq for res in mcq_results if res and hasattr(res, 'raw') for mcq in (run_crew_and_parse_json(res, 'dict') or {}).get('mcqs', [])]
-                with open("mcqs.json", 'w') as f: json.dump(all_mcqs, f, indent=4)
+                mcq_results = await run_async_tasks_with_progress(status, [kickoff_async(c) for c in mcq_crews], mcq_labels)
+                all_mcqs = []
+                for res in mcq_results:
+                    if res and hasattr(res, 'raw'):
+                        parsed = re.search(r"```json\s*(\{[\s\S]*\})\s*```", res.raw, re.DOTALL)
+                        if parsed:
+                            data = json.loads(parsed.group(1).strip())
+                            all_mcqs.extend(data.get('mcqs', []))
+                with open("mcqs.json", 'w') as f:
+                    json.dump(all_mcqs, f, indent=4)
                 status.update(label=f"MCQ Generation Complete! ({len(all_mcqs)} questions)", state="complete")
                 return all_mcqs
-        
+
         all_mcqs = asyncio.run(run_async_steps())
 
+        # --- STEP 4: DISTRACTOR GENERATION (ASYNC) ---
         async def run_distractor_step():
-             # --- STEP 4: DISTRACTOR GENERATION (ASYNCHRONOUS) ---
             with st.status("Step 4: Generating Distractors (in parallel)...", expanded=True) as status:
                 distractor_crews = [get_crew("Distractor Generation", json.dumps(q_obj))[0] for q_obj in all_mcqs]
                 distractor_labels = [f"Distractors for Q{i+1}" for i in range(len(all_mcqs))]
-                distractor_results = await run_async_tasks_with_progress(status, [c.async_kickoff() for c in distractor_crews], distractor_labels)
+                distractor_results = await run_async_tasks_with_progress(status, [kickoff_async(c) for c in distractor_crews], distractor_labels)
                 final_quiz_data = []
                 for i, result in enumerate(distractor_results):
                     q_obj = all_mcqs[i]
                     distractors = []
                     if result and hasattr(result, 'raw'):
                         match = re.search(r"```json\s*(\[[\s\S]*\])\s*```", result.raw, re.DOTALL)
-                        if match: distractors = json.loads(match.group(1).strip())
+                        if match:
+                            distractors = json.loads(match.group(1).strip())
                     options = [d.get('option', '') for d in distractors] + [q_obj['correct_answer']]
                     random.shuffle(options)
-                    final_quiz_data.append({"question": q_obj['question'], "options": options, "correct_answer": q_obj['correct_answer'], "rationale": q_obj['rationale'], "topic": q_obj.get("topic")})
+                    final_quiz_data.append({
+                        "question": q_obj['question'],
+                        "options": options,
+                        "correct_answer": q_obj['correct_answer'],
+                        "rationale": q_obj['rationale'],
+                        "topic": q_obj.get("topic"),
+                    })
                 st.session_state.final_quiz_data = final_quiz_data
                 status.update(label=f"Distractor Generation Complete!", state="complete")
-        
+
         asyncio.run(run_distractor_step())
 
         # --- STEP 5: AI QUIZ TAKER ---
@@ -3229,29 +3271,38 @@ if st.session_state.pipeline_running:
                 prompt = f"Question: {q_obj['question']}\nOptions:\n{options_str}\nRespond with only the text of the correct option."
                 response = student_llm.invoke(prompt)
                 ai_raw_output = response.content.strip()
-                ai_chosen_option = max(q_obj.get("options", []), key=lambda opt: fuzz.partial_ratio(opt, ai_raw_output)) if q_obj.get("options") else "AI failed"
+                ai_chosen_option = max(
+                    q_obj.get("options", []),
+                    key=lambda opt: fuzz.partial_ratio(opt, ai_raw_output)
+                ) if q_obj.get("options") else "AI failed"
                 ai_answers.append(ai_chosen_option)
             st.session_state.ai_answers = ai_answers
             status.update(label="AI Quiz Taker Complete!", state="complete")
 
+        # --- STEP 6: BULK DATASET GENERATOR (ASYNC) ---
         async def run_bulk_dataset_step():
-            # --- STEP 6: BULK DATASET GENERATOR (ASYNCHRONOUS) ---
             with st.status(f"Step 6: Generating {num_total_questions} triplets (in parallel)...", expanded=True) as status:
                 num_questions_per_topic = num_total_questions // len(st.session_state.strategic_plan_parsed)
-                bulk_crews = [get_crew("Bulk Dataset Generator", json.dumps(topic), num_questions=num_questions_per_topic, source_material=st.session_state.source_material)[0] for topic in st.session_state.strategic_plan_parsed]
+                bulk_crews = [
+                    get_crew("Bulk Dataset Generator", json.dumps(topic), num_questions=num_questions_per_topic,
+                             source_material=st.session_state.source_material)[0]
+                    for topic in st.session_state.strategic_plan_parsed
+                ]
                 bulk_labels = [f"Bulk questions for '{t.get('topic', 'N/A')}'" for t in st.session_state.strategic_plan_parsed]
-                bulk_results = await run_async_tasks_with_progress(status, [c.async_kickoff() for c in bulk_crews], bulk_labels)
+                bulk_results = await run_async_tasks_with_progress(status, [kickoff_async(c) for c in bulk_crews], bulk_labels)
                 all_triplets = []
                 for result in bulk_results:
                     if result and hasattr(result, 'raw'):
                         match = re.search(r"```json\s*(\[[\s\S]*\])\s*```", result.raw, re.DOTALL)
-                        if match: all_triplets.extend(json.loads(match.group(1).strip()))
+                        if match:
+                            all_triplets.extend(json.loads(match.group(1).strip()))
                 st.session_state.bulk_dataset = all_triplets
-                with open("bulk_dataset.json", 'w') as f: json.dump(all_triplets, f, indent=4)
+                with open("bulk_dataset.json", 'w') as f:
+                    json.dump(all_triplets, f, indent=4)
                 status.update(label=f"Bulk Dataset Generation Complete! ({len(all_triplets)} triplets)", state="complete")
-        
+
         asyncio.run(run_bulk_dataset_step())
-        
+
         st.session_state.pipeline_running = False
         st.session_state.pipeline_complete = True
         st.rerun()
@@ -3260,18 +3311,22 @@ if st.session_state.pipeline_running:
         st.error(f"The pipeline failed with an error: {e}")
         st.session_state.pipeline_running = False
 
-# --- Main Page Content Display ---
+# --- MAIN PAGE DISPLAY ---
 if st.session_state.pipeline_complete:
     st.header("✅ Pipeline Finished")
     st.success("All processes completed successfully. You can now review the outputs.")
-    
+
     col1, col2 = st.columns(2)
     with col1:
         st.subheader("Strategic Plan")
         st.dataframe(st.session_state.strategic_plan_parsed, height=300)
         st.subheader("AI Quiz Taker Results")
-        score = sum(1 for i, mcq in enumerate(st.session_state.final_quiz_data) if st.session_state.ai_answers[i] == mcq.get('correct_answer'))
+        score = sum(
+            1 for i, mcq in enumerate(st.session_state.final_quiz_data)
+            if st.session_state.ai_answers[i] == mcq.get('correct_answer')
+        )
         st.metric("AI Score", f"{score} / {len(st.session_state.final_quiz_data)}")
+
     with col2:
         st.subheader("Knowledge Graph")
         if st.session_state.knowledge_graph_dot:
@@ -3280,7 +3335,9 @@ if st.session_state.pipeline_complete:
     st.subheader("Bulk Dataset Generated")
     st.info(f"Generated a total of {len(st.session_state.bulk_dataset)} question-answer-reasoning triplets.")
     st.dataframe(st.session_state.bulk_dataset)
-    st.download_button("📥 Download Bulk Dataset", json.dumps(st.session_state.bulk_dataset, indent=4), "bulk_dataset.json", "application/json")
-    
+    st.download_button("📥 Download Bulk Dataset",
+                       json.dumps(st.session_state.bulk_dataset, indent=4),
+                       "bulk_dataset.json",
+                       "application/json")
 else:
     st.info("Upload a document and configure your settings in the sidebar, then click 'Run Full Pipeline'.")
