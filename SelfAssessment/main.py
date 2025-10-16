@@ -3180,17 +3180,41 @@ def init_session_state():
             st.session_state[key] = value
 
 def run_crew_and_parse_json(crew, expected_format='list'):
+    """Runs crew.kickoff() and parses JSON/JSON5 robustly with error correction."""
     result = crew.kickoff()
     if not (result and hasattr(result, 'raw')):
         return None
-    regex = r"```json\s*(\[[\s\S]*\])\s*```" if expected_format == 'list' else r"```json\s*(\{[\s\S]*\})\s*```"
-    match = re.search(regex, result.raw, re.DOTALL)
+
+    raw_text = result.raw
+    regex = (
+        r"```json\s*(\[[\s\S]*\])\s*```" if expected_format == 'list'
+        else r"```json\s*(\{[\s\S]*\})\s*```"
+    )
+    match = re.search(regex, raw_text, re.DOTALL)
     if not match:
         return None
+
+    json_text = match.group(1).strip()
+
     try:
-        return json.loads(match.group(1).strip())
-    except ValueError:
-        return None
+        return json.loads(json_text)
+    except Exception as e:
+        # Log malformed JSON for debugging
+        with open("bad_outputs.log", "a") as f:
+            f.write(f"\n\n=== Malformed JSON Detected ===\n{datetime.now()}\n{json_text}\nError: {e}\n")
+
+        # Attempt to auto-repair: quote keys, remove trailing commas
+        repaired = re.sub(r'([{,]\s*)([A-Za-z_][A-Za-z0-9_]*)(\s*:)', r'\1"\2"\3', json_text)
+        repaired = re.sub(r',(\s*[}\]])', r'\1', repaired)  # remove trailing commas
+
+        try:
+            return json.loads(repaired)
+        except Exception as e2:
+            # Final fallback: return None but log
+            with open("bad_outputs.log", "a") as f:
+                f.write(f"\nRepair failed: {e2}\nRepaired text:\n{repaired}\n")
+            return None
+
 
 # ===============================================
 # STREAMLIT UI
