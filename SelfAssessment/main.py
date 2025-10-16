@@ -3231,7 +3231,16 @@ if st.session_state.pipeline_running:
             if not parsed_data:
                 status.update(label="Strategic Plan Failed!", state="error")
                 st.stop()
+
+            # ✅ Normalize parsed data to list of dicts
+            if all(isinstance(item, str) for item in parsed_data):
+                parsed_data = [{"topic": item} for item in parsed_data]
+
             st.session_state.strategic_plan_parsed = parsed_data
+
+            # Uncomment for debugging:
+            # st.json(parsed_data)
+
             status.update(label=f"Strategic Plan Complete! ({len(parsed_data)} topics found)", state="complete")
 
         # ---------- STEP 2: KNOWLEDGE GRAPH ----------
@@ -3256,7 +3265,13 @@ if st.session_state.pipeline_running:
                              bloom_q_counts={"Remember": 1, "Understand": 1, "Apply": 1, "Analyze": 1,"Evaluate": 1, "Create": 1})[0]
                     for topic in st.session_state.strategic_plan_parsed
                 ]
-                mcq_labels = [f"MCQs for '{t.get('topic', 'N/A')}'" for t in st.session_state.strategic_plan_parsed]
+
+                # ✅ Safe label extraction
+                mcq_labels = [
+                    f"MCQs for '{t.get('topic', 'N/A')}'" if isinstance(t, dict) else f"MCQs for '{t}'"
+                    for t in st.session_state.strategic_plan_parsed
+                ]
+
                 # ⚙️ Throttled & jittered
                 mcq_results = await run_async_tasks_with_progress(status, [kickoff_async_jittered(c) for c in mcq_crews], mcq_labels, max_concurrency=2)
                 all_mcqs = []
@@ -3336,7 +3351,13 @@ if st.session_state.pipeline_running:
                              source_material=st.session_state.source_material)[0]
                     for topic in st.session_state.strategic_plan_parsed
                 ]
-                bulk_labels = [f"Bulk questions for '{t.get('topic', 'N/A')}'" for t in st.session_state.strategic_plan_parsed]
+
+                # ✅ Safe label extraction
+                bulk_labels = [
+                    f"Bulk questions for '{t.get('topic', 'N/A')}'" if isinstance(t, dict) else f"Bulk questions for '{t}'"
+                    for t in st.session_state.strategic_plan_parsed
+                ]
+
                 bulk_results = await run_async_tasks_with_progress(status, [kickoff_async_jittered(c) for c in bulk_crews], bulk_labels, max_concurrency=2)
                 all_triplets = []
                 for result in bulk_results:
