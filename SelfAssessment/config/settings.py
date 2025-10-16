@@ -4,7 +4,7 @@ from langchain_nvidia_ai_endpoints import ChatNVIDIA
 
 # --- NVIDIA API Configuration ---
 # IMPORTANT: Paste your NVIDIA API key here. It will be used for all models.
-NVIDIA_API_KEY = "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"
+NVIDIA_API_KEY = "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"
 os.environ["NVIDIA_API_KEY"] = NVIDIA_API_KEY
 os.environ["NVIDIA_NIM_API_KEY"] = NVIDIA_API_KEY
 # --- Main "Teacher" LLM Client (Kimi K2 Instruct) ---
