@@ -1,0 +1,5 @@
+lr: 5e-6
+batch_size: 2
+steps_scpt: 500
+steps_ssft: 1000
+qa_per_node: 3

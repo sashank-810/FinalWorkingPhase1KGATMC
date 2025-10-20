@@ -1,0 +1,43 @@
+# ===============================================
+# Hugging Face Configuration (Local Fine-tuning)
+# ===============================================
+
+HF_TOKEN: "my_hf_token_for_lft"  # Optional if already logged in via `huggingface-cli login`
+
+# ------------------------------
+# Models
+# ------------------------------
+TEACHER_MODEL: "meta-llama/Llama-3.1-70B-Instruct"
+STUDENT_MODEL: "meta-llama/Llama-3.1-8B-Instruct"
+
+# Keep the same evaluator from NIM config (as requested)
+EVALUATOR_MODEL: "moonshotai/kimi-k2-instruct-0905"
+
+# ------------------------------
+# Dataset paths
+# ------------------------------
+DATA_PATHS:
+  DISTILLED: "data/kd_generation/distilled.json"
+  STRUCTURED: "data/sft/ssft.json"
+  COMBINED: "data/final/train_combined.json"
+
+# ------------------------------
+# Output directory
+# ------------------------------
+MODEL_OUTPUT: "models/student_finetuned_full_hf"
+
+# ------------------------------
+# Training hyperparameters
+# ------------------------------
+TRAINING:
+  per_device_train_batch_size: 2
+  gradient_accumulation_steps: 8
+  learning_rate: 5e-5
+  num_train_epochs: 2
+  warmup_steps: 100
+  weight_decay: 0.01
+  fp16: true
+  save_strategy: "epoch"
+  save_total_limit: 2
+  logging_steps: 50
+  report_to: "none"

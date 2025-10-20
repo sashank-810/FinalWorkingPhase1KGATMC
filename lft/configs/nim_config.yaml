@@ -1,0 +1,13 @@
+# configs/nim_config.yaml
+NIM_API_KEY: "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"
+NIM_BASE: "https://integrate.api.nvidia.com/v1"
+
+TEACHER_MODEL: "meta/llama-3.3-70b-instruct"
+STUDENT_MODEL: "meta/llama-3.1-8b-instruct"
+EVALUATOR_MODEL: "moonshotai/kimi-k2-instruct-0905"
+DATA_PATHS:
+  DISTILLED: "data/kd_generation/distilled.json"
+  STRUCTURED: "data/sft/ssft.json"
+  COMBINED: "data/final/train_combined.json"
+
+MODEL_OUTPUT: "models/student_finetuned_full"

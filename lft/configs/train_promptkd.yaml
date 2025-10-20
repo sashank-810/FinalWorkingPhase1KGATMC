@@ -1,0 +1,8 @@
+prompt_len: 7
+lr_prompt: 5e-6
+lr_student: 5e-6
+alpha_reg_start: 1.0
+alpha_reg_end: 0.0
+epochs: 3
+batch_size: 4
+gradient_accumulation: 8
