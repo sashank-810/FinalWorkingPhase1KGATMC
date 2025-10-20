@@ -1,0 +1,61 @@
+{
+  "nodes": [
+    {
+      "id": "1",
+      "title": "Differential Equations",
+      "summary": "Core concepts, solution techniques and applications of ordinary differential equations",
+      "children": [
+        {
+          "id": "1.1",
+          "title": "Introduction & Motivation",
+          "summary": "What DEs are, why they matter across sciences, and the chapter overview",
+          "children": []
+        },
+        {
+          "id": "1.2",
+          "title": "Basic Concepts & Classification",
+          "summary": "Definition, ordinary vs partial, notation conventions",
+          "children": [
+            {
+              "id": "1.2.1",
+              "title": "Order of a Differential Equation",
+              "summary": "Highest derivative present; computed for several examples",
+              "children": []
+            },
+            {
+              "id": "1.2.2",
+              "title": "Degree of a Differential Equation",
+              "summary": "Polynomial power of the highest-order derivative; cases where degree is undefined",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "1.3",
+          "title": "General vs Particular Solutions",
+          "summary": "Arbitrary constants, verification techniques, solution curves",
+          "children": []
+        },
+        {
+          "id": "1.4",
+          "title": "Exercise Sets",
+          "summary": "Practice problems for order/degree and solution verification",
+          "children": [
+            {
+              "id": "1.4.1",
+              "title": "Exercise 9.1 \u2013 Order & Degree",
+              "summary": "10 problems plus 2 MCQs on order/degree determination",
+              "children": []
+            },
+            {
+              "id": "1.4.2",
+              "title": "Exercise 9.2 \u2013 Solution Verification",
+              "summary": "10 problems checking if given functions satisfy stated DEs",
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

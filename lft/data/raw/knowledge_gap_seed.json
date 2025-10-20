@@ -1,0 +1,1688 @@
+[
+  {
+    "topic": "Exponential Growth/Decay Models (dP/dt = kP)",
+    "question": "A bacterial culture grows at a rate proportional to its current size. If the population doubles in 3 hours, find the value of the growth constant k.",
+    "chain_of_thought_reasoning": "1. Model: dP/dt = kP. 2. Separate variables: dP/P = k dt. 3. Integrate: ln|P| = kt + C. 4. Exponentiate: P(t) = P\u2080e^(kt). 5. Use doubling condition: 2P\u2080 = P\u2080e^(3k). 6. Solve for k: 2 = e^(3k) \u21d2 ln 2 = 3k \u21d2 k = (ln 2)/3 \u2248 0.231 h\u207b\u00b9.",
+    "final_answer": "$k = \\frac{\\ln 2}{3} \\approx 0.231\\ \\text{h}^{-1}$"
+  },
+  {
+    "topic": "Exponential Growth/Decay Models (dP/dt = kP)",
+    "question": "The mass of a radioactive substance decays according to dm/dt = \u20130.04m (t in years). Find the half-life.",
+    "chain_of_thought_reasoning": "1. Model: dm/dt = \u20130.04m. 2. Solution: m(t) = m\u2080e^(\u20130.04t). 3. Half-life condition: m\u2080/2 = m\u2080e^(\u20130.04T). 4. Solve: 1/2 = e^(\u20130.04T) \u21d2 ln(1/2) = \u20130.04T \u21d2 T = (ln 2)/0.04 \u2248 17.33 years.",
+    "final_answer": "$T = \\frac{\\ln 2}{0.04} \\approx 17.33\\ \\text{years}$"
+  },
+  {
+    "topic": "Exponential Growth/Decay Models (dP/dt = kP)",
+    "question": "A savings account earns continuous interest at 5 % per year. If $1000 is deposited, what is the amount after 10 years?",
+    "chain_of_thought_reasoning": "1. Model: dA/dt = 0.05A. 2. Solution: A(t) = A\u2080e^(0.05t). 3. Substitute A\u2080 = 1000, t = 10: A(10) = 1000e^(0.5). 4. Evaluate: e^0.5 \u2248 1.6487 \u21d2 A \u2248 1000 \u00d7 1.6487 = $1648.72.",
+    "final_answer": "$A = 1000 e^{0.5} \\approx \\$1648.72$"
+  },
+  {
+    "topic": "Exponential Growth/Decay Models (dP/dt = kP)",
+    "question": "The population of a town was 20 000 in 2020 and 22 000 in 2022. Assuming exponential growth dP/dt = kP, predict the population in 2030.",
+    "chain_of_thought_reasoning": "1. Model: P(t) = P\u2080e^(kt). 2. Set t = 0 in 2020: P\u2080 = 20 000. 3. Use 2022 data: 22 000 = 20 000e^(2k) \u21d2 1.1 = e^(2k) \u21d2 k = (ln 1.1)/2 \u2248 0.04766 yr\u207b\u00b9. 4. Predict 2030 (t = 10): P(10) = 20 000e^(10k) = 20 000e^(5 ln 1.1) = 20 000(1.1)^5 \u2248 20 000 \u00d7 1.61051 \u2248 32 210.",
+    "final_answer": "$P \\approx 32\\,210$"
+  },
+  {
+    "topic": "Exponential Growth/Decay Models (dP/dt = kP)",
+    "question": "A drug decays in the bloodstream according to dA/dt = \u20130.25A (t in hours). If the initial dose is 80 mg, how much remains after 6 h?",
+    "chain_of_thought_reasoning": "1. Model: A(t) = 80e^(\u20130.25t). 2. Evaluate at t = 6: A(6) = 80e^(\u20131.5). 3. e^(\u20131.5) \u2248 0.22313 \u21d2 A \u2248 80 \u00d7 0.22313 \u2248 17.85 mg.",
+    "final_answer": "$A \\approx 17.85\\ \\text{mg}$"
+  },
+  {
+    "topic": "Exponential Growth/Decay Models (dP/dt = kP)",
+    "question": "Explain why the differential equation dP/dt = kP always leads to exponential growth or decay regardless of the initial population size.",
+    "chain_of_thought_reasoning": "1. Separation gives dP/P = k dt. 2. Integration yields ln|P| = kt + C. 3. Exponentiating removes the logarithm, producing P(t) = e^(kt+C) = e^C\u00b7e^(kt). 4. The constant e^C is simply the initial population P\u2080, so P(t) = P\u2080e^(kt). 5. Because P\u2080 is a multiplicative constant, the exponential form is preserved for any positive initial value; only the amplitude changes, not the functional form.",
+    "final_answer": "The solution $P(t) = P_0 e^{kt}$ shows the exponential factor $e^{kt}$ is independent of $P_0$, so the growth/decay behavior is always exponential."
+  },
+  {
+    "topic": "Exponential Growth/Decay Models (dP/dt = kP)",
+    "question": "Solve dP/dt = 0.03P with P(0) = 500 and find the time required for the population to reach 1500.",
+    "chain_of_thought_reasoning": "1. General solution: P(t) = 500e^(0.03t). 2. Set P(t) = 1500: 1500 = 500e^(0.03t) \u21d2 3 = e^(0.03t). 3. Take natural log: ln 3 = 0.03t \u21d2 t = (ln 3)/0.03 \u2248 36.62 time units.",
+    "final_answer": "$t = \\frac{\\ln 3}{0.03} \\approx 36.62$"
+  },
+  {
+    "topic": "Exponential Growth/Decay Models (dP/dt = kP)",
+    "question": "A thermometer reading 18 \u00b0C is placed in a 30 \u00b0C room. The temperature difference decays exponentially as dT/dt = \u2013k(T \u2013 30). If after 5 min the reading is 24 \u00b0C, find k.",
+    "chain_of_thought_reasoning": "1. Let D(t) = T(t) \u2013 30; then dD/dt = \u2013kD. 2. Solution: D(t) = D\u2080e^(\u2013kt) with D\u2080 = 18 \u2013 30 = \u201312. 3. At t = 5, D = 24 \u2013 30 = \u20136. 4. Solve: \u20136 = \u201312e^(\u20135k) \u21d2 0.5 = e^(\u20135k) \u21d2 \u20135k = ln(0.5) \u21d2 k = (ln 2)/5 \u2248 0.1386 min\u207b\u00b9.",
+    "final_answer": "$k = \\frac{\\ln 2}{5} \\approx 0.1386\\ \\text{min}^{-1}$"
+  },
+  {
+    "topic": "Exponential Growth/Decay Models (dP/dt = kP)",
+    "question": "An investment grows continuously at 6 % per year. How long will it take to triple the initial amount?",
+    "chain_of_thought_reasoning": "1. Model: A(t) = A\u2080e^(0.06t). 2. Set A(t) = 3A\u2080: 3 = e^(0.06t). 3. Take ln: ln 3 = 0.06t \u21d2 t = (ln 3)/0.06 \u2248 18.31 years.",
+    "final_answer": "$t = \\frac{\\ln 3}{0.06} \\approx 18.31\\ \\text{years}$"
+  },
+  {
+    "topic": "Exponential Growth/Decay Models (dP/dt = kP)",
+    "question": "The charge Q on a capacitor decays as dQ/dt = \u20130.2Q (t in seconds). Find the time for the charge to fall to 10 % of its initial value.",
+    "chain_of_thought_reasoning": "1. Solution: Q(t) = Q\u2080e^(\u20130.2t). 2. Set Q(t) = 0.1Q\u2080: 0.1 = e^(\u20130.2t). 3. Take ln: ln 0.1 = \u20130.2t \u21d2 t = \u2013(ln 0.1)/0.2 = (ln 10)/0.2 \u2248 11.51 s.",
+    "final_answer": "$t = \\frac{\\ln 10}{0.2} \\approx 11.51\\ \\text{s}$"
+  },
+  {
+    "topic": "Exponential Growth/Decay Models (dP/dt = kP)",
+    "question": "A company\u2019s profit grows continuously at 8 % per year. If the 2023 profit was $5 million, estimate the profit in 2030.",
+    "chain_of_thought_reasoning": "1. Model: P(t) = 5e^(0.08t) with t in years since 2023. 2. 2030 corresponds to t = 7. 3. P(7) = 5e^(0.56). 4. e^0.56 \u2248 1.751 \u21d2 P \u2248 5 \u00d7 1.751 \u2248 $8.75 million.",
+    "final_answer": "$P \\approx \\\\(8.75\\ \\text{million}$"
+  },
+  {
+    "topic": "Exponential Growth/Decay Models (dP/dt = kP)",
+    "question": "The concentration of a pollutant in a lake decreases at a rate proportional to its current concentration. If the level drops from 80 ppm to 50 ppm in 30 days, find the decay constant and predict the level after 60 days.",
+    "chain_of_thought_reasoning": "1. Model: C(t) = C\u2080e^(kt). 2. Use 30-day data: 50 = 80e^(30k) \u21d2 5/8 = e^(30k) \u21d2 k = (ln 0.625)/30 \u2248 \u20130.01878 day\u207b\u00b9. 3. At t = 60: C(60) = 80e^(60k) = 80(e^(30k))\u00b2 = 80(5/8)\u00b2 = 80(25/64) = 31.25 ppm.",
+    "final_answer": "$C(60) = 31.25\\ \\text{ppm}$"
+  },
+  {
+    "topic": "Exponential Growth/Decay Models (dP/dt = kP)",
+    "question": "A yeast culture follows dP/dt = kP. Starting with 10 g, the mass increases to 15 g in 4 h. Determine k and the mass after 12 h.",
+    "chain_of_thought_reasoning": "1. Solution: P(t) = 10e^(kt). 2. Use 4-h data: 15 = 10e^(4k) \u21d2 1.5 = e^(4k) \u21d2 k = (ln 1.5)/4 \u2248 0.1014 h\u207b\u00b9. 3. At t = 12: P(12) = 10e^(12k) = 10(e^(4k))\u00b3 = 10(1.5)\u00b3 = 10(3.375) = 33.75 g.",
+    "final_answer": "$P(12) = 33.75\\ \\text{g}$"
+  },
+  {
+    "topic": "Exponential Growth/Decay Models (dP/dt = kP)",
+    "question": "The number of radioactive nuclei decays to 1/8 of the initial amount in 30 days. Find the decay constant and the half-life.",
+    "chain_of_thought_reasoning": "1. Condition: N(30) = N\u2080/8. 2. Model: N\u2080/8 = N\u2080e^(30k) \u21d2 1/8 = e^(30k) \u21d2 ln(1/8) = 30k \u21d2 k = \u2013(ln 8)/30 \u2248 \u20130.0693 day\u207b\u00b9. 3. Half-life: T\u00bd = (ln 2)/|k| = (ln 2)/(ln 8)/30 = 30(ln 2)/(3 ln 2) = 10 days.",
+    "final_answer": "$T_{1/2} = 10\\ \\text{days}$"
+  },
+  {
+    "topic": "Exponential Growth/Decay Models (dP/dt = kP)",
+    "question": "Discuss how the sign of k in dP/dt = kP determines whether the quantity grows or decays, and relate this to the solution curve.",
+    "chain_of_thought_reasoning": "1. The general solution is P(t) = P\u2080e^(kt). 2. If k > 0, the exponent kt increases with time, so e^(kt) grows exponentially, and P(t) \u2192 \u221e as t \u2192 \u221e. 3. If k < 0, kt decreases, e^(kt) \u2192 0, so P(t) decays toward zero. 4. Thus the sign of k alone dictates growth (k > 0) or decay (k < 0), and the solution curve is an increasing exponential for positive k and a decreasing exponential for negative k.",
+    "final_answer": "Positive $k$ gives exponential growth; negative $k$ gives exponential decay."
+  },
+  {
+    "topic": "Exponential Growth/Decay Models (dP/dt = kP)",
+    "question": "A credit card balance increases continuously at 1.5 % per month. If the initial balance is \\(2000 and no payments are made, what is the balance after 1 year?",
+    "chain_of_thought_reasoning": "1. Model: B(t) = 2000e^(0.015t) with t in months. 2. One year = 12 months. 3. B(12) = 2000e^(0.18). 4. e^0.18 \u2248 1.1972 \u21d2 B \u2248 2000 \u00d7 1.1972 \u2248 \\)2394.40.",
+    "final_answer": "$B \\approx \\\\(2394.40$"
+  },
+  {
+    "topic": "Exponential Growth/Decay Models (dP/dt = kP)",
+    "question": "The atmospheric pressure P (in kPa) decreases with altitude h (in km) according to dP/dh = \u20130.12P. If P = 101 kPa at sea level, find the pressure at 5 km altitude.",
+    "chain_of_thought_reasoning": "1. Solution: P(h) = 101e^(\u20130.12h). 2. Evaluate at h = 5: P(5) = 101e^(\u20130.6). 3. e^(\u20130.6) \u2248 0.5488 \u21d2 P \u2248 101 \u00d7 0.5488 \u2248 55.4 kPa.",
+    "final_answer": "$P \\approx 55.4\\ \\text{kPa}$"
+  },
+  {
+    "topic": "Exponential Growth/Decay Models (dP/dt = kP)",
+    "question": "A viral post spreads exponentially so that the number of shares S(t) satisfies dS/dt = kS. Starting with 5 shares, it reaches 500 shares in 2 hours. How many shares occur in the first 30 minutes?",
+    "chain_of_thought_reasoning": "1. Solution: S(t) = 5e^(kt). 2. Use 2-h data: 500 = 5e^(2k) \u21d2 100 = e^(2k) \u21d2 k = (ln 100)/2 \u2248 2.3026 h\u207b\u00b9. 3. At t = 0.5 h: S(0.5) = 5e^(0.5k) = 5e^(ln 100/4) = 5(100)^(1/4) \u2248 5 \u00d7 3.162 \u2248 15.8 shares.",
+    "final_answer": "$S \\approx 16\\ \\text{shares}$"
+  },
+  {
+    "topic": "Exponential Growth/Decay Models (dP/dt = kP)",
+    "question": "A chemical reaction consumes a reactant so that its concentration c(t) follows dc/dt = \u20130.4c (t in minutes). Find the time when the concentration is 20 % of the initial value.",
+    "chain_of_thought_reasoning": "1. Solution: c(t) = c\u2080e^(\u20130.4t). 2. Set c(t) = 0.2c\u2080: 0.2 = e^(\u20130.4t) \u21d2 ln 0.2 = \u20130.4t \u21d2 t = \u2013(ln 0.2)/0.4 = (ln 5)/0.4 \u2248 4.02 min.",
+    "final_answer": "$t \\approx 4.02\\ \\text{min}$"
+  },
+  {
+    "topic": "Order of a Differential Equation",
+    "question": "Determine the order of the differential equation $\\frac{d^3y}{dx^3} + 2\\frac{d^2y}{dx^2} - 5\\frac{dy}{dx} + 6y = 0$.",
+    "chain_of_thought_reasoning": "1. Identify all derivatives present: $\\frac{d^3y}{dx^3}$ (third derivative), $\\frac{d^2y}{dx^2}$ (second derivative), $\\frac{dy}{dx}$ (first derivative). 2. The highest order derivative is $\\frac{d^3y}{dx^3}$. 3. Therefore, the order is 3.",
+    "final_answer": "3"
+  },
+  {
+    "topic": "Order of a Differential Equation",
+    "question": "Find the order of the differential equation $\\left(\\frac{dy}{dx}\\right)^4 + 3\\frac{d^2y}{dx^2} = x^2$.",
+    "chain_of_thought_reasoning": "1. Identify all derivatives: $\\frac{dy}{dx}$ (first derivative) and $\\frac{d^2y}{dx^2}$ (second derivative). 2. The highest order derivative is $\\frac{d^2y}{dx^2}$. 3. Therefore, the order is 2.",
+    "final_answer": "2"
+  },
+  {
+    "topic": "Order of a Differential Equation",
+    "question": "What is the order of the differential equation $\\frac{d^5y}{dx^5} - \\sin x \\frac{d^2y}{dx^2} + e^x y = \\tan x$?",
+    "chain_of_thought_reasoning": "1. Identify all derivatives: $\\frac{d^5y}{dx^5}$ (fifth derivative) and $\\frac{d^2y}{dx^2}$ (second derivative). 2. The highest order derivative is $\\frac{d^5y}{dx^5}$. 3. Therefore, the order is 5.",
+    "final_answer": "5"
+  },
+  {
+    "topic": "Order of a Differential Equation",
+    "question": "Determine the order of the differential equation $y''' + 2y'' - 3y' + 4y = 0$.",
+    "chain_of_thought_reasoning": "1. Rewrite using prime notation: $y'''$ (third derivative), $y''$ (second derivative), $y'$ (first derivative). 2. The highest order derivative is $y'''$. 3. Therefore, the order is 3.",
+    "final_answer": "3"
+  },
+  {
+    "topic": "Order of a Differential Equation",
+    "question": "Explain why the order of a differential equation is always a positive integer.",
+    "chain_of_thought_reasoning": "1. Order is defined as the order of the highest derivative present. 2. Derivatives are taken with respect to an independent variable (e.g., $x$). 3. The order of a derivative (e.g., $\\frac{d^n y}{dx^n}$) is the positive integer $n$ representing how many times the function has been differentiated. 4. Since differentiation is performed in whole steps (1st, 2nd, 3rd, etc.), the order must be a positive integer.",
+    "final_answer": "Because the order corresponds to the number of times a function is differentiated, which must be a positive integer (1, 2, 3, ...)."
+  },
+  {
+    "topic": "Order of a Differential Equation",
+    "question": "Find the order of the differential equation $\\frac{d^2y}{dx^2} + \\left(\\frac{dy}{dx}\\right)^3 = 0$.",
+    "chain_of_thought_reasoning": "1. Identify all derivatives: $\\frac{d^2y}{dx^2}$ (second derivative) and $\\frac{dy}{dx}$ (first derivative). 2. The highest order derivative is $\\frac{d^2y}{dx^2}$. 3. Therefore, the order is 2.",
+    "final_answer": "2"
+  },
+  {
+    "topic": "Order of a Differential Equation",
+    "question": "What is the order of the differential equation $\\frac{dy}{dx} + y^2 = \\sin x$?",
+    "chain_of_thought_reasoning": "1. Identify all derivatives: Only $\\frac{dy}{dx}$ (first derivative) is present. 2. The highest order derivative is $\\frac{dy}{dx}$. 3. Therefore, the order is 1.",
+    "final_answer": "1"
+  },
+  {
+    "topic": "Order of a Differential Equation",
+    "question": "Determine the order of the differential equation $\\frac{d^4y}{dx^4} - \\frac{d^3y}{dx^3} + \\frac{d^2y}{dx^2} = x$.",
+    "chain_of_thought_reasoning": "1. Identify all derivatives: $\\frac{d^4y}{dx^4}$ (fourth derivative), $\\frac{d^3y}{dx^3}$ (third derivative), and $\\frac{d^2y}{dx^2}$ (second derivative). 2. The highest order derivative is $\\frac{d^4y}{dx^4}$. 3. Therefore, the order is 4.",
+    "final_answer": "4"
+  },
+  {
+    "topic": "Order of a Differential Equation",
+    "question": "Find the order of the differential equation $\\left(\\frac{d^3y}{dx^3}\\right)^2 + \\left(\\frac{d^2y}{dx^2}\\right)^3 = 5$.",
+    "chain_of_thought_reasoning": "1. Identify all derivatives: $\\frac{d^3y}{dx^3}$ (third derivative) and $\\frac{d^2y}{dx^2}$ (second derivative). 2. The highest order derivative is $\\frac{d^3y}{dx^3}$. 3. Therefore, the order is 3.",
+    "final_answer": "3"
+  },
+  {
+    "topic": "Order of a Differential Equation",
+    "question": "Explain how the order of a differential equation affects the number of arbitrary constants in its general solution.",
+    "chain_of_thought_reasoning": "1. The order of a differential equation is the highest derivative present. 2. For an $n$-th order differential equation, the general solution contains $n$ arbitrary constants. 3. This is because integrating an $n$-th order derivative requires $n$ integrations, each introducing a constant of integration. 4. For example, a first-order equation has 1 constant, and a second-order equation has 2 constants.",
+    "final_answer": "The number of arbitrary constants in the general solution equals the order of the differential equation."
+  },
+  {
+    "topic": "Order of a Differential Equation",
+    "question": "What is the order of the differential equation $\\frac{d^2y}{dx^2} + y \\frac{dy}{dx} = e^x$?",
+    "chain_of_thought_reasoning": "1. Identify all derivatives: $\\frac{d^2y}{dx^2}$ (second derivative) and $\\frac{dy}{dx}$ (first derivative). 2. The highest order derivative is $\\frac{d^2y}{dx^2}$. 3. Therefore, the order is 2.",
+    "final_answer": "2"
+  },
+  {
+    "topic": "Order of a Differential Equation",
+    "question": "Determine the order of the differential equation $y'' + (y')^2 + y = 0$.",
+    "chain_of_thought_reasoning": "1. Rewrite using prime notation: $y''$ (second derivative) and $y'$ (first derivative). 2. The highest order derivative is $y''$. 3. Therefore, the order is 2.",
+    "final_answer": "2"
+  },
+  {
+    "topic": "Order of a Differential Equation",
+    "question": "Find the order of the differential equation $\\frac{d^6y}{dx^6} - \\frac{d^4y}{dx^4} + \\frac{d^2y}{dx^2} = 0$.",
+    "chain_of_thought_reasoning": "1. Identify all derivatives: $\\frac{d^6y}{dx^6}$ (sixth derivative), $\\frac{d^4y}{dx^4}$ (fourth derivative), and $\\frac{d^2y}{dx^2}$ (second derivative). 2. The highest order derivative is $\\frac{d^6y}{dx^6}$. 3. Therefore, the order is 6.",
+    "final_answer": "6"
+  },
+  {
+    "topic": "Order of a Differential Equation",
+    "question": "What is the order of the differential equation $\\frac{dy}{dx} + \\tan y = 0$?",
+    "chain_of_thought_reasoning": "1. Identify all derivatives: Only $\\frac{dy}{dx}$ (first derivative) is present. 2. The highest order derivative is $\\frac{dy}{dx}$. 3. Therefore, the order is 1.",
+    "final_answer": "1"
+  },
+  {
+    "topic": "Order of a Differential Equation",
+    "question": "Determine the order of the differential equation $\\left(\\frac{d^2y}{dx^2}\\right)^2 + \\frac{dy}{dx} = x^3$.",
+    "chain_of_thought_reasoning": "1. Identify all derivatives: $\\frac{d^2y}{dx^2}$ (second derivative) and $\\frac{dy}{dx}$ (first derivative). 2. The highest order derivative is $\\frac{d^2y}{dx^2}$. 3. Therefore, the order is 2.",
+    "final_answer": "2"
+  },
+  {
+    "topic": "Order of a Differential Equation",
+    "question": "Explain the difference between the order and degree of a differential equation.",
+    "chain_of_thought_reasoning": "1. Order is the highest derivative present in the equation. 2. Degree is the highest power of the highest order derivative, but only when the equation is a polynomial in derivatives. 3. For example, $(y'')^2 + y' = 0$ has order 2 and degree 2. 4. If the equation is not a polynomial in derivatives (e.g., $\\sin(y') + y = 0$), the degree is undefined.",
+    "final_answer": "Order is the highest derivative present; degree is the highest power of that derivative (if the equation is polynomial in derivatives)."
+  },
+  {
+    "topic": "Order of a Differential Equation",
+    "question": "Find the order of the differential equation $\\frac{d^3y}{dx^3} - x \\frac{d^2y}{dx^2} + (x^2 - 1) \\frac{dy}{dx} = 0$.",
+    "chain_of_thought_reasoning": "1. Identify all derivatives: $\\frac{d^3y}{dx^3}$ (third derivative), $\\frac{d^2y}{dx^2}$ (second derivative), and $\\frac{dy}{dx}$ (first derivative). 2. The highest order derivative is $\\frac{d^3y}{dx^3}$. 3. Therefore, the order is 3.",
+    "final_answer": "3"
+  },
+  {
+    "topic": "Order of a Differential Equation",
+    "question": "What is the order of the differential equation $y' + y^2 = x$?",
+    "chain_of_thought_reasoning": "1. Rewrite using prime notation: $y'$ (first derivative). 2. The highest order derivative is $y'$. 3. Therefore, the order is 1.",
+    "final_answer": "1"
+  },
+  {
+    "topic": "Order of a Differential Equation",
+    "question": "Determine the order of the differential equation $\\frac{d^2y}{dx^2} + \\sin\\left(\\frac{dy}{dx}\\right) = 0$.",
+    "chain_of_thought_reasoning": "1. Identify all derivatives: $\\frac{d^2y}{dx^2}$ (second derivative) and $\\frac{dy}{dx}$ (first derivative). 2. The highest order derivative is $\\frac{d^2y}{dx^2}$. 3. Therefore, the order is 2.",
+    "final_answer": "2"
+  },
+  {
+    "topic": "Order of a Differential Equation",
+    "question": "Find the order of the differential equation $\\frac{d^7y}{dx^7} = 0$.",
+    "chain_of_thought_reasoning": "1. Identify all derivatives: Only $\\frac{d^7y}{dx^7}$ (seventh derivative) is present. 2. The highest order derivative is $\\frac{d^7y}{dx^7}$. 3. Therefore, the order is 7.",
+    "final_answer": "7"
+  },
+  {
+    "topic": "Order of a Differential Equation",
+    "question": "Explain why the order of a differential equation is independent of whether the equation is linear or nonlinear.",
+    "chain_of_thought_reasoning": "1. Order is defined solely by the highest derivative present. 2. Linearity depends on whether the dependent variable and its derivatives appear linearly (no products or nonlinear functions). 3. For example, $y'' + y = 0$ (linear) and $y'' + y^2 = 0$ (nonlinear) both have order 2. 4. Thus, order is a structural property unrelated to linearity.",
+    "final_answer": "Order depends only on the highest derivative, not on how variables are combined."
+  },
+  {
+    "topic": "Variables-Separable Technique",
+    "question": "Solve the differential equation $\\frac{dy}{dx}=\\frac{x+1}{2-y}$ for $y\\neq 2$.",
+    "chain_of_thought_reasoning": "1. Recognize the form: The equation is first-order, first-degree and can be written as $\\frac{dy}{dx}=g(x)h(y)$ with $g(x)=x+1$ and $h(y)=\\frac{1}{2-y}$. 2. Separate variables: Multiply both sides by $(2-y)$ and by $dx$ to obtain $(2-y)\\,dy=(x+1)\\,dx$. 3. Integrate both sides: $\\int(2-y)\\,dy=\\int(x+1)\\,dx$. 4. Compute integrals: Left side gives $2y-\\frac{y^2}{2}$; right side gives $\\frac{x^2}{2}+x$. 5. Include constant: $2y-\\frac{y^2}{2}=\\frac{x^2}{2}+x+C_1$. 6. Rearrange: Multiply by 2 and collect terms to get $x^2+y^2+2x-4y+2C_1=0$. 7. Rename constant: Let $C=2C_1$, so the general solution is $x^2+y^2+2x-4y+C=0$.",
+    "final_answer": "$x^2+y^2+2x-4y+C=0$"
+  },
+  {
+    "topic": "Variables-Separable Technique",
+    "question": "Find the general solution of $\\frac{dy}{dx}=\\frac{1+y^2}{1+x^2}$.",
+    "chain_of_thought_reasoning": "1. Check separability: RHS is a product of a function of $x$ and a function of $y$, namely $g(x)=\\frac{1}{1+x^2}$ and $h(y)=1+y^2$. 2. Separate variables: $\\frac{dy}{1+y^2}=\\frac{dx}{1+x^2}$. 3. Integrate both sides: $\\int\\frac{dy}{1+y^2}=\\int\\frac{dx}{1+x^2}$. 4. Standard integrals: Left gives $\\tan^{-1}y$; right gives $\\tan^{-1}x$. 5. Add constant: $\\tan^{-1}y=\\tan^{-1}x+C$. 6. Solution form: This is the required general solution in implicit form.",
+    "final_answer": "$\\tan^{-1}y=\\tan^{-1}x+C$"
+  },
+  {
+    "topic": "Variables-Separable Technique",
+    "question": "Obtain the particular solution of $\\frac{dy}{dx}=-4xy^2$ satisfying $y=1$ when $x=0$.",
+    "chain_of_thought_reasoning": "1. Separate variables (note $y\\neq 0$): $\\frac{dy}{y^2}=-4x\\,dx$. 2. Integrate: $\\int y^{-2}\\,dy=-4\\int x\\,dx$. 3. Results: $-\\frac{1}{y}=-2x^2+C$. 4. Solve for $y$: $y=\\frac{1}{2x^2-C}$. 5. Apply initial condition: $x=0, y=1$ gives $1=\\frac{1}{-C}$, so $C=-1$. 6. Particular solution: Substitute $C=-1$ to get $y=\\frac{1}{2x^2+1}$.",
+    "final_answer": "$y=\\dfrac{1}{2x^2+1}$"
+  },
+  {
+    "topic": "Variables-Separable Technique",
+    "question": "Solve $x\\,dy=(2x^2+1)\\,dx$ for $x\\neq 0$.",
+    "chain_of_thought_reasoning": "1. Divide by $x$: $dy=\\left(2x+\\frac{1}{x}\\right)dx$. 2. Variables already separated. 3. Integrate: $\\int dy=\\int\\left(2x+\\frac{1}{x}\\right)dx$. 4. Compute: $y=x^2+\\ln|x|+C$. 5. General solution obtained.",
+    "final_answer": "$y=x^2+\\ln|x|+C$"
+  },
+  {
+    "topic": "Variables-Separable Technique",
+    "question": "Find the equation of the curve whose slope is $\\frac{2x}{y^2}$ and which passes through $(-2,3)$.",
+    "chain_of_thought_reasoning": "1. Set up DE: $\\frac{dy}{dx}=\\frac{2x}{y^2}$. 2. Separate: $y^2\\,dy=2x\\,dx$. 3. Integrate: $\\int y^2\\,dy=\\int 2x\\,dx$ gives $\\frac{y^3}{3}=x^2+C$. 4. Use point $(-2,3)$: $\\frac{27}{3}=4+C\\Rightarrow C=5$. 5. Curve equation: $\\frac{y^3}{3}=x^2+5$ or $y=(3x^2+15)^{1/3}$.",
+    "final_answer": "$y=\\sqrt[3]{3x^2+15}$"
+  },
+  {
+    "topic": "Variables-Separable Technique",
+    "question": "Explain in words the key idea that allows us to solve a differential equation by the variables-separable method.",
+    "chain_of_thought_reasoning": "The crucial insight is algebraic rearrangement: if the rate of change $\\frac{dy}{dx}$ can be factored into a product of a function of $x$ alone and a function of $y$ alone, then we can literally split the derivative into a ratio of differentials and move all $y$-terms to one side with $dy$ and all $x$-terms to the other side with $dx$. Once separated, each side is an ordinary integral that can be evaluated independently, thereby yielding an implicit or explicit relation between $y$ and $x$ up to an arbitrary constant.",
+    "final_answer": "The method works when $\\frac{dy}{dx}=g(x)h(y)$; we algebraically separate $x$ and $y$ to opposite sides of the equation and then integrate each side independently."
+  },
+  {
+    "topic": "Variables-Separable Technique",
+    "question": "Solve $\\frac{dy}{dx}=\\frac{1-\\cos x}{1+\\cos x}$.",
+    "chain_of_thought_reasoning": "1. Simplify RHS: Use identity $1-\\cos x=2\\sin^2(x/2)$ and $1+\\cos x=2\\cos^2(x/2)$, so $\\frac{dy}{dx}=\\tan^2(x/2)$. 2. Separate: $dy=\\tan^2(x/2)\\,dx$. 3. Integrate: $\\int dy=\\int\\tan^2(x/2)\\,dx$. 4. Use $\\tan^2\\theta=\\sec^2\\theta-1$: RHS becomes $\\int(\\sec^2(x/2)-1)\\,dx=2\\tan(x/2)-x+C$. 5. Result: $y=2\\tan(x/2)-x+C$.",
+    "final_answer": "$y=2\\tan\\frac{x}{2}-x+C$"
+  },
+  {
+    "topic": "Variables-Separable Technique",
+    "question": "Find the general solution of $\\frac{dy}{dx}=\\sqrt{4-y^2}$ for $-2<y<2$.",
+    "chain_of_thought_reasoning": "1. Separate: $\\frac{dy}{\\sqrt{4-y^2}}=dx$. 2. Integrate: $\\int\\frac{dy}{\\sqrt{4-y^2}}=\\int dx$. 3. Standard integral: LHS is $\\sin^{-1}(y/2)$. 4. Result: $\\sin^{-1}(y/2)=x+C$. 5. Solve for $y$: $y=2\\sin(x+C)$.",
+    "final_answer": "$y=2\\sin(x+C)$"
+  },
+  {
+    "topic": "Variables-Separable Technique",
+    "question": "Solve $\\frac{dy}{dx}+y=1$ for $y\\neq 1$.",
+    "chain_of_thought_reasoning": "1. Rearrange: $\\frac{dy}{dx}=1-y$. 2. Separate: $\\frac{dy}{1-y}=dx$. 3. Integrate: $-\\ln|1-y|=x+C_1$. 4. Exponentiate: $|1-y|=e^{-x-C_1}=Ae^{-x}$ with $A>0$. 5. Remove absolute value: $1-y=Be^{-x}$ where $B\\neq 0$. 6. General solution: $y=1-Be^{-x}$.",
+    "final_answer": "$y=1-Be^{-x}$"
+  },
+  {
+    "topic": "Variables-Separable Technique",
+    "question": "Find the general solution of $\\sec^2 x \\tan y \\,dx + \\sec^2 y \\tan x \\,dy = 0$.",
+    "chain_of_thought_reasoning": "1. Rearrange: $\\sec^2 x \\tan y \\,dx = -\\sec^2 y \\tan x \\,dy$. 2. Separate: $\\frac{\\sec^2 x}{\\tan x}\\,dx = -\\frac{\\sec^2 y}{\\tan y}\\,dy$. 3. Integrate: $\\int\\frac{\\sec^2 x}{\\tan x}\\,dx = -\\int\\frac{\\sec^2 y}{\\tan y}\\,dy$. 4. Use substitution $u=\\tan x$, $du=\\sec^2 x\\,dx$: LHS gives $\\ln|\\tan x|$; similarly RHS gives $-\\ln|\\tan y|$. 5. Combine: $\\ln|\\tan x| + \\ln|\\tan y| = C_1$. 6. Exponentiate: $\\tan x \\tan y = C$.",
+    "final_answer": "$\\tan x \\tan y = C$"
+  },
+  {
+    "topic": "Variables-Separable Technique",
+    "question": "Solve $(e^x+e^{-x})dy - (e^x-e^{-x})dx = 0$.",
+    "chain_of_thought_reasoning": "1. Separate: $dy = \\frac{e^x-e^{-x}}{e^x+e^{-x}}\\,dx$. 2. Recognize numerator as derivative of denominator. 3. Integrate: $\\int dy = \\int\\frac{d(e^x+e^{-x})}{e^x+e^{-x}}$. 4. Result: $y = \\ln(e^x+e^{-x}) + C$.",
+    "final_answer": "$y=\\ln(e^x+e^{-x})+C$"
+  },
+  {
+    "topic": "Variables-Separable Technique",
+    "question": "Find the general solution of $\\frac{dy}{dx}=(1+x^2)(1+y^2)$.",
+    "chain_of_thought_reasoning": "1. Separate: $\\frac{dy}{1+y^2}=(1+x^2)\\,dx$. 2. Integrate: $\\int\\frac{dy}{1+y^2}=\\int(1+x^2)\\,dx$. 3. Compute: $\\tan^{-1}y=x+\\frac{x^3}{3}+C$. 4. Solve for $y$: $y=\\tan\\left(x+\\frac{x^3}{3}+C\\right)$.",
+    "final_answer": "$y=\\tan\\left(\\dfrac{x^3}{3}+x+C\\right)$"
+  },
+  {
+    "topic": "Variables-Separable Technique",
+    "question": "Solve $y\\ln y\\,dx - x\\,dy = 0$.",
+    "chain_of_thought_reasoning": "1. Rearrange: $y\\ln y\\,dx = x\\,dy$. 2. Separate: $\\frac{dx}{x}=\\frac{dy}{y\\ln y}$. 3. Integrate: $\\int\\frac{dx}{x}=\\int\\frac{dy}{y\\ln y}$. 4. LHS: $\\ln|x|$; RHS: let $u=\\ln y$, then $\\int\\frac{du}{u}=\\ln|\\ln y|$. 5. Combine: $\\ln|x|=\\ln|\\ln y|+C_1$. 6. Exponentiate: $x = A\\ln y$, so $\\ln y = Bx$ and $y=e^{Bx}$.",
+    "final_answer": "$y=e^{Bx}$"
+  },
+  {
+    "topic": "Variables-Separable Technique",
+    "question": "Find the general solution of $x^5\\frac{dy}{dx}=-y^5$.",
+    "chain_of_thought_reasoning": "1. Separate: $\\frac{dy}{y^5}=-\\frac{dx}{x^5}$. 2. Integrate: $\\int y^{-5}\\,dy=-\\int x^{-5}\\,dx$. 3. Compute: $-\\frac{1}{4y^4}=\\frac{1}{4x^4}+C_1$. 4. Multiply by $-4$: $\\frac{1}{y^4}=-\\frac{1}{x^4}+C$. 5. Rearrange: $\\frac{1}{y^4}+\\frac{1}{x^4}=C$ or $x^4+y^4=Cx^4y^4$.",
+    "final_answer": "$x^4+y^4=Cx^4y^4$"
+  },
+  {
+    "topic": "Variables-Separable Technique",
+    "question": "Solve $\\frac{dy}{dx}=\\sin^{-1}x$.",
+    "chain_of_thought_reasoning": "1. Variables already separated: $dy=\\sin^{-1}x\\,dx$. 2. Integrate: $y=\\int\\sin^{-1}x\\,dx$. 3. Use integration by parts with $u=\\sin^{-1}x$, $dv=dx$: $y=x\\sin^{-1}x - \\int\\frac{x}{\\sqrt{1-x^2}}\\,dx$. 4. Remaining integral: substitute $w=1-x^2$, get $-\\sqrt{1-x^2}$. 5. Result: $y=x\\sin^{-1}x + \\sqrt{1-x^2} + C$.",
+    "final_answer": "$y=x\\sin^{-1}x+\\sqrt{1-x^2}+C$"
+  },
+  {
+    "topic": "Variables-Separable Technique",
+    "question": "Find the general solution of $e^x\\tan y\\,dx + (1-e^x)\\sec^2y\\,dy = 0$.",
+    "chain_of_thought_reasoning": "1. Rearrange: $e^x\\tan y\\,dx = -(1-e^x)\\sec^2y\\,dy$. 2. Separate: $\\frac{e^x}{1-e^x}\\,dx = -\\frac{\\sec^2y}{\\tan y}\\,dy$. 3. Integrate: LHS substitute $u=1-e^x$, get $-\\ln|1-e^x|$; RHS substitute $v=\\tan y$, get $-\\ln|\\tan y|$. 4. Combine logs: $\\ln|1-e^x| - \\ln|\\tan y| = C_1$. 5. Single log: $\\ln\\left|\\frac{1-e^x}{\\tan y}\\right|=C_1$. 6. Exponentiate: $(1-e^x)=A\\tan y$.",
+    "final_answer": "$(1-e^x)=A\\tan y$"
+  },
+  {
+    "topic": "Variables-Separable Technique",
+    "question": "Describe the main limitation of the variables-separable method and give an example of a first-order DE that cannot be solved by separation.",
+    "chain_of_thought_reasoning": "The method only applies when the right-hand side can be factored into a product of a function of $x$ alone and a function of $y$ alone. If the expression is inseparable\u2014e.g., if $y$ appears in a way that cannot be multiplicatively split from $x$\u2014then separation fails. A classic example is the linear equation $\\frac{dy}{dx}+y=x$, whose RHS after standard rearrangement is $x-y$, which is not expressible as $g(x)h(y)$. Hence it is not separable.",
+    "final_answer": "The method fails when $\\frac{dy}{dx}$ cannot be written as $g(x)h(y)$; e.g., $\\frac{dy}{dx}=x-y$ is not separable."
+  },
+  {
+    "topic": "Variables-Separable Technique",
+    "question": "Find the particular solution of $(x^3+x^2+x+1)\\frac{dy}{dx}=2x^2+x$ with $y=1$ when $x=0$.",
+    "chain_of_thought_reasoning": "1. Separate: $dy=\\frac{2x^2+x}{x^3+x^2+x+1}\\,dx$. 2. Factor denominator: $x^3+x^2+x+1=(x^2+1)(x+1)$. 3. Partial fractions: $\\frac{2x^2+x}{(x^2+1)(x+1)}=\\frac{x}{x^2+1}+\\frac{1}{x+1}$. 4. Integrate: $y=\\frac{1}{2}\\ln(x^2+1)+\\ln|x+1|+C$. 5. Use $x=0,y=1$: $1=0+0+C\\Rightarrow C=1$. 6. Particular solution: $y=\\frac{1}{2}\\ln(x^2+1)+\\ln(x+1)+1$.",
+    "final_answer": "$y=\\dfrac{1}{2}\\ln(x^2+1)+\\ln(x+1)+1$"
+  },
+  {
+    "topic": "Variables-Separable Technique",
+    "question": "Solve $x(x^2-1)\\frac{dy}{dx}=1$ with $y=0$ when $x=2$.",
+    "chain_of_thought_reasoning": "1. Separate: $dy=\\frac{dx}{x(x^2-1)}=\\frac{dx}{x(x-1)(x+1)}$. 2. Partial fractions: $\\frac{1}{x(x-1)(x+1)}=\\frac{1}{2(x-1)}-\\frac{1}{x}+\\frac{1}{2(x+1)}$. 3. Integrate: $y=\\frac{1}{2}\\ln|x-1|-\\ln|x|+\\frac{1}{2}\\ln|x+1|+C$. 4. Combine logs: $y=\\frac{1}{2}\\ln\\left|\\frac{(x-1)(x+1)}{x^2}\\right|+C=\\frac{1}{2}\\ln\\left|1-\\frac{1}{x^2}\\right|+C$. 5. Use $x=2,y=0$: $0=\\frac{1}{2}\\ln\\frac{3}{4}+C\\Rightarrow C=-\\frac{1}{2}\\ln\\frac{3}{4}$. 6. Simplify: $y=\\frac{1}{2}\\ln\\left|1-\\frac{1}{x^2}\\right|-\\frac{1}{2}\\ln\\frac{3}{4}$.",
+    "final_answer": "$y=\\dfrac{1}{2}\\ln\\left|1-\\dfrac{1}{x^2}\\right|-\\dfrac{1}{2}\\ln\\dfrac{3}{4}$"
+  },
+  {
+    "topic": "Variables-Separable Technique",
+    "question": "Find the particular solution of $\\cos\\left(\\frac{dy}{dx}\\right)=a$ with $y=1$ when $x=0$.",
+    "chain_of_thought_reasoning": "1. Solve for derivative: $\\frac{dy}{dx}=\\cos^{-1}a$ (constant). 2. Separate: $dy=\\cos^{-1}a\\,dx$. 3. Integrate: $y=(\\cos^{-1}a)x+C$. 4. Use $x=0,y=1$: $1=0+C\\Rightarrow C=1$. 5. Particular solution: $y=(\\cos^{-1}a)x+1$.",
+    "final_answer": "$y=(\\cos^{-1}a)x+1$"
+  },
+  {
+    "topic": "Variables-Separable Technique",
+    "question": "Solve $\\frac{dy}{dx}=y\\tan x$ with $y=1$ when $x=0$.",
+    "chain_of_thought_reasoning": "1. Separate: $\\frac{dy}{y}=\\tan x\\,dx$. 2. Integrate: $\\ln|y|=-\\ln|\\cos x|+C_1$. 3. Exponentiate: $y=A\\sec x$. 4. Use $x=0,y=1$: $1=A\\cdot 1\\Rightarrow A=1$. 5. Particular solution: $y=\\sec x$.",
+    "final_answer": "$y=\\sec x$"
+  },
+  {
+    "topic": "Arbitrary-Constant Count vs Order Rule",
+    "question": "State the exact number of arbitrary constants that must appear in the general solution of the ordinary differential equation $y^{(5)} + 3y'' - 4y = 0$.",
+    "chain_of_thought_reasoning": "1. Identify the highest derivative: the term $y^{(5)}$ means the fifth derivative. 2. Apply the Order Rule: the order of a differential equation equals the order of the highest derivative, so order = 5. 3. Recall the Arbitrary-Constant Count Rule: the general solution of an nth-order ordinary differential equation contains exactly n arbitrary constants. 4. Conclude: since order = 5, the general solution must contain 5 arbitrary constants.",
+    "final_answer": "5"
+  },
+  {
+    "topic": "Arbitrary-Constant Count vs Order Rule",
+    "question": "A differential equation has the general solution $y(x) = C_1 e^{2x} + C_2 e^{-x} + C_3 \\cos 3x$. How many arbitrary constants would a particular solution of this equation contain?",
+    "chain_of_thought_reasoning": "1. Count the constants in the given general solution: $C_1, C_2, C_3$ \u2192 3 constants. 2. Apply the Order Rule in reverse: the number of arbitrary constants equals the order of the differential equation, so the underlying DE is third-order. 3. Recall the definition of a particular solution: it is obtained by assigning specific numerical values to all arbitrary constants. 4. Therefore a particular solution has 0 arbitrary constants.",
+    "final_answer": "0"
+  },
+  {
+    "topic": "Arbitrary-Constant Count vs Order Rule",
+    "question": "Determine the order of the differential equation whose general solution is $y(x) = A x^2 + B x + C + D e^{x}$.",
+    "chain_of_thought_reasoning": "1. Count the arbitrary constants in the general solution: A, B, C, D \u2192 4 constants. 2. Apply the Order Rule: the number of arbitrary constants equals the order of the differential equation. 3. Conclude: since 4 constants are present, the differential equation must be of order 4.",
+    "final_answer": "4"
+  },
+  {
+    "topic": "Arbitrary-Constant Count vs Order Rule",
+    "question": "If the general solution of a differential equation is $y(t) = C_1 \\sin 2t + C_2 \\cos 2t$, how many initial conditions are required to obtain a unique particular solution?",
+    "chain_of_thought_reasoning": "1. Count the arbitrary constants: $C_1$ and $C_2$ \u2192 2 constants. 2. Apply the Order Rule: 2 constants imply the differential equation is second-order. 3. Recall that for an nth-order ODE, n initial (or boundary) conditions are needed to fix all constants. 4. Hence 2 initial conditions are required.",
+    "final_answer": "2"
+  },
+  {
+    "topic": "Arbitrary-Constant Count vs Order Rule",
+    "question": "A student claims the general solution of a certain third-order ODE is $y(x) = E x^3 + F x + G$. Is this claim consistent with the Order Rule?",
+    "chain_of_thought_reasoning": "1. Identify the number of arbitrary constants in the proposed solution: E, F, G \u2192 3 constants. 2. Note the stated order of the ODE: third-order. 3. Apply the Order Rule: a third-order ODE must have exactly 3 arbitrary constants in its general solution. 4. Compare: the student\u2019s proposal contains 3 constants, which matches the required count. 5. Conclude: the claim is consistent.",
+    "final_answer": "Yes"
+  },
+  {
+    "topic": "Arbitrary-Constant Count vs Order Rule",
+    "question": "Explain why the function $y(x) = 5 e^{3x} + 2 e^{-x}$ cannot be the general solution of any linear ordinary differential equation.",
+    "chain_of_thought_reasoning": "1. Count arbitrary constants in the given function: none; all coefficients are fixed numbers. 2. Recall the Order Rule: the general solution of an nth-order ODE must contain exactly n arbitrary constants. 3. Observe that 0 constants are present, implying the function is a particular solution. 4. Conclude: since it lacks arbitrary constants, it cannot serve as a general solution for any ODE.",
+    "final_answer": "It contains zero arbitrary constants, whereas a general solution must contain exactly n arbitrary constants where n is the order of the ODE."
+  },
+  {
+    "topic": "Arbitrary-Constant Count vs Order Rule",
+    "question": "Given that $y(x) = C_1 x + C_2 + C_3 e^{4x}$ is the general solution of a homogeneous linear ODE, what is the minimal order of that ODE?",
+    "chain_of_thought_reasoning": "1. Count the arbitrary constants: $C_1, C_2, C_3$ \u2192 3 constants. 2. Apply the Order Rule: the number of arbitrary constants equals the order of the differential equation. 3. Conclude: the ODE must be of order 3.",
+    "final_answer": "3"
+  },
+  {
+    "topic": "Arbitrary-Constant Count vs Order Rule",
+    "question": "How many arbitrary constants will the general solution of the equation $y^{(4)} - y = 0$ contain?",
+    "chain_of_thought_reasoning": "1. Identify the highest derivative: $y^{(4)}$ indicates the fourth derivative. 2. Apply the Order Rule: order = 4. 3. Recall the Arbitrary-Constant Count Rule: the general solution of an nth-order ODE contains n arbitrary constants. 4. Conclude: 4 constants are required.",
+    "final_answer": "4"
+  },
+  {
+    "topic": "Arbitrary-Constant Count vs Order Rule",
+    "question": "Suppose the general solution of a differential equation is expressed as $y(x) = A + B \\ln x$. What is the order of the corresponding differential equation?",
+    "chain_of_thought_reasoning": "1. Count the arbitrary constants: A and B \u2192 2 constants. 2. Apply the Order Rule: the number of arbitrary constants equals the order of the differential equation. 3. Conclude: the ODE must be second-order.",
+    "final_answer": "2"
+  },
+  {
+    "topic": "Arbitrary-Constant Count vs Order Rule",
+    "question": "A differential equation has the general solution $y(t) = C_1 e^{t} + C_2 t e^{t} + C_3 t^2 e^{t}$. Determine how many initial conditions must be specified to select a unique solution trajectory.",
+    "chain_of_thought_reasoning": "1. Count the arbitrary constants: $C_1, C_2, C_3$ \u2192 3 constants. 2. Apply the Order Rule: 3 constants imply the differential equation is third-order. 3. Recall that an nth-order ODE requires n initial conditions to fix all constants. 4. Conclude: 3 initial conditions are needed.",
+    "final_answer": "3"
+  },
+  {
+    "topic": "Arbitrary-Constant Count vs Order Rule",
+    "question": "A researcher proposes that the general solution of a certain ODE is $y(x) = P \\sin x + Q \\cos x + R \\sin 2x + S \\cos 2x$. Verify whether this proposal is compatible with the Order Rule for a fourth-order linear ODE.",
+    "chain_of_thought_reasoning": "1. Count the arbitrary constants: P, Q, R, S \u2192 4 constants. 2. Note the stated order: fourth-order. 3. Apply the Order Rule: a fourth-order ODE must have exactly 4 arbitrary constants in its general solution. 4. Compare: the proposal contains 4 constants, matching the required count. 5. Conclude: the proposal is compatible.",
+    "final_answer": "Compatible"
+  },
+  {
+    "topic": "Arbitrary-Constant Count vs Order Rule",
+    "question": "If a differential equation is known to be of order 5, how many arbitrary constants will appear in its general solution?",
+    "chain_of_thought_reasoning": "1. Recall the Order Rule: the number of arbitrary constants in the general solution equals the order of the differential equation. 2. Given order = 5. 3. Conclude: the general solution must contain 5 arbitrary constants.",
+    "final_answer": "5"
+  },
+  {
+    "topic": "Arbitrary-Constant Count vs Order Rule",
+    "question": "The function $y(x) = 7 \\sin 3x$ is presented as a solution of a certain homogeneous linear ODE. Can it be the general solution? Justify using the Order Rule.",
+    "chain_of_thought_reasoning": "1. Count arbitrary constants in the given function: none; 7 is a fixed coefficient. 2. Recall the Order Rule: the general solution must contain exactly n arbitrary constants where n is the order of the ODE. 3. Since 0 constants are present, the function is a particular solution. 4. Conclude: it cannot be the general solution.",
+    "final_answer": "No, because it contains zero arbitrary constants whereas a general solution must contain n arbitrary constants."
+  },
+  {
+    "topic": "Arbitrary-Constant Count vs Order Rule",
+    "question": "Given the general solution $y(x) = C_1 + C_2 x + C_3 x^2 + C_4 x^3 + C_5 x^4$, what is the order of the underlying differential equation?",
+    "chain_of_thought_reasoning": "1. Count the arbitrary constants: $C_1$ through $C_5$ \u2192 5 constants. 2. Apply the Order Rule: the number of arbitrary constants equals the order of the differential equation. 3. Conclude: the ODE must be fifth-order.",
+    "final_answer": "5"
+  },
+  {
+    "topic": "Arbitrary-Constant Count vs Order Rule",
+    "question": "A second-order linear ODE has the general solution $y(x) = A e^{x} + B e^{-x}$. How many arbitrary constants would be present in a particular solution obtained by imposing the initial conditions $y(0) = 3$ and $y'(0) = 4$?",
+    "chain_of_thought_reasoning": "1. Recognize that the given function is the general solution with 2 arbitrary constants A and B. 2. Recall that a particular solution is formed by assigning specific values to all arbitrary constants using initial/boundary conditions. 3. After applying the two given conditions, A and B will be uniquely determined. 4. Hence the resulting particular solution contains 0 arbitrary constants.",
+    "final_answer": "0"
+  },
+  {
+    "topic": "Arbitrary-Constant Count vs Order Rule",
+    "question": "Determine the number of arbitrary constants in the general solution of the differential equation $y''' - 6y'' + 11y' - 6y = 0$.",
+    "chain_of_thought_reasoning": "1. Identify the highest derivative: $y'''$ indicates the third derivative. 2. Apply the Order Rule: order = 3. 3. Recall the Arbitrary-Constant Count Rule: the general solution of an nth-order ODE contains n arbitrary constants. 4. Conclude: 3 constants are required.",
+    "final_answer": "3"
+  },
+  {
+    "topic": "Arbitrary-Constant Count vs Order Rule",
+    "question": "The general solution of an ODE is given by $y(x) = K_1 e^{2x} + K_2 e^{3x} + K_3 e^{4x} + K_4 e^{5x}$. What is the minimal possible order of this ODE?",
+    "chain_of_thought_reasoning": "1. Count the arbitrary constants: $K_1, K_2, K_3, K_4$ \u2192 4 constants. 2. Apply the Order Rule: the number of arbitrary constants equals the order of the differential equation. 3. Conclude: the ODE must be of order 4.",
+    "final_answer": "4"
+  },
+  {
+    "topic": "Arbitrary-Constant Count vs Order Rule",
+    "question": "Explain the relationship between the order of a linear ordinary differential equation and the number of arbitrary constants in its general solution.",
+    "chain_of_thought_reasoning": "1. Define the order of an ODE as the order of the highest derivative appearing. 2. State the Order Rule: for an nth-order linear ODE, the general solution contains exactly n arbitrary constants. 3. Justify: each integration step introduces one constant, and n integrations are needed to solve an nth-order equation. 4. Conclude: the count of arbitrary constants directly equals the order.",
+    "final_answer": "The number of arbitrary constants in the general solution of a linear ordinary differential equation is exactly equal to the order of the equation."
+  },
+  {
+    "topic": "Slope/Tangent Interpretation in Geometric Problems",
+    "question": "A curve passes through the point (2, 5) and at any point (x, y) on the curve the slope of the tangent is given by dy/dx = 3x\u00b2. Find the equation of the curve.",
+    "chain_of_thought_reasoning": "1. The slope of the tangent is given by dy/dx = 3x\u00b2. 2. Integrate both sides with respect to x to find y: \u222b dy = \u222b 3x\u00b2 dx \u2192 y = x\u00b3 + C. 3. Use the initial condition (2, 5): 5 = 2\u00b3 + C \u2192 5 = 8 + C \u2192 C = -3. 4. Therefore, the equation of the curve is y = x\u00b3 - 3.",
+    "final_answer": "$y = x^{3} - 3$"
+  },
+  {
+    "topic": "Slope/Tangent Interpretation in Geometric Problems",
+    "question": "Find the slope of the tangent to the circle x\u00b2 + y\u00b2 = 25 at the point (3, 4).",
+    "chain_of_thought_reasoning": "1. Differentiate the equation of the circle implicitly with respect to x: 2x + 2y(dy/dx) = 0. 2. Solve for dy/dx: dy/dx = -x/y. 3. Substitute the point (3, 4): dy/dx = -3/4. 4. Therefore, the slope of the tangent at (3, 4) is -3/4.",
+    "final_answer": "$-\\frac{3}{4}$"
+  },
+  {
+    "topic": "Slope/Tangent Interpretation in Geometric Problems",
+    "question": "The slope of the tangent to a curve at any point (x, y) is 4x - 2 and the curve passes through (1, 0). Find y when x = 2.",
+    "chain_of_thought_reasoning": "1. Given dy/dx = 4x - 2. 2. Integrate: y = \u222b(4x - 2)dx = 2x\u00b2 - 2x + C. 3. Use point (1, 0): 0 = 2(1)\u00b2 - 2(1) + C \u2192 C = 0. 4. Equation: y = 2x\u00b2 - 2x. 5. At x = 2: y = 2(4) - 2(2) = 8 - 4 = 4.",
+    "final_answer": "$4$"
+  },
+  {
+    "topic": "Slope/Tangent Interpretation in Geometric Problems",
+    "question": "A curve has dy/dx = e^x and passes through (0, 2). Find the equation of the tangent at x = 0.",
+    "chain_of_thought_reasoning": "1. Integrate dy/dx = e^x \u2192 y = e^x + C. 2. Use (0, 2): 2 = e\u2070 + C \u2192 C = 1. 3. Curve: y = e^x + 1. 4. At x = 0, y = 2. 5. Slope at x = 0: dy/dx = e\u2070 = 1. 6. Tangent line: y - 2 = 1(x - 0) \u2192 y = x + 2.",
+    "final_answer": "$y = x + 2$"
+  },
+  {
+    "topic": "Slope/Tangent Interpretation in Geometric Problems",
+    "question": "Find the angle (in degrees) between the positive x-axis and the tangent to y = ln x at x = 1.",
+    "chain_of_thought_reasoning": "1. dy/dx of y = ln x is 1/x. 2. At x = 1, slope m = 1/1 = 1. 3. The angle \u03b8 satisfies tan \u03b8 = 1. 4. \u03b8 = arctan(1) = 45\u00b0.",
+    "final_answer": "$45^{\\circ}$"
+  },
+  {
+    "topic": "Slope/Tangent Interpretation in Geometric Problems",
+    "question": "The tangent to the parabola y\u00b2 = 4x at a point makes an angle of 45\u00b0 with the positive x-axis. Find the point of tangency.",
+    "chain_of_thought_reasoning": "1. Implicit differentiation: 2y(dy/dx) = 4 \u2192 dy/dx = 2/y. 2. Slope = tan 45\u00b0 = 1. 3. Set 2/y = 1 \u2192 y = 2. 4. Substitute y = 2 into y\u00b2 = 4x \u2192 4 = 4x \u2192 x = 1. 5. Point of tangency is (1, 2).",
+    "final_answer": "$(1, 2)$"
+  },
+  {
+    "topic": "Slope/Tangent Interpretation in Geometric Problems",
+    "question": "A curve has dy/dx = 6x\u00b2 - 4x + 1 and passes through (1, 3). Find the slope of the tangent at x = 2.",
+    "chain_of_thought_reasoning": "1. The slope at any x is given directly by dy/dx = 6x\u00b2 - 4x + 1. 2. At x = 2: dy/dx = 6(4) - 4(2) + 1 = 24 - 8 + 1 = 17. 3. Therefore, the slope at x = 2 is 17.",
+    "final_answer": "$17$"
+  },
+  {
+    "topic": "Slope/Tangent Interpretation in Geometric Problems",
+    "question": "Find the equation of the normal to the curve y = x\u00b3 at x = 1.",
+    "chain_of_thought_reasoning": "1. dy/dx = 3x\u00b2 \u2192 at x = 1, slope of tangent = 3. 2. Slope of normal = -1/3. 3. At x = 1, y = 1\u00b3 = 1. 4. Normal line: y - 1 = (-1/3)(x - 1) \u2192 y = (-1/3)x + 1 + 1/3 \u2192 y = (-1/3)x + 4/3.",
+    "final_answer": "$y = -\\frac{1}{3}x + \\frac{4}{3}$"
+  },
+  {
+    "topic": "Slope/Tangent Interpretation in Geometric Problems",
+    "question": "The slope of the tangent to a curve is proportional to x. If the curve passes through (2, 5) and (4, 13), find the equation of the curve.",
+    "chain_of_thought_reasoning": "1. dy/dx = kx. 2. Integrate: y = (k/2)x\u00b2 + C. 3. Use (2, 5): 5 = (k/2)(4) + C \u2192 5 = 2k + C. 4. Use (4, 13): 13 = (k/2)(16) + C \u2192 13 = 8k + C. 5. Subtract equations: 8 = 6k \u2192 k = 4/3. 6. Then C = 5 - 2(4/3) = 5 - 8/3 = 7/3. 7. Curve: y = (2/3)x\u00b2 + 7/3.",
+    "final_answer": "$y = \\frac{2}{3}x^{2} + \\frac{7}{3}$"
+  },
+  {
+    "topic": "Slope/Tangent Interpretation in Geometric Problems",
+    "question": "Find the x-coordinate where the tangent to y = x\u00b2 - 4x + 5 is horizontal.",
+    "chain_of_thought_reasoning": "1. Horizontal tangent means dy/dx = 0. 2. dy/dx = 2x - 4. 3. Set 2x - 4 = 0 \u2192 x = 2. 4. Therefore, x = 2.",
+    "final_answer": "$2$"
+  },
+  {
+    "topic": "Slope/Tangent Interpretation in Geometric Problems",
+    "question": "A curve has dy/dx = 2y. If it passes through (0, 3), find the equation of the curve.",
+    "chain_of_thought_reasoning": "1. Separate variables: dy/y = 2 dx. 2. Integrate: ln|y| = 2x + C. 3. Exponentiate: y = Ae^(2x). 4. Use (0, 3): 3 = Ae^0 \u2192 A = 3. 5. Curve: y = 3e^(2x).",
+    "final_answer": "$y = 3e^{2x}$"
+  },
+  {
+    "topic": "Slope/Tangent Interpretation in Geometric Problems",
+    "question": "Find the slope of the tangent to the ellipse x\u00b2/9 + y\u00b2/4 = 1 at the point (3, 0).",
+    "chain_of_thought_reasoning": "1. Implicit differentiation: (2x)/9 + (2y/4)(dy/dx) = 0 \u2192 (2x)/9 + (y/2)(dy/dx) = 0. 2. Solve for dy/dx: dy/dx = -4x/(9y). 3. At (3, 0), y = 0 \u2192 division by zero. 4. This indicates a vertical tangent. 5. Slope is undefined (infinite).",
+    "final_answer": "$\\text{undefined (vertical tangent)}$"
+  },
+  {
+    "topic": "Slope/Tangent Interpretation in Geometric Problems",
+    "question": "The tangent to a curve at (1, 2) has slope 3. If dy/dx = ax, find a.",
+    "chain_of_thought_reasoning": "1. Given dy/dx = ax. 2. At x = 1, dy/dx = 3. 3. Substitute: a(1) = 3 \u2192 a = 3.",
+    "final_answer": "$3$"
+  },
+  {
+    "topic": "Slope/Tangent Interpretation in Geometric Problems",
+    "question": "A curve has dy/dx = 1/x and passes through (e, 2). Find the equation of the tangent at x = e.",
+    "chain_of_thought_reasoning": "1. Integrate: y = ln|x| + C. 2. Use (e, 2): 2 = ln e + C \u2192 2 = 1 + C \u2192 C = 1. 3. Curve: y = ln x + 1. 4. At x = e, y = 2. 5. Slope: dy/dx = 1/e. 6. Tangent: y - 2 = (1/e)(x - e) \u2192 y = (1/e)x - 1 + 2 \u2192 y = (1/e)x + 1.",
+    "final_answer": "$y = \\frac{1}{e}x + 1$"
+  },
+  {
+    "topic": "Slope/Tangent Interpretation in Geometric Problems",
+    "question": "Find the point on y = x\u00b2 where the tangent is parallel to the line y = 4x - 3.",
+    "chain_of_thought_reasoning": "1. Slope of line = 4. 2. dy/dx of y = x\u00b2 is 2x. 3. Set 2x = 4 \u2192 x = 2. 4. y = 2\u00b2 = 4. 5. Point is (2, 4).",
+    "final_answer": "$(2, 4)$"
+  },
+  {
+    "topic": "Slope/Tangent Interpretation in Geometric Problems",
+    "question": "Explain why the slope of the tangent to y = |x| does not exist at x = 0.",
+    "chain_of_thought_reasoning": "1. The function y = |x| has a sharp corner at x = 0. 2. Left-hand derivative: lim h\u21920\u207b (|0 + h| - |0|)/h = lim h\u21920\u207b (-h)/h = -1. 3. Right-hand derivative: lim h\u21920\u207a (h)/h = 1. 4. Since left and right derivatives are not equal, the derivative does not exist at x = 0. 5. Therefore, the slope of the tangent is undefined at x = 0.",
+    "final_answer": "$\\text{The left and right derivatives are not equal, so the derivative does not exist.}$"
+  },
+  {
+    "topic": "Slope/Tangent Interpretation in Geometric Problems",
+    "question": "A curve has dy/dx = sin x and passes through (0, 1). Find the equation of the curve.",
+    "chain_of_thought_reasoning": "1. Integrate: y = \u222b sin x dx = -cos x + C. 2. Use (0, 1): 1 = -cos 0 + C \u2192 1 = -1 + C \u2192 C = 2. 3. Curve: y = -cos x + 2.",
+    "final_answer": "$y = -\\cos x + 2$"
+  },
+  {
+    "topic": "Slope/Tangent Interpretation in Geometric Problems",
+    "question": "Find the slope of the tangent to the curve x = t\u00b2, y = t\u00b3 at t = 2.",
+    "chain_of_thought_reasoning": "1. Parametric derivatives: dx/dt = 2t, dy/dt = 3t\u00b2. 2. dy/dx = (dy/dt)/(dx/dt) = (3t\u00b2)/(2t) = (3t)/2. 3. At t = 2: dy/dx = (3\u00b72)/2 = 3.",
+    "final_answer": "$3$"
+  },
+  {
+    "topic": "Slope/Tangent Interpretation in Geometric Problems",
+    "question": "The slope of the tangent to a curve is given by dy/dx = 2x + 3 and the curve passes through (1, 0). Find y when x = 0.",
+    "chain_of_thought_reasoning": "1. Integrate: y = \u222b(2x + 3)dx = x\u00b2 + 3x + C. 2. Use (1, 0): 0 = 1\u00b2 + 3(1) + C \u2192 0 = 4 + C \u2192 C = -4. 3. Curve: y = x\u00b2 + 3x - 4. 4. At x = 0: y = 0 + 0 - 4 = -4.",
+    "final_answer": "$-4$"
+  },
+  {
+    "topic": "Slope/Tangent Interpretation in Geometric Problems",
+    "question": "Describe how the sign of the derivative dy/dx indicates whether the function is increasing or decreasing at a point.",
+    "chain_of_thought_reasoning": "1. The derivative dy/dx represents the slope of the tangent line. 2. If dy/dx > 0 at a point, the tangent line has a positive slope, meaning the function is increasing at that point. 3. If dy/dx < 0, the tangent has a negative slope, so the function is decreasing. 4. If dy/dx = 0, the tangent is horizontal, indicating a possible local maximum, minimum, or inflection point.",
+    "final_answer": "$\\text{If } \\frac{dy}{dx} > 0 \\text{ the function is increasing; if } \\frac{dy}{dx} < 0 \\text{ it is decreasing.}$"
+  },
+  {
+    "topic": "Degree of a Differential Equation (Polynomial in Derivatives)",
+    "question": "Determine the degree of the differential equation $\\left(\\frac{d^2y}{dx^2}\\right)^3 + 2\\left(\\frac{dy}{dx}\\right)^4 - y = 0$.",
+    "chain_of_thought_reasoning": "1. Identify the highest order derivative: $\\frac{d^2y}{dx^2}$ (second order). 2. Check if the equation is a polynomial in derivatives: Yes, all terms are powers of derivatives. 3. Find the exponent of the highest order derivative: The term $\\left(\\frac{d^2y}{dx^2}\\right)^3$ has exponent 3. 4. Conclude the degree is 3.",
+    "final_answer": "3"
+  },
+  {
+    "topic": "Degree of a Differential Equation (Polynomial in Derivatives)",
+    "question": "What is the degree of the differential equation $\\frac{d^3y}{dx^3} + 5\\left(\\frac{d^2y}{dx^2}\\right)^2 + \\sin x \\frac{dy}{dx} = 0$?",
+    "chain_of_thought_reasoning": "1. Identify the highest order derivative: $\\frac{d^3y}{dx^3}$ (third order). 2. Check if the equation is a polynomial in derivatives: Yes, all terms are powers of derivatives. 3. Find the exponent of the highest order derivative: The term $\\frac{d^3y}{dx^3}$ has exponent 1. 4. Conclude the degree is 1.",
+    "final_answer": "1"
+  },
+  {
+    "topic": "Degree of a Differential Equation (Polynomial in Derivatives)",
+    "question": "Find the degree of the differential equation $\\left(\\frac{dy}{dx}\\right)^2 + \\left(\\frac{dy}{dx}\\right)^3 - y = 0$.",
+    "chain_of_thought_reasoning": "1. Identify the highest order derivative: $\\frac{dy}{dx}$ (first order). 2. Check if the equation is a polynomial in derivatives: Yes, all terms are powers of derivatives. 3. Find the exponent of the highest order derivative: The term $\\left(\\frac{dy}{dx}\\right)^3$ has exponent 3. 4. Conclude the degree is 3.",
+    "final_answer": "3"
+  },
+  {
+    "topic": "Degree of a Differential Equation (Polynomial in Derivatives)",
+    "question": "Determine the degree of the differential equation $\\left(\\frac{d^4y}{dx^4}\\right)^2 + \\left(\\frac{d^3y}{dx^3}\\right)^5 - y = 0$.",
+    "chain_of_thought_reasoning": "1. Identify the highest order derivative: $\\frac{d^4y}{dx^4}$ (fourth order). 2. Check if the equation is a polynomial in derivatives: Yes, all terms are powers of derivatives. 3. Find the exponent of the highest order derivative: The term $\\left(\\frac{d^4y}{dx^4}\\right)^2$ has exponent 2. 4. Conclude the degree is 2.",
+    "final_answer": "2"
+  },
+  {
+    "topic": "Degree of a Differential Equation (Polynomial in Derivatives)",
+    "question": "What is the degree of the differential equation $\\frac{d^2y}{dx^2} + \\sin\\left(\\frac{dy}{dx}\\right) = 0$?",
+    "chain_of_thought_reasoning": "1. Identify the highest order derivative: $\\frac{d^2y}{dx^2}$ (second order). 2. Check if the equation is a polynomial in derivatives: No, the term $\\sin\\left(\\frac{dy}{dx}\\right)$ is not a polynomial in derivatives. 3. Conclude the degree is not defined.",
+    "final_answer": "Not defined"
+  },
+  {
+    "topic": "Degree of a Differential Equation (Polynomial in Derivatives)",
+    "question": "Find the degree of the differential equation $\\left(\\frac{d^2y}{dx^2}\\right)^4 + \\left(\\frac{dy}{dx}\\right)^6 - y^2 = 0$.",
+    "chain_of_thought_reasoning": "1. Identify the highest order derivative: $\\frac{d^2y}{dx^2}$ (second order). 2. Check if the equation is a polynomial in derivatives: Yes, all terms are powers of derivatives. 3. Find the exponent of the highest order derivative: The term $\\left(\\frac{d^2y}{dx^2}\\right)^4$ has exponent 4. 4. Conclude the degree is 4.",
+    "final_answer": "4"
+  },
+  {
+    "topic": "Degree of a Differential Equation (Polynomial in Derivatives)",
+    "question": "Determine the degree of the differential equation $\\frac{d^3y}{dx^3} + \\left(\\frac{d^2y}{dx^2}\\right)^3 + \\left(\\frac{dy}{dx}\\right)^5 = 0$.",
+    "chain_of_thought_reasoning": "1. Identify the highest order derivative: $\\frac{d^3y}{dx^3}$ (third order). 2. Check if the equation is a polynomial in derivatives: Yes, all terms are powers of derivatives. 3. Find the exponent of the highest order derivative: The term $\\frac{d^3y}{dx^3}$ has exponent 1. 4. Conclude the degree is 1.",
+    "final_answer": "1"
+  },
+  {
+    "topic": "Degree of a Differential Equation (Polynomial in Derivatives)",
+    "question": "What is the degree of the differential equation $\\left(\\frac{dy}{dx}\\right)^7 + \\left(\\frac{d^2y}{dx^2}\\right)^2 - y = 0$?",
+    "chain_of_thought_reasoning": "1. Identify the highest order derivative: $\\frac{d^2y}{dx^2}$ (second order). 2. Check if the equation is a polynomial in derivatives: Yes, all terms are powers of derivatives. 3. Find the exponent of the highest order derivative: The term $\\left(\\frac{d^2y}{dx^2}\\right)^2$ has exponent 2. 4. Conclude the degree is 2.",
+    "final_answer": "2"
+  },
+  {
+    "topic": "Degree of a Differential Equation (Polynomial in Derivatives)",
+    "question": "Find the degree of the differential equation $\\frac{d^5y}{dx^5} + \\left(\\frac{d^3y}{dx^3}\\right)^2 + \\left(\\frac{dy}{dx}\\right)^3 = 0$.",
+    "chain_of_thought_reasoning": "1. Identify the highest order derivative: $\\frac{d^5y}{dx^5}$ (fifth order). 2. Check if the equation is a polynomial in derivatives: Yes, all terms are powers of derivatives. 3. Find the exponent of the highest order derivative: The term $\\frac{d^5y}{dx^5}$ has exponent 1. 4. Conclude the degree is 1.",
+    "final_answer": "1"
+  },
+  {
+    "topic": "Degree of a Differential Equation (Polynomial in Derivatives)",
+    "question": "Determine the degree of the differential equation $\\left(\\frac{d^2y}{dx^2}\\right)^5 + \\left(\\frac{dy}{dx}\\right)^3 + \\ln y = 0$.",
+    "chain_of_thought_reasoning": "1. Identify the highest order derivative: $\\frac{d^2y}{dx^2}$ (second order). 2. Check if the equation is a polynomial in derivatives: No, the term $\\ln y$ is not a polynomial in derivatives. 3. Conclude the degree is not defined.",
+    "final_answer": "Not defined"
+  },
+  {
+    "topic": "Degree of a Differential Equation (Polynomial in Derivatives)",
+    "question": "Explain why the degree of the differential equation $\\frac{dy}{dx} + \\sin\\left(\\frac{dy}{dx}\\right) = 0$ is not defined.",
+    "chain_of_thought_reasoning": "1. The equation contains the term $\\sin\\left(\\frac{dy}{dx}\\right)$, which is a transcendental function of the derivative. 2. For the degree to be defined, the differential equation must be a polynomial in derivatives. 3. Since $\\sin\\left(\\frac{dy}{dx}\\right)$ cannot be expressed as a polynomial in $\\frac{dy}{dx}$, the equation fails the polynomial condition. 4. Hence, the degree is not defined.",
+    "final_answer": "The degree is not defined because the equation is not a polynomial in derivatives due to the $\\sin\\left(\\frac{dy}{dx}\\right)$ term."
+  },
+  {
+    "topic": "Degree of a Differential Equation (Polynomial in Derivatives)",
+    "question": "What is the significance of the degree being a positive integer in the context of differential equations?",
+    "chain_of_thought_reasoning": "1. The degree is defined as the highest power of the highest order derivative in a polynomial differential equation. 2. Being a positive integer ensures that the equation is well-behaved and can be classified systematically. 3. It helps in determining the complexity and solvability of the differential equation. 4. Non-integer or undefined degrees indicate non-polynomial terms, which require special treatment.",
+    "final_answer": "The degree being a positive integer ensures the differential equation is polynomial in derivatives, allowing systematic classification and analysis."
+  },
+  {
+    "topic": "Degree of a Differential Equation (Polynomial in Derivatives)",
+    "question": "How does the degree of a differential equation relate to its order, and can they be equal?",
+    "chain_of_thought_reasoning": "1. The order is the highest derivative present, while the degree is the exponent of that derivative in a polynomial equation. 2. They are independent concepts; the order is about differentiation, and the degree is about polynomial structure. 3. They can be equal, e.g., $\\left(\\frac{d^2y}{dx^2}\\right)^2$ has both order and degree 2. 4. However, equality is not necessary, as seen in $\\frac{d^3y}{dx^3}$ (order 3, degree 1).",
+    "final_answer": "The order and degree are independent; they can be equal (e.g., $\\left(\\frac{d^2y}{dx^2}\\right)^2$) but often differ (e.g., $\\frac{d^3y}{dx^3}$ has order 3, degree 1)."
+  },
+  {
+    "topic": "Degree of a Differential Equation (Polynomial in Derivatives)",
+    "question": "Can a differential equation have a degree of zero, and what does it imply?",
+    "chain_of_thought_reasoning": "1. A degree of zero would imply the highest order derivative has an exponent of zero, i.e., it reduces to a constant. 2. This is impossible because the derivative must appear in the equation to qualify as a differential equation. 3. Hence, the minimum degree is 1, ensuring the derivative is present. 4. A degree of zero would effectively make it an algebraic equation, not a differential one.",
+    "final_answer": "No, a differential equation cannot have a degree of zero because the derivative must appear with a positive exponent to qualify as a differential equation."
+  },
+  {
+    "topic": "Degree of a Differential Equation (Polynomial in Derivatives)",
+    "question": "Why is the degree undefined for equations like $\\frac{d^2y}{dx^2} + e^{\\frac{dy}{dx}} = 0$?",
+    "chain_of_thought_reasoning": "1. The term $e^{\\frac{dy}{dx}}$ is an exponential function of the derivative, not a polynomial term. 2. The degree is only defined when the equation is polynomial in derivatives. 3. Exponential, trigonometric, or logarithmic functions of derivatives violate this condition. 4. Hence, the degree cannot be defined for such equations.",
+    "final_answer": "The degree is undefined because $e^{\\frac{dy}{dx}}$ is not a polynomial term, violating the requirement for degree definition."
+  },
+  {
+    "topic": "Degree of a Differential Equation (Polynomial in Derivatives)",
+    "question": "Compare the degrees of the differential equations $\\left(\\frac{dy}{dx}\\right)^2 + y = 0$ and $\\left(\\frac{d^2y}{dx^2}\\right)^2 + y = 0$.",
+    "chain_of_thought_reasoning": "1. For $\\left(\\frac{dy}{dx}\\right)^2 + y = 0$, the highest order derivative is $\\frac{dy}{dx}$ (order 1), and its exponent is 2, so the degree is 2. 2. For $\\left(\\frac{d^2y}{dx^2}\\right)^2 + y = 0$, the highest order derivative is $\\frac{d^2y}{dx^2}$ (order 2), and its exponent is 2, so the degree is 2. 3. Both have the same degree but different orders. 4. This illustrates that degree is independent of order.",
+    "final_answer": "Both equations have a degree of 2, showing that degree is independent of the order of the differential equation."
+  },
+  {
+    "topic": "Definition and Essence of a Differential Equation",
+    "question": "State the formal definition of a differential equation.",
+    "chain_of_thought_reasoning": "1. Recall the source: 'In general, an equation involving derivative (derivatives) of the dependent variable with respect to independent variable (variables) is called a differential equation.' 2. Rephrase for precision: A differential equation is an equation that contains at least one derivative of an unknown function with respect to an independent variable. 3. Ensure no extra conditions (e.g., order, degree) are mixed into the definition. 4. Present concisely.",
+    "final_answer": "A differential equation is an equation that involves at least one derivative of the dependent variable with respect to the independent variable."
+  },
+  {
+    "topic": "Definition and Essence of a Differential Equation",
+    "question": "Identify the order of the differential equation $\\frac{d^3y}{dx^3} + 2\\frac{d^2y}{dx^2} - 3\\frac{dy}{dx} + 4y = 0$.",
+    "chain_of_thought_reasoning": "1. Order is defined as the order of the highest derivative present. 2. Inspect each term: $\\frac{dy}{dx}$ (order 1), $\\frac{d^2y}{dx^2}$ (order 2), $\\frac{d^3y}{dx^3}$ (order 3). 3. The highest order is 3. 4. Conclude order = 3.",
+    "final_answer": "3"
+  },
+  {
+    "topic": "Definition and Essence of a Differential Equation",
+    "question": "Determine the degree of the differential equation $\\left(\\frac{d^2y}{dx^2}\\right)^2 + 3\\frac{dy}{dx} + 5y = 0$.",
+    "chain_of_thought_reasoning": "1. Check polynomial form in derivatives: yes, all derivative terms are raised to non-negative integer powers. 2. Highest order derivative is $\\frac{d^2y}{dx^2}$. 3. Its exponent is 2. 4. Degree = highest power of the highest order derivative = 2.",
+    "final_answer": "2"
+  },
+  {
+    "topic": "Definition and Essence of a Differential Equation",
+    "question": "Explain why the degree of $\\frac{dy}{dx} + \\sin\\left(\\frac{dy}{dx}\\right) = 0$ is undefined.",
+    "chain_of_thought_reasoning": "1. Recall degree requirement: the DE must be a polynomial in its derivatives. 2. Examine term $\\sin\\left(\\frac{dy}{dx}\\right)$: it is not a polynomial expression in $\\frac{dy}{dx}$. 3. Since non-polynomial terms exist, degree cannot be assigned. 4. Conclude 'degree is undefined'.",
+    "final_answer": "Because the equation contains a non-polynomial (transcendental) function of the derivative, it is not a polynomial equation in derivatives, so its degree is undefined."
+  },
+  {
+    "topic": "Definition and Essence of a Differential Equation",
+    "question": "Find the order and degree (if defined) of $\\left(\\frac{d^4y}{dx^4}\\right)^3 + \\left(\\frac{d^2y}{dx^2}\\right)^5 - y = e^x$.",
+    "chain_of_thought_reasoning": "1. Identify highest derivative: $\\frac{d^4y}{dx^4}$ \u2192 order = 4. 2. Check polynomial structure: each derivative term raised to positive integer powers. 3. Highest order derivative power = 3. 4. Thus degree = 3.",
+    "final_answer": "Order = 4, Degree = 3"
+  },
+  {
+    "topic": "Definition and Essence of a Differential Equation",
+    "question": "Verify that $y = e^{2x}$ satisfies the differential equation $\\frac{dy}{dx} - 2y = 0$.",
+    "chain_of_thought_reasoning": "1. Compute derivative: $\\frac{dy}{dx} = 2e^{2x}$. 2. Substitute into LHS: $2e^{2x} - 2(e^{2x}) = 0$. 3. Compare to RHS: 0 = 0. 4. Conclusion: the function is a solution.",
+    "final_answer": "LHS = $2e^{2x} - 2e^{2x} = 0 = RHS$; hence verified."
+  },
+  {
+    "topic": "Definition and Essence of a Differential Equation",
+    "question": "Differentiate between an ordinary differential equation (ODE) and a partial differential equation (PDE).",
+    "chain_of_thought_reasoning": "1. ODE: involves derivatives w.r.t. only one independent variable. 2. PDE: involves partial derivatives w.r.t. two or more independent variables. 3. Source confirms ODE focus. 4. Summarize distinction clearly.",
+    "final_answer": "An ODE contains derivatives with respect to a single independent variable, whereas a PDE contains partial derivatives with respect to two or more independent variables."
+  },
+  {
+    "topic": "Definition and Essence of a Differential Equation",
+    "question": "Compute the order of the system: $\\frac{d^2x}{dt^2} + 3\\frac{dx}{dt} + 2x = \\cos t$.",
+    "chain_of_thought_reasoning": "1. Identify highest derivative of dependent variable x(t): $\\frac{d^2x}{dt^2}$. 2. Its order is 2. 3. No higher derivatives present. 4. Order = 2.",
+    "final_answer": "2"
+  },
+  {
+    "topic": "Definition and Essence of a Differential Equation",
+    "question": "Given $y'' + 4y = 0$, check if $y = A\\cos 2x + B\\sin 2x$ is a solution.",
+    "chain_of_thought_reasoning": "1. Differentiate twice: $y' = -2A\\sin 2x + 2B\\cos 2x$, $y'' = -4A\\cos 2x - 4B\\sin 2x$. 2. Plug into DE: $(-4A\\cos 2x - 4B\\sin 2x) + 4(A\\cos 2x + B\\sin 2x) = 0$. 3. Simplifies to 0 = 0. 4. Verified.",
+    "final_answer": "Yes, because substitution yields $0 = 0$."
+  },
+  {
+    "topic": "Definition and Essence of a Differential Equation",
+    "question": "What makes a differential equation 'homogeneous'?",
+    "chain_of_thought_reasoning": "1. Recall source: homogeneous function F(x,y) satisfies F(\u03bbx,\u03bby)=\u03bb\u207fF(x,y). 2. For DEs: if dy/dx = F(x,y) and F is homogeneous of degree 0, the DE is homogeneous. 3. Emphasize degree-zero homogeneity of F.",
+    "final_answer": "A differential equation dy/dx = F(x,y) is homogeneous if F(x,y) is a homogeneous function of degree zero, i.e., F(\u03bbx,\u03bby) = F(x,y) for any nonzero \u03bb."
+  },
+  {
+    "topic": "Definition and Essence of a Differential Equation",
+    "question": "Determine the degree of the equation $\\sqrt{1 + \\left(\\frac{dy}{dx}\\right)^2} = x$.",
+    "chain_of_thought_reasoning": "1. Rewrite to eliminate square root: $1 + (dy/dx)^2 = x^2$. 2. Now polynomial in dy/dx. 3. Highest order derivative is dy/dx, power = 2. 4. Degree = 2.",
+    "final_answer": "2"
+  },
+  {
+    "topic": "Definition and Essence of a Differential Equation",
+    "question": "Classify the DE: $\\frac{\\partial u}{\\partial t} = k\\frac{\\partial^2 u}{\\partial x^2}$.",
+    "chain_of_thought_reasoning": "1. Contains partial derivatives \u2192 PDE. 2. Highest derivative is second-order partial w.r.t. x. 3. Order = 2. 4. Linear (no products of u or derivatives). 5. Summary: second-order linear PDE.",
+    "final_answer": "Second-order linear partial differential equation."
+  },
+  {
+    "topic": "Definition and Essence of a Differential Equation",
+    "question": "Find the order of the equation $y''' + (y'')^2 + y' = x$.",
+    "chain_of_thought_reasoning": "1. Identify highest derivative: y''' (third derivative). 2. Order is defined by this highest derivative. 3. Order = 3.",
+    "final_answer": "3"
+  },
+  {
+    "topic": "Definition and Essence of a Differential Equation",
+    "question": "Is the degree defined for $e^{y'} + y' = x$? Explain.",
+    "chain_of_thought_reasoning": "1. Check polynomial form in derivatives: e^{y'} is transcendental, not a polynomial term. 2. Since non-polynomial expression exists, degree cannot be defined. 3. Conclude 'degree undefined'.",
+    "final_answer": "No; because the equation is not a polynomial in the derivative y' due to the exponential term."
+  },
+  {
+    "topic": "Definition and Essence of a Differential Equation",
+    "question": "Verify that $y = x^2$ satisfies $x\\frac{dy}{dx} = 2y$.",
+    "chain_of_thought_reasoning": "1. Compute dy/dx = 2x. 2. Form LHS: x(2x) = 2x\u00b2. 3. RHS: 2y = 2x\u00b2. 4. LHS = RHS \u2192 verified.",
+    "final_answer": "LHS = $x(2x) = 2x^2$; RHS = $2(x^2) = 2x^2$; hence verified."
+  },
+  {
+    "topic": "Definition and Essence of a Differential Equation",
+    "question": "What is the integrating factor of a first-order linear ODE $\\frac{dy}{dx} + P(x)y = Q(x)$?",
+    "chain_of_thought_reasoning": "1. From source: I.F. = e^{\u222bP(x)dx}. 2. This function converts LHS into derivative of y\u00b7I.F. 3. State formula directly.",
+    "final_answer": "$e^{\\int P(x)\\,dx}$"
+  },
+  {
+    "topic": "Definition and Essence of a Differential Equation",
+    "question": "Solve $\\frac{dy}{dx} = 3x^2$.",
+    "chain_of_thought_reasoning": "1. Direct integration: dy = 3x\u00b2 dx. 2. Integrate both sides: y = \u222b3x\u00b2 dx = x\u00b3 + C. 3. Present general solution.",
+    "final_answer": "$y = x^3 + C$"
+  },
+  {
+    "topic": "Definition and Essence of a Differential Equation",
+    "question": "Distinguish between general and particular solution of a DE.",
+    "chain_of_thought_reasoning": "1. General solution: contains arbitrary constants equal to order of DE. 2. Particular solution: obtained by assigning specific values to constants. 3. Source confirms this distinction. 4. Summarize clearly.",
+    "final_answer": "A general solution contains arbitrary constants (equal in number to the order of the DE), while a particular solution is obtained by giving specific values to those constants."
+  },
+  {
+    "topic": "Definition and Essence of a Differential Equation",
+    "question": "Find the degree of $(y'')^{3/2} + y' = 0$.",
+    "chain_of_thought_reasoning": "1. Rewrite to eliminate fractional exponent: (y'')^{3/2} = -y'. 2. Square both sides: (y'')\u00b3 = (y')\u00b2. 3. Now polynomial in derivatives. 4. Highest order derivative y'', power = 3. 5. Degree = 3.",
+    "final_answer": "3"
+  },
+  {
+    "topic": "Definition and Essence of a Differential Equation",
+    "question": "Why is $y = C e^{2x}$ called the general solution of $y' - 2y = 0$?",
+    "chain_of_thought_reasoning": "1. Check it satisfies: y' = 2Ce^{2x}, plug into DE \u2192 2Ce^{2x} - 2(Ce^{2x}) = 0. 2. Contains one arbitrary constant C. 3. DE is first-order \u2192 general solution must have one constant. 4. Hence general solution.",
+    "final_answer": "Because it satisfies the DE and contains one arbitrary constant, matching the first order of the differential equation."
+  },
+  {
+    "topic": "General vs Particular Solution Distinction",
+    "question": "How many arbitrary constants appear in the general solution of a 3rd-order ordinary differential equation, and why?",
+    "chain_of_thought_reasoning": "1. Definition recall: The general solution of an n-th order ODE must contain exactly n linearly independent arbitrary constants. 2. Order identification: The given ODE is 3rd-order, so n = 3. 3. Reason: Each integration step (one per order) introduces an additive constant; to capture every possible solution we must retain all three constants. 4. Therefore the general solution contains 3 arbitrary constants.",
+    "final_answer": "3"
+  },
+  {
+    "topic": "General vs Particular Solution Distinction",
+    "question": "Given the general solution $y(x) = A e^{2x} + B e^{-x}$ of a certain second-order linear ODE, produce a particular solution that satisfies $y(0)=3$ and $y'(0)=0$.",
+    "chain_of_thought_reasoning": "1. Impose the first initial condition: $y(0)=A+B=3$. 2. Differentiate: $y'(x)=2A e^{2x}-B e^{-x}$, then impose $y'(0)=2A-B=0$. 3. Solve the system: From the second equation $B=2A$; substitute into the first to get $A+2A=3\\Rightarrow A=1$, hence $B=2$. 4. Substitute back: $y(x)=1\\cdot e^{2x}+2 e^{-x}$. 5. Check: no arbitrary constants remain, confirming a particular solution.",
+    "final_answer": "$y(x) = e^{2x} + 2 e^{-x}$"
+  },
+  {
+    "topic": "General vs Particular Solution Distinction",
+    "question": "Consider the ODE $\\frac{dy}{dx}=3x^2$. Find its general solution and then derive the particular solution satisfying $y(1)=4$.",
+    "chain_of_thought_reasoning": "1. Integrate both sides: $\\int dy = \\int 3x^2 dx$. 2. General solution: $y = x^3 + C$ with one arbitrary constant because the ODE is first-order. 3. Apply initial condition: $4 = 1^3 + C\\Rightarrow C=3$. 4. Particular solution: $y = x^3 + 3$.",
+    "final_answer": "General: $y = x^3 + C$; Particular: $y = x^3 + 3$"
+  },
+  {
+    "topic": "General vs Particular Solution Distinction",
+    "question": "For the ODE $y'' + 4y = 0$, verify that $y(x) = C_1 \\cos 2x + C_2 \\sin 2x$ is the general solution and then determine the particular solution for which $y(\\pi/4)=1$ and $y'(\\pi/4)=-2$.",
+    "chain_of_thought_reasoning": "1. Verification: Compute $y''=-4C_1\\cos 2x-4C_2\\sin 2x=-4y$, so $y''+4y=0$ holds for any $C_1,C_2$, confirming generality. 2. Evaluate at $x=\\pi/4$: $y(\\pi/4)=C_1\\cdot 0 + C_2\\cdot 1 = C_2 = 1$. 3. Compute $y'(x)=-2C_1\\sin 2x + 2C_2\\cos 2x$; at $x=\\pi/4$ this gives $-2C_1\\cdot 1 + 2C_2\\cdot 0 = -2C_1 = -2\\Rightarrow C_1=1$. 4. Insert constants: $y(x)=\\cos 2x + \\sin 2x$.",
+    "final_answer": "$y(x) = \\cos 2x + \\sin 2x$"
+  },
+  {
+    "topic": "General vs Particular Solution Distinction",
+    "question": "Explain in one sentence why the solution $y(x)=0$ to the ODE $y'' - y = 0$ is classified as a particular solution rather than the general solution.",
+    "chain_of_thought_reasoning": "1. The ODE is second-order, so its general solution must contain two arbitrary constants. 2. The zero function contains no arbitrary constants. 3. Hence it is only a single, fixed instance\u2014by definition a particular solution.",
+    "final_answer": "Because it contains no arbitrary constants, whereas the general solution of a second-order ODE must contain two."
+  },
+  {
+    "topic": "General vs Particular Solution Distinction",
+    "question": "Given the first-order ODE $\\frac{dy}{dx}=\\frac{y}{x}$ with $x>0$, obtain the general solution and then the particular solution curve that passes through the point $(2,6)$.",
+    "chain_of_thought_reasoning": "1. Separate variables: $\\frac{dy}{y}=\\frac{dx}{x}$. 2. Integrate: $\\ln|y|=\\ln|x|+C_1\\Rightarrow y=Cx$ where $C=e^{C_1}$ (general solution, one constant). 3. Use point condition: $6=C\\cdot 2\\Rightarrow C=3$. 4. Particular solution: $y=3x$.",
+    "final_answer": "General: $y = Cx$; Particular: $y = 3x$"
+  },
+  {
+    "topic": "General vs Particular Solution Distinction",
+    "question": "The family of curves $x^2 + y^2 = C$ is the general solution of which differential equation? State the equation and then give the particular solution curve that goes through $(3,4)$.",
+    "chain_of_thought_reasoning": "1. Differentiate implicitly: $2x + 2y y'=0\\Rightarrow y'=-x/y$. 2. Thus the ODE is $\\frac{dy}{dx}=-\\frac{x}{y}$. 3. Plug in $(3,4)$: $3^2+4^2=C\\Rightarrow C=25$. 4. Particular curve: $x^2+y^2=25$.",
+    "final_answer": "ODE: $\\frac{dy}{dx}=-\\frac{x}{y}$; Curve: $x^2 + y^2 = 25$"
+  },
+  {
+    "topic": "General vs Particular Solution Distinction",
+    "question": "Count the number of arbitrary constants in the general solution of the ODE $\\frac{d^4y}{dx^4}+y=0$ and then write the particular solution satisfying $y(0)=1$, $y'(0)=y''(0)=y'''(0)=0$.",
+    "chain_of_thought_reasoning": "1. Order is 4, so general solution has 4 arbitrary constants. 2. Characteristic equation $r^4+1=0$ gives four complex roots, leading to $y(x)=e^{x/\\sqrt{2}}(A\\cos\\frac{x}{\\sqrt{2}}+B\\sin\\frac{x}{\\sqrt{2}})+e^{-x/\\sqrt{2}}(C\\cos\\frac{x}{\\sqrt{2}}+D\\sin\\frac{x}{\\sqrt{2}})$. 3. Apply conditions: solving the system yields $A=C=1/2$, $B=D=0$. 4. Particular solution: $y(x)=\\frac{1}{2}e^{x/\\sqrt{2}}\\cos\\frac{x}{\\sqrt{2}}+\\frac{1}{2}e^{-x/\\sqrt{2}}\\cos\\frac{x}{\\sqrt{2}}=\\cos\\frac{x}{\\sqrt{2}}\\cosh\\frac{x}{\\sqrt{2}}$.",
+    "final_answer": "4 constants; $y(x) = \\cos\\frac{x}{\\sqrt{2}}\\cosh\\frac{x}{\\sqrt{2}}$"
+  },
+  {
+    "topic": "General vs Particular Solution Distinction",
+    "question": "Provide the general solution of $\\frac{dy}{dx}=k y$ (where $k$ is a fixed non-zero real) and then state the particular solution that has $y(0)=5$.",
+    "chain_of_thought_reasoning": "1. Separate variables: $\\frac{dy}{y}=k dx$. 2. Integrate: $\\ln|y|=kx+C_1\\Rightarrow y=C e^{kx}$ (general, one constant). 3. Initial condition: $5=C e^{0}\\Rightarrow C=5$. 4. Particular solution: $y(x)=5e^{kx}$.",
+    "final_answer": "General: $y = C e^{kx}$; Particular: $y = 5 e^{kx}$"
+  },
+  {
+    "topic": "General vs Particular Solution Distinction",
+    "question": "Suppose the general solution of an ODE is $y(x)=A x^2 + B$. Determine the order of the differential equation and then find the particular solution for which the curve passes through $(1,3)$ and has slope 4 at $x=1$.",
+    "chain_of_thought_reasoning": "1. Two arbitrary constants imply the ODE is second-order. 2. Compute $y'(x)=2A x$. 3. Conditions: $y(1)=A+B=3$ and $y'(1)=2A=4\\Rightarrow A=2$. 4. Then $B=1$. 5. Particular solution: $y(x)=2x^2+1$.",
+    "final_answer": "Order 2; $y(x) = 2x^2 + 1$"
+  },
+  {
+    "topic": "General vs Particular Solution Distinction",
+    "question": "True or False: A particular solution of an n-th order ODE can contain up to $n-1$ arbitrary constants. Justify in one sentence.",
+    "chain_of_thought_reasoning": "1. By definition a particular solution is free from arbitrary constants; once any constants are fixed (no matter how many) the solution describes a single curve, but formally it must contain zero arbitrary parameters to be called particular.",
+    "final_answer": "False, because a particular solution must contain no arbitrary constants at all."
+  },
+  {
+    "topic": "General vs Particular Solution Distinction",
+    "question": "The general solution of $y'' - 3y' + 2y = 0$ is $y(x) = C_1 e^{x} + C_2 e^{2x}$. Find the particular solution such that $y(0) = 2$ and the limit of $y(x)$ as $x\\to\\infty$ is zero.",
+    "chain_of_thought_reasoning": "1. Apply $y(0)=2$: $C_1 + C_2 = 2$. 2. Limit condition: for $y\\to 0$ as $x\\to\\infty$ we must eliminate growing exponentials; here both terms grow unless their coefficients are zero, but their sum is 2, so the only decaying combination is identically zero, which contradicts $y(0)=2$. 3. Re-evaluate: since both exponentials grow, the only way the limit is zero is if $C_1=C_2=0$, but this gives $y(0)=0\\neq 2$. 4. Conclusion: no such particular solution exists.",
+    "final_answer": "No such particular solution exists because both linearly independent solutions grow as $x\\to\\infty$."
+  },
+  {
+    "topic": "General vs Particular Solution Distinction",
+    "question": "Find the general solution of the separable ODE $\\frac{dy}{dx}=x e^{-y}$ and then the particular solution satisfying $y(0)=0$.",
+    "chain_of_thought_reasoning": "1. Separate: $e^y dy = x dx$. 2. Integrate: $e^y = \\frac{x^2}{2} + C$. 3. General: $y = \\ln\\left(\\frac{x^2}{2} + C\\right)$ (one constant). 4. Initial: $0 = \\ln(0 + C)\\Rightarrow C=1$. 5. Particular: $y = \\ln\\left(\\frac{x^2}{2} + 1\\right)$.",
+    "final_answer": "General: $y = \\ln\\left(\\frac{x^2}{2} + C\\right)$; Particular: $y = \\ln\\left(\\frac{x^2}{2} + 1\\right)$"
+  },
+  {
+    "topic": "General vs Particular Solution Distinction",
+    "question": "A second-order ODE has general solution $y(x)=C_1 f(x)+C_2 g(x)$. Explain how imposing two initial conditions converts this general solution into a unique particular solution.",
+    "chain_of_thought_reasoning": "1. Two conditions (e.g., $y(x_0)=y_0$, $y'(x_0)=y'_0$) produce two algebraic equations linear in $C_1,C_2$. 2. The determinant of the coefficient matrix is the Wronskian $W(f,g)(x_0)$; since $f,g$ are linearly independent solutions, $W\\neq 0$. 3. Hence the system has a unique solution $(C_1,C_2)$, yielding exactly one function $y(x)$\u2014a particular solution.",
+    "final_answer": "The two conditions form a linear system with non-zero Wronskian, guaranteeing a unique pair $(C_1,C_2)$ and thus a unique solution curve."
+  },
+  {
+    "topic": "General vs Particular Solution Distinction",
+    "question": "Given the ODE $\\frac{dy}{dx}=\\frac{2x}{1+x^2}$ and its general solution $y(x)=\\ln(1+x^2)+C$, compute the value of $C$ so that the particular solution passes through $(0,0)$ and then evaluate this solution at $x=1$.",
+    "chain_of_thought_reasoning": "1. Plug in $(0,0)$: $0 = \\ln(1+0) + C\\Rightarrow C=0$. 2. Particular solution: $y(x)=\\ln(1+x^2)$. 3. Evaluate at $x=1$: $y(1)=\\ln 2$.",
+    "final_answer": "$C = 0$; $y(1) = \\ln 2$"
+  },
+  {
+    "topic": "General vs Particular Solution Distinction",
+    "question": "State the difference in the number of arbitrary constants between the general solution of a fifth-order ODE and a particular solution of a fourth-order ODE.",
+    "chain_of_thought_reasoning": "1. General solution of 5th-order ODE contains 5 constants. 2. Particular solution of any ODE contains 0 constants by definition. 3. Difference: $5 - 0 = 5$.",
+    "final_answer": "5"
+  },
+  {
+    "topic": "General vs Particular Solution Distinction",
+    "question": "The general solution of $y'' + 9y = 0$ is $y(x)=A\\cos 3x + B\\sin 3x$. Find the particular solution for which the graph passes through $(0,1)$ and has a local extremum at $x=\\pi/6$.",
+    "chain_of_thought_reasoning": "1. $y(0)=A=1$. 2. For extremum at $x=\\pi/6$ require $y'(\\pi/6)=0$. 3. $y'(x)=-3A\\sin 3x + 3B\\cos 3x$; at $x=\\pi/6$: $-3(1)(1) + 3B(0) = -3 \\neq 0$. 4. Contradiction: no finite $B$ can make derivative zero. 5. Conclusion: no such particular solution exists.",
+    "final_answer": "No such particular solution exists because the derivative cannot be zero at $x=\\pi/6$ when $A=1$."
+  },
+  {
+    "topic": "General vs Particular Solution Distinction",
+    "question": "Produce a general solution with exactly four arbitrary constants and then explain how you would obtain a particular solution from it.",
+    "chain_of_thought_reasoning": "1. Example of 4th-order ODE general solution: $y(x)=C_1 e^x + C_2 e^{-x} + C_3 \\cos x + C_4 \\sin x$. 2. To obtain a particular solution, impose four independent conditions (e.g., $y(x_0)$, $y'(x_0)$, $y''(x_0)$, $y'''(x_0)$) yielding four equations. 3. Solve the linear system for $C_1,C_2,C_3,C_4$; substitute back to eliminate all constants.",
+    "final_answer": "General: $y(x)=C_1 e^x + C_2 e^{-x} + C_3 \\cos x + C_4 \\sin x$; impose four initial/boundary conditions and solve for the constants to obtain a particular solution."
+  },
+  {
+    "topic": "Homogeneous Differential Equations (y = vx Substitution)",
+    "question": "Show that the differential equation $(x^2 + xy)\\,dy = (x^2 + y^2)\\,dx$ is homogeneous and find its general solution.",
+    "chain_of_thought_reasoning": "1. Rewrite in standard form: $\\frac{dy}{dx}=\\frac{x^2+y^2}{x^2+xy}$. 2. Check homogeneity: $F(x,y)=\\frac{x^2+y^2}{x^2+xy}$ gives $F(\\lambda x,\\lambda y)=\\frac{\\lambda^2(x^2+y^2)}{\\lambda^2(x^2+xy)}=F(x,y)$, so degree 0 \u2192 homogeneous. 3. Substitute $y=vx$, so $\\frac{dy}{dx}=v+x\\frac{dv}{dx}$. 4. RHS becomes $\\frac{1+v^2}{1+v}$. 5. Separate variables: $x\\frac{dv}{dx}=\\frac{1+v^2}{1+v}-v=\\frac{1-v}{1+v}$ \u21d2 $\\frac{1+v}{1-v}\\,dv=\\frac{dx}{x}$. 6. Integrate LHS: split $\\frac{1+v}{1-v}=-1+\\frac{2}{1-v}$ \u2192 $-v-2\\ln|1-v|$. 7. Integrate RHS: $\\ln|x|+C$. 8. Combine and substitute $v=y/x$.",
+    "final_answer": "$\\ln|x| + \\frac{y}{x} + 2\\ln\\left|1 - \\frac{y}{x}\\right| = C$"
+  },
+  {
+    "topic": "Homogeneous Differential Equations (y = vx Substitution)",
+    "question": "Solve the homogeneous DE $\\frac{dy}{dx}=\\frac{x+y}{x}$.",
+    "chain_of_thought_reasoning": "1. Recognise RHS as homogeneous of degree 0. 2. Set $y=vx$ \u21d2 $\\frac{dy}{dx}=v+x\\frac{dv}{dx}$. 3. Equation becomes $v+x\\frac{dv}{dx}=\\frac{x+vx}{x}=1+v$. 4. Simplify to $x\\frac{dv}{dx}=1$ \u21d2 $dv=\\frac{dx}{x}$. 5. Integrate: $v=\\ln|x|+C$. 6. Replace $v=y/x$ and solve for $y$.",
+    "final_answer": "$y = x\\ln|x| + Cx$"
+  },
+  {
+    "topic": "Homogeneous Differential Equations (y = vx Substitution)",
+    "question": "Find the particular solution of $(x-y)\\,dy=(x+y)\\,dx$ given $y(1)=0$.",
+    "chain_of_thought_reasoning": "1. Rearrange to $\\frac{dy}{dx}=\\frac{x+y}{x-y}$ (homogeneous). 2. Substitute $y=vx$ \u21d2 $\\frac{dy}{dx}=v+x\\frac{dv}{dx}$. 3. RHS becomes $\\frac{1+v}{1-v}$. 4. Separate: $x\\frac{dv}{dx}=\\frac{1+v}{1-v}-v=\\frac{1+v^2}{1-v}$ \u21d2 $\\frac{1-v}{1+v^2}\\,dv=\\frac{dx}{x}$. 5. Split LHS: $\\int\\frac{1}{1+v^2}\\,dv - \\int\\frac{v}{1+v^2}\\,dv = \\tan^{-1}v - \\frac12\\ln(1+v^2)$. 6. RHS: $\\ln|x|+C$. 7. Back-substitute $v=y/x$ and apply $y(1)=0$ to find $C=0$.",
+    "final_answer": "$\\tan^{-1}\\left(\\frac{y}{x}\\right) - \\frac{1}{2}\\ln\\left(x^2 + y^2\\right) = 0$"
+  },
+  {
+    "topic": "Homogeneous Differential Equations (y = vx Substitution)",
+    "question": "Explain why the substitution $y=vx$ reduces any homogeneous first-order DE to a separable equation.",
+    "chain_of_thought_reasoning": "1. Definition: homogeneous DE has $\\frac{dy}{dx}=F(x,y)$ with $F(\\lambda x,\\lambda y)=F(x,y)$. 2. Hence $F(x,y)=g(y/x)$ for some $g$. 3. Let $y=vx$ so $\\frac{dy}{dx}=v+x\\frac{dv}{dx}$. 4. DE becomes $v+x\\frac{dv}{dx}=g(v)$. 5. Rearrange to $x\\frac{dv}{dx}=g(v)-v$, variables separable. 6. Integrating yields $\\int\\frac{dv}{g(v)-v}=\\int\\frac{dx}{x}$.",
+    "final_answer": "The substitution $y = vx$ transforms $\\frac{dy}{dx} = g\\left(\\frac{y}{x}\\right)$ into $v + x\\frac{dv}{dx} = g(v)$, giving the separable form $\\frac{dv}{g(v)-v} = \\frac{dx}{x}$."
+  },
+  {
+    "topic": "Homogeneous Differential Equations (y = vx Substitution)",
+    "question": "Solve $(x^2 - y^2)\\,dx + 2xy\\,dy = 0$.",
+    "chain_of_thought_reasoning": "1. Write $\\frac{dy}{dx}=\\frac{y^2-x^2}{2xy}$ (homogeneous). 2. Set $y=vx$ \u21d2 $\\frac{dy}{dx}=v+x\\frac{dv}{dx}$. 3. RHS becomes $\\frac{v^2-1}{2v}$. 4. Isolate $x\\frac{dv}{dx}=\\frac{v^2-1}{2v}-v=-\\frac{1+v^2}{2v}$. 5. Separate: $\\frac{2v}{1+v^2}\\,dv=-\\frac{dx}{x}$. 6. Integrate LHS: $\\ln(1+v^2)$; RHS: $-\\ln|x|+C$. 7. Combine logs and substitute $v=y/x$.",
+    "final_answer": "$x^2 + y^2 = Cx$"
+  },
+  {
+    "topic": "Homogeneous Differential Equations (y = vx Substitution)",
+    "question": "Obtain the general solution of $x^2\\frac{dy}{dx}=x^2-2y^2+xy$.",
+    "chain_of_thought_reasoning": "1. Divide by $x^2$: $\\frac{dy}{dx}=1+\\frac{y}{x}-2\\left(\\frac{y}{x}\\right)^2$ (homogeneous). 2. Substitute $y=vx$ \u21d2 $\\frac{dy}{dx}=v+x\\frac{dv}{dx}$. 3. RHS becomes $1+v-2v^2$. 4. Separate: $x\\frac{dv}{dx}=1-2v^2$ \u21d2 $\\frac{dv}{1-2v^2}=\\frac{dx}{x}$. 5. Integrate LHS using partial fractions or standard form $\\frac{1}{2}\\sqrt2\\tanh^{-1}(\\sqrt2 v)$. 6. RHS: $\\ln|x|+C$. 7. Solve for $v$ and revert to $y$.",
+    "final_answer": "$\\tanh^{-1}\\left(\\sqrt2\\,\\frac{y}{x}\\right) = \\sqrt2\\,\\ln|x| + C$"
+  },
+  {
+    "topic": "Homogeneous Differential Equations (y = vx Substitution)",
+    "question": "Find the curve passing through $(2,1)$ whose tangent slope satisfies $x\\frac{dy}{dx}=y+\\sqrt{x^2+y^2}$.",
+    "chain_of_thought_reasoning": "1. Recognise RHS as homogeneous. 2. Substitute $y=vx$ \u21d2 $\\frac{dy}{dx}=v+x\\frac{dv}{dx}$. 3. Equation becomes $v+x\\frac{dv}{dx}=v+\\sqrt{1+v^2}$. 4. Simplify to $\\frac{dv}{\\sqrt{1+v^2}}=\\frac{dx}{x}$. 5. Integrate: $\\sinh^{-1}v=\\ln|x|+C$. 6. Exponentiate: $v+\\sqrt{1+v^2}=Ax$. 7. Replace $v=y/x$ and use $(2,1)$ to find $A=1+\\frac12\\sqrt5$. 8. Rearrange.",
+    "final_answer": "$y + \\sqrt{x^2 + y^2} = x^2\\left(1 + \\frac{\\sqrt5}{2}\\right)$"
+  },
+  {
+    "topic": "Homogeneous Differential Equations (y = vx Substitution)",
+    "question": "Solve $x\\,dy - y\\,dx = \\sqrt{x^2+y^2}\\,dx$.",
+    "chain_of_thought_reasoning": "1. Rearrange to $\\frac{dy}{dx}=\\frac{y+\\sqrt{x^2+y^2}}{x}$ (homogeneous). 2. Substitute $y=vx$ \u21d2 $\\frac{dy}{dx}=v+x\\frac{dv}{dx}$. 3. RHS becomes $v+\\sqrt{1+v^2}$. 4. Isolate $x\\frac{dv}{dx}=\\sqrt{1+v^2}$ \u21d2 $\\frac{dv}{\\sqrt{1+v^2}}=\\frac{dx}{x}$. 5. Integrate: $\\sinh^{-1}v=\\ln|x|+C$. 6. Exponentiate: $v+\\sqrt{1+v^2}=Ax$. 7. Replace $v=y/x$ and simplify.",
+    "final_answer": "$y + \\sqrt{x^2 + y^2} = A x^2$"
+  },
+  {
+    "topic": "Homogeneous Differential Equations (y = vx Substitution)",
+    "question": "Determine the general solution of $\\left\\{x\\cos\\frac{y}{x}+y\\sin\\frac{y}{x}\\right\\}y\\,dx = \\left\\{y\\sin\\frac{y}{x}-x\\cos\\frac{y}{x}\\right\\}x\\,dy$.",
+    "chain_of_thought_reasoning": "1. Divide by $x^2$ and set $v=y/x$ to confirm homogeneity. 2. Substitute $y=vx$ and simplify to $\\frac{dy}{dx}=\\frac{v\\cos v + v^2\\sin v}{v\\sin v - \\cos v}$. 3. Separate variables: $\\frac{v\\sin v - \\cos v}{v\\cos v}\\,dv = \\frac{dx}{x}$. 4. Split integrand: $\\tan v - \\frac{1}{v}$ \u21d2 $-\\ln|\\cos v| - \\ln|v|$. 5. RHS: $\\ln|x|+C$. 6. Combine logs and revert to $y$.",
+    "final_answer": "$\\cos\\left(\\frac{y}{x}\\right) = C\\,\\frac{y}{x}$"
+  },
+  {
+    "topic": "Homogeneous Differential Equations (y = vx Substitution)",
+    "question": "Find the particular solution of $2xy\\,dy = (y^2 - x^2)\\,dx$ with $y(1)=2$.",
+    "chain_of_thought_reasoning": "1. Rearrange to $\\frac{dy}{dx}=\\frac{y^2-x^2}{2xy}$ (homogeneous). 2. Substitute $y=vx$ \u21d2 $\\frac{dy}{dx}=v+x\\frac{dv}{dx}$. 3. RHS becomes $\\frac{v^2-1}{2v}$. 4. Separate: $\\frac{2v}{v^2-1}\\,dv=-\\frac{dx}{x}$. 5. Integrate: $\\ln|v^2-1|=-\\ln|x|+C$ \u21d2 $(v^2-1)x=A$. 6. Replace $v=y/x$ \u21d2 $y^2-x^2=Ax$. 7. Use $y(1)=2$ to find $A=3$.",
+    "final_answer": "$y^2 - x^2 = 3x$"
+  },
+  {
+    "topic": "Homogeneous Differential Equations (y = vx Substitution)",
+    "question": "Solve $\\frac{dy}{dx}=\\frac{y}{x}+\\tan\\frac{y}{x}$.",
+    "chain_of_thought_reasoning": "1. Recognise homogeneous form. 2. Substitute $y=vx$ \u21d2 $\\frac{dy}{dx}=v+x\\frac{dv}{dx}$. 3. Equation becomes $v+x\\frac{dv}{dx}=v+\\tan v$. 4. Simplify to $\\frac{dv}{\\tan v}=\\frac{dx}{x}$ \u21d2 $\\cot v\\,dv=\\frac{dx}{x}$. 5. Integrate: $\\ln|\\sin v|=\\ln|x|+C$. 6. Exponentiate: $\\sin v=Ax$. 7. Replace $v=y/x$.",
+    "final_answer": "$\\sin\\left(\\frac{y}{x}\\right) = Cx$"
+  },
+  {
+    "topic": "Homogeneous Differential Equations (y = vx Substitution)",
+    "question": "Show that the family of curves with slope $\\frac{x^2+y^2}{2xy}$ satisfies $x^2 - y^2 = Cx$.",
+    "chain_of_thought_reasoning": "1. Set $\\frac{dy}{dx}=\\frac{x^2+y^2}{2xy}$ (homogeneous). 2. Substitute $y=vx$ \u21d2 $\\frac{dy}{dx}=v+x\\frac{dv}{dx}$. 3. RHS becomes $\\frac{1+v^2}{2v}$. 4. Isolate $x\\frac{dv}{dx}=\\frac{1-v^2}{2v}$ \u21d2 $\\frac{2v}{1-v^2}\\,dv=\\frac{dx}{x}$. 5. Integrate: $-\\ln|1-v^2|=\\ln|x|+C$ \u21d2 $\\frac{1}{1-v^2}=Ax$. 6. Replace $v=y/x$ and rearrange to $x^2-y^2=Cx$.",
+    "final_answer": "$x^2 - y^2 = Cx$"
+  },
+  {
+    "topic": "Homogeneous Differential Equations (y = vx Substitution)",
+    "question": "Find the general solution of $y\\,dx + x\\log\\frac{y}{x}\\,dy - 2x\\,dy = 0$.",
+    "chain_of_thought_reasoning": "1. Rearrange to $\\frac{dy}{dx}=\\frac{y}{2x - x\\log\\frac{y}{x}}$ (homogeneous). 2. Substitute $y=vx$ \u21d2 $\\frac{dy}{dx}=v+x\\frac{dv}{dx}$. 3. RHS becomes $\\frac{v}{2 - \\log v}$. 4. Separate: $\\frac{2 - \\log v}{v(1 - \\log v)}\\,dv=\\frac{dx}{x}$. 5. Let $u=1-\\log v$ \u21d2 integral becomes $\\ln|v| + \\ln|1-\\log v|$. 6. Combine with RHS $\\ln|x|+C$ and revert to $y$.",
+    "final_answer": "$\\frac{y}{x}\\left(1 - \\log\\frac{y}{x}\\right) = C$"
+  },
+  {
+    "topic": "Homogeneous Differential Equations (y = vx Substitution)",
+    "question": "Solve the DE $\\left(1+e^{x/y}\\right)dx + e^{x/y}\\left(1-\\frac{x}{y}\\right)dy = 0$.",
+    "chain_of_thought_reasoning": "1. Write as $\\frac{dx}{dy}=\\frac{e^{x/y}(\\frac{x}{y}-1)}{1+e^{x/y}}$ (homogeneous). 2. Substitute $x=vy$ \u21d2 $\\frac{dx}{dy}=v+y\\frac{dv}{dy}$. 3. RHS becomes $\\frac{e^v(v-1)}{1+e^v}$. 4. Separate: $\\frac{1+e^v}{v+e^v}\\,dv=-\\frac{dy}{y}$. 5. Integrate: $\\ln|v+e^v|=-\\ln|y|+C$ \u21d2 $v+e^v=\\frac{C}{y}$. 6. Replace $v=x/y$.",
+    "final_answer": "$x + y e^{x/y} = C$"
+  },
+  {
+    "topic": "Homogeneous Differential Equations (y = vx Substitution)",
+    "question": "Find the particular solution of $(x+y)\\,dy + (x-y)\\,dx = 0$ satisfying $y(1)=1$.",
+    "chain_of_thought_reasoning": "1. Rearrange to $\\frac{dy}{dx}=\\frac{y-x}{x+y}$ (homogeneous). 2. Substitute $y=vx$ \u21d2 $\\frac{dy}{dx}=v+x\\frac{dv}{dx}$. 3. RHS becomes $\\frac{v-1}{1+v}$. 4. Separate: $\\frac{1+v}{1+v^2}\\,dv=-\\frac{dx}{x}$. 5. Integrate: $\\tan^{-1}v + \\frac12\\ln(1+v^2) = -\\ln|x| + C$. 6. Replace $v=y/x$ and use $y(1)=1$ to find $C=\\frac{\\pi}{4} + \\frac12\\ln2$.",
+    "final_answer": "$\\tan^{-1}\\left(\\frac{y}{x}\\right) + \\frac{1}{2}\\ln\\left(x^2 + y^2\\right) = \\frac{\\pi}{4} + \\frac{1}{2}\\ln2$"
+  },
+  {
+    "topic": "Homogeneous Differential Equations (y = vx Substitution)",
+    "question": "Solve $x\\frac{dy}{dx} - y + x\\sin\\frac{y}{x} = 0$.",
+    "chain_of_thought_reasoning": "1. Rearrange to $\\frac{dy}{dx}=\\frac{y}{x}-\\sin\\frac{y}{x}$ (homogeneous). 2. Substitute $y=vx$ \u21d2 $\\frac{dy}{dx}=v+x\\frac{dv}{dx}$. 3. RHS becomes $v-\\sin v$. 4. Isolate $x\\frac{dv}{dx}=-\\sin v$ \u21d2 $\\frac{dv}{\\sin v}=-\\frac{dx}{x}$. 5. Integrate: $\\ln|\\tan\\frac{v}{2}|=-\\ln|x|+C$ \u21d2 $\\tan\\frac{v}{2}=\\frac{C}{x}$. 6. Replace $v=y/x$.",
+    "final_answer": "$\\tan\\left(\\frac{y}{2x}\\right) = \\frac{C}{x}$"
+  },
+  {
+    "topic": "Homogeneous Differential Equations (y = vx Substitution)",
+    "question": "Find the curve through $(1,\\pi/4)$ for which $\\sin x\\cos y\\,dx + \\cos x\\sin y\\,dy = 0$.",
+    "chain_of_thought_reasoning": "1. Recognise variables separable: $\\frac{\\sin x}{\\cos x}\\,dx + \\frac{\\sin y}{\\cos y}\\,dy = 0$. 2. Integrate: $-\\ln|\\cos x| - \\ln|\\cos y| = C$. 3. Exponentiate: $\\cos x\\cos y = A$. 4. Use $(1,\\pi/4)$ to find $A=\\cos1\\cdot\\frac{\\sqrt2}{2}$.",
+    "final_answer": "$\\cos x \\cos y = \\frac{\\sqrt{2}}{2}\\cos 1$"
+  },
+  {
+    "topic": "Mixing and Newton\u2019s Law of Cooling Applications",
+    "question": "A 100 L tank initially contains 20 kg of salt dissolved in water. Brine with 0.5 kg/L concentration flows in at 4 L/min, and the well-mixed solution flows out at 4 L/min. Find the mass of salt in the tank after 30 min.",
+    "chain_of_thought_reasoning": "1. Set up the model: Let m(t) be the mass of salt at time t. Volume remains 100 L because inflow = outflow. 2. Rate in: 4 L/min \u00d7 0.5 kg/L = 2 kg/min. 3. Rate out: 4 L/min \u00d7 m/100 kg/L = m/25 kg/min. 4. Differential equation: dm/dt = 2 - m/25. 5. Solve the linear DE: dm/dt + m/25 = 2. Integrating factor = e^(\u222b1/25 dt) = e^(t/25). 6. General solution: m(t) = 50 + Ce^(-t/25). 7. Initial condition: m(0) = 20 \u21d2 C = -30. 8. Particular solution: m(t) = 50 - 30e^(-t/25). 9. Evaluate at t = 30: m(30) = 50 - 30e^(-30/25) \u2248 50 - 30e^(-1.2).",
+    "final_answer": "$m(30) = 50 - 30e^{-1.2} \\approx 50 - 30(0.3012) \\approx 40.96 \\text{ kg}$"
+  },
+  {
+    "topic": "Mixing and Newton\u2019s Law of Cooling Applications",
+    "question": "A 200 L tank contains pure water. Salt water (1 kg/L) enters at 5 L/min, and the mixed solution drains at 5 L/min. Find the concentration after 1 h.",
+    "chain_of_thought_reasoning": "1. Volume constant at 200 L. Let m(t) be salt mass. 2. Rate in: 5 L/min \u00d7 1 kg/L = 5 kg/min. 3. Rate out: 5 L/min \u00d7 m/200 kg/L = m/40 kg/min. 4. DE: dm/dt = 5 - m/40. 5. Linear form: dm/dt + m/40 = 5. 6. Integrating factor: e^(\u222b1/40 dt) = e^(t/40). 7. Solution: m(t) = 200 + Ce^(-t/40). 8. Initial: m(0)=0 \u21d2 C=-200. 9. m(t)=200(1-e^(-t/40)). 10. At t=60: m=200(1-e^(-1.5)). 11. Concentration = m/200 = 1 - e^(-1.5).",
+    "final_answer": "$\\text{Concentration} = 1 - e^{-1.5} \\approx 0.7769 \\text{ kg/L}$"
+  },
+  {
+    "topic": "Mixing and Newton\u2019s Law of Cooling Applications",
+    "question": "A body cools from 100 \u00b0C to 80 \u00b0C in 10 min in a 20 \u00b0C room. Find its temperature after 30 min using Newton\u2019s Law of Cooling.",
+    "chain_of_thought_reasoning": "1. Newton\u2019s Law: dT/dt = -k(T - 20). 2. Solution: T(t) = 20 + Ce^(-kt). 3. Initial: T(0)=100 \u21d2 C=80. 4. T(t)=20 + 80e^(-kt). 5. Use T(10)=80: 80=20+80e^(-10k) \u21d2 e^(-10k)=0.75. 6. Solve k: -10k=ln(0.75) \u21d2 k\u22480.02877. 7. Find T(30): T=20+80e^(-0.02877\u00d730)=20+80e^(-0.8631). 8. Compute exponent: e^(-0.8631)\u22480.4219. 9. T\u224820+80\u00d70.4219\u224853.75.",
+    "final_answer": "$T(30) \\approx 53.75\\,^\\circ\\text{C}$"
+  },
+  {
+    "topic": "Mixing and Newton\u2019s Law of Cooling Applications",
+    "question": "A 50 gal tank has 20 lb of salt. Brine (1 lb/gal) enters at 3 gal/min; mixed solution leaves at 3 gal/min. Compute salt after 20 min.",
+    "chain_of_thought_reasoning": "1. Constant volume 50 gal. Let m(t) be salt mass. 2. Rate in: 3 gal/min \u00d7 1 lb/gal = 3 lb/min. 3. Rate out: 3 gal/min \u00d7 m/50 lb/gal = 3m/50 lb/min. 4. DE: dm/dt = 3 - 3m/50. 5. Linear: dm/dt + 3m/50 = 3. 6. Integrating factor: e^(\u222b3/50 dt)=e^(3t/50). 7. General: m(t)=50 + Ce^(-3t/50). 8. Initial: m(0)=20 \u21d2 C=-30. 9. m(t)=50 - 30e^(-3t/50). 10. At t=20: m=50 - 30e^(-1.2).",
+    "final_answer": "$m(20) = 50 - 30e^{-1.2} \\approx 40.96 \\text{ lb}$"
+  },
+  {
+    "topic": "Mixing and Newton\u2019s Law of Cooling Applications",
+    "question": "A cup of coffee at 90 \u00b0C cools in a 25 \u00b0C room. After 5 min it is 80 \u00b0C. When will it reach 60 \u00b0C?",
+    "chain_of_thought_reasoning": "1. Model: dT/dt = -k(T - 25). 2. Solution: T(t)=25 + Ce^(-kt). 3. T(0)=90 \u21d2 C=65. 4. T(t)=25 + 65e^(-kt). 5. T(5)=80: 80=25+65e^(-5k) \u21d2 e^(-5k)=55/65\u22480.8462. 6. Solve k: -5k=ln(0.8462)\u21d2k\u22480.0333. 7. Set T=60: 60=25+65e^(-0.0333t)\u21d2e^(-0.0333t)=35/65\u22480.5385. 8. Solve t: -0.0333t=ln(0.5385)\u21d2t\u224817.0 min.",
+    "final_answer": "$t \\approx 17.0 \\text{ min}$"
+  },
+  {
+    "topic": "Mixing and Newton\u2019s Law of Cooling Applications",
+    "question": "Explain why the volume remains constant in the standard mixing problem with equal inflow and outflow rates.",
+    "chain_of_thought_reasoning": "1. Let V(t) be volume. 2. Rate of change dV/dt = (inflow rate) - (outflow rate). 3. If both rates equal R, then dV/dt = R - R = 0. 4. Zero derivative implies V(t) is constant. 5. Therefore the tank volume does not change over time, simplifying the salt mass balance to dm/dt = (concentration in \u00d7 R) - (m(t)/V \u00d7 R).",
+    "final_answer": "Because inflow rate equals outflow rate, dV/dt = 0, so volume stays constant."
+  },
+  {
+    "topic": "Mixing and Newton\u2019s Law of Cooling Applications",
+    "question": "A tank holds 500 L of pure water. Salt water (0.2 kg/L) flows in at 10 L/min, and mixed solution drains at 10 L/min. Find the amount of salt after 2 h.",
+    "chain_of_thought_reasoning": "1. Volume constant 500 L. Let m(t) be salt mass. 2. Rate in: 10 L/min \u00d7 0.2 kg/L = 2 kg/min. 3. Rate out: 10 L/min \u00d7 m/500 kg/L = m/50 kg/min. 4. DE: dm/dt = 2 - m/50. 5. Linear: dm/dt + m/50 = 2. 6. Integrating factor: e^(\u222b1/50 dt)=e^(t/50). 7. General: m(t)=100 + Ce^(-t/50). 8. Initial: m(0)=0 \u21d2 C=-100. 9. m(t)=100(1 - e^(-t/50)). 10. t=120 min: m=100(1 - e^(-2.4)).",
+    "final_answer": "$m(120) = 100(1 - e^{-2.4}) \\approx 100(1 - 0.0907) \\approx 90.93 \\text{ kg}$"
+  },
+  {
+    "topic": "Mixing and Newton\u2019s Law of Cooling Applications",
+    "question": "An object cools from 120 \u00b0F to 90 \u00b0F in 30 min in a 70 \u00b0F environment. Find the constant k in Newton\u2019s Law of Cooling.",
+    "chain_of_thought_reasoning": "1. Model: T(t)=70 + Ce^(-kt). 2. T(0)=120 \u21d2 C=50. 3. T(t)=70 + 50e^(-kt). 4. T(30)=90: 90=70+50e^(-30k) \u21d2 e^(-30k)=20/50=0.4. 5. Take ln: -30k=ln(0.4)\u21d2k=-ln(0.4)/30\u22480.9163/30.",
+    "final_answer": "$k = \\frac{\\ln(2.5)}{30} \\approx 0.0305 \\text{ per minute}$"
+  },
+  {
+    "topic": "Mixing and Newton\u2019s Law of Cooling Applications",
+    "question": "A 300 L tank contains 15 kg of salt. Freshwater enters at 6 L/min and mixed solution leaves at 6 L/min. Determine salt after 45 min.",
+    "chain_of_thought_reasoning": "1. Constant volume 300 L. 2. No salt inflow \u21d2 rate in = 0. 3. Rate out: 6 L/min \u00d7 m/300 kg/L = m/50 kg/min. 4. DE: dm/dt = -m/50. 5. Solution: m(t)=m\u2080e^(-t/50)=15e^(-t/50). 6. At t=45: m=15e^(-45/50)=15e^(-0.9).",
+    "final_answer": "$m(45) = 15e^{-0.9} \\approx 15(0.4066) \\approx 6.10 \\text{ kg}$"
+  },
+  {
+    "topic": "Mixing and Newton\u2019s Law of Cooling Applications",
+    "question": "A metal rod at 200 \u00b0C is placed in a 30 \u00b0C room. After 10 min it is 150 \u00b0C. Predict its temperature after 30 min.",
+    "chain_of_thought_reasoning": "1. Model: T(t)=30 + Ce^(-kt). 2. T(0)=200 \u21d2 C=170. 3. T(t)=30 + 170e^(-kt). 4. T(10)=150: 150=30+170e^(-10k)\u21d2e^(-10k)=120/170\u22480.7059. 5. Solve k: -10k=ln(0.7059)\u21d2k\u22480.0348. 6. T(30)=30+170e^(-0.0348\u00d730)=30+170e^(-1.044). 7. e^(-1.044)\u22480.3520. 8. T\u224830+170\u00d70.3520\u224889.8.",
+    "final_answer": "$T(30) \\approx 89.8\\,^\\circ\\text{C}$"
+  },
+  {
+    "topic": "Mixing and Newton\u2019s Law of Cooling Applications",
+    "question": "Describe how the integrating factor method applies to the differential equation for Newton\u2019s Law of Cooling.",
+    "chain_of_thought_reasoning": "1. Newton\u2019s Law: dT/dt = -k(T - T_s). 2. Rewrite: dT/dt + kT = kT_s. 3. This is linear in T with P(t)=k and Q(t)=kT_s. 4. Integrating factor: e^(\u222bk dt)=e^(kt). 5. Multiply through: e^(kt)dT/dt + ke^(kt)T = kT_s e^(kt). 6. Left side is d/dt[T e^(kt)]. 7. Integrate: T e^(kt)=T_s e^(kt)+C. 8. Solve: T(t)=T_s + Ce^(-kt), the standard solution.",
+    "final_answer": "The integrating factor e^(kt) converts the left side to the derivative of T e^(kt), yielding T(t)=T_s + Ce^(-kt)."
+  },
+  {
+    "topic": "Mixing and Newton\u2019s Law of Cooling Applications",
+    "question": "A 1000 L tank has 50 kg of salt. Brine (0.4 kg/L) enters at 25 L/min; mixed solution drains at 25 L/min. Find salt after 1 h.",
+    "chain_of_thought_reasoning": "1. Constant volume 1000 L. 2. Rate in: 25 L/min \u00d7 0.4 kg/L = 10 kg/min. 3. Rate out: 25 L/min \u00d7 m/1000 kg/L = m/40 kg/min. 4. DE: dm/dt = 10 - m/40. 5. Linear: dm/dt + m/40 = 10. 6. Integrating factor: e^(t/40). 7. General: m(t)=400 + Ce^(-t/40). 8. Initial: m(0)=50 \u21d2 C=-350. 9. m(t)=400 - 350e^(-t/40). 10. t=60: m=400 - 350e^(-1.5).",
+    "final_answer": "$m(60) = 400 - 350e^{-1.5} \\approx 400 - 350(0.2231) \\approx 321.9 \\text{ kg}$"
+  },
+  {
+    "topic": "Mixing and Newton\u2019s Law of Cooling Applications",
+    "question": "A bowl of soup at 95 \u00b0C cools to 80 \u00b0C in 5 min in a 25 \u00b0C kitchen. Find the temperature after 15 min.",
+    "chain_of_thought_reasoning": "1. Model: T(t)=25 + Ce^(-kt). 2. T(0)=95 \u21d2 C=70. 3. T(t)=25 + 70e^(-kt). 4. T(5)=80: 80=25+70e^(-5k)\u21d2e^(-5k)=55/70\u22480.7857. 5. Solve k: -5k=ln(0.7857)\u21d2k\u22480.0483. 6. T(15)=25+70e^(-0.0483\u00d715)=25+70e^(-0.7245). 7. e^(-0.7245)\u22480.4845. 8. T\u224825+70\u00d70.4845\u224858.9.",
+    "final_answer": "$T(15) \\approx 58.9\\,^\\circ\\text{C}$"
+  },
+  {
+    "topic": "Mixing and Newton\u2019s Law of Cooling Applications",
+    "question": "A 400 L tank contains 8 kg of salt. Salt water (0.3 kg/L) flows in at 8 L/min, and mixed solution leaves at 8 L/min. Calculate the concentration after 40 min.",
+    "chain_of_thought_reasoning": "1. Constant volume 400 L. 2. Rate in: 8 L/min \u00d7 0.3 kg/L = 2.4 kg/min. 3. Rate out: 8 L/min \u00d7 m/400 kg/L = m/50 kg/min. 4. DE: dm/dt = 2.4 - m/50. 5. Linear: dm/dt + m/50 = 2.4. 6. Integrating factor: e^(t/50). 7. General: m(t)=120 + Ce^(-t/50). 8. Initial: m(0)=8 \u21d2 C=-112. 9. m(t)=120 - 112e^(-t/50). 10. t=40: m=120 - 112e^(-0.8). 11. Concentration = m/400 = 0.3 - 0.28e^(-0.8).",
+    "final_answer": "$\\text{Concentration} = 0.3 - 0.28e^{-0.8} \\approx 0.3 - 0.28(0.4493) \\approx 0.1742 \\text{ kg/L}$"
+  },
+  {
+    "topic": "Mixing and Newton\u2019s Law of Cooling Applications",
+    "question": "A pie at 180 \u00b0F cools in a 75 \u00b0F room. After 20 min it is 140 \u00b0F. When will it reach 100 \u00b0F?",
+    "chain_of_thought_reasoning": "1. Model: T(t)=75 + Ce^(-kt). 2. T(0)=180 \u21d2 C=105. 3. T(t)=75 + 105e^(-kt). 4. T(20)=140: 140=75+105e^(-20k)\u21d2e^(-20k)=65/105\u22480.6190. 5. Solve k: -20k=ln(0.6190)\u21d2k\u22480.0244. 6. Set T=100: 100=75+105e^(-0.0244t)\u21d2e^(-0.0244t)=25/105\u22480.2381. 7. Take ln: -0.0244t=ln(0.2381)\u21d2t\u224859.2 min.",
+    "final_answer": "$t \\approx 59.2 \\text{ min}$"
+  },
+  {
+    "topic": "Mixing and Newton\u2019s Law of Cooling Applications",
+    "question": "Compare the long-term behavior of salt mass in a tank when inflow concentration is (i) constant and (ii) exponentially decreasing.",
+    "chain_of_thought_reasoning": "1. Constant inflow: DE becomes dm/dt = R c_in - R m/V. Steady state dm/dt=0 gives m_ss = c_in V, a constant equilibrium. 2. Exponentially decreasing inflow: c_in(t)=c\u2080e^(-at). Then DE is dm/dt = R c\u2080 e^(-at) - R m/V. 3. This is a linear ODE with exponential forcing. The homogeneous part still drives m toward zero, while the forcing term adds a decaying input. 4. As t\u2192\u221e, both the input and the solution decay to zero. 5. Thus, constant inflow yields non-zero steady salt, whereas exponentially decreasing inflow yields asymptotic extinction of salt.",
+    "final_answer": "Constant inflow approaches a non-zero steady mass; exponentially decreasing inflow causes the mass to decay to zero."
+  },
+  {
+    "topic": "Constructing a Differential Equation from a Given Family of Curves",
+    "question": "Given the family of curves $y = Cx^2$, form the differential equation.",
+    "chain_of_thought_reasoning": "1. Differentiate the given equation with respect to x: $\\frac{dy}{dx} = 2Cx$. 2. From the original equation, solve for C: $C = \\frac{y}{x^2}$. 3. Substitute C into the derivative: $\\frac{dy}{dx} = 2 \\cdot \\frac{y}{x^2} \\cdot x = \\frac{2y}{x}$. 4. Rearrange to get the differential equation: $x\\frac{dy}{dx} = 2y$.",
+    "final_answer": "$x\\frac{dy}{dx} = 2y$"
+  },
+  {
+    "topic": "Constructing a Differential Equation from a Given Family of Curves",
+    "question": "Given the family of curves $y = Ce^{2x}$, form the differential equation.",
+    "chain_of_thought_reasoning": "1. Differentiate the given equation with respect to x: $\\frac{dy}{dx} = 2Ce^{2x}$. 2. From the original equation, solve for C: $C = \\frac{y}{e^{2x}}$. 3. Substitute C into the derivative: $\\frac{dy}{dx} = 2 \\cdot \\frac{y}{e^{2x}} \\cdot e^{2x} = 2y$. 4. Rearrange to get the differential equation: $\\frac{dy}{dx} = 2y$.",
+    "final_answer": "$\\frac{dy}{dx} = 2y$"
+  },
+  {
+    "topic": "Constructing a Differential Equation from a Given Family of Curves",
+    "question": "Given the family of curves $y = C_1e^x + C_2e^{-x}$, form the differential equation.",
+    "chain_of_thought_reasoning": "1. Differentiate the given equation with respect to x: $\\frac{dy}{dx} = C_1e^x - C_2e^{-x}$. 2. Differentiate again: $\\frac{d^2y}{dx^2} = C_1e^x + C_2e^{-x}$. 3. Notice that the second derivative is equal to the original function: $\\frac{d^2y}{dx^2} = y$. 4. Rearrange to get the differential equation: $\\frac{d^2y}{dx^2} - y = 0$.",
+    "final_answer": "$\\frac{d^2y}{dx^2} - y = 0$"
+  },
+  {
+    "topic": "Constructing a Differential Equation from a Given Family of Curves",
+    "question": "Given the family of curves $x^2 + y^2 = C$, form the differential equation.",
+    "chain_of_thought_reasoning": "1. Differentiate the given equation implicitly with respect to x: $2x + 2y\\frac{dy}{dx} = 0$. 2. Simplify the equation: $x + y\\frac{dy}{dx} = 0$. 3. Rearrange to get the differential equation: $y\\frac{dy}{dx} = -x$.",
+    "final_answer": "$y\\frac{dy}{dx} = -x$"
+  },
+  {
+    "topic": "Constructing a Differential Equation from a Given Family of Curves",
+    "question": "Given the family of curves $y = Cx^3$, form the differential equation.",
+    "chain_of_thought_reasoning": "1. Differentiate the given equation with respect to x: $\\frac{dy}{dx} = 3Cx^2$. 2. From the original equation, solve for C: $C = \\frac{y}{x^3}$. 3. Substitute C into the derivative: $\\frac{dy}{dx} = 3 \\cdot \\frac{y}{x^3} \\cdot x^2 = \\frac{3y}{x}$. 4. Rearrange to get the differential equation: $x\\frac{dy}{dx} = 3y$.",
+    "final_answer": "$x\\frac{dy}{dx} = 3y$"
+  },
+  {
+    "topic": "Constructing a Differential Equation from a Given Family of Curves",
+    "question": "Given the family of curves $y = C_1\\cos x + C_2\\sin x$, form the differential equation.",
+    "chain_of_thought_reasoning": "1. Differentiate the given equation with respect to x: $\\frac{dy}{dx} = -C_1\\sin x + C_2\\cos x$. 2. Differentiate again: $\\frac{d^2y}{dx^2} = -C_1\\cos x - C_2\\sin x$. 3. Notice that the second derivative is equal to the negative of the original function: $\\frac{d^2y}{dx^2} = -y$. 4. Rearrange to get the differential equation: $\\frac{d^2y}{dx^2} + y = 0$.",
+    "final_answer": "$\\frac{d^2y}{dx^2} + y = 0$"
+  },
+  {
+    "topic": "Constructing a Differential Equation from a Given Family of Curves",
+    "question": "Given the family of curves $y = C_1e^{3x} + C_2e^{-2x}$, form the differential equation.",
+    "chain_of_thought_reasoning": "1. Differentiate the given equation with respect to x: $\\frac{dy}{dx} = 3C_1e^{3x} - 2C_2e^{-2x}$. 2. Differentiate again: $\\frac{d^2y}{dx^2} = 9C_1e^{3x} + 4C_2e^{-2x}$. 3. From the original equation and its derivatives, we can eliminate C1 and C2. 4. After elimination, we get the differential equation: $\\frac{d^2y}{dx^2} - \\frac{dy}{dx} - 6y = 0$.",
+    "final_answer": "$\\frac{d^2y}{dx^2} - \\frac{dy}{dx} - 6y = 0$"
+  },
+  {
+    "topic": "Constructing a Differential Equation from a Given Family of Curves",
+    "question": "Given the family of curves $y = Cx + C^2$, form the differential equation.",
+    "chain_of_thought_reasoning": "1. Differentiate the given equation with respect to x: $\\frac{dy}{dx} = C$. 2. From the original equation, solve for C: $C = \\frac{dy}{dx}$. 3. Substitute C into the original equation: $y = x\\frac{dy}{dx} + \\left(\\frac{dy}{dx}\\right)^2$. 4. Rearrange to get the differential equation: $y = x\\frac{dy}{dx} + \\left(\\frac{dy}{dx}\\right)^2$.",
+    "final_answer": "$y = x\\frac{dy}{dx} + \\left(\\frac{dy}{dx}\\right)^2$"
+  },
+  {
+    "topic": "Constructing a Differential Equation from a Given Family of Curves",
+    "question": "Given the family of curves $y = A\\cos 2x + B\\sin 2x$, form the differential equation.",
+    "chain_of_thought_reasoning": "1. Differentiate the given equation with respect to x: $\\frac{dy}{dx} = -2A\\sin 2x + 2B\\cos 2x$. 2. Differentiate again: $\\frac{d^2y}{dx^2} = -4A\\cos 2x - 4B\\sin 2x$. 3. Notice that the second derivative is equal to -4 times the original function: $\\frac{d^2y}{dx^2} = -4y$. 4. Rearrange to get the differential equation: $\\frac{d^2y}{dx^2} + 4y = 0$.",
+    "final_answer": "$\\frac{d^2y}{dx^2} + 4y = 0$"
+  },
+  {
+    "topic": "Constructing a Differential Equation from a Given Family of Curves",
+    "question": "Given the family of curves $y = C_1x + C_2x^2$, form the differential equation.",
+    "chain_of_thought_reasoning": "1. Differentiate the given equation with respect to x: $\\frac{dy}{dx} = C_1 + 2C_2x$. 2. Differentiate again: $\\frac{d^2y}{dx^2} = 2C_2$. 3. From the second derivative, solve for C2: $C_2 = \\frac{1}{2}\\frac{d^2y}{dx^2}$. 4. Substitute C2 into the first derivative: $\\frac{dy}{dx} = C_1 + x\\frac{d^2y}{dx^2}$. 5. Solve for C1: $C_1 = \\frac{dy}{dx} - x\\frac{d^2y}{dx^2}$. 6. Substitute C1 and C2 into the original equation: $y = x\\left(\\frac{dy}{dx} - x\\frac{d^2y}{dx^2}\\right) + \\frac{x^2}{2}\\frac{d^2y}{dx^2}$. 7. Simplify to get the differential equation: $x^2\\frac{d^2y}{dx^2} - 2x\\frac{dy}{dx} + 2y = 0$.",
+    "final_answer": "$x^2\\frac{d^2y}{dx^2} - 2x\\frac{dy}{dx} + 2y = 0$"
+  },
+  {
+    "topic": "Constructing a Differential Equation from a Given Family of Curves",
+    "question": "Explain the general method for constructing a differential equation from a given family of curves.",
+    "chain_of_thought_reasoning": "1. Start with the equation of the family of curves, which typically contains arbitrary constants (parameters). 2. Differentiate the equation with respect to the independent variable as many times as there are arbitrary constants. 3. Use the resulting equations to eliminate the arbitrary constants. 4. The final equation, which relates the derivatives and the variables, is the differential equation that represents the given family of curves.",
+    "final_answer": "The general method involves: (1) Writing the family equation with parameters, (2) Differentiating n times for n parameters, (3) Eliminating all parameters, (4) Obtaining a differential equation relating derivatives and variables."
+  },
+  {
+    "topic": "Constructing a Differential Equation from a Given Family of Curves",
+    "question": "Given the family of curves $y = C_1e^x + C_2xe^x$, form the differential equation.",
+    "chain_of_thought_reasoning": "1. Differentiate the given equation with respect to x: $\\frac{dy}{dx} = C_1e^x + C_2e^x + C_2xe^x$. 2. Differentiate again: $\\frac{d^2y}{dx^2} = C_1e^x + 2C_2e^x + C_2xe^x$. 3. From the original equation and its derivatives, we can eliminate C1 and C2. 4. After elimination, we get the differential equation: $\\frac{d^2y}{dx^2} - 2\\frac{dy}{dx} + y = 0$.",
+    "final_answer": "$\\frac{d^2y}{dx^2} - 2\\frac{dy}{dx} + y = 0$"
+  },
+  {
+    "topic": "Constructing a Differential Equation from a Given Family of Curves",
+    "question": "Given the family of curves $x = Cy^2$, form the differential equation.",
+    "chain_of_thought_reasoning": "1. Differentiate the given equation implicitly with respect to x: $1 = 2Cy\\frac{dy}{dx}$. 2. From the original equation, solve for C: $C = \\frac{x}{y^2}$. 3. Substitute C into the derivative equation: $1 = 2\\cdot\\frac{x}{y^2}\\cdot y\\cdot\\frac{dy}{dx}$. 4. Simplify: $1 = \\frac{2x}{y}\\frac{dy}{dx}$. 5. Rearrange to get the differential equation: $y = 2x\\frac{dy}{dx}$.",
+    "final_answer": "$y = 2x\\frac{dy}{dx}$"
+  },
+  {
+    "topic": "Constructing a Differential Equation from a Given Family of Curves",
+    "question": "Given the family of curves $y = C_1x^2 + C_2x$, form the differential equation.",
+    "chain_of_thought_reasoning": "1. Differentiate the given equation with respect to x: $\\frac{dy}{dx} = 2C_1x + C_2$. 2. Differentiate again: $\\frac{d^2y}{dx^2} = 2C_1$. 3. From the second derivative, solve for C1: $C_1 = \\frac{1}{2}\\frac{d^2y}{dx^2}$. 4. Substitute C1 into the first derivative: $\\frac{dy}{dx} = x\\frac{d^2y}{dx^2} + C_2$. 5. Solve for C2: $C_2 = \\frac{dy}{dx} - x\\frac{d^2y}{dx^2}$. 6. Substitute C1 and C2 into the original equation: $y = \\frac{x^2}{2}\\frac{d^2y}{dx^2} + x\\left(\\frac{dy}{dx} - x\\frac{d^2y}{dx^2}\\right)$. 7. Simplify to get the differential equation: $x^2\\frac{d^2y}{dx^2} - 2x\\frac{dy}{dx} + 2y = 0$.",
+    "final_answer": "$x^2\\frac{d^2y}{dx^2} - 2x\\frac{dy}{dx} + 2y = 0$"
+  },
+  {
+    "topic": "Constructing a Differential Equation from a Given Family of Curves",
+    "question": "Given the family of curves $y = C\\sin x$, form the differential equation.",
+    "chain_of_thought_reasoning": "1. Differentiate the given equation with respect to x: $\\frac{dy}{dx} = C\\cos x$. 2. Differentiate again: $\\frac{d^2y}{dx^2} = -C\\sin x$. 3. Notice that the second derivative is equal to the negative of the original function: $\\frac{d^2y}{dx^2} = -y$. 4. Rearrange to get the differential equation: $\\frac{d^2y}{dx^2} + y = 0$.",
+    "final_answer": "$\\frac{d^2y}{dx^2} + y = 0$"
+  },
+  {
+    "topic": "Constructing a Differential Equation from a Given Family of Curves",
+    "question": "Given the family of curves $y = C_1 + C_2x + C_3x^2$, form the differential equation.",
+    "chain_of_thought_reasoning": "1. Differentiate the given equation with respect to x: $\\frac{dy}{dx} = C_2 + 2C_3x$. 2. Differentiate again: $\\frac{d^2y}{dx^2} = 2C_3$. 3. Differentiate a third time: $\\frac{d^3y}{dx^3} = 0$. 4. The third derivative is zero, which gives us the differential equation: $\\frac{d^3y}{dx^3} = 0$.",
+    "final_answer": "$\\frac{d^3y}{dx^3} = 0$"
+  },
+  {
+    "topic": "Constructing a Differential Equation from a Given Family of Curves",
+    "question": "Discuss how the number of arbitrary constants in a family of curves relates to the order of the resulting differential equation.",
+    "chain_of_thought_reasoning": "1. A family of curves is typically represented by an equation containing arbitrary constants (parameters). 2. Each arbitrary constant represents a degree of freedom in the family. 3. To construct a differential equation, we need to eliminate all arbitrary constants. 4. This requires differentiating the equation as many times as there are arbitrary constants. 5. Therefore, the order of the resulting differential equation equals the number of arbitrary constants in the original family of curves.",
+    "final_answer": "The order of the differential equation equals the number of arbitrary constants in the family of curves, as we must differentiate once for each constant to eliminate them."
+  },
+  {
+    "topic": "Constructing a Differential Equation from a Given Family of Curves",
+    "question": "Given the family of curves $y = C_1e^{2x} + C_2e^{-x} + C_3xe^{-x}$, form the differential equation.",
+    "chain_of_thought_reasoning": "1. This is a third-order family (three arbitrary constants), so we need three derivatives. 2. After differentiating three times and systematically eliminating C1, C2, and C3 through algebraic manipulation, we obtain a third-order linear differential equation. 3. The characteristic equation approach shows the roots are 2, -1 (double root), leading to: 4. The differential equation: $\\frac{d^3y}{dx^3} - 3\\frac{dy}{dx} - 2y = 0$.",
+    "final_answer": "$\\frac{d^3y}{dx^3} - 3\\frac{dy}{dx} - 2y = 0$"
+  },
+  {
+    "topic": "Integrating Factor Formula Memorisation and Common Errors",
+    "question": "State the formula for the integrating factor (I.F.) of a first-order linear differential equation in the standard form $\\frac{dy}{dx} + P(x)y = Q(x)$.",
+    "chain_of_thought_reasoning": "The integrating factor is derived so that the left-hand side becomes the derivative of the product $y \\cdot (I.F.)$. This requires $e^{\\int P(x)\\,dx}$ because differentiating $y \\cdot e^{\\int P(x)\\,dx}$ produces $e^{\\int P(x)\\,dx} \\frac{dy}{dx} + P(x) e^{\\int P(x)\\,dx} y$, matching the original equation multiplied through by the I.F.",
+    "final_answer": "$I.F. = e^{\\int P(x)\\,dx}$"
+  },
+  {
+    "topic": "Integrating Factor Formula Memorisation and Common Errors",
+    "question": "Find the integrating factor for the differential equation $\\frac{dy}{dx} + 3y = e^{2x}$.",
+    "chain_of_thought_reasoning": "1. Identify $P(x) = 3$. 2. Compute the integral $\\int P(x)\\,dx = \\int 3\\,dx = 3x$. 3. Exponentiate to obtain the integrating factor $e^{3x}$.",
+    "final_answer": "$e^{3x}$"
+  },
+  {
+    "topic": "Integrating Factor Formula Memorisation and Common Errors",
+    "question": "Compute the integrating factor for $\\frac{dy}{dx} + \\frac{2}{x}y = x^3$.",
+    "chain_of_thought_reasoning": "1. Here $P(x) = \\frac{2}{x}$. 2. Integrate: $\\int \\frac{2}{x}\\,dx = 2\\ln|x| = \\ln x^2$. 3. Exponentiate: $e^{\\ln x^2} = x^2$.",
+    "final_answer": "$x^2$"
+  },
+  {
+    "topic": "Integrating Factor Formula Memorisation and Common Errors",
+    "question": "Determine the integrating factor of the linear DE $\\frac{dy}{dx} - y\\tan x = \\sin x$.",
+    "chain_of_thought_reasoning": "1. $P(x) = -\\tan x$. 2. Integrate: $\\int -\\tan x\\,dx = \\int \\frac{-\\sin x}{\\cos x}\\,dx = \\ln|\\cos x|$. 3. Exponentiate: $e^{\\ln|\\cos x|} = |\\cos x|$; we conventionally take the positive form $\\cos x$ for the I.F.",
+    "final_answer": "$\\cos x$"
+  },
+  {
+    "topic": "Integrating Factor Formula Memorisation and Common Errors",
+    "question": "A student mistakenly writes the integrating factor as $e^{\\int Q(x)\\,dx}$ instead of $e^{\\int P(x)\\,dx}$. For the equation $\\frac{dy}{dx} + 4y = 5$, what incorrect I.F. would the student compute?",
+    "chain_of_thought_reasoning": "The student applies the wrong integrand $Q(x)=5$. Integrating gives $\\int 5\\,dx = 5x$, and exponentiating yields $e^{5x}$, which is not the correct integrating factor.",
+    "final_answer": "$e^{5x}$"
+  },
+  {
+    "topic": "Integrating Factor Formula Memorisation and Common Errors",
+    "question": "For the linear equation $x\\frac{dy}{dx} + y = x^2$, obtain the integrating factor.",
+    "chain_of_thought_reasoning": "1. Rewrite in standard form: divide by $x$ to get $\\frac{dy}{dx} + \\frac{1}{x}y = x$. 2. $P(x)=\\frac{1}{x}$. 3. Integrate: $\\int \\frac{1}{x}\\,dx = \\ln|x|$. 4. Exponentiate: $e^{\\ln|x|} = |x|$; we take $x$ (positive) as the I.F.",
+    "final_answer": "$x$"
+  },
+  {
+    "topic": "Integrating Factor Formula Memorisation and Common Errors",
+    "question": "Identify the integrating factor for $\\frac{dy}{dx} + \\cot x\\,y = 2\\cos x$.",
+    "chain_of_thought_reasoning": "1. $P(x)=\\cot x$. 2. Integrate: $\\int \\cot x\\,dx = \\ln|\\sin x|$. 3. Exponentiate: $e^{\\ln|\\sin x|} = |\\sin x|$; we use $\\sin x$ as the I.F.",
+    "final_answer": "$\\sin x$"
+  },
+  {
+    "topic": "Integrating Factor Formula Memorisation and Common Errors",
+    "question": "Find the integrating factor of the differential equation $\\frac{dy}{dx} + \\frac{1}{1+x^2}y = 0$.",
+    "chain_of_thought_reasoning": "1. $P(x)=\\frac{1}{1+x^2}$. 2. Integrate: $\\int \\frac{1}{1+x^2}\\,dx = \\tan^{-1}x$. 3. Exponentiate: $e^{\\tan^{-1}x}$.",
+    "final_answer": "$e^{\\tan^{-1}x}$"
+  },
+  {
+    "topic": "Integrating Factor Formula Memorisation and Common Errors",
+    "question": "A common error is forgetting the constant of integration when computing the I.F. Does omitting $+C$ in $\\int P(x)\\,dx$ affect the validity of the integrating-factor method?",
+    "chain_of_thought_reasoning": "No. The constant cancels inside the exponential: $e^{\\int P\\,dx + C} = e^C \\cdot e^{\\int P\\,dx}$. When both sides of the linear DE are multiplied by this factor, $e^C$ divides out, so the method still works. Thus the constant is conventionally dropped for simplicity.",
+    "final_answer": "No, the constant of integration does not affect the method."
+  },
+  {
+    "topic": "Integrating Factor Formula Memorisation and Common Errors",
+    "question": "Compute the integrating factor for the equation $\\frac{dy}{dx} - \\frac{3}{x}y = x^4$.",
+    "chain_of_thought_reasoning": "1. $P(x)=-\\frac{3}{x}$. 2. Integrate: $\\int -\\frac{3}{x}\\,dx = -3\\ln|x| = \\ln x^{-3}$. 3. Exponentiate: $e^{\\ln x^{-3}} = x^{-3} = \\frac{1}{x^3}$.",
+    "final_answer": "$\\frac{1}{x^3}$"
+  },
+  {
+    "topic": "Integrating Factor Formula Memorisation and Common Errors",
+    "question": "For $\\frac{dy}{dx} + 2xy = x$, determine the integrating factor.",
+    "chain_of_thought_reasoning": "1. $P(x)=2x$. 2. Integrate: $\\int 2x\\,dx = x^2$. 3. Exponentiate: $e^{x^2}$.",
+    "final_answer": "$e^{x^2}$"
+  },
+  {
+    "topic": "Integrating Factor Formula Memorisation and Common Errors",
+    "question": "A student writes the I.F. as $e^{-\\int P(x)\\,dx}$. For $\\frac{dy}{dx} + 5y = 7$, what wrong expression would result?",
+    "chain_of_thought_reasoning": "The student uses the negative exponent. With $P(x)=5$, the integral is $5x$, so the erroneous I.F. becomes $e^{-5x}$.",
+    "final_answer": "$e^{-5x}$"
+  },
+  {
+    "topic": "Integrating Factor Formula Memorisation and Common Errors",
+    "question": "Find the integrating factor for the linear equation $\\frac{dy}{dx} + y = x\\cos x$.",
+    "chain_of_thought_reasoning": "1. $P(x)=1$. 2. Integrate: $\\int 1\\,dx = x$. 3. Exponentiate: $e^x$.",
+    "final_answer": "$e^x$"
+  },
+  {
+    "topic": "Integrating Factor Formula Memorisation and Common Errors",
+    "question": "Determine the integrating factor of $\\frac{dy}{dx} + \\frac{x}{1+x^2}y = \\frac{1}{1+x^2}$.",
+    "chain_of_thought_reasoning": "1. $P(x)=\\frac{x}{1+x^2}$. 2. Integrate: $\\int \\frac{x}{1+x^2}\\,dx = \\frac{1}{2}\\ln(1+x^2)$. 3. Exponentiate: $e^{\\frac{1}{2}\\ln(1+x^2)} = \\sqrt{1+x^2}$.",
+    "final_answer": "$\\sqrt{1+x^2}$"
+  },
+  {
+    "topic": "Integrating Factor Formula Memorisation and Common Errors",
+    "question": "Explain why the integrating factor must be exponential in form and not, for example, a polynomial.",
+    "chain_of_thought_reasoning": "The I.F. is constructed so that the left-hand side becomes the derivative of a product $y \\cdot (I.F.)$. This requires the product rule to match the original linear DE exactly: $\\frac{d}{dx}[y \\cdot g(x)] = g(x)\\frac{dy}{dx} + g'(x)y$. Equating coefficients forces $g'(x)=P(x)g(x)$, whose solution is $g(x)=e^{\\int P(x)\\,dx}$. No polynomial (or other non-exponential) function satisfies this differential constraint in general.",
+    "final_answer": "Only an exponential form satisfies the differential constraint $g'(x)=P(x)g(x)$ required by the product-rule matching."
+  },
+  {
+    "topic": "Integrating Factor Formula Memorisation and Common Errors",
+    "question": "Compute the integrating factor for $\\frac{dy}{dx} + \\tanh x\\,y = 1$.",
+    "chain_of_thought_reasoning": "1. $P(x)=\\tanh x$. 2. Integrate: $\\int \\tanh x\\,dx = \\ln(\\cosh x)$. 3. Exponentiate: $e^{\\ln(\\cosh x)} = \\cosh x$.",
+    "final_answer": "$\\cosh x$"
+  },
+  {
+    "topic": "Integrating Factor Formula Memorisation and Common Errors",
+    "question": "Find the integrating factor of the equation $\\frac{dy}{dx} + \\frac{2x}{1+x^2}y = 4x^3$.",
+    "chain_of_thought_reasoning": "1. $P(x)=\\frac{2x}{1+x^2}$. 2. Integrate: $\\int \\frac{2x}{1+x^2}\\,dx = \\ln(1+x^2)$. 3. Exponentiate: $e^{\\ln(1+x^2)} = 1+x^2$.",
+    "final_answer": "$1+x^2$"
+  },
+  {
+    "topic": "Integrating Factor Formula Memorisation and Common Errors",
+    "question": "For the linear DE $\\frac{dy}{dx} + y\\sec x = \\tan x$, obtain the integrating factor.",
+    "chain_of_thought_reasoning": "1. $P(x)=\\sec x$. 2. Integrate: $\\int \\sec x\\,dx = \\ln|\\sec x + \\tan x|$. 3. Exponentiate: $e^{\\ln|\\sec x + \\tan x|} = |\\sec x + \\tan x|$; we take $\\sec x + \\tan x$ as the I.F.",
+    "final_answer": "$\\sec x + \\tan x$"
+  },
+  {
+    "topic": "Integrating Factor Formula Memorisation and Common Errors",
+    "question": "A student misremembers the formula and tries $e^{\\int Q(x)\\,dx}$ for $\\frac{dy}{dx} + y = e^x$. What incorrect I.F. is obtained?",
+    "chain_of_thought_reasoning": "The student integrates $Q(x)=e^x$ instead of $P(x)=1$, yielding $\\int e^x\\,dx = e^x$, and exponentiates to $e^{e^x}$.",
+    "final_answer": "$e^{e^x}$"
+  },
+  {
+    "topic": "Integrating Factor Formula Memorisation and Common Errors",
+    "question": "Describe a frequent sign error made when computing the integrating factor and illustrate with $\\frac{dy}{dx} - 3y = 6$.",
+    "chain_of_thought_reasoning": "A common mistake is neglecting the minus sign in $P(x)$. Here $P(x)=-3$, so the correct integral is $\\int -3\\,dx = -3x$, giving I.F. $e^{-3x}$. Forgetting the sign would integrate $+3$ and produce $e^{3x}$, which is wrong.",
+    "final_answer": "The error is omitting the minus sign, leading to the wrong I.F. $e^{3x}$ instead of $e^{-3x}$."
+  },
+  {
+    "topic": "Integrating Factor Formula Memorisation and Common Errors",
+    "question": "Find the integrating factor for the differential equation $\\frac{dy}{dx} + \\frac{1}{x\\ln x}y = \\frac{1}{x}$.",
+    "chain_of_thought_reasoning": "1. $P(x)=\\frac{1}{x\\ln x}$. 2. Integrate: substitute $u=\\ln x$, $du=\\frac{1}{x}dx$, so $\\int \\frac{1}{x\\ln x}\\,dx = \\int \\frac{1}{u}\\,du = \\ln|u| = \\ln|\\ln x|$. 3. Exponentiate: $e^{\\ln|\\ln x|} = |\\ln x|$; we use $\\ln x$ as the I.F.",
+    "final_answer": "$\\ln x$"
+  },
+  {
+    "topic": "Verification of a Proposed Solution",
+    "question": "Verify whether $y = e^{2x}$ is a solution of the differential equation $y' - 2y = 0$.",
+    "chain_of_thought_reasoning": "1. Compute the derivative of the proposed solution: $y = e^{2x} \\Rightarrow y' = 2e^{2x}$. 2. Substitute $y$ and $y'$ into the left-hand side (LHS) of the differential equation: LHS = $y' - 2y = 2e^{2x} - 2(e^{2x}) = 0$. 3. Compare LHS with the right-hand side (RHS): RHS = 0. Since LHS = RHS, the proposed function satisfies the differential equation.",
+    "final_answer": "$y = e^{2x}$ is a solution."
+  },
+  {
+    "topic": "Verification of a Proposed Solution",
+    "question": "Check if $y = \\sin x$ satisfies the equation $y'' + y = 0$.",
+    "chain_of_thought_reasoning": "1. Differentiate $y = \\sin x$ once: $y' = \\cos x$. 2. Differentiate again: $y'' = -\\sin x$. 3. Substitute into the differential equation: LHS = $y'' + y = -\\sin x + \\sin x = 0$. 4. RHS is 0, so LHS = RHS. Hence, the function satisfies the equation.",
+    "final_answer": "$y = \\sin x$ is a solution."
+  },
+  {
+    "topic": "Verification of a Proposed Solution",
+    "question": "Determine whether $y = x^2$ is a solution of $y' = 2x$.",
+    "chain_of_thought_reasoning": "1. Differentiate the proposed solution: $y = x^2 \\Rightarrow y' = 2x$. 2. Compare with the RHS of the differential equation: RHS = $2x$. 3. Since $y'$ equals the RHS, the function satisfies the equation.",
+    "final_answer": "$y = x^2$ is a solution."
+  },
+  {
+    "topic": "Verification of a Proposed Solution",
+    "question": "Verify if $y = Ce^{3x}$ satisfies $y' - 3y = 0$ for any constant $C$.",
+    "chain_of_thought_reasoning": "1. Differentiate: $y = Ce^{3x} \\Rightarrow y' = 3Ce^{3x}$. 2. Substitute into the equation: LHS = $y' - 3y = 3Ce^{3x} - 3(Ce^{3x}) = 0$. 3. RHS is 0, so equality holds for every $C$.",
+    "final_answer": "$y = Ce^{3x}$ is a solution for any constant $C$."
+  },
+  {
+    "topic": "Verification of a Proposed Solution",
+    "question": "Is $y = \\ln x$ a solution of $xy' = 1$?",
+    "chain_of_thought_reasoning": "1. Differentiate: $y = \\ln x \\Rightarrow y' = 1/x$. 2. Multiply by $x$: $xy' = x(1/x) = 1$. 3. RHS of the equation is 1, so LHS = RHS. Therefore, the function satisfies the equation.",
+    "final_answer": "$y = \\ln x$ is a solution."
+  },
+  {
+    "topic": "Verification of a Proposed Solution",
+    "question": "Show that $y = A\\cos x + B\\sin x$ satisfies $y'' + y = 0$ for arbitrary constants $A$ and $B$.",
+    "chain_of_thought_reasoning": "1. First derivative: $y' = -A\\sin x + B\\cos x$. 2. Second derivative: $y'' = -A\\cos x - B\\sin x$. 3. Substitute into the equation: LHS = $y'' + y = (-A\\cos x - B\\sin x) + (A\\cos x + B\\sin x) = 0$. 4. RHS is 0, so the equality holds for all $A$ and $B$.",
+    "final_answer": "$y = A\\cos x + B\\sin x$ is a solution."
+  },
+  {
+    "topic": "Verification of a Proposed Solution",
+    "question": "Check whether $y = e^{-x}$ satisfies $y' + y = 0$.",
+    "chain_of_thought_reasoning": "1. Compute derivative: $y = e^{-x} \\Rightarrow y' = -e^{-x}$. 2. Substitute into the equation: LHS = $y' + y = -e^{-x} + e^{-x} = 0$. 3. RHS is 0, so the equation is satisfied.",
+    "final_answer": "$y = e^{-x}$ is a solution."
+  },
+  {
+    "topic": "Verification of a Proposed Solution",
+    "question": "Verify if $y = 3x^2 + 2$ is a solution of $y' = 6x$.",
+    "chain_of_thought_reasoning": "1. Differentiate: $y = 3x^2 + 2 \\Rightarrow y' = 6x$. 2. Compare with RHS of the differential equation: RHS = $6x$. 3. Since $y'$ matches the RHS, the function is a solution.",
+    "final_answer": "$y = 3x^2 + 2$ is a solution."
+  },
+  {
+    "topic": "Verification of a Proposed Solution",
+    "question": "Does $y = x^3$ satisfy the differential equation $y' = 3x^2$?",
+    "chain_of_thought_reasoning": "1. Differentiate: $y = x^3 \\Rightarrow y' = 3x^2$. 2. RHS of the equation is $3x^2$. 3. Since $y'$ equals the RHS, the function satisfies the equation.",
+    "final_answer": "$y = x^3$ is a solution."
+  },
+  {
+    "topic": "Verification of a Proposed Solution",
+    "question": "Is $y = 5$ a solution of $y' = 0$?",
+    "chain_of_thought_reasoning": "1. Differentiate the constant function: $y = 5 \\Rightarrow y' = 0$. 2. RHS of the equation is 0. 3. Since $y'$ equals 0, the equation is satisfied.",
+    "final_answer": "$y = 5$ is a solution."
+  },
+  {
+    "topic": "Verification of a Proposed Solution",
+    "question": "Explain in general terms the steps required to verify if a given function is a solution of a differential equation.",
+    "chain_of_thought_reasoning": "1. Identify the order of the differential equation to know how many derivatives are needed. 2. Compute the necessary derivatives of the proposed solution. 3. Substitute the function and its derivatives into the differential equation. 4. Simplify both sides of the equation. 5. Check if the equality holds true. If it does, the function is a solution; otherwise, it is not.",
+    "final_answer": "Steps: differentiate, substitute, simplify, and check equality."
+  },
+  {
+    "topic": "Verification of a Proposed Solution",
+    "question": "Why is it important to verify a proposed solution of a differential equation before using it in applications?",
+    "chain_of_thought_reasoning": "Verifying ensures that the function actually satisfies the equation, confirming its mathematical validity. This prevents errors in further analysis, guarantees that physical interpretations based on the solution are meaningful, and avoids propagation of incorrect results in engineering or scientific models.",
+    "final_answer": "Verification ensures correctness, prevents errors, and validates physical interpretations."
+  },
+  {
+    "topic": "Verification of a Proposed Solution",
+    "question": "What is the difference between a general solution and a particular solution in the context of verification?",
+    "chain_of_thought_reasoning": "A general solution contains arbitrary constants and represents a family of functions that satisfy the differential equation. A particular solution is obtained by assigning specific values to those constants, often using initial or boundary conditions. Verification of a general solution shows it satisfies the equation for any constants, whereas verification of a particular solution confirms it for specific values.",
+    "final_answer": "General solution has arbitrary constants; particular solution uses specific values."
+  },
+  {
+    "topic": "Verification of a Proposed Solution",
+    "question": "Can a differential equation have more than one solution? Explain briefly.",
+    "chain_of_thought_reasoning": "Yes, differential equations can have infinitely many solutions, especially when no initial or boundary conditions are imposed. The general solution typically includes arbitrary constants, each choice of which yields a different particular solution. This multiplicity reflects the degrees of freedom in the system modeled by the equation.",
+    "final_answer": "Yes, due to arbitrary constants in the general solution."
+  },
+  {
+    "topic": "Verification of a Proposed Solution",
+    "question": "What does it mean if a proposed solution does not satisfy the differential equation?",
+    "chain_of_thought_reasoning": "It indicates that the function is not a valid solution. Possible reasons include computational errors in differentiation or substitution, algebraic mistakes, or that the function was incorrectly assumed to solve the equation. Re-examination of each step is necessary to identify and correct the error.",
+    "final_answer": "The function is invalid; check for errors in differentiation or algebra."
+  },
+  {
+    "topic": "Verification of a Proposed Solution",
+    "question": "Verify whether $y = x\\ln x$ satisfies the differential equation $xy' - y = x$.",
+    "chain_of_thought_reasoning": "1. Differentiate: $y = x\\ln x \\Rightarrow y' = \\ln x + 1$. 2. Substitute into the equation: LHS = $x(\\ln x + 1) - x\\ln x = x\\ln x + x - x\\ln x = x$. 3. RHS is $x$, so LHS = RHS. Hence, the function is a solution.",
+    "final_answer": "$y = x\\ln x$ is a solution."
+  },
+  {
+    "topic": "Verification of a Proposed Solution",
+    "question": "Check if $y = \\tan x$ satisfies $y' = 1 + y^2$.",
+    "chain_of_thought_reasoning": "1. Differentiate: $y = \\tan x \\Rightarrow y' = \\sec^2 x$. 2. Compute the RHS: $1 + y^2 = 1 + \\tan^2 x = \\sec^2 x$. 3. Since $y' = \\sec^2 x$ equals the RHS, the equation is satisfied.",
+    "final_answer": "$y = \\tan x$ is a solution."
+  },
+  {
+    "topic": "Verification of a Proposed Solution",
+    "question": "Is $y = e^{x^2}$ a solution of $y' = 2xy$?",
+    "chain_of_thought_reasoning": "1. Differentiate: $y = e^{x^2} \\Rightarrow y' = 2x e^{x^2}$. 2. Compute the RHS: $2xy = 2x e^{x^2}$. 3. Since $y'$ equals the RHS, the function satisfies the differential equation.",
+    "final_answer": "$y = e^{x^2}$ is a solution."
+  },
+  {
+    "topic": "Verification of a Proposed Solution",
+    "question": "Verify if $y = \\frac{1}{x}$ satisfies $y' + y^2 = 0$.",
+    "chain_of_thought_reasoning": "1. Differentiate: $y = x^{-1} \\Rightarrow y' = -x^{-2} = -\\frac{1}{x^2}$. 2. Compute $y^2 = \\frac{1}{x^2}$. 3. Substitute into the equation: LHS = $y' + y^2 = -\\frac{1}{x^2} + \\frac{1}{x^2} = 0$. 4. RHS is 0, so the equality holds.",
+    "final_answer": "$y = \\frac{1}{x}$ is a solution."
+  },
+  {
+    "topic": "Verification of a Proposed Solution",
+    "question": "Does $y = x + 1$ satisfy the differential equation $y'' = 0$?",
+    "chain_of_thought_reasoning": "1. First derivative: $y = x + 1 \\Rightarrow y' = 1$. 2. Second derivative: $y'' = 0$. 3. RHS of the equation is 0. 4. Since $y''$ equals 0, the equation is satisfied.",
+    "final_answer": "$y = x + 1$ is a solution."
+  },
+  {
+    "topic": "Recognising Non-Homogeneous or Non-Linear Traps",
+    "question": "Determine if the differential equation $\\frac{dy}{dx} = \\frac{x^2 + y^2}{xy}$ is homogeneous by testing F(\u03bbx,\u03bby) = \u03bb\u207fF(x,y).",
+    "chain_of_thought_reasoning": "1. Identify F(x,y) = $\\frac{x^2 + y^2}{xy}$. 2. Test homogeneity: F(\u03bbx,\u03bby) = $\\frac{(\u03bbx)^2 + (\u03bby)^2}{(\u03bbx)(\u03bby)} = \\frac{\u03bb^2x^2 + \u03bb^2y^2}{\u03bb^2xy} = \\frac{\u03bb^2(x^2 + y^2)}{\u03bb^2xy} = \u03bb^0 \\cdot \\frac{x^2 + y^2}{xy} = \u03bb^0F(x,y)$. 3. Since F(\u03bbx,\u03bby) = \u03bb\u2070F(x,y) with n=0, this is homogeneous of degree 0. 4. This is NOT a non-homogeneous trap - it's actually homogeneous.",
+    "final_answer": "Homogeneous (degree 0)"
+  },
+  {
+    "topic": "Recognising Non-Homogeneous or Non-Linear Traps",
+    "question": "Check if the differential equation $\\frac{dy}{dx} = x + y + 5$ is homogeneous.",
+    "chain_of_thought_reasoning": "1. Identify F(x,y) = x + y + 5. 2. Test homogeneity: F(\u03bbx,\u03bby) = \u03bbx + \u03bby + 5 = \u03bb(x + y) + 5. 3. Compare with \u03bb\u207fF(x,y) = \u03bb\u207f(x + y + 5). 4. For this to be homogeneous, we need \u03bb(x + y) + 5 = \u03bb\u207f(x + y + 5). 5. This cannot be satisfied for any n since the constant term 5 doesn't scale with \u03bb. 6. Therefore, this is non-homogeneous - a common trap!",
+    "final_answer": "Non-homogeneous"
+  },
+  {
+    "topic": "Recognising Non-Homogeneous or Non-Linear Traps",
+    "question": "Is the differential equation $\\frac{dy}{dx} + y^2 = x$ linear? Explain why or why not.",
+    "chain_of_thought_reasoning": "1. Standard linear form: $\\frac{dy}{dx} + P(x)y = Q(x)$. 2. Rearrange: $\\frac{dy}{dx} = x - y^2$. 3. The term y\u00b2 is nonlinear - it appears as y squared, not y to the first power. 4. In linear equations, y and its derivatives must appear to the first power only. 5. The y\u00b2 term makes this nonlinear - a classic non-linear trap!",
+    "final_answer": "Non-linear (due to y\u00b2 term)"
+  },
+  {
+    "topic": "Recognising Non-Homogeneous or Non-Linear Traps",
+    "question": "Test if $\\frac{dy}{dx} = \\frac{x - y + 3}{x + y - 2}$ is homogeneous and explain the trap.",
+    "chain_of_thought_reasoning": "1. Identify F(x,y) = $\\frac{x - y + 3}{x + y - 2}$. 2. Test homogeneity: F(\u03bbx,\u03bby) = $\\frac{\u03bbx - \u03bby + 3}{\u03bbx + \u03bby - 2} = \\frac{\u03bb(x - y) + 3}{\u03bb(x + y) - 2}$. 3. For homogeneity, we need F(\u03bbx,\u03bby) = \u03bb\u207fF(x,y). 4. The constant terms +3 and -2 don't scale with \u03bb. 5. This appears to be a ratio of linear expressions, but the constants make it non-homogeneous. 6. This is a common trap - students might mistake it for homogeneous due to the linear appearance.",
+    "final_answer": "Non-homogeneous (constants prevent scaling)"
+  },
+  {
+    "topic": "Recognising Non-Homogeneous or Non-Linear Traps",
+    "question": "Why is $\\frac{dy}{dx} = \\sin(y)$ considered non-linear while $\\frac{dy}{dx} = \\sin(x)$ is linear?",
+    "chain_of_thought_reasoning": "1. For $\\frac{dy}{dx} = \\sin(x)$: This is in the form $\\frac{dy}{dx} = Q(x)$ where Q depends only on x. This is linear with P(x) = 0. 2. For $\\frac{dy}{dx} = \\sin(y)$: The right side depends on y in a nonlinear way. 3. Linear equations require: (i) y and derivatives to first power, (ii) no products of y/derivatives, (iii) no nonlinear functions of y. 4. sin(y) violates condition (iii) - it's a nonlinear function of the dependent variable. 5. This demonstrates the key trap: nonlinear functions of the dependent variable make equations non-linear.",
+    "final_answer": "$\\sin(y)$ is a nonlinear function of the dependent variable, violating linearity conditions"
+  },
+  {
+    "topic": "Recognising Non-Homogeneous or Non-Linear Traps",
+    "question": "Determine if $\\frac{dy}{dx} = \\frac{y}{x} + \\frac{y^2}{x^2}$ is homogeneous and identify any traps.",
+    "chain_of_thought_reasoning": "1. Identify F(x,y) = $\\frac{y}{x} + \\frac{y^2}{x^2}$. 2. Test homogeneity: F(\u03bbx,\u03bby) = $\\frac{\u03bby}{\u03bbx} + \\frac{(\u03bby)^2}{(\u03bbx)^2} = \\frac{y}{x} + \\frac{\u03bb^2y^2}{\u03bb^2x^2} = \\frac{y}{x} + \\frac{y^2}{x^2} = \u03bb^0F(x,y)$. 3. This is homogeneous of degree 0. 4. However, check linearity: rearrange to $\\frac{dy}{dx} - \\frac{y}{x} = \\frac{y^2}{x^2}$. 5. The y\u00b2 term makes this nonlinear despite being homogeneous. 6. Trap: Homogeneity doesn't imply linearity - this is homogeneous but nonlinear!",
+    "final_answer": "Homogeneous but nonlinear (y\u00b2 term)"
+  },
+  {
+    "topic": "Recognising Non-Homogeneous or Non-Linear Traps",
+    "question": "Is the equation $y\\frac{dy}{dx} + 2x = 3y$ linear? Show your analysis.",
+    "chain_of_thought_reasoning": "1. Rearrange: $y\\frac{dy}{dx} = 3y - 2x$. 2. Divide by y: $\\frac{dy}{dx} = 3 - \\frac{2x}{y}$. 3. Standard linear form requires: $\\frac{dy}{dx} + P(x)y = Q(x)$. 4. Here we have $\\frac{dy}{dx} = 3 - \\frac{2x}{y}$ which cannot be written in linear form. 5. The term $\\frac{1}{y}$ makes this nonlinear. 6. Additionally, the original form $y\\frac{dy}{dx}$ shows a product of y and its derivative - violating linearity. 7. This is a clear non-linear trap.",
+    "final_answer": "Non-linear (product y\u00b7dy/dx and 1/y term)"
+  },
+  {
+    "topic": "Recognising Non-Homogeneous or Non-Linear Traps",
+    "question": "Test the homogeneity of $\\frac{dy}{dx} = \\frac{x^2y + xy^2}{x^3 + y^3}$ and verify your conclusion.",
+    "chain_of_thought_reasoning": "1. Identify F(x,y) = $\\frac{x^2y + xy^2}{x^3 + y^3}$. 2. Factor: F(x,y) = $\\frac{xy(x + y)}{x^3 + y^3}$. 3. Note that $x^3 + y^3 = (x + y)(x^2 - xy + y^2)$. 4. So F(x,y) = $\\frac{xy}{x^2 - xy + y^2}$. 5. Test homogeneity: F(\u03bbx,\u03bby) = $\\frac{(\u03bbx)(\u03bby)}{(\u03bbx)^2 - (\u03bbx)(\u03bby) + (\u03bby)^2} = \\frac{\u03bb^2xy}{\u03bb^2(x^2 - xy + y^2)} = \u03bb^0F(x,y)$. 6. This is homogeneous of degree 0. 7. No trap here - it's genuinely homogeneous.",
+    "final_answer": "Homogeneous (degree 0)"
+  },
+  {
+    "topic": "Recognising Non-Homogeneous or Non-Linear Traps",
+    "question": "Explain why $\\frac{dy}{dx} + y\\frac{dy}{dx} = x$ is non-linear and how to recognize such traps.",
+    "chain_of_thought_reasoning": "1. Factor: $\\frac{dy}{dx}(1 + y) = x$. 2. This gives $\\frac{dy}{dx} = \\frac{x}{1 + y}$. 3. The nonlinear trap is subtle: we have a product of y and its derivative in the original form. 4. Even when rearranged, the $\\frac{1}{1+y}$ term is a nonlinear function of y. 5. Recognition tip: Look for products like $y\\frac{dy}{dx}$, $(\\frac{dy}{dx})^2$, or functions like $\\frac{1}{y}$, $y^2$, $\\sin(y)$. 6. These violate the linearity condition that y and derivatives must appear to first power only.",
+    "final_answer": "Non-linear due to product y\u00b7dy/dx and nonlinear function 1/(1+y)"
+  },
+  {
+    "topic": "Recognising Non-Homogeneous or Non-Linear Traps",
+    "question": "Is $\\frac{dy}{dx} = e^{x+y}$ homogeneous, linear, or neither? Provide detailed analysis.",
+    "chain_of_thought_reasoning": "1. Rewrite: $\\frac{dy}{dx} = e^x \\cdot e^y$. 2. Test homogeneity: F(\u03bbx,\u03bby) = $e^{\u03bbx} \\cdot e^{\u03bby} = e^{\u03bb(x+y)}$. 3. For homogeneity, we need F(\u03bbx,\u03bby) = \u03bb\u207fF(x,y) = \u03bb\u207f$e^{x+y}$. 4. This would require $e^{\u03bb(x+y)} = \u03bb^n e^{x+y}$, which is impossible for all \u03bb. 5. Check linearity: The $e^y$ term is a nonlinear function of the dependent variable. 6. This equation is neither homogeneous nor linear - it's separable but falls into both trap categories.",
+    "final_answer": "Neither homogeneous nor linear (e^y makes it nonlinear)"
+  },
+  {
+    "topic": "Recognising Non-Homogeneous or Non-Linear Traps",
+    "question": "Determine if $\\frac{dy}{dx} = \\frac{y + x\\sin(x)}{x}$ is homogeneous and explain the trap.",
+    "chain_of_thought_reasoning": "1. Identify F(x,y) = $\\frac{y + x\\sin(x)}{x} = \\frac{y}{x} + \\sin(x)$. 2. Test homogeneity: F(\u03bbx,\u03bby) = $\\frac{\u03bby}{\u03bbx} + \\sin(\u03bbx) = \\frac{y}{x} + \\sin(\u03bbx)$. 3. For homogeneity, we need F(\u03bbx,\u03bby) = \u03bb\u207fF(x,y) = \u03bb\u207f$[\\frac{y}{x} + \\sin(x)]$. 4. The $\\sin(\u03bbx)$ term cannot equal \u03bb\u207f$\\sin(x)$ for all \u03bb. 5. The $\\sin(x)$ term depends only on x and doesn't scale properly. 6. This is non-homogeneous - the trap is that $\\frac{y}{x}$ looks homogeneous but the added $\\sin(x)$ breaks homogeneity.",
+    "final_answer": "Non-homogeneous (sin(x) term doesn't scale)"
+  },
+  {
+    "topic": "Recognising Non-Homogeneous or Non-Linear Traps",
+    "question": "Why is $\\frac{d^2y}{dx^2} + (\\frac{dy}{dx})^2 + y = 0$ non-linear while $\\frac{d^2y}{dx^2} + \\frac{dy}{dx} + y = 0$ is linear?",
+    "chain_of_thought_reasoning": "1. First equation: Contains $(\\frac{dy}{dx})^2$ - the derivative appears squared. 2. Second equation: All terms are linear in y and its derivatives. 3. Linearity requires: (i) dependent variable and derivatives to first power, (ii) no products of derivatives, (iii) no nonlinear functions. 4. The squared derivative $(\\frac{dy}{dx})^2$ violates condition (i). 5. This is a common trap in higher-order equations - students might miss nonlinear terms involving derivatives. 6. The second equation satisfies all linearity conditions.",
+    "final_answer": "First equation has (dy/dx)\u00b2 making it nonlinear; second has all linear terms"
+  },
+  {
+    "topic": "Recognising Non-Homogeneous or Non-Linear Traps",
+    "question": "Test if $\\frac{dy}{dx} = \\frac{x^2 - 2xy + y^2}{x^2 - y^2}$ is homogeneous and simplify if possible.",
+    "chain_of_thought_reasoning": "1. Identify F(x,y) = $\\frac{x^2 - 2xy + y^2}{x^2 - y^2}$. 2. Factor numerator: $x^2 - 2xy + y^2 = (x - y)^2$. 3. Factor denominator: $x^2 - y^2 = (x - y)(x + y)$. 4. Simplify: F(x,y) = $\\frac{(x - y)^2}{(x - y)(x + y)} = \\frac{x - y}{x + y}$ (assuming x \u2260 y). 5. Test homogeneity: F(\u03bbx,\u03bby) = $\\frac{\u03bbx - \u03bby}{\u03bbx + \u03bby} = \\frac{\u03bb(x - y)}{\u03bb(x + y)} = \u03bb^0F(x,y)$. 6. This is homogeneous of degree 0. 7. The trap is in the complex appearance - factoring reveals the homogeneous structure.",
+    "final_answer": "Homogeneous (degree 0) after simplifying to (x-y)/(x+y)"
+  },
+  {
+    "topic": "Recognising Non-Homogeneous or Non-Linear Traps",
+    "question": "Analyze why $\\frac{dy}{dx} = y^{1/2}$ is non-linear and identify the specific violation.",
+    "chain_of_thought_reasoning": "1. The equation contains $y^{1/2} = \\sqrt{y}$. 2. Standard linear form: $\\frac{dy}{dx} + P(x)y = Q(x)$. 3. Here we have $\\frac{dy}{dx} = \\sqrt{y}$ which cannot be written in linear form. 4. The violation is specific: y appears with exponent 1/2 instead of 1. 5. Linearity requires y to appear to the first power only. 6. Fractional exponents of the dependent variable always indicate nonlinearity. 7. This is a clear trap - square roots or fractional powers of the dependent variable violate linearity.",
+    "final_answer": "Non-linear due to y^(1/2) - violates first-power requirement for dependent variable"
+  },
+  {
+    "topic": "Recognising Non-Homogeneous or Non-Linear Traps",
+    "question": "Is the equation $\\frac{dy}{dx} = \\frac{y}{x} + \\ln(x)$ homogeneous? Justify your answer.",
+    "chain_of_thought_reasoning": "1. Identify F(x,y) = $\\frac{y}{x} + \\ln(x)$. 2. Test homogeneity: F(\u03bbx,\u03bby) = $\\frac{\u03bby}{\u03bbx} + \\ln(\u03bbx) = \\frac{y}{x} + \\ln(\u03bb) + \\ln(x)$. 3. For homogeneity, we need F(\u03bbx,\u03bby) = \u03bb\u207fF(x,y) = \u03bb\u207f$[\\frac{y}{x} + \\ln(x)]$. 4. This would require $\\frac{y}{x} + \\ln(\u03bb) + \\ln(x) = \u03bb^n\\frac{y}{x} + \u03bb^n\\ln(x)$. 5. The $\\ln(\u03bb)$ term cannot be matched on the right side. 6. The $\\ln(x)$ term doesn't scale with \u03bb. 7. This is non-homogeneous - logarithmic terms typically break homogeneity.",
+    "final_answer": "Non-homogeneous (ln(x) doesn't scale properly with \u03bb)"
+  },
+  {
+    "topic": "Recognising Non-Homogeneous or Non-Linear Traps",
+    "question": "What makes $\\frac{dy}{dx} + xy^2 = x^2$ a nonlinear equation, and how would you recognize similar traps?",
+    "chain_of_thought_reasoning": "1. Rearranged form: $\\frac{dy}{dx} = x^2 - xy^2$. 2. The term xy\u00b2 contains y squared. 3. In standard linear form $\\frac{dy}{dx} + P(x)y = Q(x)$, we cannot have y\u00b2 terms. 4. The coefficient of y\u00b2 is x, making it seem like a variable coefficient, but the y\u00b2 itself is nonlinear. 5. Recognition strategy: Look for any term where y appears with exponent \u2260 1, especially y\u00b2, y\u00b3, \u221ay, 1/y. 6. Also watch for products like xy\u00b2, y\u00b7dy/dx, or functions like sin(y), e^y. 7. This trap is common - variable coefficients can obscure nonlinear y terms.",
+    "final_answer": "Non-linear due to xy\u00b2 term - y appears squared, violating linearity conditions"
+  },
+  {
+    "topic": "Recognising Non-Homogeneous or Non-Linear Traps",
+    "question": "Determine whether $\\frac{dy}{dx} = \\tan(\\frac{y}{x})$ is homogeneous and explain your testing method.",
+    "chain_of_thought_reasoning": "1. Identify F(x,y) = $\\tan(\\frac{y}{x})$. 2. Test homogeneity: F(\u03bbx,\u03bby) = $\\tan(\\frac{\u03bby}{\u03bbx}) = \\tan(\\frac{y}{x})$. 3. This equals \u03bb\u2070F(x,y) = \u03bb\u2070$\\tan(\\frac{y}{x}) = \\tan(\\frac{y}{x})$. 4. Since F(\u03bbx,\u03bby) = \u03bb\u2070F(x,y), this is homogeneous of degree 0. 5. However, note that tan is a nonlinear function. 6. This equation is homogeneous but nonlinear - demonstrating that homogeneity and linearity are independent properties. 7. The testing method: substitute \u03bbx, \u03bby and check if you can factor out \u03bb\u207f.",
+    "final_answer": "Homogeneous (degree 0) but nonlinear due to tan function"
+  },
+  {
+    "topic": "Recognising Non-Homogeneous or Non-Linear Traps",
+    "question": "Why can't we immediately apply linear differential equation methods to $(1+y)\\frac{dy}{dx} + xy = 1$, and what's the specific trap?",
+    "chain_of_thought_reasoning": "1. Rearrange: $(1+y)\\frac{dy}{dx} = 1 - xy$. 2. This gives: $\\frac{dy}{dx} = \\frac{1 - xy}{1 + y}$. 3. The trap is the coefficient $(1+y)$ multiplying $\\frac{dy}{dx}$. 4. In standard linear form: $\\frac{dy}{dx} + P(x)y = Q(x)$, the coefficient of $\\frac{dy}{dx}$ must be 1. 5. Here, the coefficient depends on y itself, making it nonlinear. 6. We cannot simply divide by (1+y) and expect linearity - the resulting equation still has y in the denominator. 7. This demonstrates a key trap: variable coefficients of derivatives often indicate nonlinearity.",
+    "final_answer": "Non-linear due to (1+y) coefficient of dy/dx - dependent variable appears as coefficient"
+  },
+  {
+    "topic": "Linear First-Order Form and Integrating Factor",
+    "question": "Find the general solution of the differential equation $\\frac{dy}{dx} + 3y = e^{2x}$.",
+    "chain_of_thought_reasoning": "1. Standard Form: The equation is already in the standard linear form $\\frac{dy}{dx} + P(x)y = Q(x)$ with $P(x) = 3$ and $Q(x) = e^{2x}$. 2. Integrating Factor (I.F.): Calculate I.F. = $e^{\\int P(x) dx} = e^{\\int 3 dx} = e^{3x}$. 3. Multiply Through: Multiply the entire equation by the I.F. to get $e^{3x}\\frac{dy}{dx} + 3e^{3x}y = e^{5x}$. The left side is the derivative of $y e^{3x}$. 4. Integrate Both Sides: Integrate both sides with respect to $x$ to get $y e^{3x} = \\int e^{5x} dx = \\frac{1}{5}e^{5x} + C$. 5. Solve for y: Divide both sides by $e^{3x}$ to isolate $y$.",
+    "final_answer": "$y = \\frac{1}{5}e^{2x} + Ce^{-3x}$"
+  },
+  {
+    "topic": "Linear First-Order Form and Integrating Factor",
+    "question": "Solve the differential equation $\\frac{dy}{dx} + \\frac{1}{x}y = x^2$ for $x > 0$.",
+    "chain_of_thought_reasoning": "1. Standard Form: The equation is already in the standard linear form with $P(x) = \\frac{1}{x}$ and $Q(x) = x^2$. 2. Integrating Factor (I.F.): Calculate I.F. = $e^{\\int \\frac{1}{x} dx} = e^{\\ln x} = x$. 3. Multiply Through: Multiply the entire equation by the I.F. to get $x\\frac{dy}{dx} + y = x^3$. The left side is the derivative of $xy$. 4. Integrate Both Sides: Integrate both sides with respect to $x$ to get $xy = \\int x^3 dx = \\frac{x^4}{4} + C$. 5. Solve for y: Divide both sides by $x$ to isolate $y$.",
+    "final_answer": "$y = \\frac{x^3}{4} + \\frac{C}{x}$"
+  },
+  {
+    "topic": "Linear First-Order Form and Integrating Factor",
+    "question": "Find the particular solution of $\\frac{dy}{dx} - 2y = 4$ satisfying $y(0) = 1$.",
+    "chain_of_thought_reasoning": "1. Standard Form: The equation is in the standard linear form with $P(x) = -2$ and $Q(x) = 4$. 2. Integrating Factor (I.F.): Calculate I.F. = $e^{\\int -2 dx} = e^{-2x}$. 3. Multiply Through: Multiply the entire equation by the I.F. to get $e^{-2x}\\frac{dy}{dx} - 2e^{-2x}y = 4e^{-2x}$. The left side is the derivative of $y e^{-2x}$. 4. Integrate Both Sides: Integrate both sides with respect to $x$ to get $y e^{-2x} = \\int 4e^{-2x} dx = -2e^{-2x} + C$. 5. Solve for y: Multiply both sides by $e^{2x}$ to get $y = -2 + Ce^{2x}$. 6. Apply Initial Condition: Substitute $x = 0$ and $y = 1$ to find $C = 3$.",
+    "final_answer": "$y = 3e^{2x} - 2$"
+  },
+  {
+    "topic": "Linear First-Order Form and Integrating Factor",
+    "question": "Determine the general solution of $x\\frac{dy}{dx} + y = \\sin x$ for $x > 0$.",
+    "chain_of_thought_reasoning": "1. Standard Form: Divide by $x$ to get $\\frac{dy}{dx} + \\frac{1}{x}y = \\frac{\\sin x}{x}$. This is a linear DE with $P(x) = \\frac{1}{x}$ and $Q(x) = \\frac{\\sin x}{x}$. 2. Integrating Factor (I.F.): Calculate I.F. = $e^{\\int \\frac{1}{x} dx} = e^{\\ln x} = x$. 3. Multiply Through: Multiply the entire equation by the I.F. to get $x\\frac{dy}{dx} + y = \\sin x$. The left side is the derivative of $xy$. 4. Integrate Both Sides: Integrate both sides with respect to $x$ to get $xy = \\int \\sin x dx = -\\cos x + C$. 5. Solve for y: Divide both sides by $x$ to isolate $y$.",
+    "final_answer": "$y = -\\frac{\\cos x}{x} + \\frac{C}{x}$"
+  },
+  {
+    "topic": "Linear First-Order Form and Integrating Factor",
+    "question": "Find the integrating factor for the differential equation $\\frac{dy}{dx} + y \\cot x = 2\\csc x$.",
+    "chain_of_thought_reasoning": "1. Identify P(x): The equation is in the standard linear form with $P(x) = \\cot x$. 2. Calculate Integrating Factor: The integrating factor is given by I.F. = $e^{\\int P(x) dx} = e^{\\int \\cot x dx}$. 3. Evaluate Integral: Recall that $\\int \\cot x dx = \\ln|\\sin x|$. 4. Simplify: Thus, I.F. = $e^{\\ln|\\sin x|} = \\sin x$.",
+    "final_answer": "$\\sin x$"
+  },
+  {
+    "topic": "Linear First-Order Form and Integrating Factor",
+    "question": "Explain why the integrating factor method works for solving first-order linear differential equations.",
+    "chain_of_thought_reasoning": "The integrating factor method transforms the left-hand side of the linear differential equation $\\frac{dy}{dx} + P(x)y = Q(x)$ into the derivative of a product. By multiplying the entire equation by the integrating factor $e^{\\int P(x)dx}$, the left side becomes exactly $\\frac{d}{dx}\\left(y \\cdot e^{\\int P(x)dx}\\right)$. This transformation is valid because the derivative of the integrating factor times $y$ plus the integrating factor times $P(x)y$ (the original left side) matches the product rule expansion. Once the left side is expressed as a single derivative, both sides of the equation can be integrated directly, yielding an algebraic equation for $y$ that is easily solved. This method guarantees a solution exists and provides a systematic way to find it.",
+    "final_answer": "The integrating factor converts the left side of a linear DE into the derivative of a product, allowing direct integration and solution for $y$."
+  },
+  {
+    "topic": "Linear First-Order Form and Integrating Factor",
+    "question": "Solve the differential equation $\\frac{dy}{dx} + 2xy = x$.",
+    "chain_of_thought_reasoning": "1. Standard Form: The equation is already in the standard linear form with $P(x) = 2x$ and $Q(x) = x$. 2. Integrating Factor (I.F.): Calculate I.F. = $e^{\\int 2x dx} = e^{x^2}$. 3. Multiply Through: Multiply the entire equation by the I.F. to get $e^{x^2}\\frac{dy}{dx} + 2xe^{x^2}y = xe^{x^2}$. The left side is the derivative of $y e^{x^2}$. 4. Integrate Both Sides: Integrate both sides with respect to $x$ to get $y e^{x^2} = \\int xe^{x^2} dx$. Use substitution $u = x^2$, $du = 2x dx$ to evaluate the integral as $\\frac{1}{2}e^{x^2} + C$. 5. Solve for y: Divide both sides by $e^{x^2}$ to isolate $y$.",
+    "final_answer": "$y = \\frac{1}{2} + Ce^{-x^2}$"
+  },
+  {
+    "topic": "Linear First-Order Form and Integrating Factor",
+    "question": "Find the general solution of $\\frac{dy}{dx} - y = e^{x}\\sin x$.",
+    "chain_of_thought_reasoning": "1. Standard Form: The equation is in the standard linear form with $P(x) = -1$ and $Q(x) = e^{x}\\sin x$. 2. Integrating Factor (I.F.): Calculate I.F. = $e^{\\int -1 dx} = e^{-x}$. 3. Multiply Through: Multiply the entire equation by the I.F. to get $e^{-x}\\frac{dy}{dx} - e^{-x}y = \\sin x$. The left side is the derivative of $y e^{-x}$. 4. Integrate Both Sides: Integrate both sides with respect to $x$ to get $y e^{-x} = \\int \\sin x dx = -\\cos x + C$. 5. Solve for y: Multiply both sides by $e^{x}$ to isolate $y$.",
+    "final_answer": "$y = -e^{x}\\cos x + Ce^{x}$"
+  },
+  {
+    "topic": "Linear First-Order Form and Integrating Factor",
+    "question": "Determine the particular solution of $\\frac{dy}{dx} + \\frac{2}{x}y = x^3$ with $y(1) = 2$.",
+    "chain_of_thought_reasoning": "1. Standard Form: The equation is already in the standard linear form with $P(x) = \\frac{2}{x}$ and $Q(x) = x^3$. 2. Integrating Factor (I.F.): Calculate I.F. = $e^{\\int \\frac{2}{x} dx} = e^{2\\ln x} = x^2$. 3. Multiply Through: Multiply the entire equation by the I.F. to get $x^2\\frac{dy}{dx} + 2xy = x^5$. The left side is the derivative of $xy^2$. Wait, correction: The left side is the derivative of $y x^2$. 4. Integrate Both Sides: Integrate both sides with respect to $x$ to get $y x^2 = \\int x^5 dx = \\frac{x^6}{6} + C$. 5. Solve for y: Divide both sides by $x^2$ to get $y = \\frac{x^4}{6} + \\frac{C}{x^2}$. 6. Apply Initial Condition: Substitute $x = 1$ and $y = 2$ to find $C = \\frac{11}{6}$.",
+    "final_answer": "$y = \\frac{x^4}{6} + \\frac{11}{6x^2}$"
+  },
+  {
+    "topic": "Linear First-Order Form and Integrating Factor",
+    "question": "Find the integrating factor for $\\frac{dy}{dx} + y\\tanh x = \\cosh x$.",
+    "chain_of_thought_reasoning": "1. Identify P(x): The equation is in the standard linear form with $P(x) = \\tanh x$. 2. Calculate Integrating Factor: The integrating factor is given by I.F. = $e^{\\int P(x) dx} = e^{\\int \\tanh x dx}$. 3. Evaluate Integral: Recall that $\\int \\tanh x dx = \\ln(\\cosh x)$. 4. Simplify: Thus, I.F. = $e^{\\ln(\\cosh x)} = \\cosh x$.",
+    "final_answer": "$\\cosh x$"
+  },
+  {
+    "topic": "Linear First-Order Form and Integrating Factor",
+    "question": "Solve the differential equation $(x+1)\\frac{dy}{dx} - y = e^{x}(x+1)^2$.",
+    "chain_of_thought_reasoning": "1. Standard Form: Divide by $(x+1)$ to get $\\frac{dy}{dx} - \\frac{1}{x+1}y = e^{x}(x+1)$. This is a linear DE with $P(x) = -\\frac{1}{x+1}$ and $Q(x) = e^{x}(x+1)$. 2. Integrating Factor (I.F.): Calculate I.F. = $e^{\\int -\\frac{1}{x+1} dx} = e^{-\\ln|x+1|} = \\frac{1}{x+1}$. 3. Multiply Through: Multiply the entire equation by the I.F. to get $\\frac{1}{x+1}\\frac{dy}{dx} - \\frac{y}{(x+1)^2} = e^{x}$. The left side is the derivative of $\\frac{y}{x+1}$. 4. Integrate Both Sides: Integrate both sides with respect to $x$ to get $\\frac{y}{x+1} = \\int e^{x} dx = e^{x} + C$. 5. Solve for y: Multiply both sides by $(x+1)$ to isolate $y$.",
+    "final_answer": "$y = (x+1)e^{x} + C(x+1)$"
+  },
+  {
+    "topic": "Linear First-Order Form and Integrating Factor",
+    "question": "Find the general solution of $\\frac{dy}{dx} + 3y = 6$.",
+    "chain_of_thought_reasoning": "1. Standard Form: The equation is in the standard linear form with $P(x) = 3$ and $Q(x) = 6$. 2. Integrating Factor (I.F.): Calculate I.F. = $e^{\\int 3 dx} = e^{3x}$. 3. Multiply Through: Multiply the entire equation by the I.F. to get $e^{3x}\\frac{dy}{dx} + 3e^{3x}y = 6e^{3x}$. The left side is the derivative of $y e^{3x}$. 4. Integrate Both Sides: Integrate both sides with respect to $x$ to get $y e^{3x} = \\int 6e^{3x} dx = 2e^{3x} + C$. 5. Solve for y: Divide both sides by $e^{3x}$ to isolate $y$.",
+    "final_answer": "$y = 2 + Ce^{-3x}$"
+  },
+  {
+    "topic": "Linear First-Order Form and Integrating Factor",
+    "question": "Determine the particular solution of $\\frac{dy}{dx} - y = x$ with $y(0) = 0$.",
+    "chain_of_thought_reasoning": "1. Standard Form: The equation is in the standard linear form with $P(x) = -1$ and $Q(x) = x$. 2. Integrating Factor (I.F.): Calculate I.F. = $e^{\\int -1 dx} = e^{-x}$. 3. Multiply Through: Multiply the entire equation by the I.F. to get $e^{-x}\\frac{dy}{dx} - e^{-x}y = xe^{-x}$. The left side is the derivative of $y e^{-x}$. 4. Integrate Both Sides: Integrate both sides with respect to $x$ to get $y e^{-x} = \\int xe^{-x} dx$. Use integration by parts with $u = x$, $dv = e^{-x}dx$ to get $-xe^{-x} - e^{-x} + C$. 5. Solve for y: Multiply both sides by $e^{x}$ to get $y = -x - 1 + Ce^{x}$. 6. Apply Initial Condition: Substitute $x = 0$ and $y = 0$ to find $C = 1$.",
+    "final_answer": "$y = e^{x} - x - 1$"
+  },
+  {
+    "topic": "Linear First-Order Form and Integrating Factor",
+    "question": "Find the general solution of $\\frac{dy}{dx} + 2y = \\cos x$.",
+    "chain_of_thought_reasoning": "1. Standard Form: The equation is in the standard linear form with $P(x) = 2$ and $Q(x) = \\cos x$. 2. Integrating Factor (I.F.): Calculate I.F. = $e^{\\int 2 dx} = e^{2x}$. 3. Multiply Through: Multiply the entire equation by the I.F. to get $e^{2x}\\frac{dy}{dx} + 2e^{2x}y = e^{2x}\\cos x$. The left side is the derivative of $y e^{2x}$. 4. Integrate Both Sides: Integrate both sides with respect to $x$ to get $y e^{2x} = \\int e^{2x}\\cos x dx$. This integral requires integration by parts twice or using a standard formula. The result is $\\frac{e^{2x}(2\\cos x + \\sin x)}{5} + C$. 5. Solve for y: Divide both sides by $e^{2x}$ to isolate $y$.",
+    "final_answer": "$y = \\frac{2\\cos x + \\sin x}{5} + Ce^{-2x}$"
+  },
+  {
+    "topic": "Linear First-Order Form and Integrating Factor",
+    "question": "Explain the role of the integrating factor in solving first-order linear differential equations and how it is derived.",
+    "chain_of_thought_reasoning": "The integrating factor is a function that transforms the left-hand side of a first-order linear differential equation into the derivative of a product, specifically the derivative of $y$ times the integrating factor. For the standard form $\\frac{dy}{dx} + P(x)y = Q(x)$, the integrating factor is defined as $e^{\\int P(x)dx}$. This choice is derived by requiring that when the differential equation is multiplied by the integrating factor, the left-hand side becomes the derivative of $y$ times the integrating factor. This requirement leads to the condition that the derivative of the integrating factor must equal $P(x)$ times the integrating factor, which is satisfied by the exponential form. Once the left side is expressed as a single derivative, the equation can be integrated directly, yielding the solution for $y$.",
+    "final_answer": "The integrating factor $e^{\\int P(x)dx}$ converts the left side of $\\frac{dy}{dx} + P(x)y = Q(x)$ into $\\frac{d}{dx}\\left(y e^{\\int P(x)dx}\\right)$, allowing direct integration to solve for $y$."
+  },
+  {
+    "topic": "Linear First-Order Form and Integrating Factor",
+    "question": "Solve the differential equation $\\frac{dy}{dx} - 3y = e^{3x}\\sin x$.",
+    "chain_of_thought_reasoning": "1. Standard Form: The equation is in the standard linear form with $P(x) = -3$ and $Q(x) = e^{3x}\\sin x$. 2. Integrating Factor (I.F.): Calculate I.F. = $e^{\\int -3 dx} = e^{-3x}$. 3. Multiply Through: Multiply the entire equation by the I.F. to get $e^{-3x}\\frac{dy}{dx} - 3e^{-3x}y = \\sin x$. The left side is the derivative of $y e^{-3x}$. 4. Integrate Both Sides: Integrate both sides with respect to $x$ to get $y e^{-3x} = \\int \\sin x dx = -\\cos x + C$. 5. Solve for y: Multiply both sides by $e^{3x}$ to isolate $y$.",
+    "final_answer": "$y = -e^{3x}\\cos x + Ce^{3x}$"
+  },
+  {
+    "topic": "Linear First-Order Form and Integrating Factor",
+    "question": "Find the particular solution of $\\frac{dy}{dx} + y = e^{-x}$ with $y(0) = 1$.",
+    "chain_of_thought_reasoning": "1. Standard Form: The equation is in the standard linear form with $P(x) = 1$ and $Q(x) = e^{-x}$. 2. Integrating Factor (I.F.): Calculate I.F. = $e^{\\int 1 dx} = e^{x}$. 3. Multiply Through: Multiply the entire equation by the I.F. to get $e^{x}\\frac{dy}{dx} + e^{x}y = 1$. The left side is the derivative of $y e^{x}$. 4. Integrate Both Sides: Integrate both sides with respect to $x$ to get $y e^{x} = \\int 1 dx = x + C$. 5. Solve for y: Divide both sides by $e^{x}$ to get $y = xe^{-x} + Ce^{-x}$. 6. Apply Initial Condition: Substitute $x = 0$ and $y = 1$ to find $C = 1$.",
+    "final_answer": "$y = (x + 1)e^{-x}$"
+  },
+  {
+    "topic": "Linear First-Order Form and Integrating Factor",
+    "question": "Determine the general solution of $\\frac{dy}{dx} + \\frac{y}{x} = \\frac{1}{x^2}$ for $x > 0$.",
+    "chain_of_thought_reasoning": "1. Standard Form: The equation is already in the standard linear form with $P(x) = \\frac{1}{x}$ and $Q(x) = \\frac{1}{x^2}$. 2. Integrating Factor (I.F.): Calculate I.F. = $e^{\\int \\frac{1}{x} dx} = e^{\\ln x} = x$. 3. Multiply Through: Multiply the entire equation by the I.F. to get $x\\frac{dy}{dx} + y = \\frac{1}{x}$. The left side is the derivative of $xy$. 4. Integrate Both Sides: Integrate both sides with respect to $x$ to get $xy = \\int \\frac{1}{x} dx = \\ln x + C$. 5. Solve for y: Divide both sides by $x$ to isolate $y$.",
+    "final_answer": "$y = \\frac{\\ln x}{x} + \\frac{C}{x}$"
+  }
+]
